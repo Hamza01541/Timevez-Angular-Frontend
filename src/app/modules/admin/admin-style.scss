@@ -1,0 +1,347 @@
+@import "./color.scss";
+admin-root{
+.recipie-dialog-button{
+    position: absolute; bottom: 22px;
+}
+h1{
+	margin-bottom: 30px;
+}
+.admin{
+h1, h2, h3, h4, h5, h6{
+	color: $themeColor !important;
+  }
+}
+  .table{
+	  color: $themeColor;
+	  button{
+		  
+		  font-size: 12px;
+		  color: #fff;
+		  background: $themeColor;
+		  margin-right: 15px;
+	  }
+	  input[type=time]{
+		  border: 1px solid $themeColor !important;
+		  border-radius: 5px;
+		  color: $themeColor;
+	  }
+	  .col{
+		  display: flex;
+		  align-items: center;
+		  .mat-checkbox-layout{
+			  margin-bottom: 0px;
+		  }
+	  }
+  }
+}
+admin-root{
+	display: flex;
+	min-height: 100vh;
+	flex-wrap: wrap;
+
+.logo{
+	position: absolute;
+	left: 30px;
+	top: 30px !important;
+}
+.admin{
+	padding-top: 0px !important;
+}
+header{
+	position: relative;
+	display: flex;
+	justify-content: flex-end;
+	.logout{
+		width: 75px;
+		line-height: 32px;
+		display: block;
+		background: rgba( black, 0.1);
+		text-align: center;
+		color: #fff;
+		border-radius: 5px;
+		
+	}
+}
+.admin-input input[type=text], .admin-input input[type=password], .admin-input input[type=number], .admin-input-datetime,
+select{
+	width: 100%;
+	height: 56px;
+	// background: rgba(255, 255, 255, 0.2) !important;
+	// font-family: "MyriadPro-Regular";
+	// font-size: 18px;
+	// color: #fff !important;
+	// text-align: left;
+	// float: left;
+	// border: 2px solid #E4A00F !important;
+	// margin-bottom: 10px;
+	// -webkit-appearance: none;
+	// appearance: none;
+	// text-shadow: 2px 2px 6px #000;
+}
+.mat-ink-bar{
+    background-color: #E4A00F !important;
+}
+.admin-active-label {
+    flex-grow: 0.1;
+}
+.btn-outline-warning{
+	color: $themeColor;
+	border-color: $themeColor;
+}
+.btn-outline-warning:disabled{
+	color: $themeColor;
+}
+.jsgrid-alt-row, .jsgrid-row{
+	color: $themeColor;
+}
+.jsgrid-header-row{
+	background-color: $themeColor;
+	color: #fff;
+}
+::-webkit-scrollbar-thumb{
+	background-color: $themeColor;
+}
+.jsgrid-alt-row{
+	border-top: 1px solid transparentize($color: $themeColor, $amount: 0.5);
+	border-bottom: 1px solid transparentize($color: $themeColor, $amount: 0.5);
+	background: transparentize($color: $themeColor, $amount: 0.9);
+}
+.jsgrid-row{
+	background-color: transparentize($color: $themeColor, $amount: 0.8);
+}
+.odd{
+	background-color: transparentize($color: $themeColor, $amount: 0.9);
+}
+.selected-row{
+	background-color: $themeColor;
+	color: #fff;
+	border: 0px;
+}
+.control-label{
+	color: $themeColor;	
+}
+.admin-label .ng-select.ng-select-single .ng-select-container .ng-arrow-wrapper {
+	display: flex;
+	align-self: center !important;
+	bottom: 0 !important;
+}
+.admin-label .ng-select.ng-select-focused .ng-select-container .ng-value-container .ng-placeholder {
+	color: $themeColor !important;
+}
+.admin-label .ng-select .ng-select-container .ng-value-container .ng-placeholder {
+	color: $themeColor !important;
+	text-shadow: 2px 2px 6px #000;
+	top: 14px !important;
+}
+.admin-label .ng-select.ng-select-single .ng-select-container .ng-value-container {
+	align-self: center !important;
+}
+.ingredient-lable-checkbox {
+	flex-grow: 1;
+	text-align: left;
+}
+.mat-tab-label{
+	opacity: 1 !important;
+}
+.mat-tab-label, .mat-tab-link {
+	color: #fff !important;
+}
+.mat-tab-label-container{
+	margin-bottom: 15px;
+}
+.admin-input input[type=text]::placeholder, .admin-input input[type=password]::placeholder, .admin-input input[type=number]::placeholder{
+	color: $themeColor;
+}
+.admin-input .form-control:focus{
+	border-bottom-color: $themeColor !important;
+}
+.admin-popup .ng-value{
+	background: #E4A00F !important;
+	color: black !important;
+	padding: 5px !important;
+}
+.admin-popup .ng-select.ng-select-single .ng-select-container .ng-value-container {
+	align-self: center !important;
+}
+.admin-popup .ng-select.ng-select-focused .ng-select-container .ng-value-container .ng-placeholder {
+	color: black !important;
+}
+.admin-popup .ng-select.ng-select-single .ng-select-container .ng-arrow-wrapper {
+	display: flex;
+	align-self: center !important;
+	bottom: 0 !important;
+}
+.admin-popup .ng-select .ng-select-container .ng-value-container .ng-placeholder {
+	color: black !important;
+	top: 14px !important;
+}
+.admin-popup .ng-select .ng-select-multiple .ng-select-container .ng-value-container .ng-placeholder {
+	color: black !important;
+}
+.admin-popup label {
+	margin-bottom: 1.5rem;
+}
+.pl5 {
+	padding-left: 5px !important;
+}
+
+
+
+// materialized css style starts from here
+
+.ng-select .ng-select-container{
+	overflow: visible !important;
+}
+.mat-form-field-appearance-legacy .mat-form-field-infix{
+	padding: 0px;
+}
+.mat-form-field{
+	width: 100%;
+}
+.admin-input input[type=text], .admin-input input[type=password], .admin-input input[type=number], .admin-input-datetime, select{
+	height: 42px;
+	background: #fff;
+	width: 100%;
+	padding: 0px 15px;
+}
+.mat-form-field-label-wrapper{
+	overflow: visible !important;
+}
+.mat-form-field-label-wrapper label{
+	margin-bottom: 0px;
+}
+.mat-form-field-appearance-legacy .mat-form-field-label{
+	top: 0px;
+	left: 0px;
+}
+.mat-form-field-appearance-legacy .mat-form-field-label{
+	-webkit-transform: translateY(12px) translateX(15px) scale(1) perspective(100px) translateZ(1px) !important;
+    transform: translateY(12px) translateX(15px) scale(1) perspective(100px) translateZ(1px) !important;
+}
+.mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label, .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label{
+    -webkit-transform: translateY(-25px)  translateX(0px) scale(.75) perspective(100px) translateZ(.001px) !important;
+    transform: translateY(-25px) translateX(0px) scale(.75) perspective(100px) translateZ(.001px) !important;
+}
+.mat-form-field-ripple{
+	background-color: $themeColor !important;
+}
+.ng-select.ng-select-focused .ng-select-container:after{
+	border-color: $themeColor;
+}
+.ng-select .ng-arrow-wrapper .ng-arrow{
+	color: $themeColor !important;
+}
+.ng-select .ng-select-container .ng-value-container .ng-input > input{
+	height: 42px !important;
+	padding: 0px 15px;
+}
+.ng-select .ng-select-container{
+	min-height: 42px !important;
+	background: #fff;
+}
+.ng-select .ng-select-container .ng-value-container .ng-input{
+	bottom: 0em;
+}
+.admin-label .ng-select .ng-select-container .ng-value-container .ng-placeholder{
+	top: 8px !important;
+	text-shadow: none;
+	background: none !important;
+}
+.mat-form-field-appearance-legacy .mat-form-field-label,
+.mat-form-field.mat-focused .mat-form-field-label{
+	color: $themeColor;
+}
+.ng-select{
+	font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+.ng-select .ng-select-container .ng-value-container{
+	padding: 0em !important;
+}
+.ng-value-label{
+	color: $themeColor !important;
+	margin-left: 15px;
+}
+.admin-label .ng-select .ng-select-container .ng-value-container .ng-placeholder{
+	-webkit-transform: translateY(0px) translateX(15px) scale(1) perspective(100px) translateZ(1px);
+    transform: translateY(0px) translateX(15px) scale(1) perspective(100px) translateZ(1px);
+}
+
+
+
+.mat-form-field-infix {
+    padding: 0 !important;
+    border-top: 0em solid transparent !important; 
+}
+.mat-form-field-label-wrapper {
+    top: 0em;
+    padding-top: 0em;
+}
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value{
+	background: rgba(var(--themeColorOpacity), 0.5);
+}
+.ng-select.ng-select-multiple .ng-value-label{
+	color: #fff !important;
+}
+.mat-form-field-wrapper{
+    padding-bottom: 0em !important;
+}
+.jsgrid-pager-container input.mat-input-element{
+    height: 45px;
+}
+.mat-form-field-underline{
+	bottom: 0 !important;
+}
+.jsgrid-pager-container .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label{
+    -webkit-transform: translateY(-14px) translateX(0px) scale(0.75) perspective(100px) translateZ(0.001px) !important;
+    transform: translateY(-14px) translateX(0px) scale(0.75) perspective(100px) translateZ(0.001px) !important;
+}
+.jsgrid-pager-container .mat-form-field-appearance-legacy .mat-form-field-label {
+    -webkit-transform: translateY(12px) translateX(0px) scale(1) perspective(100px) translateZ(1px) !important;
+    transform: translateY(12px) translateX(0px) scale(1) perspective(100px) translateZ(1px) !important;
+}
+.mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background{
+	background-color: $themeColor;
+}
+.btn-outline-warning.disabled, .btn-outline-warning:disabled{
+	color: $themeColor;
+}
+.btn-outline-warning:hover{
+	color: #fff;
+    background-color: $themeColor;
+    border-color: $themeColor;
+}
+.alert-danger{
+	padding: 0px;
+	margin: 0px;
+	background-color: transparent !important;
+	border: 0px;
+	color: #f44336;
+
+	label{
+		margin: 0px;
+		font-size: 13px;
+	}
+}
+.mat-checkbox-frame{
+	border-color: $themeColor;
+}
+.form-group{
+	margin-bottom: 2rem;
+}
+.ng-select{
+	padding-bottom: 0px;
+}
+.even{
+	background-color: transparentize($color: $themeColor, $amount: 0.8);
+}
+.odd{
+	background-color: transparentize($color: $themeColor, $amount: 0.9);
+}
+.mat-form-field-underline{
+	background-color: rgba($themeColor, 0.2) !important;
+  }
+header{
+	  background: $themeColor;
+  }
+}

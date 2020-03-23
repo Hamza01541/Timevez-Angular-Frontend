@@ -1,0 +1,31 @@
+<div class="mb-3 row d-flex jsgrid-pager-container">
+    <div class="col-12 col-md-6 d-flex align-items-center">
+        <div class="fa fa-plus add mr-3" data-toggle="tooltip" data-placement="bottom" title="Add New Record!"
+            aria-hidden="true" [hidden]="isShowAdd" (click)="emitAction('add')"></div>
+        <div class="fas fa-file-download cpdf mr-3" data-toggle="tooltip" data-placement="bottom"
+            title="Export Current Page" aria-hidden="true" (click)="emitAction('exportCurrentPage')"></div>
+        <div class="fas fa-file-pdf pdf" data-toggle="tooltip" data-placement="bottom" title="Export To Pdf"
+            aria-hidden="true" (click)="emitAction('export')"></div>
+    </div>
+    <div class="col-12 col-md-6 d-flex justify-content-end align-items-center pager pr-5">
+        <mat-form-field>
+            <input matInput type="text" id="searchField" name="search" [(ngModel)]="search" placeholder="Search...">
+        </mat-form-field>
+        <div class="fas fa-search pdf ml-3" data-toggle="tooltip" data-placement="bottom" title="Search"
+            aria-hidden="true"></div>
+    </div>
+</div>
+
+<!--grid div-->
+<div id="test">
+
+</div>
+
+<!--grid pager div-->
+<div id="test-pager">
+</div>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

@@ -1,0 +1,34 @@
+<header class="p-2">
+  <a href="#" class="mr-auto logo">
+    <img src="../../../../../assets/pos/images/logo.png" alt="">
+  </a>
+  <a class="logout" [routerLink]="['/login']" [queryParams]="{logout: true}">
+    Logout</a>
+</header>
+<aside>
+  <div class="row p-0 m-0">
+    <nav class="navbar">
+      <ul class="flex-wrap">
+        <li class="" [routerLink]="['/dashboard']"> <span class="fa fa-tachometer-alt mr-1"></span> Dashboard</li>
+        <li *ngFor="let tab of navbarTabs" class=""
+          [ngClass]="{'active': currentPage.toLowerCase() == tab.route.toLowerCase()}"
+          routerLink="/admin/{{tab.route}}">
+          <span class="fa fa-tachometer-alt mr-1"></span> {{tab.name}}
+        </li>
+        
+      </ul>
+    </nav>
+  </div>
+</aside>
+
+<div class="admin">
+  
+  <div class="col">
+    
+    <h1 class="text-center mb-5">{{currentPage.replace('-', ' ') | titlecase}} </h1>
+    <!-- <button type="button" class="btn btn-secondary" style="margin: 30px auto; display: block;">{{currentDate | translateDate: 'longDate'}}</button> -->
+
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

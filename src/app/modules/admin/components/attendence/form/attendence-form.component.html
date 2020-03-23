@@ -1,0 +1,89 @@
+<form style="width: 100%;" name="form" #form="ngForm">
+  <div class="row d-flex">
+    <div class="form-group col-md-6 col-12 admin-label">
+      <ng-select [items]="" bindLabel="label" bindValue="value" #user="ngModel" id="User" name="User"
+        [(ngModel)]="model.user" placeholder="Select User" [multiple]="true" required></ng-select>
+
+      <div *ngIf="user.errors?.required && (user.dirty || user.touched)" class="alert alert-danger">
+        User is Required.
+      </div>
+    </div>
+    <div class="form-group col-md-6 col-12 ">
+
+      <mat-form-field>
+        <input matInput type="text" #comment="ngModel" id="comment" name="comment" [(ngModel)]="model.comment"
+          minlength="3" placeholder="Enter Comment">
+      </mat-form-field>
+      <div class="input-wrapper">
+        <mat-form-field>
+          <input matInput [min]="min" [max]="max" placeholder="Select CheckIn Date and Time" [(ngModel)]="model.checkIn"
+            name="checkIn date" class="admin-input-datetime" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1"
+            #checkInDate="ngModel" required>
+        </mat-form-field>
+        <div *ngIf=" checkInDate.errors?.required  && checkInDate.touched" class="alert alert-danger">
+          CheckIn Date is Required.
+        </div>
+        <owl-date-time #dtPicker1 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
+          [pickerMode]="pickerMode" [pickerType]="'timer'"></owl-date-time>
+      </div>
+      <div class="input-wrapper">
+        <mat-form-field>
+          <input matInput [min]="min" [max]="max" placeholder="Select CheckOut Date and Time"
+            [(ngModel)]="model.checkOut" name="checkOut date" class="admin-input-datetime"
+            [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2" #checkOutDate="ngModel" required>
+        </mat-form-field>
+        <div *ngIf=" checkOutDate.errors?.required  && checkOutDate.touched" class="alert alert-danger">
+          CheckOut Date is Required.
+        </div>
+        <owl-date-time #dtPicker2 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
+          [pickerMode]="pickerMode" [pickerType]="'timer'"></owl-date-time>
+      </div>
+      <div class="input-wrapper">
+        <mat-form-field>
+          <input matInput [min]="min" [max]="max" placeholder="Select Break Start Date and Time"
+            [(ngModel)]="model.breakStartTime" name="breakStart date" class="admin-input-datetime"
+            [owlDateTimeTrigger]="dtPicker3" [owlDateTime]="dtPicker3" #breakStartTimeDate="ngModel" required>
+        </mat-form-field>
+        <div *ngIf=" breakStartTimeDate.errors?.required  && breakStartTimeDate.touched" class="alert alert-danger">
+          Break Start Time & Date is Required.
+        </div>
+        <owl-date-time #dtPicker3 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
+          [pickerMode]="pickerMode" [pickerType]="'timer'"></owl-date-time>
+      </div>
+      <div class="input-wrapper">
+        <mat-form-field>
+          <input matInput [min]="min" [max]="max" placeholder="Select Break End Date and Time"
+            [(ngModel)]="model.breakEndTime" name="breakEnd date" class="admin-input-datetime"
+            [owlDateTimeTrigger]="dtPicker4" [owlDateTime]="dtPicker4" #breakEndTimeDate="ngModel" required>
+        </mat-form-field>
+        <div *ngIf=" breakEndTimeDate.errors?.required  && breakEndTimeDate.touched" class="alert alert-danger">
+          Break End Time & Date is Required.
+        </div>
+        <owl-date-time #dtPicker4 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
+          [pickerMode]="pickerMode" [pickerType]="'timer'"></owl-date-time>
+      </div>
+      <div class="input-wrapper">
+        <mat-form-field>
+          <input matInput [min]="min" [max]="max" placeholder="Select Date " [(ngModel)]="model.date"
+            name="breakEnd date" class="admin-input-datetime" [owlDateTimeTrigger]="dtPicker5" [owlDateTime]="dtPicker5"
+            #Date="ngModel" required>
+        </mat-form-field>
+        <div *ngIf="Date.errors?.required  && Date.touched" class="alert alert-danger">
+          Date is Required.
+        </div>
+        <owl-date-time #dtPicker5 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
+          [pickerMode]="pickerMode" [pickerType]="'both'"></owl-date-time>
+      </div>
+      <div class="col-md-6 col-12 d-flex align-items-center justify-content-center">
+        <div class="form-group d-flex align-items-center justify-content-between">
+          <label class="control-label col-2">Status</label>
+          <mat-checkbox id="status" name="status" [(ngModel)]="model.status"></mat-checkbox>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
+<button type="button" class="btn btn-outline-warning float-right" [routerLink]="['/admin/attendence']">Cancel</button>
+<button type="button" class="btn btn-outline-warning float-right mr-2" [disabled]="form.invalid"
+    (click)="save()">Save</button>

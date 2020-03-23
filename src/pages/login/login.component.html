@@ -1,0 +1,31 @@
+<form style="width: 100%;" name="loginForm" #loginForm="ngForm">
+    <div class="row d-flex">
+        <div class="col-md-2 col-12">
+            <div class="form-group">
+                <mat-form-field>
+                    <input matInput type="text" required #userName="ngModel" id="name" name="name"
+                        [(ngModel)]="loginModel.Username" placeholder="Enter UserName">
+                </mat-form-field>
+            </div>
+            <div *ngIf="userName.errors?.required && userName.touched " class="alert alert-danger">
+                User Name is Required.
+            </div>
+        </div>
+        <div class="col-md-2 col-12 ">
+            <div class="form-group">
+                <mat-form-field>
+                    <input matInput type="password" required #password="ngModel" id="description" name="description"
+                        [(ngModel)]="loginModel.Password" placeholder="Enter Password">
+                </mat-form-field>
+            </div>
+            <div *ngIf="password.errors?.required && password.touched " class="alert alert-danger">
+                Password is Required.
+            </div>
+        </div>
+    </div>
+</form>
+<button type="button" (click)="login()" [disabled]="loginForm.invalid"
+    class="btn btn-primary float-left">Login</button>
+    <button routerLink="/admin/user" class="btn btn-primary float-left">User</button>
+    <button routerLink="/admin/user-form" class="btn btn-primary float-left">User forms</button>
+    <button routerLink="/check" class="btn btn-primary float-left">Attendence</button>

@@ -1,0 +1,51 @@
+@import "../../../app/modules//admin//color.scss";
+
+.jsgrid-pager-container{
+    display: flex;
+    justify-content: center;
+    .add{
+        color:$themeColor;
+        font-size: 25px;
+        // margin-left: 17px;
+        cursor: pointer;
+    }
+    .cpdf{
+        color:$themeColor;
+        // margin-left: -372px;
+        font-size: 25px;
+        cursor: pointer;
+    }.pdf{
+        color:$themeColor;
+        // margin-left: -760px;
+        font-size: 25px;
+        cursor: pointer;
+    }.search{
+        margin-left:400px;
+    }
+}
+.jsgrid{
+    margin: 0 auto !important;
+    width: auto !important;
+}
+.jsgrid-pager-container{
+    background: #fff;
+    margin-top: 30px;
+    padding: 15px 0px;
+    
+}
+.jsgrid-pager-container ::before{
+    color: $themeColor;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-infix{
+    padding: 0px;
+}
+.mat-form-field{
+    width: 100%;
+}
+.admin-input input[type=text], .admin-input input[type=password], .admin-input input[type=number], .admin-input-datetime, select{
+    height: 42px;
+    background: #fff;
+    width: 100%;
+    padding: 0px 15px;
+}

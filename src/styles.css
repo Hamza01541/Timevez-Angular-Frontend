@@ -1,0 +1,50 @@
+
+/* Material */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+
+/* ngx-toastr */
+@import '~ngx-toastr/toastr.css';
+
+/* Owl Date and time*/
+
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+body.disable-scroll{
+  overflow: hidden;
+}
+
+/* hides arrow of input type='number' */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+   -webkit-appearance: none; 
+   margin: 0; 
+}
+
+/* display cursor pointer not-allowed for all disabled buttons */
+button[disabled]:hover {
+  cursor: not-allowed;
+}
+
+:disabled {
+  cursor: not-allowed;
+}
+.selected-row {
+  border: 2px solid #E4A00F;
+  background: #E4A00F ;
+}
+.jsgrid-header-row{
+ background-color: #fcfcfc;
+}
+.jsgrid-alt-row{
+border-top: 1px solid #f3f3f3;
+border-bottom: 1px solid #f3f3f3;
+}
+.jsgrid-alt-row,
+.jsgrid-row{
+  color: #fff;
+}
+.jsgrid-grid-body{
+  overflow-y: auto !important;
+}
