@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {
-  LoginComponent, SignupComponent,CheckComponent
+  LoginComponent, SignupComponent,timesheetComponent
 } from '../pages/index';
 
 const appRoutes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'check', component: CheckComponent },
+  { path: 'timesheet', component: timesheetComponent },
   {
     path: 'admin',
     // loadChildren: './modules/admin/admin.module#AdminModule',

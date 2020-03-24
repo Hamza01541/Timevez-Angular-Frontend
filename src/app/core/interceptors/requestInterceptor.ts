@@ -3,19 +3,16 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import * as Sentry from "@sentry/browser";
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
     blacklistHeaderUrls: string[] = ['api.ipify.org'];
-    sentryBlackListUrls: any[] = [];
 
     constructor(private router: Router) { }
 
     /**
      * Request/Error Interceptor.
      * Check request urls and set headers and token, if required.
-     * Catch backend errors, log them in sentry.
      * On 401 error, logout user and rediect to login page.
      * @param request 
      * @param next 
@@ -24,7 +21,6 @@ export class RequestInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // request = this.checkUrl(request);
         request = this.setRequestHeader(request);
-
         return next.handle(request).pipe(map((response: HttpEvent<any>) => {
             return response;
         }),
@@ -34,33 +30,10 @@ export class RequestInterceptor implements HttpInterceptor {
                         this.router.navigate(['login'], { queryParams: { logout: true } });
                     }, 100);
                 } else {
-                    // this.logSentryError(request, error);
                 }
                 return throwError(error);
             })
         );
-    }
-
-    /**
-     * Checks either current request error is in sentry black listed errors,
-     * if not, then log error in sentry.
-     * @param {HttpErrorResponse} error request error to be logged in sentry.
-     * @returns {void}
-     */
-    logSentryError(request: HttpRequest<any>, error: HttpErrorResponse): void {
-        let isBlackListUrl = false;
-
-        for (let i = 0; i < this.sentryBlackListUrls.length; i++) {
-            if (request.url.includes(this.sentryBlackListUrls[i])) {
-                isBlackListUrl = true;
-                break;
-            }
-        }
-
-        if (!isBlackListUrl) {
-            const eventId = Sentry.captureException(error);
-            Sentry.showReportDialog({ eventId });
-        }
     }
 
     /**

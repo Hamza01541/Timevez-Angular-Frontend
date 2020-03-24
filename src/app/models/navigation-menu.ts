@@ -13,17 +13,6 @@ export const AdminNavigationMenu = [
   ];
   
   export const StaffNavigationMenu = [
-    {
-      "name": "Product",
-      "route": "product"
-    },
-    {
-      "name": "Ingredient",
-      "route": "ingredient"
-    },
-    {
-      "name": "Product Detail",
-      "route": "product-detail"
-    },
+    
   ]
   

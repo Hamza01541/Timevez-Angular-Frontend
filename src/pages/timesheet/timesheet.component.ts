@@ -4,11 +4,11 @@ import { AlertService, LoaderService } from '../../app/core/services/index';
 
 
 @Component({
-  selector: 'check-component',
-  templateUrl: './check.component.html',
-  styleUrls: ['./check.component.css']
+  selector: 'timesheet-component',
+  templateUrl: './timesheet.component.html',
+  styleUrls: ['./timesheet.component.css']
 })
-export class CheckComponent implements OnInit {
+export class timesheetComponent implements OnInit {
 
  
 

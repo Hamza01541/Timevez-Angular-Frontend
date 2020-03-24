@@ -10,38 +10,48 @@ export class RoleService {
     constructor(private RequestService: RequestService) { }
 
     role = `${ApiUrl.role}`;
+    /**
+   * Get Role Data 
+   *  It Returns the Object 
+   */
     getData() {
         const role = `${this.role}/${ApiUrl.list}`;
-        return this.RequestService.getData(role).map((response: any) => {
-            return response;
-        });
+        return this.RequestService.getData(role);
     }
 
-    addData(param) {
+    /**
+       * Add Data to role
+       * @param obj is the object to be added
+       */
+    addData(obj) {
         const role = `${this.role}/${ApiUrl.add}`;
-        return this.RequestService.addData(role, param).map((response: any) => {
-            return response;
-        });
+        return this.RequestService.addData(role, obj);
     }
 
+    /**
+   * Get Role  By Id
+   * @param id is to get role on the base of Id
+   */
     getById(id) {
         const role = `${this.role}/${ApiUrl.list}/`;
-        return this.RequestService.getData(role + id).map((response: any) => {
-            return response;
-        });
+        return this.RequestService.getData(role + id);
     }
 
-    updateData(model) {
+    /**
+   * Update role
+   * @param obj it the object to update the data
+   */
+    updateData(obj) {
         const role = `${this.role}/${ApiUrl.update}/`;
-        return this.RequestService.updateData(role, model).map((response: any) => {
-            return response;
-        });
+        return this.RequestService.updateData(role, obj);
     }
 
+    /**
+   * Delete role Detail By Id
+   * @param id is to delete the role data on the base of Id
+   */
     deleteData(id) {
         const role = `${this.role}/${ApiUrl.delete}/`;
-        return this.RequestService.deleteData(role, id).map((response: any) => {
-            return response;
-        });
+        return this.RequestService.deleteData(role, id);
     }
 }

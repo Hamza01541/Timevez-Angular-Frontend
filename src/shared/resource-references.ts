@@ -5,10 +5,7 @@ import { environment } from 'src/environments/environment';
  */
 export class ApiUrl {
     static url = `${environment.apiUrl}`;
-
-
     //Admin
-
     static user = `user`;
     static list = `list`;
     static login = `login`;
@@ -21,7 +18,6 @@ export class ApiUrl {
     static detail=`detail`;
     static checkIn=`checkIn`;
     static checkOut=`checkOut`;
-    
     static startBreak=`startBreak`;
     static endBreak=`endBreak`;
 }
