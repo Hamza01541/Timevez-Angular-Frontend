@@ -43,7 +43,7 @@ border-bottom: 1px solid #f3f3f3;
 }
 .jsgrid-alt-row,
 .jsgrid-row{
-  color: #fff;
+  color: black;
 }
 .jsgrid-grid-body{
   overflow-y: auto !important;

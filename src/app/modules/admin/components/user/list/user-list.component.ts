@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-
+import { AlertService, LoaderService, UserService } from 'src/app/core/services/index';
 import { GridComponent } from 'src/shared/components/index';
 
 @Component({
@@ -19,11 +19,11 @@ export class UserListComponent implements OnInit {
     selectedRowId;
     isShowAdd: boolean = false;
 
-
-
-
     constructor(
         private router: Router,
+        private userService: UserService,
+        private alertService: AlertService,
+        private loaderService: LoaderService,
         public dialog: MatDialog) { }
 
 
@@ -46,11 +46,12 @@ export class UserListComponent implements OnInit {
                 }
             },
             { title: 'User Name', width: 92, name: 'username' },
-            { title: 'Roles', width: 50, name: 'roles' },
-            { title: 'Country', width: 44, name: 'country' },
-            { title: 'City', width: 50, name: 'city' },
+
+            { title: 'CNIC', width: 44, name: 'CNIC' },
+            { title: 'address', width: 50, name: 'address' },
             { title: 'Email', width: 92, name: 'email' },
             { title: 'Phone Number', width: 60, name: 'phoneNumber' },
+            { title: 'Roles', width: 50, name: 'roles' },
             {
                 title: 'Active', width: 50, name: 'active', itemTemplate: function (active) {
                     var iconClass = "";
@@ -63,12 +64,40 @@ export class UserListComponent implements OnInit {
                     return $("<span>").attr("class", iconClass);
                 }
             },
+            {
+                title: 'Action', width: 70, itemTemplate: (__, data) => {
+
+                    console.log("data", data);
+                    this.selectedRowId = data.id;
+                    console.log("ttt", this.selectedRowId);
+                    const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fas fa-edit mr-3'  >").on("click", () => this.performCurdOperation('update', data.id));
+                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-ban mr-3'>").on("click", () => this.performCurdOperation('delete', data.id));
+                    // const hardDeleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Delete'>").append("<i class='fas fa-trash-alt mr-3'>").on("click", () => this.openDialog());
+                    return $("<span>").append(updateIcon).append(deleteIcon);
+                }
+            }
 
         ];
     }
 
     performCurdOperation(action, id) {
-
+        console.log("action id", action, id);
+        switch (action) {
+            case 'update':
+                // this.router.navigate(['/admin/user-form'], { queryParams: { id: this.selectedRowId } });
+                break;
+            case 'delete':
+                this.showLoader();
+                this.userService.deleteData(id).subscribe(res => {
+                    this.hideLoader();
+                    this.alertService.successToastr("Selected User Disabled Successfully.", false);
+                    this.gridComponent.deleteRowListener(id);
+                }, error => {
+                    this.hideLoader();
+                    this.alertService.errorToastr("Error in Deleting User.", false);
+                });
+                break;
+        }
     }
 
     /**
@@ -92,141 +121,33 @@ export class UserListComponent implements OnInit {
     // }
     //   }
 
-
     getUsers(pageindex: number = 1) {
 
-
-
-        let data = {
-            "data": [
-                {
-                    "id": "01608381-2cec-471e-b034-d19ec108b607",
-                    "username": "test@foodvez.com",
-                    "firstName": "Testing",
-                    "lastName": "Testing",
-                    "email": "test@foodvez.com",
-                    "password": "AQAAAAEAACcQAAAAEJABaDtRGm+MPz43uucFTueWqLkfU4IH34WLfpKsiF3TLSz7a5iz3jb+WCVS7T7aOQ==",
-                    "country": "Pakistan",
-                    "city": "Multan",
-                    "phoneNumber": "70740430882",
-                    "roleName": null,
-                    "roles": [
-                        "Customer"
-                    ],
-                    "token": null,
-                    "connectionId": null,
-                    "createdDate": "0001-01-01T00:00:00",
-                    "modifiedDate": null,
-                    "createdBy": null,
-                    "modifiedBy": null,
-                    "active": true
-                },
-                {
-                    "id": "67440bc3-a3c6-481f-b279-790ca300e3d7",
-                    "username": "ali@gmail.com",
-                    "firstName": "ali",
-                    "lastName": "Aqib",
-                    "email": "ali@gmail.com",
-                    "password": "AQAAAAEAACcQAAAAEFTe13o6QaICkQxBeZ0jZiNyK932WGstTJHfYs/ajRl1nDl/PDOvwoaavGA+FU89zQ==",
-                    "country": "Pakistan",
-                    "city": "Multan",
-                    "phoneNumber": "11212221111",
-                    "roleName": null,
-                    "roles": [
-                        "Staff"
-                    ],
-                    "token": null,
-                    "connectionId": null,
-                    "createdDate": "0001-01-01T00:00:00",
-                    "modifiedDate": null,
-                    "createdBy": null,
-                    "modifiedBy": null,
-                    "active": true
-                },
-                {
-                    "id": "ab5261ca-0546-4c72-ad21-d9fd80270e0c",
-                    "username": "sr.zohaibamin@gmail.com",
-                    "firstName": "zohab",
-                    "lastName": "amin",
-                    "email": "sr.zohaibamin@gmail.com",
-                    "password": "AQAAAAEAACcQAAAAEP5BgE0Uw/Bbhc36fhTY7U6UnkU43JhGcNrsYAwSfQpKFtauXozpWo8zIyXga5v26Q==",
-                    "country": "Pakistan",
-                    "city": "Multan",
-                    "phoneNumber": "03007321257",
-                    "roleName": null,
-                    "roles": [
-                        "Customer"
-                    ],
-                    "token": null,
-                    "connectionId": null,
-                    "createdDate": "0001-01-01T00:00:00",
-                    "modifiedDate": null,
-                    "createdBy": null,
-                    "modifiedBy": null,
-                    "active": true
-                },
-                {
-                    "id": "e1b6d1b9-e653-40b1-8e4d-51a174b1d89f",
-                    "username": "Bilal@gmail.com",
-                    "firstName": "Bilal",
-                    "lastName": "Aqib",
-                    "email": "Bilal@gmail.com",
-                    "password": "AQAAAAEAACcQAAAAEGRP7BkQ1eH+SYhs7lauT5I8VVfYQyQGVD2qVvt4DuWkuFWyJE3LtlXNB3Nwh0c4MQ==",
-                    "country": "Pakistan",
-                    "city": "Multan",
-                    "phoneNumber": "34343243433",
-                    "roleName": null,
-                    "roles": [
-                        "Staff"
-                    ],
-                    "token": null,
-                    "connectionId": null,
-                    "createdDate": "0001-01-01T00:00:00",
-                    "modifiedDate": null,
-                    "createdBy": null,
-                    "modifiedBy": null,
-                    "active": true
-                },
-                {
-                    "id": "ee3e59de-baf9-4ee7-8e0b-bef2f72c7238",
-                    "username": "hamzashahzad@gmail.com",
-                    "firstName": "Hamza",
-                    "lastName": "Shahzad",
-                    "email": "hamzashahzad@gmail.com",
-                    "password": "AQAAAAEAACcQAAAAEG5tmbj1LxcYqp+NQgPhBLTWfM0S3EkG9smJkVrnG7vGnVcJ9CNrF9wvPWvrtskkdA==",
-                    "country": "Pakistan",
-                    "city": "Multan",
-                    "phoneNumber": "11123456432",
-                    "roleName": null,
-                    "roles": [
-                        "Staff"
-                    ],
-                    "token": null,
-                    "connectionId": null,
-                    "createdDate": "0001-01-01T00:00:00",
-                    "modifiedDate": null,
-                    "createdBy": null,
-                    "modifiedBy": null,
-                    "active": true
-                }
-            ],
-            "total": 5
-        }
-
-        this.users = data.data;
-        this.totalUsers = data.total;
-
+        this.showLoader();
+        this.userService.getData().subscribe((users: any) => {
+            console.log("users", users);
+            this.hideLoader();
+            this.users = users.data;
+            this.totalUsers = users.total;
+        }, error => {
+            this.hideLoader();
+            this.alertService.errorToastr("Error in Getting Users.", false);
+        });
     }
 
     performOperation(event: any) {
         switch (event.action) {
             case 'add':
-              this.router.navigate(['/admin/user-form']);
-              break;
-           
-          }
-
-
+                this.router.navigate(['/admin/user-form']);
+                break;
+        }
     }
 
+    showLoader() {
+        this.loaderService.show();
+    }
+
+    hideLoader() {
+        this.loaderService.hide();
+    }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 // import { ConfirmationDialogueComponent } from 'src/app/shared/components/dialogues/confirmation/confirmation.component';
-import * as $ from 'jquery';
+import 'jquery';
 @Component({
   selector: 'jsgrid',
   templateUrl: './grid.component.html',
@@ -151,7 +151,7 @@ export class GridComponent implements OnInit, OnChanges {
    * Fires When we have to open page based on PageIndex
    */
   gridPageOpen() {
-    // ($('#test') as any).jsGrid("openPage", this.jsfilter.pageIndex);
+    ($('#test') as any).jsGrid("openPage", this.jsfilter.pageIndex);
     
   }
 
@@ -183,22 +183,22 @@ export class GridComponent implements OnInit, OnChanges {
    * Open confirmation dialogue.
    * On confirmation, deletes selected row of grid.
    */
-//   openDialog() {
-//     const dialogRef = this.dialog.open(ConfirmationDialogueComponent, {
-//       width: '250px',
-//       data: {
-//         message: 'Want to Delete Data?'
-//       }
-//     });
+  // openDialog() {
+  //   const dialogRef = this.dialog.open(ConfirmationDialogueComponent, {
+  //     width: '250px',
+  //     data: {
+  //       message: 'Want to Delete Data?'
+  //     }
+  //   });
 
-//     if (dialogRef) {
-//       dialogRef.afterClosed().subscribe(result => {
-//         if (result) {
-//           this.emitAction('hardDelete', this.selectedRow.id);
-//         }
-//       });
-//     }
-//   }
+  //   if (dialogRef) {
+  //     dialogRef.afterClosed().subscribe(result => {
+  //       if (result) {
+  //         this.emitAction('hardDelete', this.selectedRow.id);
+  //       }
+  //     });
+  //   }
+  // }
 
   //   /**
   //    * Callback method.

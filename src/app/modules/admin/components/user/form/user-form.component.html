@@ -124,8 +124,9 @@
             </div>
         </div>
         <div class="form-group col-md-6 col-12 admin-label">
-            <ng-select [items]="rolesTypes" class="form-control" bindLabel="label" bindValue="value" #roles="ngModel" id="Roles" name="Roles"
-                [(ngModel)]="model.roles" placeholder="Select Roles" [multiple]="true" required></ng-select>
+            <ng-select [items]="rolesTypes" class="form-control" bindLabel="label" bindValue="value" #roles="ngModel"
+                id="Roles" name="Roles" [(ngModel)]="model.roles" placeholder="Select Roles"
+                [multiple]="true" required></ng-select>
 
             <div *ngIf="roles.errors?.required && (roles.dirty || roles.touched)" class="alert alert-danger">
                 Roles is Required.
