@@ -51,7 +51,7 @@ export class RoleService {
    * @param id is to delete the role data on the base of Id
    */
     deleteData(id) {
-        const role = `${this.role}/${ApiUrl.delete}/`;
+        const role = `${this.role}/${ApiUrl.delete}`;
         return this.RequestService.deleteData(role, id);
     }
 

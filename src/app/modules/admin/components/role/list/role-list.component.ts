@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService, LoaderService, RoleService } from 'src/app/core/services/index';
-import { GridComponent } from 'src/shared/components/index';
+import { GridComponent,ConfirmationDialogueComponent} from 'src/shared/components/index';
 
 @Component({
     selector: 'app-role-list',
@@ -26,17 +26,21 @@ export class RoleListComponent implements OnInit {
         private loaderService: LoaderService,
         public dialog: MatDialog) { }
 
-
     ngOnInit() {
         this.getGridData();
     }
 
+    /**
+        * Call the ColumnDefs and Roles.
+        */
     getGridData() {
         this.getColumnDefs();
         this.getRoles();
     }
 
-    //initialize grid
+    /**
+       * Initializing the Grid with Data
+       */
     getColumnDefs() {
         const _this = this;
         this.jscolumnDefs = [
@@ -56,18 +60,18 @@ export class RoleListComponent implements OnInit {
             },
             {
                 title: 'Action', width: 70, itemTemplate: (__, data) => {
-                    console.log("data",data);
                     this.selectedRowId = data.id;
                     const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', data.id));
-                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.performCurdOperation('delete', data.id));
-                    // const hardDeleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Delete'>").append("<i class='fas fa-trash-alt mr-3'>").on("click", () => this.openDialog());
+                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.openDialog());
                     return $("<span>").append(updateIcon).append(deleteIcon);
                 }
             }
-
         ];
     }
 
+    /**
+    * Perform Update or Delete Operation..
+    */
     performCurdOperation(action, id) {
         switch (action) {
             case 'update':
@@ -77,11 +81,11 @@ export class RoleListComponent implements OnInit {
                 this.showLoader();
                 this.roleService.deleteData(id).subscribe(res => {
                     this.hideLoader();
-                    this.alertService.successToastr("Selected User Disabled Successfully.", false);
+                    this.alertService.successToastr("Selected Role Deleted Successfully.", false);
                     this.gridComponent.deleteRowListener(id);
                 }, error => {
                     this.hideLoader();
-                    this.alertService.errorToastr("Error in Deleting User.", false);
+                    this.alertService.errorToastr("Error in Deleting Role.", false);
                 });
                 break;
         }
@@ -91,28 +95,29 @@ export class RoleListComponent implements OnInit {
      * Open confirmation dialogue.
      * On confirmation, deletes selected row of grid.
      */
-    //   openDialog() {
-    //     const dialogRef = this.dialog.open(ConfirmationDialogueComponent, {
-    //       width: '250px',
-    //       data: {
-    //         message: 'Want to Delete Data?'
-    //       }
-    //     });
+    openDialog() {
+        const dialogRef = this.dialog.open(ConfirmationDialogueComponent, {
+            width: '250px',
+            data: {
+                message: 'Want to Delete Data?'
+            }
+        });
 
-    // if (dialogRef) {
-    //   dialogRef.afterClosed().subscribe(result => {
-    //     if (result) {
-    //       this.performCurdOperation('hardDelete', this.selectedRowId);
-    //     }
-    //   });
-    // }
-    //   }
+        if (dialogRef) {
+            dialogRef.afterClosed().subscribe(result => {
+                if (result) {
+                    this.performCurdOperation('delete', this.selectedRowId);
+                }
+            });
+        }
+    }
 
+    /**
+   * Get Roles on the base of page index.
+   */
     getRoles(pageindex: number = 1) {
-
         this.showLoader();
         this.roleService.getPagedRole(pageindex).subscribe((roles: any) => {
-
             this.hideLoader();
             this.role = roles.data;
             this.totalRoles = roles.total;
@@ -122,6 +127,9 @@ export class RoleListComponent implements OnInit {
         });
     }
 
+    /**
+     * Perform Add Operation
+     */
     performOperation(event: any) {
         switch (event.action) {
             case 'add':
@@ -130,10 +138,16 @@ export class RoleListComponent implements OnInit {
         }
     }
 
+    /**
+   * Show the loader screen
+   */
     showLoader() {
         this.loaderService.show();
     }
 
+    /**
+     * Hide the Loader Screen
+     */
     hideLoader() {
         this.loaderService.hide();
     }

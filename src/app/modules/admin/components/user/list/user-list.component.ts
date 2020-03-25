@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService, LoaderService, UserService } from 'src/app/core/services/index';
-import { GridComponent } from 'src/shared/components/index';
+import { GridComponent, ConfirmationDialogueComponent } from 'src/shared/components/index';
 
 @Component({
     selector: 'app-user-list',
@@ -26,17 +26,21 @@ export class UserListComponent implements OnInit {
         private loaderService: LoaderService,
         public dialog: MatDialog) { }
 
-
     ngOnInit() {
         this.getGridData();
     }
 
+    /**
+         * Call the Column and Users.
+         */
     getGridData() {
         this.getColumnDefs();
         this.getUsers();
     }
 
-    //initialize grid
+    /**
+      * Initializing the Grid with Data
+      */
     getColumnDefs() {
         const _this = this;
         this.jscolumnDefs = [
@@ -46,7 +50,6 @@ export class UserListComponent implements OnInit {
                 }
             },
             { title: 'User Name', width: 92, name: 'username' },
-
             { title: 'CNIC', width: 44, name: 'CNIC' },
             { title: 'address', width: 50, name: 'address' },
             { title: 'Email', width: 92, name: 'email' },
@@ -66,18 +69,18 @@ export class UserListComponent implements OnInit {
             },
             {
                 title: 'Action', width: 70, itemTemplate: (__, user) => {
-
                     this.selectedRowId = user.id;
                     const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', user.id));
-                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.performCurdOperation('delete', user.id));
-                    // const hardDeleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Delete'>").append("<i class='fas fa-trash-alt mr-3'>").on("click", () => this.openDialog());
+                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.openDialog());
                     return $("<span>").append(updateIcon).append(deleteIcon);
                 }
             }
-
         ];
     }
 
+    /**
+     * Perform Update or Delete Operation..
+     */
     performCurdOperation(action, id) {
         switch (action) {
             case 'update':
@@ -87,7 +90,7 @@ export class UserListComponent implements OnInit {
                 this.showLoader();
                 this.userService.deleteData(id).subscribe(res => {
                     this.hideLoader();
-                    this.alertService.successToastr("Selected User Disabled Successfully.", false);
+                    this.alertService.successToastr("Selected User Deleted Successfully.", false);
                     this.gridComponent.deleteRowListener(id);
                 }, error => {
                     this.hideLoader();
@@ -101,25 +104,27 @@ export class UserListComponent implements OnInit {
      * Open confirmation dialogue.
      * On confirmation, deletes selected row of grid.
      */
-    //   openDialog() {
-    //     const dialogRef = this.dialog.open(ConfirmationDialogueComponent, {
-    //       width: '250px',
-    //       data: {
-    //         message: 'Want to Delete Data?'
-    //       }
-    //     });
+    openDialog() {
+        const dialogRef = this.dialog.open(ConfirmationDialogueComponent, {
+            width: '250px',
+            data: {
+                message: 'Want to Delete Data?'
+            }
+        });
 
-    // if (dialogRef) {
-    //   dialogRef.afterClosed().subscribe(result => {
-    //     if (result) {
-    //       this.performCurdOperation('hardDelete', this.selectedRowId);
-    //     }
-    //   });
-    // }
-    //   }
+        if (dialogRef) {
+            dialogRef.afterClosed().subscribe(result => {
+                if (result) {
+                    this.performCurdOperation('delete', this.selectedRowId);
+                }
+            });
+        }
+    }
 
+    /**
+     * Get Users on the base of page index.
+     */
     getUsers(pageindex: number = 1) {
-
         this.showLoader();
         this.userService.getPagedUsers(pageindex).subscribe((users: any) => {
             this.hideLoader();
@@ -131,6 +136,9 @@ export class UserListComponent implements OnInit {
         });
     }
 
+    /**
+         * Perform Add Operation
+         */
     performOperation(event: any) {
         switch (event.action) {
             case 'add':
@@ -139,10 +147,16 @@ export class UserListComponent implements OnInit {
         }
     }
 
+    /**
+     * Show the loader screen
+     */
     showLoader() {
         this.loaderService.show();
     }
 
+    /**
+     * Hide the Loader Screen
+     */
     hideLoader() {
         this.loaderService.hide();
     }

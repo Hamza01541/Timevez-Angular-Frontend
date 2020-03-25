@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-// import { ConfirmationDialogueComponent } from 'src/app/shared/components/dialogues/confirmation/confirmation.component';
 import 'jquery';
 @Component({
   selector: 'jsgrid',
@@ -178,27 +177,6 @@ export class GridComponent implements OnInit, OnChanges {
   emitAction(action: string, currentRowId: number = null) {
     this.performOperation.emit({ "selectedRowId": currentRowId, "action": action });
   }
-
-  /**
-   * Open confirmation dialogue.
-   * On confirmation, deletes selected row of grid.
-   */
-  // openDialog() {
-  //   const dialogRef = this.dialog.open(ConfirmationDialogueComponent, {
-  //     width: '250px',
-  //     data: {
-  //       message: 'Want to Delete Data?'
-  //     }
-  //   });
-
-  //   if (dialogRef) {
-  //     dialogRef.afterClosed().subscribe(result => {
-  //       if (result) {
-  //         this.emitAction('hardDelete', this.selectedRow.id);
-  //       }
-  //     });
-  //   }
-  // }
 
   //   /**
   //    * Callback method.

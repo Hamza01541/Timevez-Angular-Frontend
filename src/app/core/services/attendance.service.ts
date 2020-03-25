@@ -70,7 +70,7 @@ export class AttendanceService {
           * @param id is to delete attendence data 
           */
     deleteData(id) {
-        const attendance = `${this.attendance}/${ApiUrl.delete}/`;
+        const attendance = `${this.attendance}/${ApiUrl.delete}`;
         return this.RequestService.deleteData(attendance, id);
     }
 

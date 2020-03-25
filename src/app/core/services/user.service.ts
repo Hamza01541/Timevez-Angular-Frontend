@@ -61,7 +61,7 @@ export class UserService {
 * @param id is to delete the user on base of id
 */
     deleteData(id) {
-        const user = `${this.user}/${ApiUrl.delete}/`;
+        const user = `${this.user}/${ApiUrl.delete}`;
         return this.RequestService.deleteData(user, id);
     }
 

@@ -1,0 +1,13 @@
+<!-- Confirmation Dialog -->
+<div *ngIf="dialogData">
+  <div>
+    <h1 mat-dialog-title>Confirmation</h1>
+    <div mat-dialog-content>
+      <p>{{dialogData.message}}</p>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button cdkFocusInitial (click)="save()">Confirm</button>
+    </div>
+  </div>
+</div>
