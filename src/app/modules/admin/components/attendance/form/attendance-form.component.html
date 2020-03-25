@@ -1,7 +1,7 @@
 <form style="width: 100%;" name="form" #form="ngForm">
   <div class="row d-flex">
     <div class="form-group col-md-6 col-12 admin-label">
-      <ng-select [items]="" bindLabel="label" bindValue="value" #user="ngModel" id="User" name="User"
+      <ng-select [items]="users" bindLabel="label" bindValue="value" #user="ngModel" id="User" name="User"
         [(ngModel)]="model.user" placeholder="Select User" [multiple]="true" required></ng-select>
 
       <div *ngIf="user.errors?.required && (user.dirty || user.touched)" class="alert alert-danger">
@@ -64,7 +64,7 @@
       </div>
       <div class="input-wrapper">
         <mat-form-field>
-          <input matInput [min]="min" [max]="max" placeholder="Select Date " [(ngModel)]="model.date"
+          <input matInput [min]="min" [max]="max" placeholder="Select Date " [(ngModel)]="date"
             name="breakEnd date" class="admin-input-datetime" [owlDateTimeTrigger]="dtPicker5" [owlDateTime]="dtPicker5"
             #Date="ngModel" required>
         </mat-form-field>
@@ -72,7 +72,7 @@
           Date is Required.
         </div>
         <owl-date-time #dtPicker5 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
-          [pickerMode]="pickerMode" [pickerType]="'both'"></owl-date-time>
+          [pickerMode]="pickerMode" [pickerType]="'calendar'"></owl-date-time>
       </div>
       <div class="col-md-6 col-12 d-flex align-items-center justify-content-center">
         <div class="form-group d-flex align-items-center justify-content-between">
@@ -83,6 +83,6 @@
     </div>
   </div>
 </form>
-<button type="button" class="btn btn-outline-warning float-right" [routerLink]="['/admin/attendence']">Cancel</button>
+<button type="button" class="btn btn-outline-warning float-right" [routerLink]="['/admin/attendance']">Cancel</button>
 <button type="button" class="btn btn-outline-warning float-right mr-2" [disabled]="form.invalid"
-    (click)="save()">Save</button>
+  (click)="save()">Save</button>

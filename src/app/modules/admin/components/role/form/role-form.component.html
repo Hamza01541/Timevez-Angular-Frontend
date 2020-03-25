@@ -1,0 +1,24 @@
+<form style="width: 100%;" name="form" #form="ngForm">
+    <div class="row d-flex">
+        <div class="form-group col-md-6 col-12 ">
+            <mat-form-field>
+                <input matInput type="text" required #rolename="ngModel" id="RoleName" name="rolename"
+                    [(ngModel)]="model.name" placeholder="Enter Role Name">
+            </mat-form-field>
+            <div *ngIf="rolename.invalid && (rolename.dirty || rolename.touched)" class="alert alert-danger">
+                <label>
+                    Role Name is Required
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6 col-12 d-flex justify-content-center align-items-center">
+            <div class="admin-active-label"><label class="control-label col-2 text-black" for="active">Active</label>
+            </div>
+            <mat-checkbox [(ngModel)]="model.active" name="active"></mat-checkbox>
+        </div>
+    </div>
+</form>
+<button type="button" class="btn btn-outline-warning float-right" [routerLink]="['/admin/role']">Cancel</button>
+<button type="button" class="btn btn-outline-warning float-right mr-2" [disabled]="form.invalid"
+    (click)="save()">Save</button> 

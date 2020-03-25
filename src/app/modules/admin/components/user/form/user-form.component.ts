@@ -40,7 +40,6 @@ export class UserFormComponent implements OnInit {
         this.showLoader();
         this.userService.getById(this.id).subscribe(res => {
           this.hideLoader();
-          console.log("res",res);
           // this.model = res;
           this.operation = "update";
         }, error => {
@@ -54,26 +53,13 @@ export class UserFormComponent implements OnInit {
 
   save() {
     this.showLoader();
-    if (this.operation == "update") {
-      this.userService.updateData(this.model).subscribe(res => {
-        this.hideLoader();
-        this.alertService.successToastr("Update Successfully");
-        this.router.navigate(['admin/user']);
-      }, error => {
-        this.hideLoader();
-        this.alertService.errorToastr("Error in Update User.", false)
-      });
-    }
-    else {
-      this.userService.addData(this.model).subscribe(res => {
-        this.hideLoader();
-        this.alertService.successToastr("Registration successful");
-        this.router.navigate(['admin/user']);
-      }, error => {
-        this.hideLoader();
-        this.alertService.errorToastr("Error in Add User.", false)
-      });
-    }
+    this.operation = this.id ? 'updateData' : 'addData';
+    this.showLoader();
+    this.userService[this.operation](this.model).subscribe(res => {
+      this.hideLoader();
+      this.alertService.successToastr(`SuccessFully ${this.operation} Of Role.`, false);
+      this.router.navigate(['/admin/role']);
+    });
 
   }
   getRoles() {

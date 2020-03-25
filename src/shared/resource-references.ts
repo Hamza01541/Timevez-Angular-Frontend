@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
  */
 export class ApiUrl {
     static url = `${environment.apiUrl}`;
-    //Admin
+    //Admin and Other Pages
     static user = `user`;
     static list = `list`;
     static login = `login`;
@@ -14,12 +14,17 @@ export class ApiUrl {
     static delete = `delete`;
     static role = `role`;
     static add = `add`;
-    static attendance=`attendance`;
-    static detail=`detail`;
-    static checkIn=`checkIn`;
-    static checkOut=`checkOut`;
-    static startBreak=`startBreak`;
-    static endBreak=`endBreak`;
+    static attendance = `attendance`;
+    static detail = `detail`;
+    static checkIn = `checkIn`;
+    static checkOut = `checkOut`;
+    static startBreak = `startBreak`;
+    static endBreak = `endBreak`;
+    //Pagination
+    static getPagedAttendances = `getPagedAttendances`;
+    static getPagedRoles = `getPagedRoles`;
+    static getPagedUsers = `getPagedUsers`
+
 }
 
 /**

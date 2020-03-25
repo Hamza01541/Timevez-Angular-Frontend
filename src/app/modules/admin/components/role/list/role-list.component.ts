@@ -1,27 +1,27 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { AlertService, LoaderService, UserService } from 'src/app/core/services/index';
+import { AlertService, LoaderService, RoleService } from 'src/app/core/services/index';
 import { GridComponent } from 'src/shared/components/index';
 
 @Component({
-    selector: 'app-user-list',
-    templateUrl: './user-list.component.html',
-    styleUrls: ['./user-list.component.scss']
+    selector: 'app-role-list',
+    templateUrl: './role-list.component.html',
+    styleUrls: ['./role-list.component.scss']
 })
-export class UserListComponent implements OnInit {
+export class RoleListComponent implements OnInit {
     @ViewChild(GridComponent) gridComponent: GridComponent;
 
     jscolumnDefs: any[];
-    users: any[];
-    totalUsers: number;
+    role: any[];
+    totalRoles: number;
     jsfilter: any = {};
     selectedRowId;
     isShowAdd: boolean = false;
 
     constructor(
         private router: Router,
-        private userService: UserService,
+        private roleService: RoleService,
         private alertService: AlertService,
         private loaderService: LoaderService,
         public dialog: MatDialog) { }
@@ -33,25 +33,15 @@ export class UserListComponent implements OnInit {
 
     getGridData() {
         this.getColumnDefs();
-        this.getUsers();
+        this.getRoles();
     }
 
     //initialize grid
     getColumnDefs() {
         const _this = this;
         this.jscolumnDefs = [
-            {
-                title: 'Name', name: "firstName", width: 75, itemTemplate: function (__, user) {
-                    return `${user.firstName} ${user.lastName}`;
-                }
-            },
-            { title: 'User Name', width: 92, name: 'username' },
 
-            { title: 'CNIC', width: 44, name: 'CNIC' },
-            { title: 'address', width: 50, name: 'address' },
-            { title: 'Email', width: 92, name: 'email' },
-            { title: 'Phone Number', width: 60, name: 'phoneNumber' },
-            { title: 'Roles', width: 50, name: 'roles' },
+            { title: 'Name', width: 92, name: 'name' },
             {
                 title: 'Active', width: 50, name: 'active', itemTemplate: function (active) {
                     var iconClass = "";
@@ -65,11 +55,10 @@ export class UserListComponent implements OnInit {
                 }
             },
             {
-                title: 'Action', width: 70,  itemTemplate: (__, user) => { 
-                   
-                    this.selectedRowId = user.id;
-                    const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', user.id));
-                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.performCurdOperation('delete', user.id));
+                title: 'Action', width: 70, itemTemplate: (__, data) => {
+                    this.selectedRowId = data.id;
+                    const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', data.id));
+                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.performCurdOperation('delete', data.id));
                     // const hardDeleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Delete'>").append("<i class='fas fa-trash-alt mr-3'>").on("click", () => this.openDialog());
                     return $("<span>").append(updateIcon).append(deleteIcon);
                 }
@@ -85,7 +74,7 @@ export class UserListComponent implements OnInit {
                 break;
             case 'delete':
                 this.showLoader();
-                this.userService.deleteData(id).subscribe(res => {
+                this.roleService.deleteData(id).subscribe(res => {
                     this.hideLoader();
                     this.alertService.successToastr("Selected User Disabled Successfully.", false);
                     this.gridComponent.deleteRowListener(id);
@@ -118,23 +107,24 @@ export class UserListComponent implements OnInit {
     // }
     //   }
 
-    getUsers(pageindex: number = 1) {
+    getRoles(pageindex: number = 1) {
 
         this.showLoader();
-        this.userService.getData().subscribe((users: any) => {
+        this.roleService.getData().subscribe((roles: any) => {
+
             this.hideLoader();
-            this.users = users.data;
-            this.totalUsers = users.total;
+            this.role = roles.data;
+            this.totalRoles = roles.total;
         }, error => {
             this.hideLoader();
-            this.alertService.errorToastr("Error in Getting Users.", false);
+            this.alertService.errorToastr("Error in Getting roles.", false);
         });
     }
 
     performOperation(event: any) {
         switch (event.action) {
             case 'add':
-                this.router.navigate(['/admin/user-form']);
+                this.router.navigate(['/admin/role-form']);
                 break;
         }
     }

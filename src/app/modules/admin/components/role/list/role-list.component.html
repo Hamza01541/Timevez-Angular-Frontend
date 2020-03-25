@@ -1,0 +1,3 @@
+<jsgrid *ngIf="role" [jscolumnDefs]="jscolumnDefs" [jsfilter]="jsfilter" [isShowAdd]="false" [rowData]="role" [pageCount]="totalRoles"
+    (performOperation)="performOperation($event)" (filter)="getRoles($event)">
+</jsgrid>

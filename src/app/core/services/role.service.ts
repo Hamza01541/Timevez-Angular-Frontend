@@ -54,4 +54,6 @@ export class RoleService {
         const role = `${this.role}/${ApiUrl.delete}/`;
         return this.RequestService.deleteData(role, id);
     }
+
+ 
 }

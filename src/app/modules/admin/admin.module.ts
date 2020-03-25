@@ -15,11 +15,12 @@ import {
     AdminRootComponent,
     UserFormComponent,
     UserListComponent,
-    AttendenceFormComponent,
-    AttendenceListComponent
+    AttendanceFormComponent,
+    AttendanceListComponent,
+    RoleFormComponent,
+    RoleListComponent
 
 } from "./components";
-
 
 import { SharedModule } from '.././../../shared/shared.module';
 
@@ -29,9 +30,10 @@ import { SharedModule } from '.././../../shared/shared.module';
         AdminRootComponent,
         UserFormComponent,
         UserListComponent,
-        AttendenceFormComponent,
-        AttendenceListComponent
-
+        AttendanceFormComponent,
+        AttendanceListComponent,
+        RoleFormComponent,
+        RoleListComponent,
     ],
 
     imports: [

@@ -28,7 +28,7 @@ import {
 
 //Shared Module
 import {
-  GridComponent, LoaderComponent
+  GridComponent
 } from 'src/shared/components/index';
 
 const SHARED_MODULES = [
@@ -50,8 +50,7 @@ const SHARED_MODULES = [
 
 const SHARED_COMPONENTS = [
   //Shared Component
-  GridComponent,
-  LoaderComponent
+  GridComponent
 ];
 
 const SHARED_SERVICES = [

@@ -19,12 +19,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
+  
 
   }
   login() {
-
-    console.log("login model", this.loginModel);
     this.alertService.successToastr("Logined", false);
 
   }

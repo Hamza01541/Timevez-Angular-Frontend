@@ -5,11 +5,11 @@ import { GridComponent } from 'src/shared/components/index';
 import { AlertService, LoaderService, AttendanceService } from 'src/app/core/services/index';
 
 @Component({
-    selector: 'app-attendence-list',
-    templateUrl: './attendence-list.component.html',
-    styleUrls: ['./attendence-list.component.scss']
+    selector: 'app-attendance-list',
+    templateUrl: './attendance-list.component.html',
+    styleUrls: ['./attendance-list.component.scss']
 })
-export class AttendenceListComponent implements OnInit {
+export class AttendanceListComponent implements OnInit {
     @ViewChild(GridComponent) gridComponent: GridComponent;
 
     jscolumnDefs: any[];
@@ -27,7 +27,7 @@ export class AttendenceListComponent implements OnInit {
         private attendanceService: AttendanceService,
         private alertService: AlertService,
         private loaderService: LoaderService,
-        
+
         public dialog: MatDialog) { }
 
 
@@ -44,19 +44,12 @@ export class AttendenceListComponent implements OnInit {
     getColumnDefs() {
         const _this = this;
         this.jscolumnDefs = [
+
+            { title: 'Check In', width: 92, name: 'checkIn' },
+
+            { title: 'Date', width: 44, name: 'date' },
             {
-                title: 'Name', name: "firstName", width: 75, itemTemplate: function (__, user) {
-                    return `${user.firstName} ${user.lastName}`;
-                }
-            },
-            { title: 'User Name', width: 92, name: 'username' },
-            { title: 'Roles', width: 50, name: 'roles' },
-            { title: 'Country', width: 44, name: 'country' },
-            { title: 'City', width: 50, name: 'city' },
-            { title: 'Email', width: 92, name: 'email' },
-            { title: 'Phone Number', width: 60, name: 'phoneNumber' },
-            {
-                title: 'Active', width: 50, name: 'active', itemTemplate: function (active) {
+                title: 'Status', width: 50, name: 'status', itemTemplate: function (active) {
                     var iconClass = "";
                     if (active == true) {
                         iconClass = "fa fa-check";
@@ -67,6 +60,16 @@ export class AttendenceListComponent implements OnInit {
                     return $("<span>").attr("class", iconClass);
                 }
             },
+            {
+                title: 'Action', width: 70, itemTemplate: (__, data) => {
+
+                    this.selectedRowId = data.id;
+                    const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', data.id));
+                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.performCurdOperation('delete', data.id));
+                    // const hardDeleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Delete'>").append("<i class='fas fa-trash-alt mr-3'>").on("click", () => this.openDialog());
+                    return $("<span>").append(updateIcon).append(deleteIcon);
+                }
+            }
 
         ];
     }
@@ -98,9 +101,7 @@ export class AttendenceListComponent implements OnInit {
 
 
     getAttendance(pageindex: number = 1) {
-
         this.attendanceService.getData().subscribe((attendanceList: any) => {
-            console.log("attendance", attendanceList);
             this.attendance = attendanceList.data;
             this.totalAttendance = attendanceList.total;
 
@@ -113,7 +114,7 @@ export class AttendenceListComponent implements OnInit {
     performOperation(event: any) {
         switch (event.action) {
             case 'add':
-                this.router.navigate(['/admin/attendence-form']);
+                this.router.navigate(['/admin/attendance-form']);
                 break;
         }
     }

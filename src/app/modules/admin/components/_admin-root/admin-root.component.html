@@ -1,7 +1,4 @@
 <header class="p-2">
-  <a href="#" class="mr-auto logo">
-    <img src="../../../../../assets/pos/images/logo.png" alt="">
-  </a>
   <a class="logout" [routerLink]="['/login']" [queryParams]="{logout: true}">
     Logout</a>
 </header>
@@ -9,7 +6,6 @@
   <div class="row p-0 m-0">
     <nav class="navbar">
       <ul class="flex-wrap">
-        <li class="" [routerLink]="['/dashboard']"> <span class="fa fa-tachometer-alt mr-1"></span> Dashboard</li>
         <li *ngFor="let tab of navbarTabs" class=""
           [ngClass]="{'active': currentPage.toLowerCase() == tab.route.toLowerCase()}"
           routerLink="/admin/{{tab.route}}">
