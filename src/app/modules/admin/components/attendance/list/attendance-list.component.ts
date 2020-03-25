@@ -101,7 +101,7 @@ export class AttendanceListComponent implements OnInit {
 
 
     getAttendance(pageindex: number = 1) {
-        this.attendanceService.getData().subscribe((attendanceList: any) => {
+        this.attendanceService.getPagedAttendance(pageindex).subscribe((attendanceList: any) => {
             this.attendance = attendanceList.data;
             this.totalAttendance = attendanceList.total;
 

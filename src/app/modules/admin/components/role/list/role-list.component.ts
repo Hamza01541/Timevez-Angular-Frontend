@@ -56,6 +56,7 @@ export class RoleListComponent implements OnInit {
             },
             {
                 title: 'Action', width: 70, itemTemplate: (__, data) => {
+                    console.log("data",data);
                     this.selectedRowId = data.id;
                     const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', data.id));
                     const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.performCurdOperation('delete', data.id));
@@ -110,7 +111,7 @@ export class RoleListComponent implements OnInit {
     getRoles(pageindex: number = 1) {
 
         this.showLoader();
-        this.roleService.getData().subscribe((roles: any) => {
+        this.roleService.getPagedRole(pageindex).subscribe((roles: any) => {
 
             this.hideLoader();
             this.role = roles.data;

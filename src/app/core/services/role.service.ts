@@ -55,5 +55,12 @@ export class RoleService {
         return this.RequestService.deleteData(role, id);
     }
 
- 
+    /**
+     * Return  role 
+     * @param pageNumber is to get page based data 
+     */
+    getPagedRole(pageNumber) {
+        const role = `${this.role}/${ApiUrl.getPagedRoles}/${pageNumber}`;
+        return this.RequestService.getData(role);
+    }
 }

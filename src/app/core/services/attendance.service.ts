@@ -74,6 +74,15 @@ export class AttendanceService {
         return this.RequestService.deleteData(attendance, id);
     }
 
+        /**
+     * Return  role 
+     * @param pageNumber is to get page based data 
+     */
+    getPagedAttendance(pageNumber) {
+        const attendance = `${this.attendance}/${ApiUrl.getPagedAttendances}/${pageNumber}`;
+        return this.RequestService.getData(attendance);
+    }
+
     /**
           *Check In for Attendence By  Employee Id
           * @param id is to check in employee on the base  Id

@@ -65,8 +65,8 @@ export class UserListComponent implements OnInit {
                 }
             },
             {
-                title: 'Action', width: 70,  itemTemplate: (__, user) => { 
-                   
+                title: 'Action', width: 70, itemTemplate: (__, user) => {
+
                     this.selectedRowId = user.id;
                     const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', user.id));
                     const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.performCurdOperation('delete', user.id));
@@ -121,7 +121,7 @@ export class UserListComponent implements OnInit {
     getUsers(pageindex: number = 1) {
 
         this.showLoader();
-        this.userService.getData().subscribe((users: any) => {
+        this.userService.getPagedUsers(pageindex).subscribe((users: any) => {
             this.hideLoader();
             this.users = users.data;
             this.totalUsers = users.total;

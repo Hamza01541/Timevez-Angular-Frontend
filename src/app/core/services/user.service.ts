@@ -64,4 +64,13 @@ export class UserService {
         const user = `${this.user}/${ApiUrl.delete}/`;
         return this.RequestService.deleteData(user, id);
     }
+
+    /**
+ * Return  role 
+ * @param pageNumber is to get page based data 
+ */
+    getPagedUsers(pageNumber) {
+        const user = `${this.user}/${ApiUrl.getPagedUsers}/${pageNumber}`;
+        return this.RequestService.getData(user);
+    }
 }
