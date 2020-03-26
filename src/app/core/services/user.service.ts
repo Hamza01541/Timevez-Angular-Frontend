@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { RequestService } from "./request.service";
 import { ApiUrl } from 'src/shared/resource-references';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Injectable({
     providedIn: 'root'
 })
+
 export class UserService {
 
-    constructor(private RequestService: RequestService) { }
+    constructor(private RequestService: RequestService, private storageService: LocalStorageService, ) { }
 
     user = `${ApiUrl.user}`;
 
@@ -26,7 +28,7 @@ export class UserService {
      */
     addData(obj) {
         const user = `${this.user}/${ApiUrl.register}`;
-        return this.RequestService.addData(user, obj);
+        return this.RequestService.addData(user, obj); 
     }
 
     /**
@@ -35,7 +37,7 @@ export class UserService {
     */
     userLogin(obj) {
         const user = `${this.user}/${ApiUrl.login}`;
-        return this.RequestService.addData(user, obj);
+        return this.RequestService.getData(user, obj);
     }
 
     /**
@@ -57,20 +59,28 @@ export class UserService {
     }
 
     /**
-* Delete User by id  
-* @param id is to delete the user on base of id
-*/
+  * Delete User by id  
+  * @param id is to delete the user on base of id
+  */
     deleteData(id) {
         const user = `${this.user}/${ApiUrl.delete}`;
         return this.RequestService.deleteData(user, id);
     }
 
     /**
- * Return  role 
- * @param pageNumber is to get page based data 
- */
+  * Return  role 
+  * @param pageNumber is to get page based data 
+  */
     getPagedUsers(pageNumber) {
         const user = `${this.user}/${ApiUrl.getPagedUsers}/${pageNumber}`;
         return this.RequestService.getData(user);
+    }
+
+    /**
+   * Logout The user 
+   * It will remove the current user details from local storage
+   */
+    logOut() {
+        this.storageService.remove('currentUser');
     }
 }

@@ -5,6 +5,9 @@ import { HttpModule } from '@angular/http';
 import { Router, NavigationEnd } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
+//auth Guard
+import { AuthGuard } from 'src/app/core/guards';
+
 //Toaster
 import { ToastrModule } from 'ngx-toastr';
 // Service
@@ -61,7 +64,8 @@ const SHARED_SERVICES = [
   LoaderService,
   AttendanceService,
   RoleService,
-  UserService
+  UserService,
+  AuthGuard,
 ];
 
 @NgModule({

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import {
-  LoginComponent, SignupComponent,timesheetComponent
+  LoginComponent, SignupComponent, timesheetComponent
 } from '../pages/index';
 
 const appRoutes: Routes = [
@@ -11,10 +12,8 @@ const appRoutes: Routes = [
   { path: 'timesheet', component: timesheetComponent },
   {
     path: 'admin',
-    // loadChildren: './modules/admin/admin.module#AdminModule',
-    loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
-
-    // canActivate: [AuthGuard]
+    loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AuthGuard]
   },
 
 

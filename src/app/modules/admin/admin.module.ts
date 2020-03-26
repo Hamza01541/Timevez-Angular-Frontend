@@ -17,9 +17,6 @@ import {
     UserListComponent,
     AttendanceFormComponent,
     AttendanceListComponent,
-    RoleFormComponent,
-    RoleListComponent
-
 } from "./components";
 
 import { SharedModule } from '.././../../shared/shared.module';
@@ -32,8 +29,6 @@ import { SharedModule } from '.././../../shared/shared.module';
         UserListComponent,
         AttendanceFormComponent,
         AttendanceListComponent,
-        RoleFormComponent,
-        RoleListComponent,
     ],
 
     imports: [

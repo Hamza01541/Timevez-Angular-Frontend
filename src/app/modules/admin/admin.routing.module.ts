@@ -9,7 +9,6 @@ import {
     UserListComponent,
     AttendanceFormComponent,
     AttendanceListComponent,
-    RoleFormComponent, RoleListComponent
 } from "./components/index";
 
 
@@ -23,8 +22,6 @@ const routes: Routes = [
             { path: 'user-form', component: UserFormComponent },
             { path: 'attendence-form', component: AttendanceFormComponent },
             { path: 'attendence', component: AttendanceListComponent },
-            { path: 'role-form', component: RoleFormComponent },
-            { path: 'role', component: RoleListComponent },
             // otherwise redirect to home
             { path: '**', redirectTo: "user" },
         ]

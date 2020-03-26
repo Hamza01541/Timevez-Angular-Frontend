@@ -33,7 +33,6 @@ export class UserFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getRoles();
     this.route.queryParams.subscribe(params => {
       this.id = params['id'] || null;
       if (this.id) {
@@ -61,15 +60,6 @@ export class UserFormComponent implements OnInit {
       this.router.navigate(['/admin/role']);
     });
 
-  }
-  getRoles() {
-    this.roleService.getData().subscribe((roles: any) => {
-      this.rolesTypes=[];
-      roles.data.forEach(roles => {
-        let temp = { "value": roles.id, "label": roles.name };
-        this.rolesTypes.push(temp);
-      })
-    });
   }
 
   showLoader() {

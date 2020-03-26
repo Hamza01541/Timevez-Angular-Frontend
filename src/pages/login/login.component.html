@@ -4,7 +4,7 @@
             <div class="form-group">
                 <mat-form-field>
                     <input matInput type="text" required #userName="ngModel" id="name" name="name"
-                        [(ngModel)]="loginModel.Username" placeholder="Enter UserName">
+                        [(ngModel)]="loginModel.username" placeholder="Enter UserName">
                 </mat-form-field>
             </div>
             <div *ngIf="userName.errors?.required && userName.touched " class="alert alert-danger">
@@ -15,7 +15,7 @@
             <div class="form-group">
                 <mat-form-field>
                     <input matInput type="password" required #password="ngModel" id="description" name="description"
-                        [(ngModel)]="loginModel.Password" placeholder="Enter Password">
+                        [(ngModel)]="loginModel.password" placeholder="Enter Password">
                 </mat-form-field>
             </div>
             <div *ngIf="password.errors?.required && password.touched " class="alert alert-danger">
@@ -24,8 +24,4 @@
         </div>
     </div>
 </form>
-<button type="button" (click)="login()" [disabled]="loginForm.invalid"
-    class="btn btn-primary float-left">Login</button>
-    <button routerLink="/admin/user" class="btn btn-primary float-left">User</button>
-    <button routerLink="/admin/user-form" class="btn btn-primary float-left">User forms</button>
-    <button routerLink="/timesheet" class="btn btn-primary float-left">Attendence</button>
+<button type="button" (click)="login()" [disabled]="loginForm.invalid" class="btn btn-primary float-left">Login</button>

@@ -21,9 +21,9 @@ export class ApiUrl {
     static startBreak = `startBreak`;
     static endBreak = `endBreak`;
     //Pagination
-    static getPagedAttendances = `getPagedAttendances`;
-    static getPagedRoles = `getPagedRoles`;
-    static getPagedUsers = `getPagedUsers`
+    static getPagedAttendances = `PagedAttendances`;
+    static getPagedRoles = `PagedRoles`;
+    static getPagedUsers = `PagedUsers`
 
 }
 

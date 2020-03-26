@@ -8,12 +8,6 @@ export const AdminNavigationMenu = [
       "name": "Attendence",
       "route": "attendence"
     },
-    {
-      "name": "Role",
-      "route": "role"
-    },
-    
-   
   ];
   
   export const StaffNavigationMenu = [

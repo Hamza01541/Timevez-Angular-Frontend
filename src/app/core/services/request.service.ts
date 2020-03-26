@@ -16,6 +16,9 @@ export class RequestService {
    * @param id
    */
     getData(url: string, obj: any = {}) {
+
+      console.log("url",url);
+      console.log("Obj",obj);
       url = `${this.baseUrl}${url}`;
       return this.http.get(url, obj);
     }
