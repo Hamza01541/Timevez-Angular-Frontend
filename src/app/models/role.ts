@@ -1,4 +1,4 @@
-export class role {
-    name: string;
-    active: boolean;
+export enum Role {
+    Admin = 'Admin',
+    Employee = 'Employee',
 }

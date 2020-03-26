@@ -54,8 +54,9 @@ export class LoginComponent implements OnInit {
   }
 
   checkRole(user: any) {
-    if (user && user.token && user.roles) {
-      if (user.roles.indexOf('Admin') > -1) {
+
+    if (user && user.token && user.role) {
+      if (user.role == 'Admin') {
         this.router.navigate(['/admin/user']);
       } else {
         this.router.navigate(['/timesheet']);

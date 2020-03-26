@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import {
   LoginComponent, SignupComponent, timesheetComponent
 } from '../pages/index';
+import {Role} from 'src/app/models/role';
 
 const appRoutes: Routes = [
 
@@ -13,10 +13,9 @@ const appRoutes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule),
+    data: { role: Role.Admin },
     canActivate: [AuthGuard]
   },
-
-
   // otherwise redirect to
   { path: '', redirectTo: "/login", pathMatch: 'full' },
 ];

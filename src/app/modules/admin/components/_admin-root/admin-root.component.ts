@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { AdminNavigationMenu, StaffNavigationMenu } from 'src/app/models/navigation-menu';
+import { AdminNavigationMenu} from 'src/app/models/navigation-menu';
 
 @Injectable()
 @Component({
@@ -17,20 +17,18 @@ export class AdminRootComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-  
+
   ) { }
 
   ngOnInit() {
-  
-    this.navbarTabs=AdminNavigationMenu;
 
-    // if (this.currentUser && this.currentUser.roles) {
-    //   if (this.currentUser.roles.indexOf('Admin') > -1) {
-    //     this.navbarTabs = AdminNavigationMenu;
-    //   } else if (this.currentUser.roles.indexOf('Staff') > -1) {
-    //     this.navbarTabs = StaffNavigationMenu;
-    //   }
-    // }
+    this.navbarTabs = AdminNavigationMenu;
+
+    if (this.currentUser && this.currentUser.roles) {
+      if (this.currentUser.role == 'Admin') {
+        this.navbarTabs = AdminNavigationMenu;
+      }
+    }
 
     /**
      * For initial routing, router.event doesn't subscribe any event.

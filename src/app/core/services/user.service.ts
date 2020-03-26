@@ -28,7 +28,7 @@ export class UserService {
      */
     addData(obj) {
         const user = `${this.user}/${ApiUrl.register}`;
-        return this.RequestService.addData(user, obj); 
+        return this.RequestService.addData(user, obj);
     }
 
     /**
@@ -37,7 +37,7 @@ export class UserService {
     */
     userLogin(obj) {
         const user = `${this.user}/${ApiUrl.login}`;
-        return this.RequestService.getData(user, obj);
+        return this.RequestService.addData(user, obj);
     }
 
     /**

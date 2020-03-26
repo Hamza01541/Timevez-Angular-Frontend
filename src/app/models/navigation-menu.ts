@@ -10,7 +10,5 @@ export const AdminNavigationMenu = [
     },
   ];
   
-  export const StaffNavigationMenu = [
-    
-  ]
+
   
