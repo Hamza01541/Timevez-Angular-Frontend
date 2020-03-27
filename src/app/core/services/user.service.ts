@@ -54,7 +54,7 @@ export class UserService {
 * @param obj it the object to update the data
 */
     updateData(obj) {
-        const user = `${this.user}/${ApiUrl.update}/`;
+        const user = `${this.user}/${ApiUrl.update}/${obj._id}`;
         return this.RequestService.updateData(user, obj);
     }
 

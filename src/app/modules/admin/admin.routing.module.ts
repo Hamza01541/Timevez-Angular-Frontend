@@ -20,8 +20,8 @@ const routes: Routes = [
             { path: '', redirectTo: "/user", pathMatch: 'full' },
             { path: 'user', component: UserListComponent },
             { path: 'user-form', component: UserFormComponent },
-            { path: 'attendence-form', component: AttendanceFormComponent },
-            { path: 'attendence', component: AttendanceListComponent },
+            { path: 'attendance-form', component: AttendanceFormComponent },
+            { path: 'attendance', component: AttendanceListComponent },
             // otherwise redirect to home
             { path: '**', redirectTo: "user" },
         ]

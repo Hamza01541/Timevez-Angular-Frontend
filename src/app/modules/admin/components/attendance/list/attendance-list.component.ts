@@ -42,10 +42,25 @@ export class AttendanceListComponent implements OnInit {
          * Initializing the Grid with Data
          */
     getColumnDefs() {
+        console.log("new Date(attendance.date):",new Date(2/2/2020))
         const _this = this;
         this.jscolumnDefs = [
-            { title: 'Check In', width: 92, name: 'checkIn' },
-            { title: 'Date', width: 44, name: 'date' },
+            { title: 'Checkin', width: 92, name: 'checkIn', itemTemplate: function (__, attendance) {
+                return new Date(attendance.checkIn).toLocaleTimeString('en-US');
+            }},
+            { title: 'Checkout', width: 92, name: 'checkOut', itemTemplate: function (__, attendance) {
+                return attendance.checkOut ? new Date(attendance.checkOut).toLocaleTimeString('en-US'):'';
+            }},
+            { title: 'Break Start', width: 92, name: 'breakStartTime', itemTemplate: function (__, attendance) {
+                return attendance.breakStart? new Date(attendance.breakStart).toLocaleTimeString('en-US'):'';
+            }},
+            { title: 'Break End', width: 92, name: 'breakStartTime', itemTemplate: function (__, attendance) {
+                return attendance.breakEnd ? new Date(attendance.breakEnd).toLocaleTimeString('en-US'): '';
+            }},
+            // { title: 'Date', width: 44, name: 'date' },
+            { title: 'Date', width: 60, name: 'date', itemTemplate: function (__, attendance) {
+                return new Date(attendance.date).toLocaleDateString('en-GB', {day: '2-digit', month: 'short', year: 'numeric', weekday:'short'})
+            }},
             {
                 title: 'Status', width: 50, name: 'status', itemTemplate: function (active) {
                     var iconClass = "";
@@ -60,9 +75,8 @@ export class AttendanceListComponent implements OnInit {
             },
             {
                 title: 'Action', width: 70, itemTemplate: (__, data) => {
-
-                    this.selectedRowId = data.id;
-                    const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', data.id));
+                    this.selectedRowId = data._id;
+                    const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', data._id));
                     const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.openDialog());
                     return $("<span>").append(updateIcon).append(deleteIcon);
                 }
@@ -76,7 +90,7 @@ export class AttendanceListComponent implements OnInit {
     performCurdOperation(action, id) {
         switch (action) {
             case 'update':
-                // this.router.navigate(['/admin/attendance-form'], { queryParams: { id: this.selectedRowId } });
+                this.router.navigate(['/admin/attendance-form'], { queryParams: { id: id } });
                 break;
             case 'delete':
                 this.showLoader();

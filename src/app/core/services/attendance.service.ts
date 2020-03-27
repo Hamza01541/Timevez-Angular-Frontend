@@ -61,7 +61,7 @@ export class AttendanceService {
         * @param obj is the object to update the data
         */
     updateData(obj) {
-        const attendance = `${this.attendance}/${ApiUrl.update}/`;
+        const attendance = `${this.attendance}/${ApiUrl.update}/${obj.id}`;
         return this.RequestService.updateData(attendance, obj);
     }
 
@@ -87,36 +87,35 @@ export class AttendanceService {
           *Check In for Attendence By  Employee Id
           * @param id is to check in employee on the base  Id
           */
-    checkIn(obj: any) {
-        const attendance = `${this.attendance}/${ApiUrl.checkIn}/`;
-
-        return this.RequestService.addData(attendance, obj);
+    checkIn() {
+        const attendance = `${this.attendance}/${ApiUrl.checkIn}`;
+        return this.RequestService.addData(attendance);
     }
 
     /**
       *Check Out for Attendence By  Employee Id
       * @param id is to checkOut employee on the base  Id
       */
-    checkOut(obj: any) {
+    checkOut() {
         const attendance = `${this.attendance}/${ApiUrl.checkOut}`;
-        return this.RequestService.updateData(attendance, obj);
+        return this.RequestService.updateData(attendance);
     }
 
     /**
       *Start Break for Specific Employee 
       * @param id is to Start Break of employee on the base  Id
       */
-    startBreak(obj: any) {
+    startBreak() {
         const attendance = `${this.attendance}/${ApiUrl.startBreak}`;
-        return this.RequestService.updateData(attendance, obj);
+        return this.RequestService.updateData(attendance);
     }
 
     /**
         *End Break for Specific Employee 
         * @param id is to End Break of employee on the base  Id
         */
-    endBreak(obj: any) {
+    endBreak() {
         const attendance = `${this.attendance}/${ApiUrl.endBreak}`;
-        return this.RequestService.updateData(attendance, obj);
+        return this.RequestService.updateData(attendance);
     }
 }

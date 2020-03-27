@@ -45,31 +45,36 @@ export class UserListComponent implements OnInit {
         let _this = this;
         this.jscolumnDefs = [
             {
-                title: 'Name', name: "firstName", width: 121, itemTemplate: function (__, user) {
+                title: 'Name', name: "firstName", width: 75, itemTemplate: function (__, user) {
+                    console.log("user:",user)
                     return `${user.firstname} ${user.lastname}`;
                 }
             },
-            { title: 'User Name', width: 48, name: 'username' },
-            { title: 'CNIC', width: 77, name: 'CNIC' },
-            { title: 'address', width: 118, name: 'address' },
-            { title: 'Email', width: 117, name: 'email' },
-            { title: 'Phone Number', width: 65, name: 'phone' },
+            { title: 'Username', width: 92, name: 'username' },
+            { title: 'CNIC', width: 44, name: 'CNIC' },
+            { title: 'Address', width: 50, name: 'address' },
+            { title: 'Email', width: 92, name: 'email' },
+            { title: 'Phone Number', width: 60, name: 'phoneNumber' },
+            { title: 'Roles', width: 50, name: 'roles' },
             {
                 title: 'Active', width: 34, name: 'active', itemTemplate: function (active) {
                     var iconClass = "";
+                    var iconStyle = "";
                     if (active == true) {
                         iconClass = "fa fa-check";
+                        iconStyle = "color:green";
                     }
                     else {
                         iconClass = "fa fa-close";
+                        iconStyle = "color:red"
                     }
-                    return $("<span>").attr("class", iconClass);
+                    return $("<span>").attr("class", iconClass).attr("style", iconStyle);
                 }
             },
             {
                 title: 'Action', width: 70, name: "username", itemTemplate: (__, user) => {
-                    this.selectedRowId = user.id;
-                    const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', user.id));
+                    this.selectedRowId = user._id;
+                    const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', user._id));
                     const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.openDialog());
                     return $("<span>").append(updateIcon).append(deleteIcon);
                 }
@@ -83,7 +88,7 @@ export class UserListComponent implements OnInit {
     performCurdOperation(action, id) {
         switch (action) {
             case 'update':
-                // this.router.navigate(['/admin/user-form'], { queryParams: { id: this.selectedRowId } });
+                this.router.navigate(['/admin/user-form'], { queryParams: { id: this.selectedRowId } });
                 break;
             case 'delete':
                 this.showLoader();

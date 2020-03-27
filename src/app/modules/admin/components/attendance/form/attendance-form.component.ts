@@ -43,20 +43,26 @@ export class AttendanceFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUsers();
+    this.id = this.route.snapshot.queryParams['id'] || null;
 
+    this.getUsers();
+    this.getAttendanceById(this.id);
   }
 
   save() {
-    let date = new Date(this.date);
-    this.model.date = date.toLocaleDateString();
     this.showLoader();
     this.operation = this.id ? 'updateData' : 'addData';
     this.showLoader();
     this.attendanceService[this.operation](this.model).subscribe(res => {
       this.hideLoader();
       this.alertService.successToastr(`SuccessFully ${this.operation} Of Attendance`, false);
-      this.router.navigate(['/admin/attendence']);
+      this.router.navigate(['/admin/attendance']);
+    });
+  }
+
+  getAttendanceById(attendanceId:number) {
+    this.attendanceService.getById(attendanceId).subscribe((attendance: any) => {
+      this.model = attendance.data;
     });
   }
 

@@ -13,7 +13,7 @@ import { AuthGuard } from 'src/app/core/guards';
 import { ToastrModule } from 'ngx-toastr';
 // Service
 import {
-  AlertService, LoaderService, UserService, RoleService, AttendanceService
+  AlertService, LoaderService, UserService, AttendanceService
 } from 'src/app/core/services';
 
 //Material Module Imports
@@ -63,7 +63,6 @@ const SHARED_SERVICES = [
   AlertService,
   LoaderService,
   AttendanceService,
-  RoleService,
   UserService,
   AuthGuard,
 ];

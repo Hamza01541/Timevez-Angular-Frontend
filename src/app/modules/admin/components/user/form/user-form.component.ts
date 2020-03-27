@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { signUp, rolesType } from "src/app/models/signup";
-import { UserService, RoleService } from "src/app/core/services/index";
+import { UserService } from "src/app/core/services/index";
 import { AlertService, LoaderService } from 'src/app/core/services/index';
 
 
@@ -22,7 +22,6 @@ export class UserFormComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private roleService: RoleService,
     private route: ActivatedRoute,
     private alertService: AlertService,
     private loaderService: LoaderService,
@@ -37,9 +36,9 @@ export class UserFormComponent implements OnInit {
       this.id = params['id'] || null;
       if (this.id) {
         this.showLoader();
-        this.userService.getById(this.id).subscribe(res => {
+        this.userService.getById(this.id).subscribe(user => {
           this.hideLoader();
-          // this.model = res;
+          this.model = user.data;
           this.operation = "update";
         }, error => {
           this.hideLoader();

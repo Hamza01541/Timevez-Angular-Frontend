@@ -9,8 +9,7 @@ import { AlertService, LoaderService, AttendanceService } from 'src/app/core/ser
   styleUrls: ['./timesheet.component.css']
 })
 export class timesheetComponent implements OnInit {
-  obj: any = {}
-
+fullname: string;
 
   constructor(
     private alertService: AlertService,
@@ -20,14 +19,18 @@ export class timesheetComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
+     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+     this.fullname = `${currentUser.firstname} ${currentUser.lastname}`
   }
 
+  /**
+   * Checkin user
+   */
   checkIn() {
-    this.attendanceService.checkIn(this.obj).subscribe((result: any) => {
-
-      this.alertService.successToastr("Successfully Clocked In", false);
+    this.showLoader();
+    this.attendanceService.checkIn().subscribe((result: any) => {
+      this.hideLoader();
+      this.alertService.successToastr(`Good Morning ${this.fullname}!`, false);
     }, error => {
       this.hideLoader();
       this.alertService.warningToastr("Already Clocked In", false);
@@ -35,9 +38,14 @@ export class timesheetComponent implements OnInit {
 
   }
 
+  /**
+   * Checkout user
+   */
   checkOut() {
-    this.attendanceService.checkOut(this.obj).subscribe((result: any) => {
-      this.alertService.successToastr("Successfully Checked Out", false);
+    this.showLoader();
+    this.attendanceService.checkOut().subscribe((result: any) => {
+      this.hideLoader();
+      this.alertService.successToastr(`Good Night ${this.fullname}!`, false);
     }, error => {
       this.hideLoader();
       this.alertService.warningToastr("Already Checekd Out", false);
@@ -45,29 +53,44 @@ export class timesheetComponent implements OnInit {
 
   }
 
+  /**
+   * Start break time
+   */
   breakStart() {
-    this.attendanceService.startBreak(this.obj).subscribe((result: any) => {
-      this.alertService.successToastr("Break Started", false);
+    this.showLoader();
+    this.attendanceService.startBreak().subscribe((result: any) => {
+      this.hideLoader();
+      this.alertService.successToastr(`See you soon ${this.fullname}!`, false);
     }, error => {
       this.hideLoader();
       this.alertService.warningToastr("Break Started already", false);
     });
   }
 
+  /**
+   * End break time
+   */
   breakEnd() {
-    this.attendanceService.endBreak(this.obj).subscribe((result: any) => {
-      this.alertService.successToastr(" Sucessfully Break End", false);
+    this.showLoader();
+    this.attendanceService.endBreak().subscribe((result: any) => {
+      this.hideLoader();
+      this.alertService.successToastr(`Welcome back ${this.fullname}!`, false);
     }, error => {
       this.hideLoader();
       this.alertService.warningToastr("Break Ended already", false);
     });
   }
 
-
+/**
+ * Show loader
+ */
   showLoader() {
     this.loaderService.show();
   }
 
+  /**
+   * Hide loader
+   */
   hideLoader() {
     this.loaderService.hide();
   }

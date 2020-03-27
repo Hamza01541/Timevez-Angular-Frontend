@@ -5,8 +5,8 @@ export const AdminNavigationMenu = [
       "route": "user"
     },
     {
-      "name": "Attendence",
-      "route": "attendence"
+      "name": "Attendance",
+      "route": "attendance"
     },
   ];
   

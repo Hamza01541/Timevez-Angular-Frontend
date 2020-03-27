@@ -6,5 +6,5 @@ export class attendence {
     date: String;
     status: Boolean;
     comment: String;
-    user: number;
+    userId: number;
 }

@@ -50,8 +50,8 @@ export class GridComponent implements OnInit, OnChanges {
 
     let __this = this;
     if (__this.jscolumnDefs && __this.jscolumnDefs.length > 0) {
-      let grid = ($("#test") as any);
-      let pagerContainer = "#test-pager";
+      let grid = ($("#jsGrid") as any);
+      let pagerContainer = "#jsGrid-pager";
       grid.jsGrid({
         align: "center",
 
@@ -150,8 +150,8 @@ export class GridComponent implements OnInit, OnChanges {
    * Fires When we have to open page based on PageIndex
    */
   gridPageOpen() {
-    ($('#test') as any).jsGrid("openPage", this.jsfilter.pageIndex);
-
+    ($('#jsGrid') as any).jsGrid("openPage", this.jsfilter.pageIndex);
+    
   }
 
   /**
@@ -187,6 +187,6 @@ export class GridComponent implements OnInit, OnChanges {
     let temp = this.rowData.find(data => data.id == currentRowId);
     let index = this.rowData.indexOf(temp);
     this.rowData.splice(index, 1);
-    ($('#test') as any).jsGrid("refresh");
+    ($('#jsGrid') as any).jsGrid("refresh");
   }
 }

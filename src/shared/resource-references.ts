@@ -4,15 +4,15 @@ import { environment } from 'src/environments/environment';
  * For API Requests
  */
 export class ApiUrl {
-    static url = `${environment.apiUrl}`;
-    //Admin and Other Pages
+    // Base URL
+    static baseBackendUrl = `${environment.backend_uri}${environment.api_version}`;
+    // Admin and Other Pages
     static user = `user`;
     static list = `list`;
     static login = `login`;
     static register = `register`;
     static update = `update`;
     static delete = `delete`;
-    static role = `role`;
     static add = `add`;
     static attendance = `attendance`;
     static detail = `detail`;
@@ -20,11 +20,9 @@ export class ApiUrl {
     static checkOut = `checkOut`;
     static startBreak = `startBreak`;
     static endBreak = `endBreak`;
-    //Pagination
+    // Pagination
     static getPagedAttendances = `PagedAttendances`;
-    static getPagedRoles = `PagedRoles`;
     static getPagedUsers = `PagedUsers`
-
 }
 
 /**
