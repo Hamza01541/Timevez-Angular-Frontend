@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService, LoaderService, UserService } from '../../app/core/services/index';
+import { AlertService, LoaderService, UserService } from 'src/app/core/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { Role } from 'src/app/models/role';
 
 @Component({
   selector: 'login-component',
@@ -56,10 +57,10 @@ export class LoginComponent implements OnInit {
   checkRole(user: any) {
 
     if (user && user.token && user.role) {
-      if (user.role == 'Admin') {
+      if (user.role == Role.Admin) {
         this.router.navigate(['/admin/user']);
       } else {
-        this.router.navigate(['/timesheet']);
+        this.router.navigate(['/timesheet'], { queryParams: { id: user.id } });
       }
     }
   }

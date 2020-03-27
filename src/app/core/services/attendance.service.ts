@@ -74,10 +74,10 @@ export class AttendanceService {
         return this.RequestService.deleteData(attendance, id);
     }
 
-        /**
-     * Return  role 
-     * @param pageNumber is to get page based data 
-     */
+    /**
+ * Return  role 
+ * @param pageNumber is to get page based data 
+ */
     getPagedAttendance(pageNumber) {
         const attendance = `${this.attendance}/${ApiUrl.getPagedAttendances}/${pageNumber}`;
         return this.RequestService.getData(attendance);
@@ -87,35 +87,36 @@ export class AttendanceService {
           *Check In for Attendence By  Employee Id
           * @param id is to check in employee on the base  Id
           */
-    checkIn(id) {
+    checkIn(obj: any) {
         const attendance = `${this.attendance}/${ApiUrl.checkIn}/`;
-        return this.RequestService.deleteData(attendance, id);
+
+        return this.RequestService.addData(attendance, obj);
     }
 
     /**
       *Check Out for Attendence By  Employee Id
       * @param id is to checkOut employee on the base  Id
       */
-    checkOut(id) {
-        const attendance = `${this.attendance}/${ApiUrl.checkOut}/`;
-        return this.RequestService.deleteData(attendance, id);
+    checkOut(obj: any) {
+        const attendance = `${this.attendance}/${ApiUrl.checkOut}`;
+        return this.RequestService.updateData(attendance, obj);
     }
 
     /**
       *Start Break for Specific Employee 
       * @param id is to Start Break of employee on the base  Id
       */
-    startBreak(id) {
-        const attendance = `${this.attendance}/${ApiUrl.startBreak}/`;
-        return this.RequestService.deleteData(attendance, id);
+    startBreak(obj: any) {
+        const attendance = `${this.attendance}/${ApiUrl.startBreak}`;
+        return this.RequestService.updateData(attendance, obj);
     }
 
     /**
         *End Break for Specific Employee 
         * @param id is to End Break of employee on the base  Id
         */
-    endBreak(id) {
-        const attendance = `${this.attendance}/${ApiUrl.endBreak}/`;
-        return this.RequestService.deleteData(attendance, id);
+    endBreak(obj: any) {
+        const attendance = `${this.attendance}/${ApiUrl.endBreak}`;
+        return this.RequestService.updateData(attendance, obj);
     }
 }

@@ -10,7 +10,12 @@ export class AuthGuard implements CanActivate {
     private storageService: LocalStorageService,
   ) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  /**
+       *@param route will check if any data is passed in Parameter while moving to the route
+       * It will match the Role from storage and data passed through param and navigate to role based module or page
+       * Other wise it will return to login page
+       */
+  canActivate(route: ActivatedRouteSnapshot) {
     let currentUser = this.storageService.get('currentUser');
 
     if (currentUser && currentUser.role && currentUser.role.length && route.data && route.data.role && route.data.role.length) {
@@ -27,9 +32,5 @@ export class AuthGuard implements CanActivate {
       //logged in so return true
       return true;
     }
-
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-    return false;
   }
 }

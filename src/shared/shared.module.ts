@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { Router, NavigationEnd } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { RequestInterceptor } from 'src/app/core/interceptors';
 //auth Guard
 import { AuthGuard } from 'src/app/core/guards';
 
@@ -23,7 +24,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
-import { RequestInterceptor } from 'src/app/core/interceptors';
 import {
   RequestService,
   LocalStorageService
@@ -72,8 +72,9 @@ const SHARED_SERVICES = [
   imports: [SHARED_MODULES],
   exports: [SHARED_MODULES, SHARED_COMPONENTS],
   declarations: [SHARED_COMPONENTS],
-  providers: [SHARED_SERVICES,
-    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
+  providers: [SHARED_SERVICES,{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
+  
+   
   ],
 })
 

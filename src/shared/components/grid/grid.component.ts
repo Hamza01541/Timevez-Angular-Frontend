@@ -24,7 +24,7 @@ export class GridComponent implements OnInit, OnChanges {
   pagination: boolean;
   enableSorting: boolean;
   selectedRow: any;
-  search:any;
+  search: any;
 
   resetSort: boolean;
   currentPageNo: number;
@@ -47,14 +47,14 @@ export class GridComponent implements OnInit, OnChanges {
 
   defineGrid() {
     var $ = jQuery;
-   
+
     let __this = this;
     if (__this.jscolumnDefs && __this.jscolumnDefs.length > 0) {
       let grid = ($("#test") as any);
       let pagerContainer = "#test-pager";
       grid.jsGrid({
         align: "center",
-        
+
         filtering: true,
         editing: true,
         sorting: true,
@@ -151,7 +151,7 @@ export class GridComponent implements OnInit, OnChanges {
    */
   gridPageOpen() {
     ($('#test') as any).jsGrid("openPage", this.jsfilter.pageIndex);
-    
+
   }
 
   /**

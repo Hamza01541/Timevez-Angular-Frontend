@@ -42,21 +42,20 @@ export class UserListComponent implements OnInit {
       * Initializing the Grid with Data
       */
     getColumnDefs() {
-        const _this = this;
+        let _this = this;
         this.jscolumnDefs = [
             {
-                title: 'Name', name: "firstName", width: 75, itemTemplate: function (__, user) {
-                    return `${user.firstName} ${user.lastName}`;
+                title: 'Name', name: "firstName", width: 121, itemTemplate: function (__, user) {
+                    return `${user.firstname} ${user.lastname}`;
                 }
             },
-            { title: 'User Name', width: 92, name: 'username' },
-            { title: 'CNIC', width: 44, name: 'CNIC' },
-            { title: 'address', width: 50, name: 'address' },
-            { title: 'Email', width: 92, name: 'email' },
-            { title: 'Phone Number', width: 60, name: 'phoneNumber' },
-            { title: 'Roles', width: 50, name: 'roles' },
+            { title: 'User Name', width: 48, name: 'username' },
+            { title: 'CNIC', width: 77, name: 'CNIC' },
+            { title: 'address', width: 118, name: 'address' },
+            { title: 'Email', width: 117, name: 'email' },
+            { title: 'Phone Number', width: 65, name: 'phone' },
             {
-                title: 'Active', width: 50, name: 'active', itemTemplate: function (active) {
+                title: 'Active', width: 34, name: 'active', itemTemplate: function (active) {
                     var iconClass = "";
                     if (active == true) {
                         iconClass = "fa fa-check";
@@ -68,7 +67,7 @@ export class UserListComponent implements OnInit {
                 }
             },
             {
-                title: 'Action', width: 70, itemTemplate: (__, user) => {
+                title: 'Action', width: 70, name: "username", itemTemplate: (__, user) => {
                     this.selectedRowId = user.id;
                     const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', user.id));
                     const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.openDialog());

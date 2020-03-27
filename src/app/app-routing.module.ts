@@ -1,15 +1,20 @@
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import {
-  LoginComponent, SignupComponent, timesheetComponent
-} from '../pages/index';
-import {Role} from 'src/app/models/role';
+  LoginComponent, timesheetComponent
+} from 'src/app/pages';
+import { Role } from 'src/app/models/role';
 
 const appRoutes: Routes = [
 
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'timesheet', component: timesheetComponent },
+
+  {
+    path: 'timesheet', component: timesheetComponent,
+    data: { role: Role.Employee },
+    canActivate: [AuthGuard]
+  },
+
   {
     path: 'admin',
     loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule),

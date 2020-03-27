@@ -17,8 +17,6 @@ export class RequestService {
   */
   getData(url: string, obj: any = {}) {
 
-    console.log("url", url);
-    console.log("Obj", obj);
     url = `${this.baseUrl}${url}`;
     return this.http.get(url, obj);
   } 
@@ -36,8 +34,8 @@ export class RequestService {
   * Get Attendence Detail By Id
   * @param id
   */
-  updateData(url: string, obj: any = {}) {
-    url = `${this.baseUrl}${url}/${obj.id}`;
+  updateData(url: string, obj: any) {
+    url = `${this.baseUrl}${url}`;
     return this.http.put(url, obj)
   }
 
