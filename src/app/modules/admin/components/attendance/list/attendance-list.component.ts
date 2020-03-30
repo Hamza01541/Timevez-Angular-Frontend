@@ -16,7 +16,6 @@ export class AttendanceListComponent implements OnInit {
     attendance: any[];
     totalAttendance: number;
     jsfilter: any = {};
-    selectedRowId;
     isShowAdd: boolean = false;
 
     constructor(
@@ -42,6 +41,7 @@ export class AttendanceListComponent implements OnInit {
          * Initializing the Grid with Data
          */
     getColumnDefs() {
+      const _this = this;
         this.jscolumnDefs = [
             {
                 title: 'Name', name: "fullname", width: 75, itemTemplate: function (__, attendance) {
@@ -76,9 +76,8 @@ export class AttendanceListComponent implements OnInit {
             },
             {
                 title: 'Action', width: 70, itemTemplate: (__, data) => {
-                    this.selectedRowId = data._id;
                     const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', data._id));
-                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.openDialog());
+                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.openDialog(data._id));
                     return $("<span>").append(updateIcon).append(deleteIcon);
                 }
             }
@@ -88,17 +87,17 @@ export class AttendanceListComponent implements OnInit {
     /**
      * Perform Update or Delete Operation.
      */
-    performCurdOperation(action, id) {
+    performCurdOperation(action:string, selectedRowId: number) {     
         switch (action) {
             case 'update':
-                this.router.navigate(['/admin/attendance-form'], { queryParams: { id: id } });
+                this.router.navigate(['/admin/attendance-form'], { queryParams: { id: selectedRowId } });
                 break;
             case 'delete':
                 this.showLoader();
-                this.attendanceService.deleteData(id).subscribe(res => {
+                this.attendanceService.deleteData(selectedRowId).subscribe(res => {
                     this.hideLoader();
                     this.alertService.successToastr("Selected Attendance Deleted Successfully.", false);
-                    this.gridComponent.deleteRowListener(id);
+                    this.gridComponent.deleteRowListener(selectedRowId);
                 }, error => {
                     this.hideLoader();
                     this.alertService.errorToastr("Error in Deleting Attendance.", false);
@@ -111,19 +110,18 @@ export class AttendanceListComponent implements OnInit {
      * Open confirmation dialogue.
      * On confirmation, deletes selected row of grid.
      */
-    openDialog() {
-        console.log("here");
+    openDialog(selectedRowId:number) {
         const dialogRef = this.dialog.open(ConfirmationDialogueComponent, {
             width: '250px',
             data: {
-                message: 'Want to Delete Data?'
+                message: 'Want to Delete Selected Record?'
             }
         });
 
         if (dialogRef) {
             dialogRef.afterClosed().subscribe(result => {
                 if (result) {
-                    this.performCurdOperation('delete', this.selectedRowId);
+                    this.performCurdOperation('delete', selectedRowId);
                 }
             });
         }

@@ -47,13 +47,14 @@ export class UserListComponent implements OnInit {
             {
                 title: 'Name', name: "fullname", width: 75, itemTemplate: function (__, user) {
                     return `${user.firstname} ${user.lastname}`;
-                }},
+                }
+            },
             { title: 'Username', width: 92, name: 'username' },
             { title: 'CNIC', width: 44, name: 'CNIC' },
             { title: 'Address', width: 50, name: 'address' },
             { title: 'Email', width: 92, name: 'email' },
-            { title: 'Phone Number', width: 60, name: 'phoneNumber' },
-            { title: 'Roles', width: 50, name: 'roles' },
+            { title: 'Phone', width: 60, name: 'phone' },
+            { title: 'Role', width: 50, name: 'role' },
             {
                 title: 'Active', width: 34, name: 'active', itemTemplate: function (active) {
                     var iconClass = "";
@@ -70,10 +71,9 @@ export class UserListComponent implements OnInit {
                 }
             },
             {
-                title: 'Action', width: 70, name: "username", itemTemplate: (__, user) => {
-                    this.selectedRowId = user._id;
-                    const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', user._id));
-                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.openDialog());
+                title: 'Action', width: 70, name: "username", itemTemplate: (__, data) => {
+                    const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', data._id));
+                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.openDialog(data._id));
                     return $("<span>").append(updateIcon).append(deleteIcon);
                 }
             }
@@ -83,17 +83,17 @@ export class UserListComponent implements OnInit {
     /**
      * Perform Update or Delete Operation..
      */
-    performCurdOperation(action, id) {
+    performCurdOperation(action:string, selectedRowId: number) {
         switch (action) {
             case 'update':
-                this.router.navigate(['/admin/user-form'], { queryParams: { id: this.selectedRowId } });
+                this.router.navigate(['/admin/user-form'], { queryParams: { id: selectedRowId } });
                 break;
             case 'delete':
                 this.showLoader();
-                this.userService.deleteData(id).subscribe(res => {
+                this.userService.deleteData(selectedRowId).subscribe(res => {
                     this.hideLoader();
                     this.alertService.successToastr("Selected User Deleted Successfully.", false);
-                    this.gridComponent.deleteRowListener(id);
+                    this.gridComponent.deleteRowListener(selectedRowId);
                 }, error => {
                     this.hideLoader();
                     this.alertService.errorToastr("Error in Deleting User.", false);
@@ -106,7 +106,7 @@ export class UserListComponent implements OnInit {
      * Open confirmation dialogue.
      * On confirmation, deletes selected row of grid.
      */
-    openDialog() {
+    openDialog(selectedRowId:number) {
         const dialogRef = this.dialog.open(ConfirmationDialogueComponent, {
             width: '250px',
             data: {
@@ -117,7 +117,7 @@ export class UserListComponent implements OnInit {
         if (dialogRef) {
             dialogRef.afterClosed().subscribe(result => {
                 if (result) {
-                    this.performCurdOperation('delete', this.selectedRowId);
+                    this.performCurdOperation('delete', selectedRowId);
                 }
             });
         }
