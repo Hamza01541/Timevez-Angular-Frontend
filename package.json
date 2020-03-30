@@ -38,6 +38,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
     "jsgrid": "^1.5.3",
+    "moment": "^2.24.0",
     "ng-pick-datetime": "^7.0.0",
     "ngx-bootstrap": "^5.5.0",
     "ngx-toastr": "^12.0.0",

@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
  */
 export class ApiUrl {
     // Base URL
-    static baseBackendUrl = `${environment.backend_uri}${environment.api_version}`;
+    static baseBackendUrl = `${environment.backend_uri}/${environment.api_version}`;
     // Admin and Other Pages
     static user = `user`;
     static list = `list`;
