@@ -73,7 +73,7 @@ export class UserListComponent implements OnInit {
             {
                 title: 'Action', width: 70, name: "username", itemTemplate: (__, data) => {
                     const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', data._id));
-                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fa fa-trash-o mr-3'>").on("click", () => this.openDialog(data._id));
+                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fas fa-trash-alt mr-3'>").on("click", () => this.openDialog(data._id));
                     return $("<span>").append(updateIcon).append(deleteIcon);
                 }
             }
