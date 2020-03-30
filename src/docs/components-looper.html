@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title> Looper Components | Looper - Bootstrap 4 Admin Theme </title>
+    <meta property="og:title" content="Looper Components">
+    <meta name="author" content="Beni Arisandi">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="Responsive admin theme build on top of Bootstrap 4">
+    <meta property="og:description" content="Responsive admin theme build on top of Bootstrap 4">
+    <link rel="canonical" href="https://uselooper.com">
+    <meta property="og:url" content="https://uselooper.com">
+    <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme">
+    <script type="application/ld+json">
+      {
+        "name": "Looper - Bootstrap 4 Admin Theme",
+        "description": "Responsive admin theme build on top of Bootstrap 4",
+        "author":
+        {
+          "@type": "Person",
+          "name": "Beni Arisandi"
+        },
+        "@type": "WebSite",
+        "url": "",
+        "headline": "Looper Components",
+        "@context": "http://schema.org"
+      }
+    </script><!-- End SEO tag -->
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End Google font -->
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="theme-color" content="#070B0F"><!-- End Favicons -->
+    <!-- BEGIN PLUGINS STYLES -->
+    <link rel="stylesheet" href="vendor/open-iconic/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.css">
+    <link rel="stylesheet" href="vendor/highlightjs/styles/ocean.css"><!-- END PLUGINS STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="stylesheets/theme.min.css" data-skin="default">
+    <link rel="stylesheet" href="stylesheets/theme-dark.min.css" data-skin="dark">
+    <script>
+      var skin = localStorage.getItem('skin') || 'default';
+      var isCompact = JSON.parse(localStorage.getItem('hasCompactMenu'));
+      var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+      // Disable unused skin immediately
+      disabledSkinStylesheet.setAttribute('rel', '');
+      disabledSkinStylesheet.setAttribute('disabled', true);
+      // add flag class to html immediately
+      if (isCompact == true) document.querySelector('html').classList.add('preparing-compact-menu');
+    </script><!-- END THEME STYLES -->
+  </head>
+  <body data-spy="scroll" data-target="#nav-content" data-offset="76">
+    <!-- .app -->
+    <div class="app">
+      <!--[if lt IE 10]>
+      <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
+      <![endif]-->
+      <!-- .app-header -->
+      <header class="app-header app-header-dark bg-black">
+        <!-- .top-bar -->
+        <div class="top-bar">
+          <!-- .top-bar-brand -->
+          <div class="top-bar-brand">
+            <a href="index.html" class="d-flex"><svg class="mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28" viewbox="0 0 94 68">
+                <defs>
+                  <path id="a" d="M156.538 45.644v1.04a6.347 6.347 0 0 1-1.847 3.98L127.708 77.67a6.338 6.338 0 0 1-3.862 1.839h-1.272a6.34 6.34 0 0 1-3.862-1.839L91.728 50.664a6.353 6.353 0 0 1 0-9l9.11-9.117-2.136-2.138a3.171 3.171 0 0 0-4.498 0L80.711 43.913a3.177 3.177 0 0 0-.043 4.453l-.002.003.048.047 24.733 24.754-4.497 4.5a6.339 6.339 0 0 1-3.863 1.84h-1.27a6.337 6.337 0 0 1-3.863-1.84L64.971 50.665a6.353 6.353 0 0 1 0-9l26.983-27.008a6.336 6.336 0 0 1 4.498-1.869c1.626 0 3.252.622 4.498 1.87l26.986 27.006a6.353 6.353 0 0 1 0 9l-9.11 9.117 2.136 2.138a3.171 3.171 0 0 0 4.498 0l13.49-13.504a3.177 3.177 0 0 0 .046-4.453l.002-.002-.047-.048-24.737-24.754 4.498-4.5a6.344 6.344 0 0 1 8.996 0l26.983 27.006a6.347 6.347 0 0 1 1.847 3.98zm-46.707-4.095l-2.362 2.364a3.178 3.178 0 0 0 0 4.501l2.362 2.364 2.361-2.364a3.178 3.178 0 0 0 0-4.501l-2.361-2.364z"></path>
+                </defs>
+                <use fill="currentColor" fill-rule="evenodd" transform="translate(-63 -12)" xlink:href="#a"></use>
+              </svg> <span>Documentation</span></a>
+          </div><!-- /.top-bar-brand -->
+          <!-- .top-bar-list -->
+          <div class="top-bar-list">
+            <!-- .top-bar-item -->
+            <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+              <!-- toggle menu -->
+              <button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button> <!-- /toggle menu -->
+            </div><!-- /.top-bar-item -->
+            <!-- .top-bar-item -->
+            <!-- .top-bar-item -->
+            <div class="top-bar-item top-bar-item-right pr-3 pr-lg-4">
+              <!-- .nav -->
+              <ul class="header-nav nav">
+                <!-- .nav-item -->
+                <li class="nav-item">
+                  <a class="nav-link" href="support.html"><i class="fa fa-life-ring d-sm-none"></i> <span class="d-none d-sm-inline">Support</span></a>
+                </li><!-- /.nav-item -->
+                <!-- .nav-item -->
+                <li class="nav-item has-notified">
+                  <a class="nav-link" href="whats-new.html"><i class="fa fa-bell d-sm-none"></i> <span class="d-none d-sm-inline">What's new</span></a>
+                </li><!-- /.nav-item -->
+              </ul><!-- /.nav -->
+              <a href="https://themes.getbootstrap.com/product/looper-responsive-admin-template" class="btn btn-subtle-success border-0">Download Now</a>
+            </div><!-- /.top-bar-item -->
+          </div><!-- /.top-bar-list -->
+        </div><!-- /.top-bar -->
+      </header><!-- /.app-header -->
+      <!-- .app-aside -->
+      <aside class="app-aside app-aside-expand-md app-aside-light">
+        <!-- .aside-content -->
+        <div class="aside-content">
+          <!-- .aside-menu -->
+          <div class="aside-menu p-3">
+            <!-- .stacked-menu -->
+            <nav id="stacked-menu" class="stacked-menu">
+              <!-- .menu -->
+              <ul class="menu">
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="index.html" class="menu-link"><span class="menu-text">Getting Started</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="basic-layout.html" class="menu-link"><span class="menu-text">Basic Layout</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="build-tools.html" class="menu-link"><span class="menu-text">Build Tools</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="theming.html" class="menu-link"><span class="menu-text">Theming</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-header -->
+                <li class="menu-header">Components </li><!-- /.menu-header -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-bootstrap.html" class="menu-link"><span class="menu-text">Bootstrap</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item has-active">
+                  <a href="components-looper.html" class="menu-link"><span class="menu-text">Looper</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-plugins.html" class="menu-link"><span class="menu-text">Plugins</span></a>
+                </li><!-- /.menu-item -->
+              </ul><!-- /.menu -->
+            </nav><!-- /.stacked-menu -->
+          </div><!-- /.aside-menu -->
+          <!-- Skin changer -->
+          <footer class="aside-footer border-top p-2">
+            <button class="btn btn-light btn-block text-primary" data-toggle="skin"><span class="d-compact-menu-none">Night mode</span> <i class="fas fa-moon ml-1"></i></button>
+          </footer><!-- /Skin changer -->
+        </div><!-- /.aside-content -->
+      </aside><!-- /.app-aside -->
+      <!-- .app-main -->
+      <main class="app-main">
+        <!-- .wrapper -->
+        <div class="wrapper">
+          <!-- .page -->
+          <div class="page has-sidebar has-sidebar-expand-xl">
+            <!-- .page-inner -->
+            <div class="page-inner">
+              <!-- .page-title-bar -->
+              <header class="page-title-bar">
+                <h1 class="page-title"> Looper Components </h1>
+                <p class="text-muted"> Looper includes new components to enhance the functionality of your apps. </p><button class="btn btn-dark btn-floated d-sm-block d-xl-none" type="button" data-toggle="sidebar"><i class="fa fa-th-list"></i></button>
+              </header><!-- /.page-title-bar -->
+              <!-- .page-section -->
+              <div class="page-section">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="avatar" class="section-title"> Avatar </h2>
+                  <p> Avatars house an image that represents people or entity oriented object. An image is the preferred format for an avatar. If an image is unavailable, please use <a href="#tiles" class="smooth-scroll">tile circle</a> as a fallback, use one or up to two letter or object icon instead. </p>
+                  <ul class="list-inline">
+                    <li class="list-inline-item">
+                      <figure class="user-avatar user-avatar-xl">
+                        <img src="images/avatars/uifaces4.jpg" alt="">
+                      </figure>
+                      <p class="my-1">
+                        <code>.user-avatar-xl</code>
+                      </p>
+                    </li>
+                    <li class="list-inline-item">
+                      <figure class="user-avatar user-avatar-lg">
+                        <img src="images/avatars/uifaces4.jpg" alt="">
+                      </figure>
+                      <p class="my-1">
+                        <code>user-avatar-lg</code>
+                      </p>
+                    </li>
+                    <li class="list-inline-item">
+                      <figure class="user-avatar">
+                        <img src="images/avatars/uifaces4.jpg" alt="">
+                      </figure>
+                      <p class="my-1">
+                        <code>user-avatar</code>
+                      </p>
+                    </li>
+                    <li class="list-inline-item">
+                      <figure class="user-avatar user-avatar-sm">
+                        <img src="images/avatars/uifaces4.jpg" alt="">
+                      </figure>
+                      <p class="my-1">
+                        <code>user-avatar-sm</code>
+                      </p>
+                    </li>
+                    <li class="list-inline-item">
+                      <figure class="user-avatar user-avatar-xs">
+                        <img src="images/avatars/uifaces4.jpg" alt="">
+                      </figure>
+                      <p class="my-1">
+                        <code>user-avatar-xs</code>
+                      </p>
+                    </li>
+                  </ul>
+                  <pre><code class="html">&lt;figure class="user-avatar"&gt;
+  &lt;img src="user.jpg" alt="User Avatar"&gt;
+&lt;/figure&gt;</code></pre><!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Class References </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.user-avatar</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>&lt;figure&gt;</code> to create avatar component. </dd>
+                        <dt class="col-lg-4">
+                          <code>.user-avatar-xl</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.user-avatar</code> to increate avatar size to extra large. </dd>
+                        <dt class="col-lg-4">
+                          <code>.user-avatar-lg</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.user-avatar</code> to increate avatar size to large. </dd>
+                        <dt class="col-lg-4">
+                          <code>.user-avatar-sm</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.user-avatar</code> to increate avatar size to small. </dd>
+                        <dt class="col-lg-4">
+                          <code>.user-avatar-xs</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.user-avatar</code> to increate avatar size to extra small. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                  <div class="alert alert-secondary">
+                    <strong>Pro Tips:</strong> Assuming that a user has filled his/her name, but didn't upload photo. In this case, You should use <a href="#tiles" class="smooth-scroll">Tile circle</a> as fallback. So, if the record name contains two words, like first and last name, use the first capitalized letter of each. For records that only have a single word name, use the first two letters of that word using one capital and one lower case letter. If either an image or initials are unavailable, use the object icon as a fallback. See example below: </div><!-- grid row -->
+                  <div class="row align-items-start mb-3">
+                    <!-- .col -->
+                    <div class="col-12 col-sm-6 mb-4">
+                      <figure class="user-avatar mr-2">
+                        <img src="images/avatars/uifaces2.jpg" alt="">
+                      </figure>Beni Arisandi <div class="text-muted ml-1 p-2">
+                        <i class="fa fa-long-arrow-alt-down"></i>
+                      </div><span class="tile tile-circle bg-blue mr-2">BA</span> Beni Arisandi
+                    </div><!-- /.col -->
+                    <!-- .col -->
+                    <div class="col-12 col-sm-6 mb-4">
+                      <figure class="user-avatar mr-2">
+                        <img src="images/avatars/uifaces4.jpg" alt="">
+                      </figure>Marilyn <div class="text-muted ml-1 p-2">
+                        <i class="fa fa-long-arrow-alt-down"></i>
+                      </div><span class="tile tile-circle bg-pink mr-2">Ma</span> Marilyn
+                    </div><!-- /.col -->
+                    <!-- .col -->
+                    <div class="col-12 col-sm-6 mb-4">
+                      <figure class="user-avatar mr-2">
+                        <img src="images/avatars/uifaces3.jpg" alt="">
+                      </figure>Albert Donald Jimenez <div class="text-muted ml-1 p-2">
+                        <i class="fa fa-long-arrow-alt-down"></i>
+                      </div><span class="tile tile-circle bg-yellow mr-2">AJ</span> Albert Donald Jimenez
+                    </div><!-- /.col -->
+                    <!-- .col -->
+                    <div class="col-12 col-sm-6 mb-4">
+                      <figure class="user-avatar mr-2">
+                        <img src="images/avatars/uifaces3.jpg" alt="">
+                      </figure>Albert Donald-Jimenez <div class="text-muted ml-1 p-2">
+                        <i class="fa fa-long-arrow-alt-down"></i>
+                      </div><span class="tile tile-circle bg-teal mr-2">AJ</span> Albert Donald-Jimenez
+                    </div><!-- /.col -->
+                    <!-- .col -->
+                    <div class="col-12 col-sm-6 mb-4">
+                      <figure class="user-avatar mr-2">
+                        <img src="images/avatars/uifaces2.jpg" alt="">
+                      </figure>bent10 <div class="text-muted ml-1 p-2">
+                        <i class="fa fa-long-arrow-alt-down"></i>
+                      </div><span class="tile tile-circle bg-purple mr-2"><i class="oi oi-person"></i></span> bent10
+                    </div><!-- /.col -->
+                  </div><!-- /grid row -->
+                  <h2 class="section-title"> Behavior </h2>
+                  <p> User avatars can display a badge indicator to show a user's availability and dropdown actions. </p>
+                  <pre><code class="html">&lt;figure class="user-avatar"&gt;
+  &lt;img src="user.jpg" alt="User Avatar"&gt;
+  &lt;span class="avatar-badge has-indicator online"&gt;
+    &lt;i class="fa fa-check"&gt;&lt;/i&gt;
+  &lt;/span&gt;
+&lt;/figure&gt;</code></pre>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th> State </th>
+                        <th> Example </th>
+                        <th> Description </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td> Online </td>
+                        <td>
+                          <figure class="user-avatar">
+                            <img src="images/avatars/uifaces2.jpg" alt=""> <span class="avatar-badge has-indicator online"><i class="fa fa-check"></i></span>
+                          </figure>
+                        </td>
+                        <td> The user is online and available. </td>
+                      </tr>
+                      <tr>
+                        <td> Idle </td>
+                        <td>
+                          <figure class="user-avatar">
+                            <img src="images/avatars/uifaces2.jpg" alt=""> <span class="avatar-badge has-indicator idle"><i class="fa fa-minus"></i></span>
+                          </figure>
+                        </td>
+                        <td> The user is online but blocked notification or away. </td>
+                      </tr>
+                      <tr>
+                        <td> Busy </td>
+                        <td>
+                          <figure class="user-avatar">
+                            <img src="images/avatars/uifaces2.jpg" alt=""> <span class="avatar-badge has-indicator busy"><i class="fa fa-times"></i></span>
+                          </figure>
+                        </td>
+                        <td> The user is online and unavailable. </td>
+                      </tr>
+                      <tr>
+                        <td> Offline </td>
+                        <td>
+                          <figure class="user-avatar">
+                            <img src="images/avatars/uifaces2.jpg" alt=""> <span class="avatar-badge has-indicator offline"></span>
+                          </figure>
+                        </td>
+                        <td> The user is offline or away and unavailable. </td>
+                      </tr>
+                      <tr>
+                        <td> Actionable </td>
+                        <td>
+                          <figure class="user-avatar dropdown">
+                            <a href="#" data-toggle="dropdown"><img src="images/avatars/uifaces2.jpg" alt=""> <span class="avatar-badge has-indicator online"><i class="fa fa-check"></i></span></a>
+                            <div class="dropdown-menu">
+                              <a href="#" class="dropdown-item">Online</a> <a href="#" class="dropdown-item">Idle</a> <a href="#" class="dropdown-item">Busy</a> <a href="#" class="dropdown-item">Offline</a>
+                            </div>
+                          </figure>
+                        </td>
+                        <td> The user can change their availability. Click the avatar to open dropdown action </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <h2 class="section-title"> Avatar Group </h2>
+                  <p> User avatars can be grouped together in a stack pattern to show multiple users as a team/contributors. Groups are limited to 3 or 5 avatars and 1 tile to indicate truncated avatars. The truncated avatars can be show using a dropdown menu or modal component. when user hover on avatar, a tooltip expands to reveal the avatar name. </p><!-- grid row -->
+                  <div class="row">
+                    <!-- grid column -->
+                    <div class="col">
+                      <!-- .avatar-group -->
+                      <div class="avatar-group">
+                        <a href="#" class="user-avatar" data-toggle="tooltip" title="Beni Arisandi"><img src="images/avatars/uifaces4.jpg" alt=""></a> <a href="#" class="user-avatar" data-toggle="tooltip" title="Beni Arisandi"><img src="images/avatars/uifaces1.jpg" alt=""></a> <a href="#" class="user-avatar" data-toggle="tooltip" title="Beni Arisandi"><img src="images/avatars/uifaces3.jpg" alt=""></a> <a href="#" class="tile tile-circle">+23</a>
+                      </div><!-- /.avatar-group -->
+                    </div><!-- /grid column -->
+                    <!-- grid column -->
+                    <div class="col">
+                      <!-- .avatar-group -->
+                      <div class="avatar-group">
+                        <a href="#" class="user-avatar" data-toggle="tooltip" title="Beni Arisandi"><img src="images/avatars/uifaces1.jpg" alt=""></a> <a href="#" class="user-avatar" data-toggle="tooltip" title="Beni Arisandi"><img src="images/avatars/uifaces2.jpg" alt=""></a> <a href="#" class="user-avatar" data-toggle="tooltip" title="Beni Arisandi"><img src="images/avatars/uifaces3.jpg" alt=""></a> <a href="#" class="user-avatar" data-toggle="tooltip" title="Beni Arisandi"><img src="images/avatars/uifaces4.jpg" alt=""></a> <a href="#" class="user-avatar" data-toggle="tooltip" title="Beni Arisandi"><img src="images/avatars/uifaces5.jpg" alt=""></a> <a href="#" class="tile tile-circle">+21</a>
+                      </div><!-- /.avatar-group -->
+                    </div><!-- /grid column -->
+                  </div><!-- /grid row -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="conversation" class="section-title"> Conversation </h2>
+                  <p> Used to display real-time and past message logs between users. It comes with a number of sub components that can be used to display the different types of message items. </p>
+                  <pre><code class="html">&lt;div role="log" class="conversations"&gt;
+  &lt;ul class="conversation-list"&gt;
+    &lt;li class="log-divider"&gt;&lt;/li&gt;
+    &lt;li class="conversation-inbound"&gt;&lt;/li&gt;
+    &lt;li class="conversation-outbound"&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre><!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Class references </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.conversations</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>&lt;div&gt;</code> to create conversations wrapper. </dd>
+                        <dt class="col-lg-4">
+                          <code>.conversation-list</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>&lt;ul&gt;</code> to create conversation list. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                  <!-- .card -->
+                  <div class="card card-reflow">
+                    <!-- .card-body -->
+                    <div class="card-body">
+                      <!-- .conversations -->
+                      <div role="log" class="conversations">
+                        <ul class="conversation-list">
+                          <li class="log-divider">
+                            <span class="bg-light"><i class="far fa-fw fa-comment-alt"></i> Chat started by <strong>John Doe</strong> · Wed, Feb 14, 2018</span>
+                          </li>
+                          <li class="conversation-inbound">
+                            <div class="conversation-avatar">
+                              <a href="#" class="user-avatar"><img src="images/avatars/uifaces4.jpg" alt="John Doe"> <span class="avatar-badge online"></span></a>
+                            </div>
+                            <div class="conversation-message">
+                              <div class="conversation-message-text"> Laboriosam asperiores cupiditate aperiam! </div>
+                              <div class="conversation-meta"> John Doe · 20m </div>
+                            </div>
+                            <div class="conversation-actions">
+                              <button class="btn btn-light circle"><i class="far fa-trash-alt"></i></button>
+                            </div>
+                          </li>
+                          <li class="conversation-outbound">
+                            <div class="conversation-actions">
+                              <button class="btn btn-light circle"><i class="far fa-trash-alt"></i></button>
+                            </div>
+                            <div class="conversation-message">
+                              <div class="conversation-message-text"> Consectetur quis. </div>
+                              <div class="conversation-meta"> Beni Arisandi · 14m </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div><!-- /.conversations -->
+                    </div><!-- /.card-body -->
+                  </div><!-- /.card -->
+                  <pre><code class="html">&lt;div role="log" class="conversations"&gt;
+  &lt;ul class="conversation-list"&gt;
+    &lt;li class="log-divider"&gt;
+      &lt;span class="bg-light"&gt;
+        &lt;i class="far fa-fw fa-comment-alt"&gt;&lt;/i&gt;
+        Chat started by &lt;strong&gt;John Doe&lt;/strong&gt; &amp;middot; Wed, Feb 14, 2018
+      &lt;/span&gt;
+    &lt;/li&gt;
+
+    &lt;li class="conversation-inbound"&gt;
+      &lt;div class="conversation-avatar"&gt;
+        &lt;a href="#" class="user-avatar"&gt;
+          &lt;img src="avatar.jpg" alt="User Avatar"&gt;
+          &lt;span class="avatar-badge online"&gt;&lt;/span&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class="conversation-message bg-white"&gt;
+        &lt;div class="conversation-message-text"&gt;
+          Laboriosam asperiores cupiditate aperiam!
+        &lt;/div&gt;
+        &lt;div class="conversation-meta"&gt;
+          John Doe &amp;middot; 20m
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="conversation-actions"&gt;
+        &lt;button class="btn btn-light circle"&gt;&lt;i class="far fa-trash-alt"&gt;&lt;/i&gt;&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;
+
+    &lt;li class="conversation-outbound"&gt;
+      &lt;div class="conversation-actions"&gt;
+        &lt;button class="btn btn-light circle"&gt;&lt;i class="far fa-trash-alt"&gt;&lt;/i&gt;&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class="conversation-message"&gt;
+        &lt;div class="conversation-message-text"&gt;
+          Consectetur quis.
+        &lt;/div&gt;
+        &lt;div class="conversation-meta"&gt;
+          Beni Arisandi &amp;middot; 14m
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+                  <p> Conversation List comes with 3 different item types: </p>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th> Item </th>
+                        <th> Class </th>
+                        <th> Description </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td> Inbound message </td>
+                        <td>
+                          <code>.conversation-inbound</code>
+                        </td>
+                        <td> Contain messages from other users </td>
+                      </tr>
+                      <tr>
+                        <td> Outbound message </td>
+                        <td>
+                          <code>.conversation-outbound</code>
+                        </td>
+                        <td> Contain messages from users itself </td>
+                      </tr>
+                      <tr>
+                        <td> Log Event </td>
+                        <td>
+                          <code>.log-divider</code>
+                        </td>
+                        <td> Contain log event from system and users </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="expansion-cards" class="section-title"> Expansion cards </h2>
+                  <p> A lightweight container that may either stand alone or be connected to a larger surface, such as a card. </p><!-- #accordion -->
+                  <div id="accordion" class="card-expansion">
+                    <!-- .card -->
+                    <div class="card card-expansion-item expanded">
+                      <div class="card-header border-0" id="headingOne">
+                        <button class="btn btn-reset" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><span class="collapse-indicator mr-2"><i class="fa fa-fw fa-caret-right"></i></span> <span>Expandable Item #1</span></button>
+                      </div>
+                      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body pt-0"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. </div>
+                      </div>
+                    </div><!-- /.card -->
+                    <!-- .card -->
+                    <div class="card card-expansion-item">
+                      <div class="card-header border-0" id="headingTwo">
+                        <button class="btn btn-reset collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><span class="collapse-indicator mr-2"><i class="fa fa-fw fa-caret-right"></i></span> <span>Expandable Item #2</span></button>
+                      </div>
+                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body pt-0"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. </div>
+                      </div>
+                    </div><!-- /.card -->
+                    <!-- .card -->
+                    <div class="card card-expansion-item">
+                      <div class="card-header border-0" id="headingThree">
+                        <button class="btn btn-reset collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><span class="collapse-indicator mr-2"><i class="fa fa-fw fa-caret-right"></i></span> <span>Expandable Item #3</span></button>
+                      </div>
+                      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body pt-0"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. </div>
+                      </div>
+                    </div><!-- /.card -->
+                  </div><!-- /#accordion -->
+                  <pre><code class="html">&lt;div id="accordion" class="card-expansion"&gt;
+  &lt;!-- .card --&gt;
+  &lt;div class="card card-expansion-item expanded"&gt;
+    &lt;div class="card-header border-0" id="headingOne"&gt;
+      &lt;button class="btn btn-reset" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"&gt;
+        &lt;span class="collapse-indicator mr-2"&gt;
+          &lt;i class="fa fa-fw fa-caret-right"&gt;&lt;/i&gt;
+        &lt;/span&gt;
+        &lt;span&gt;Expandable Item #1&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion"&gt;
+      &lt;div class="card-body pt-0"&gt;
+        Content #1
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- /.card --&gt;
+
+  &lt;!-- .card --&gt;
+  &lt;div class="card card-expansion-item"&gt;
+    &lt;div class="card-header border-0" id="headingTwo"&gt;
+      &lt;button class="btn btn-reset collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"&gt;
+        &lt;span class="collapse-indicator mr-2"&gt;
+          &lt;i class="fa fa-fw fa-caret-right"&gt;&lt;/i&gt;
+        &lt;/span&gt;
+        &lt;span&gt;Expandable Item #2&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion"&gt;
+      &lt;div class="card-body pt-0"&gt;
+        Content #2
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- /.card --&gt;
+
+  &lt;!-- .card --&gt;
+  &lt;div class="card card-expansion-item"&gt;
+    &lt;div class="card-header border-0" id="headingThree"&gt;
+      &lt;button class="btn btn-reset collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"&gt;
+        &lt;span class="collapse-indicator mr-2"&gt;
+          &lt;i class="fa fa-fw fa-caret-right"&gt;&lt;/i&gt;
+        &lt;/span&gt;
+        &lt;span&gt;Expandable Item #3&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion"&gt;
+      &lt;div class="card-body pt-0"&gt;
+        Content #3
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- /.card --&gt;
+&lt;/div&gt;</code></pre><!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Collapse Indicator References </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.fa-plus</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.fa</code> to use plus icon as a collapse indicator. </dd>
+                        <dt class="col-lg-4">
+                          <code>.fa-angle-down</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.fa</code> to use angle down icon as a collapse indicator. </dd>
+                        <dt class="col-lg-4">
+                          <code>.fa-caret-down</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.fa</code> to use caret down icon as a collapse indicator. </dd>
+                        <dt class="col-lg-4">
+                          <code>.fa-chevron-down</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.fa</code> to use chevron down icon as a collapse indicator. </dd>
+                        <dt class="col-lg-4">
+                          <code>.oi-caret-down</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.oi</code> to use caret down icon as a collapse indicator. </dd>
+                        <dt class="col-lg-4">
+                          <code>.oi-chevron-down</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.oi</code> to use chevron down icon as a collapse indicator. </dd>
+                        <dt class="col-lg-4">
+                          <code>.fa-angle-right</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.fa</code> to use angle right icon as a collapse indicator. </dd>
+                        <dt class="col-lg-4">
+                          <code>.fa-caret-right</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.fa</code> to use caret right icon as a collapse indicator. </dd>
+                        <dt class="col-lg-4">
+                          <code>.fa-chevron-right</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.fa</code> to use chevron right icon as a collapse indicator. </dd>
+                        <dt class="col-lg-4">
+                          <code>.oi-caret-right</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.oi</code> to use caret right icon as a collapse indicator. </dd>
+                        <dt class="col-lg-4">
+                          <code>.oi-chevron-right</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.oi</code> to use chevron right icon as a collapse indicator. </dd>
+                        <dt class="col-lg-4">
+                          <code>.fa-circle</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.fa</code> to use circle icon as a collapse indicator. </dd>
+                        <dt class="col-lg-4">
+                          <code>.fa-dot-circle</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.fa</code> to use dot circle icon as a collapse indicator. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="feeds" class="section-title"> Feeds </h2>
+                  <p> A linear, single-threaded of a list of recurring elements of similar types. It can be a discussion, post, pages, tasks, issues displayed in chronological order. Depending on the context, It can take place among authors of feed, audiences, and readers. </p><!-- .feed -->
+                  <div class="feed">
+                    <!-- .feed-post -->
+                    <div class="feed-post card">
+                      <!-- .card-header -->
+                      <div class="card-header card-header-fluid">
+                        <a href="#" class="btn-account" role="button">
+                          <div class="user-avatar user-avatar-lg">
+                            <img src="images/avatars/uifaces5.jpg" alt="">
+                          </div>
+                          <div class="account-summary">
+                            <p class="account-name"> David Collins </p>
+                            <p class="account-description"> New member · Yesterday at 5:48 PM </p>
+                          </div>
+                        </a> <!-- .dropdown -->
+                        <div class="dropdown align-self-start ml-auto">
+                          <button class="btn btn-icon btn-light" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></button>
+                          <div class="dropdown-menu dropdown-menu-right">
+                            <div class="dropdown-arrow"></div><a href="#" class="dropdown-item">Get notified</a> <a href="#" class="dropdown-item">Mute notified</a> <a href="#" class="dropdown-item">Permalink</a> <a href="#" class="dropdown-item">Block this user</a> <a href="#" class="dropdown-item">Remove</a>
+                          </div>
+                        </div><!-- /.dropdown -->
+                      </div><!-- /.card-header -->
+                      <!-- .card-body -->
+                      <div class="card-body">
+                        <p class="mb-2"> Hey there! this is a post with outbound link, <a href="#" class="mention">@stilearning</a> ratione doloremque eos <a href="#" class="hashtag">#looper</a> aliquid ipsam, molestias cumque asperiores mollitia nam corrupti dolore recusandae nihil? </p><!-- .outbound-link -->
+                        <a href="#" class="outbound-link">
+                          <h5 class="outbound-title"> Expanding Your Home Network’s Reach </h5>
+                          <p class="outbound-text"> Atque natus, quod quas commodi beatae inventore eligendi recusandae necessitatibus eum distinctio. </p>
+                        </a> <!-- /.outbound-link -->
+                        <!-- .feed-summary -->
+                        <div class="feed-summary">
+                          <a href="#" class="feed-summary-item mr-auto">6.3K likes</a> <a href="#" class="feed-summary-item">826 comments</a> <a href="#" class="feed-summary-item">·</a> <a href="#" class="feed-summary-item">2.9K shares</a>
+                        </div><!-- .feed-summary -->
+                      </div><!-- /.card-body -->
+                      <!-- .card-footer -->
+                      <div class="card-footer">
+                        <div class="card-footer-item">
+                          <button type="button" class="btn btn-reset text-muted"><i class="fa fa-fw fa-thumbs-up"></i> Like</button>
+                        </div>
+                        <div class="card-footer-item">
+                          <button type="button" class="btn btn-reset text-muted"><i class="fa fa-fw fa-comment"></i> Comment</button>
+                        </div>
+                        <div class="card-footer-item">
+                          <button type="button" class="btn btn-reset text-muted"><i class="fa fa-fw fa-share"></i> Share</button>
+                        </div>
+                      </div><!-- /.card-footer -->
+                    </div><!-- /.feed-post -->
+                    <!-- .feed-comments -->
+                    <div class="feed-comments card">
+                      <!-- .card-header -->
+                      <div class="card-header d-flex justify-content-between">
+                        <a href="#">Expand all</a> <span class="text-muted">1 of 12</span>
+                      </div><!-- /.card-header -->
+                      <!-- .conversations -->
+                      <div role="log" class="conversations">
+                        <!-- .conversation-list -->
+                        <ul class="conversation-list">
+                          <!-- .conversation-inbound -->
+                          <li class="conversation-inbound">
+                            <!-- .conversation-avatar -->
+                            <div class="conversation-avatar">
+                              <a href="#" class="user-avatar"><img src="images/avatars/uifaces4.jpg" alt=""></a>
+                            </div><!-- /.conversation-avatar -->
+                            <!-- .conversation-message -->
+                            <div class="conversation-message">
+                              <div class="conversation-message-text">
+                                <a href="#"><strong>Sara Ward</strong></a> Laboriosam asperiores cupiditate aperiam! </div>
+                              <div class="conversation-meta">
+                                <a href="#">Like</a> · <a href="#">Reply</a> · 1hr </div>
+                            </div><!-- /.conversation-message -->
+                          </li><!-- /.conversation-inbound -->
+                          <!-- .conversation-action -->
+                          <li class="conversation-action mt-3">
+                            <!-- .media -->
+                            <div class="media">
+                              <figure class="user-avatar mr-2">
+                                <img src="images/avatars/uifaces4.jpg" alt="">
+                              </figure><!-- .media-body -->
+                              <div class="media-body">
+                                <!-- .composer -->
+                                <div class="publisher publisher-alt">
+                                  <!-- .publisher-input -->
+                                  <div class="publisher-input">
+                                    <textarea class="form-control" placeholder="Write a comment"></textarea>
+                                  </div><!-- /.publisher-input -->
+                                  <!-- .publisher-actions -->
+                                  <div class="publisher-actions">
+                                    <!-- .publisher-tools -->
+                                    <div class="publisher-tools mr-auto">
+                                      <div class="btn btn-link fileinput-button">
+                                        <i class="fa fa-paperclip"></i> <input type="file" id="comment-attachment" name="commentAttachment[]" multiple>
+                                      </div><button type="button" class="btn btn-link"><i class="far fa-smile"></i></button>
+                                    </div><!-- /.publisher-tools -->
+                                    <button type="submit" class="btn btn-primary">Publish</button>
+                                  </div><!-- /.publisher-actions -->
+                                </div><!-- /.publisher -->
+                              </div><!-- /.media-body -->
+                            </div><!-- /.media -->
+                          </li><!-- /.conversation-action -->
+                        </ul><!-- /.conversation-list -->
+                      </div><!-- /.conversations -->
+                    </div><!-- /.feed-comments -->
+                  </div><!-- /.feed -->
+                  <pre><code class="html">&lt;div class="feed"&gt;
+  &lt;!-- .feed-post --&gt;
+  &lt;div class="feed-post card"&gt;
+    &lt;!-- .card-header --&gt;
+    &lt;div class="card-header card-header-fluid"&gt;
+      &lt;a href="#" class="btn-account" role="button"&gt;
+        &lt;div class="user-avatar user-avatar-lg"&gt;
+          &lt;img src="avatar.jpg" alt="Beni Arisandi"&gt;
+        &lt;/div&gt;
+        &lt;div class="account-summary"&gt;
+          &lt;p class="account-name"&gt;Beni Arisandi&lt;/p&gt;
+          &lt;p class="account-description"&gt;New member &amp;middot; Yesterday at 5:48 PM&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/a&gt;
+      &lt;!-- .dropdown --&gt;
+      &lt;div class="dropdown align-self-start ml-auto"&gt;
+        &lt;button class="btn btn-icon btn-light" data-toggle="dropdown"&gt;
+          &lt;i class="fa fa-fw fa-ellipsis-v"&gt;&lt;/i&gt;
+        &lt;/button&gt;
+        &lt;div class="dropdown-menu dropdown-menu-right"&gt;
+          &lt;div class="dropdown-arrow"&gt;&lt;/div&gt;
+          &lt;a href="#" class="dropdown-item"&gt;Get notified&lt;/a&gt;
+          &lt;a href="#" class="dropdown-item"&gt;Mute notified&lt;/a&gt;
+          &lt;a href="#" class="dropdown-item"&gt;Permalink&lt;/a&gt;
+          &lt;a href="#" class="dropdown-item"&gt;Block this user&lt;/a&gt;
+          &lt;a href="#" class="dropdown-item"&gt;Remove&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!-- /.dropdown --&gt;
+    &lt;/div&gt;
+    &lt;!-- /.card-header --&gt;
+    &lt;!-- .card-body --&gt;
+    &lt;div class="card-body"&gt;
+      &lt;p class="mb-2"&gt;Feed content.&lt;/p&gt;
+
+      &lt;!-- .feed-summary --&gt;
+      &lt;div class="feed-summary"&gt;
+        &lt;a href="#" class="feed-summary-item ml-auto"&gt;10 likes&lt;/a&gt;
+        &lt;a href="#" class="feed-summary-item"&gt;&amp;middot;&lt;/a&gt;
+        &lt;a href="#" class="feed-summary-item"&gt;12 comments&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;!-- .feed-summary --&gt;
+    &lt;/div&gt;
+    &lt;!-- /.card-body --&gt;
+
+    &lt;!-- .card-footer --&gt;
+    &lt;div class="card-footer"&gt;
+      &lt;div class="card-footer-item"&gt;
+        &lt;button type="button" class="btn btn-reset text-muted"&gt;&lt;i class="fa fa-fw fa-thumbs-up"&gt;&lt;/i&gt; Like&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class="card-footer-item"&gt;
+        &lt;button type="button" class="btn btn-reset text-muted"&gt;&lt;i class="fa fa-fw fa-comment"&gt;&lt;/i&gt; Comment&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class="card-footer-item"&gt;
+        &lt;button type="button" class="btn btn-reset text-muted"&gt;&lt;i class="fa fa-fw fa-share"&gt;&lt;/i&gt; Share&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- /.card-footer --&gt;
+  &lt;/div&gt;
+  &lt;!-- /.feed-post --&gt;
+
+  &lt;!-- .feed-comments --&gt;
+  &lt;div class="feed-comments card"&gt;
+    &lt;!-- .card-header --&gt;
+    &lt;div class="card-header d-flex justify-content-between"&gt;
+      &lt;a href="#"&gt;Expand all&lt;/a&gt;
+      &lt;span class="text-muted"&gt;1 of 12&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;!-- /.card-header --&gt;
+    &lt;!-- .conversations --&gt;
+    &lt;div role="log" class="conversations"&gt;
+      &lt;!-- .conversation-list --&gt;
+      &lt;ul class="conversation-list"&gt;
+        &lt;!-- .conversation-inbound --&gt;
+        &lt;li class="conversation-inbound"&gt;
+          &lt;!-- .conversation-avatar --&gt;
+          &lt;div class="conversation-avatar"&gt;
+            &lt;a href="#" class="user-avatar"&gt;
+              &lt;img src="avatar.jpg" alt="Beni Arisandi"&gt;
+            &lt;/a&gt;
+          &lt;/div&gt;
+          &lt;!-- /.conversation-avatar --&gt;
+          &lt;!-- .conversation-message --&gt;
+          &lt;div class="conversation-message"&gt;
+            &lt;div class="conversation-message-text"&gt;&lt;a href="#"&gt;&lt;strong&gt;Beni arisandi&lt;/strong&gt;&lt;/a&gt; Laboriosam asperiores cupiditate aperiam!&lt;/div&gt;
+            &lt;div class="conversation-meta"&gt;
+              &lt;a href="#"&gt;Like&lt;/a&gt; &amp;middot; &lt;a href="#"&gt;Reply&lt;/a&gt; &amp;middot; 1hr
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;!-- /.conversation-message --&gt;
+        &lt;/li&gt;
+        &lt;!-- /.conversation-inbound --&gt;
+
+        &lt;!-- .conversation-action --&gt;
+        &lt;li class="conversation-action mt-3"&gt;
+          &lt;!-- use publisher to post a conversation here --&gt;
+        &lt;/li&gt;
+        &lt;!-- /.conversation-action --&gt;
+      &lt;/ul&gt;
+      &lt;!-- /.conversation-list --&gt;
+    &lt;/div&gt;
+    &lt;!-- /.conversations --&gt;
+  &lt;/div&gt;
+  &lt;!-- /.feed-comments --&gt;
+&lt;/div&gt;</code></pre>
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="figures" class="section-title"> Figures </h2>
+                  <p> Easily display grids of images, videos, text, and more. </p><!-- grid row -->
+                  <div class="row">
+                    <!-- grid column -->
+                    <div class="col-xl-4 col-sm-6">
+                      <!-- .card -->
+                      <div class="card card-figure">
+                        <!-- .card-figure -->
+                        <figure class="figure">
+                          <img class="img-fluid" src="images/dummy/img-5.jpg" alt="Card image cap"> <!-- .figure-caption -->
+                          <figcaption class="figure-caption">
+                            <h6 class="figure-title"> Simple figure </h6>
+                            <p class="text-muted mb-0"> Give some text description </p>
+                          </figcaption><!-- /.figure-caption -->
+                        </figure><!-- /.card-figure -->
+                      </div><!-- /.card -->
+                    </div><!-- /grid column -->
+                    <!-- grid column -->
+                    <div class="col-xl-4 col-sm-6">
+                      <!-- .card -->
+                      <div class="card card-figure is-hoverable">
+                        <!-- .card-figure -->
+                        <figure class="figure">
+                          <img class="img-fluid" src="images/dummy/img-4.jpg" alt="Card image cap"> <!-- .figure-caption -->
+                          <figcaption class="figure-caption">
+                            <h6 class="figure-title"> Hoverable figure </h6>
+                            <p class="text-muted mb-0"> Give some text description </p>
+                          </figcaption><!-- /.figure-caption -->
+                        </figure><!-- /.card-figure -->
+                      </div><!-- /.card -->
+                    </div><!-- /grid column -->
+                    <!-- grid column -->
+                    <div class="col-xl-4 col-sm-6">
+                      <!-- .card -->
+                      <div class="card card-figure">
+                        <!-- .card-figure -->
+                        <figure class="figure">
+                          <!-- .figure-img -->
+                          <div class="figure-img">
+                            <img class="img-fluid" src="images/dummy/img-3.jpg" alt="Card image cap">
+                            <div class="figure-tools">
+                              <a href="#" class="tile tile-circle tile-sm mr-auto"><span class="oi oi-data-transfer-download"></span></a> <span class="badge badge-danger">Illustration</span>
+                            </div>
+                            <div class="figure-action">
+                              <a href="#" class="btn btn-block btn-sm btn-primary">Quick Action</a>
+                            </div>
+                          </div><!-- /.figure-img -->
+                          <!-- .figure-caption -->
+                          <figcaption class="figure-caption">
+                            <h6 class="figure-title">
+                              <a href="#">Figure tools</a>
+                            </h6>
+                            <p class="text-muted mb-0"> Give some text description </p>
+                          </figcaption><!-- /.figure-caption -->
+                        </figure><!-- /.card-figure -->
+                      </div><!-- /.card -->
+                    </div><!-- /grid column -->
+                  </div><!-- /grid row -->
+                  <pre><code class="html">&lt;div class="card card-figure"&gt;
+  &lt;!-- .card-figure --&gt;
+  &lt;figure class="figure"&gt;
+    &lt;!-- .figure-img --&gt;
+    &lt;div class="figure-img"&gt;
+      &lt;img class="img-fluid" src="assets/images/dummy/img-12.jpg" alt="Card image cap"&gt;
+      &lt;div class="figure-description"&gt;
+        &lt;h6 class="figure-title"&gt;Figure description&lt;/h6&gt;
+        &lt;p class="text-muted mb-0"&gt;&lt;small&gt;Laboriosam neque officia adipisci quo ut placeat labore? Doloribus, ipsam? Voluptates, minus.&lt;/small&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="figure-tools"&gt;
+        &lt;a href="#" class="tile tile-circle tile-sm mr-auto"&gt;
+          &lt;span class="oi oi-data-transfer-download"&gt;&lt;/span&gt;
+        &lt;/a&gt;
+        &lt;span class="badge badge-warning"&gt;Gadget&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="figure-action"&gt;
+        &lt;a href="#" class="btn btn-block btn-sm btn-primary"&gt;Quick Action&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- /.figure-img --&gt;
+    &lt;figcaption class="figure-caption"&gt;
+      &lt;ul class="list-inline d-flex text-muted mb-0"&gt;
+        &lt;li class="list-inline-item mr-auto"&gt;&lt;span class="oi oi-paperclip"&gt;&lt;/span&gt; 2MB&lt;/li&gt;
+        &lt;li class="list-inline-item"&gt;&lt;span class="oi oi-calendar"&gt;&lt;/span&gt; Apr 11, 2018&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/figcaption&gt;
+  &lt;/figure&gt;
+  &lt;!-- /.card-figure --&gt;
+&lt;/div&gt;</code></pre><!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Class references </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.is-hoverable</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.card-figure</code> to increase shadow and give a bit transform animation on hover. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="icons" class="section-title"> Icons </h2>
+                  <p class="text-muted"> Come with two icon sets, includes 223 <a href="https://useiconic.com/open" target="_blank">Open Iconic</a> and 1,109 <a href="https://fontawesome.com/icons?d=gallery&amp;m=free" target="_blank">Font Awesome</a> Icons. </p><!-- .card -->
+                  <div class="card">
+                    <!-- .card-body -->
+                    <div class="card-body">
+                      <h4 class="card-title"> Use with button </h4><!-- .el-example -->
+                      <div class="el-example mb-3">
+                        <button class="btn btn-secondary"><i class="oi oi-data-transfer-download mr-1"></i> Button</button> <button class="btn btn-primary">Button <i class="oi oi-thumb-up ml-1"></i></button>
+                      </div><!-- /.el-example -->
+                      <h4 class="card-title"> List Icons </h4>
+                      <ul class="list-icons mb-3">
+                        <li>
+                          <span class="list-icon"><i class="oi oi-check text-primary"></i></span> Ullam odit vel at, commodi atque ratione? </li>
+                        <li>
+                          <span class="list-icon"><i class="oi oi-media-record text-pink pulse"></i></span> Eligendi aliquid quis reprehenderit, officia fuga vero. </li>
+                        <li>
+                          <span class="list-icon"><i class="oi oi-circle-check text-success"></i></span> Nostrum perspiciatis laboriosam mollitia assumenda beatae distinctio! </li>
+                      </ul>
+                    </div><!-- /.card-body -->
+                  </div><!-- /.card -->
+                  <pre><code class="html">&lt;button class="btn btn-secondary"&gt;
+  &lt;i class="oi oi-data-transfer-download mr-1"&gt;&lt;/i&gt;
+  Button
+&lt;/button&gt;
+
+&lt;ul class="list-icons"&gt;
+  &lt;li&gt;
+    &lt;span class="list-icon"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt;
+    Ullam odit vel at, commodi atque ratione?
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="metrics" class="section-title"> Metrics </h2>
+                  <p> Get a clear view of a key performance values that you're measuring. </p><!-- .metric -->
+                  <div class="metric metric-bordered align-items-center mb-3">
+                    <p class="metric-value h3">
+                      <sub><i class="oi oi-people fa-lg"></i></sub> <span class="value">8</span>
+                    </p>
+                    <h2 class="metric-label"> Teams </h2>
+                  </div><!-- /.metric -->
+                  <!-- .metric -->
+                  <div class="card-metric mb-3">
+                    <div class="metric">
+                      <p class="metric-value h3">
+                        <sub><i class="oi oi-fork"></i></sub> <span class="value">12</span>
+                      </p>
+                      <h2 class="metric-label"> Teams </h2>
+                    </div>
+                  </div><!-- /.metric -->
+                  <pre><code class="html">&lt;div class="metric metric-bordered align-items-center"&gt;
+  &lt;p class="metric-value h3"&gt;
+    &lt;sub&gt;&lt;i class="oi oi-people fa-lg"&gt;&lt;/i&gt;&lt;/sub&gt;
+    &lt;span class="value"&gt;8&lt;/span&gt;
+  &lt;/p&gt;
+  &lt;h2 class="metric-label"&gt;Teams&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;!-- view metric as a card --&gt;
+&lt;div class="card-metric"&gt;
+  &lt;div class="metric"&gt;
+    &lt;p class="metric-value h3"&gt;
+      &lt;sub&gt;&lt;i class="oi oi-fork"&gt;&lt;/i&gt;&lt;/sub&gt;
+      &lt;span class="value"&gt;12&lt;/span&gt;
+    &lt;/p&gt;
+    &lt;h2 class="metric-label"&gt;Teams&lt;/h2&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre><!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Class references </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.metric</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>&lt;div&gt;</code> or <code>&lt;a&gt;</code> to create a metric. </dd>
+                        <dt class="col-lg-4">
+                          <code>.metric-bordered</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.metric</code> to add solid border. </dd>
+                        <dt class="col-lg-4">
+                          <code>.card-metric</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.metric</code> parent to make the metric like a card. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                  <h2 class="section-title"> Metrics Group & Nesting </h2>
+                  <p> Group metrics by their family to easily monitoring your bussiness objective at multiple levels. </p><!-- metric row -->
+                  <div class="metric-row">
+                    <div class="col-lg-9">
+                      <div class="metric-row metric-flush">
+                        <!-- metric column -->
+                        <div class="col">
+                          <!-- .metric -->
+                          <a href="#" class="metric metric-bordered align-items-center">
+                            <h2 class="metric-label"> Teams </h2>
+                            <p class="metric-value h3">
+                              <sub><i class="oi oi-people"></i></sub> <span class="value">8</span>
+                            </p>
+                          </a> <!-- /.metric -->
+                        </div><!-- /metric column -->
+                        <!-- metric column -->
+                        <div class="col">
+                          <!-- .metric -->
+                          <a href="#" class="metric metric-bordered align-items-center">
+                            <h2 class="metric-label"> Projects </h2>
+                            <p class="metric-value h3">
+                              <sub><i class="oi oi-fork"></i></sub> <span class="value">12</span>
+                            </p>
+                          </a> <!-- /.metric -->
+                        </div><!-- /metric column -->
+                        <!-- metric column -->
+                        <div class="col">
+                          <!-- .metric -->
+                          <a href="#" class="metric metric-bordered align-items-center">
+                            <h2 class="metric-label"> Active Tasks </h2>
+                            <p class="metric-value h3">
+                              <sub><i class="fa fa-tasks"></i></sub> <span class="value">64</span>
+                            </p>
+                          </a> <!-- /.metric -->
+                        </div><!-- /metric column -->
+                      </div>
+                    </div><!-- metric column -->
+                    <div class="col-lg-3">
+                      <!-- .metric -->
+                      <a href="#" class="metric metric-bordered">
+                        <div class="metric-badge">
+                          <span class="badge badge-lg badge-success"><span class="oi oi-media-record pulse mr-1"></span> ONGOING TASKS</span>
+                        </div>
+                        <p class="metric-value h3">
+                          <sub><i class="oi oi-timer"></i></sub> <span class="value">8</span>
+                        </p>
+                      </a> <!-- /.metric -->
+                    </div><!-- /metric column -->
+                  </div><!-- /metric row -->
+                  <pre><code class="html">&lt;div class="metric-row"&gt;
+  &lt;!-- metric column --&gt;
+  &lt;div class="col-lg-9"&gt;
+    &lt;!-- nesting metric group --&gt;
+    &lt;!-- metric row --&gt;
+    &lt;div class="metric-row metric-flush"&gt;
+      &lt;!-- metric column --&gt;
+      &lt;div class="col"&gt;
+        &lt;!-- .metric --&gt;
+        &lt;a href="user-teams.html" class="metric metric-bordered align-items-center"&gt;
+          &lt;h2 class="metric-label"&gt;Teams&lt;/h2&gt;
+          &lt;p class="metric-value h3"&gt;
+            &lt;sub&gt;&lt;i class="oi oi-people"&gt;&lt;/i&gt;&lt;/sub&gt;
+            &lt;span class="value"&gt;8&lt;/span&gt;
+          &lt;/p&gt;
+        &lt;/a&gt;
+        &lt;!-- /.metric --&gt;
+      &lt;/div&gt;
+      &lt;!-- /metric column --&gt;
+      &lt;!-- metric column --&gt;
+      &lt;div class="col"&gt;
+        &lt;!-- .metric --&gt;
+        &lt;a href="user-projects.html" class="metric metric-bordered align-items-center"&gt;
+          &lt;h2 class="metric-label"&gt;Projects&lt;/h2&gt;
+          &lt;p class="metric-value h3"&gt;
+            &lt;sub&gt;&lt;i class="oi oi-fork"&gt;&lt;/i&gt;&lt;/sub&gt;
+            &lt;span class="value"&gt;12&lt;/span&gt;
+          &lt;/p&gt;
+        &lt;/a&gt;
+        &lt;!-- /.metric --&gt;
+      &lt;/div&gt;
+      &lt;!-- /metric column --&gt;
+      &lt;!-- metric column --&gt;
+      &lt;div class="col"&gt;
+        &lt;!-- .metric --&gt;
+        &lt;a href="user-tasks.html" class="metric metric-bordered align-items-center"&gt;
+          &lt;h2 class="metric-label"&gt;Active Tasks&lt;/h2&gt;
+          &lt;p class="metric-value h3"&gt;
+            &lt;sub&gt;&lt;i class="fa fa-tasks"&gt;&lt;/i&gt;&lt;/sub&gt;
+            &lt;span class="value"&gt;64&lt;/span&gt;
+          &lt;/p&gt;
+        &lt;/a&gt;
+        &lt;!-- /.metric --&gt;
+      &lt;/div&gt;
+      &lt;!-- /metric column --&gt;
+    &lt;/div&gt;
+    &lt;!-- /metric row --&gt;
+  &lt;/div&gt;
+  &lt;!-- /metric column --&gt;
+
+  &lt;!-- metric column --&gt;
+  &lt;div class="col-lg-3"&gt;
+    &lt;!-- .metric --&gt;
+    &lt;a href="user-tasks.html" class="metric metric-bordered"&gt;
+      &lt;div class="metric-badge"&gt;
+        &lt;span class="badge badge-lg badge-success"&gt;
+          &lt;span class="oi oi-media-record pulse mr-1"&gt;&lt;/span&gt;
+          ONGOING TASKS
+        &lt;/span&gt;
+      &lt;/div&gt;
+      &lt;p class="metric-value h3"&gt;
+        &lt;sub&gt;&lt;i class="oi oi-timer"&gt;&lt;/i&gt;&lt;/sub&gt;
+        &lt;span class="value"&gt;8&lt;/span&gt;
+      &lt;/p&gt;
+    &lt;/a&gt;
+    &lt;!-- /.metric --&gt;
+  &lt;/div&gt;
+  &lt;!-- /metric column --&gt;
+&lt;/div&gt;</code></pre>
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="publisher" class="section-title"> Publisher </h2>
+                  <p> Advanced longform text input form element. </p><!-- .card -->
+                  <div class="card">
+                    <!-- .card-body -->
+                    <div class="card-body">
+                      <!-- .media -->
+                      <div class="media">
+                        <figure class="user-avatar user-avatar-md mr-2">
+                          <img src="images/avatars/uifaces4.jpg" alt="">
+                        </figure><!-- .media-body -->
+                        <div class="media-body">
+                          <!-- .publisher -->
+                          <div class="publisher keep-focus focus">
+                            <label for="publisherInput" class="publisher-label">Reply to: Beni Arisandi</label> <!-- .publisher-input -->
+                            <div class="publisher-input">
+                              <textarea id="publisherInput" class="form-control" placeholder="Write a comment"></textarea>
+                            </div><!-- /.publisher-input -->
+                            <!-- .publisher-actions -->
+                            <div class="publisher-actions">
+                              <!-- .publisher-tools -->
+                              <div class="publisher-tools mr-auto">
+                                <div class="btn btn-link fileinput-button">
+                                  <i class="fa fa-paperclip"></i> <input type="file" id="attachment" name="attachment[]" multiple>
+                                </div><button type="button" class="btn btn-link"><i class="far fa-smile"></i></button>
+                              </div><!-- /.publisher-tools -->
+                              <button type="submit" class="btn btn-primary">Publish</button>
+                            </div><!-- /.publisher-actions -->
+                          </div><!-- /.publisher -->
+                        </div><!-- /.media-body -->
+                      </div><!-- /.media -->
+                    </div><!-- /.card-body -->
+                  </div><!-- /.card -->
+                  <pre><code class="html">&lt;!-- .media --&gt;
+&lt;div class="media"&gt;
+  &lt;figure class="user-avatar user-avatar-md mr-2"&gt;
+    &lt;img src="images/avatars/uifaces4.jpg" alt="User Avatar"&gt;
+  &lt;/figure&gt;
+  &lt;!-- .media-body --&gt;
+  &lt;div class="media-body"&gt;
+    &lt;!-- .publisher --&gt;
+    &lt;div class="publisher keep-focus focus"&gt;
+      &lt;label for="publisherInput" class="publisher-label"&gt;Reply to: Beni Arisandi&lt;/label&gt;
+      &lt;!-- .publisher-input --&gt;
+      &lt;div class="publisher-input"&gt;
+        &lt;textarea id="publisherInput" class="form-control" placeholder="Write a comment"&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+      &lt;!-- /.publisher-input --&gt;
+      &lt;!-- .publisher-actions --&gt;
+      &lt;div class="publisher-actions"&gt;
+        &lt;!-- .publisher-tools --&gt;
+        &lt;div class="publisher-tools mr-auto"&gt;
+          &lt;button type="button" class="btn btn-link fileinput-button"&gt;
+            &lt;i class="fa fa-paperclip"&gt;&lt;/i&gt;
+            &lt;input type="file" id="attachment" name="attachment[]" multiple&gt;
+          &lt;/button&gt;
+          &lt;button type="button" class="btn btn-link"&gt;&lt;i class="far fa-smile"&gt;&lt;/i&gt;&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;!-- /.publisher-tools --&gt;
+        &lt;button type="submit" class="btn btn-primary"&gt;Publish&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;!-- /.publisher-actions --&gt;
+    &lt;/div&gt;
+    &lt;!-- /.publisher --&gt;
+  &lt;/div&gt;
+  &lt;!-- /.media-body --&gt;
+&lt;/div&gt;
+&lt;!-- /.media --&gt;</code></pre><!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Class references </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.publisher</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>&lt;div&gt;</code> to create a publisher. </dd>
+                        <dt class="col-lg-4">
+                          <code>.publisher-alt</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.publisher</code> to add difference style of publisher. </dd>
+                        <dt class="col-lg-4">
+                          <code>.focus</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.publisher</code> to expand a publisher on focus. </dd>
+                        <dt class="col-lg-4">
+                          <code>.keep-focus</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.publisher</code> to make publisher never be collapsed on focusout. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="steps" class="section-title"> Steps </h2>
+                  <p> A progress tracker to guide users through steps or actions across multiple screens, in order to completed a task. The progress tracker shows users where they are in the process, and can be used to navigate through the process by selecting steps. </p>
+                  <div class="steps">
+                    <ul>
+                      <li class="success">
+                        <a href="#" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-flag"></i></span> <span class="d-none d-sm-inline">Welcome</span></a>
+                      </li>
+                      <li class="error">
+                        <a href="#" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fa fa-id-card-alt"></i></span> <span class="d-none d-sm-inline">Upload Photo</span></a>
+                      </li>
+                      <li class="active">
+                        <a href="#" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-people"></i></span> <span class="d-none d-sm-inline">Find People</span></a>
+                      </li>
+                      <li>
+                        <a href="#" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-wrench"></i></span> <span class="d-none d-sm-inline">Account Details</span></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <pre><code class="html">&lt;div class="steps"&gt;
+  &lt;ul&gt;
+    &lt;li class="success"&gt;
+      &lt;a href="#" tabindex="-1"&gt;
+        &lt;span class="step-indicator step-indicator-icon"&gt;
+          &lt;i class="oi oi-flag"&gt;&lt;/i&gt;
+        &lt;/span&gt;
+        &lt;span class="d-none d-sm-inline"&gt;Welcome&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="error"&gt;
+      &lt;a href="#" tabindex="-1"&gt;
+        &lt;span class="step-indicator step-indicator-icon"&gt;
+          &lt;i class="fa fa-id-card-alt"&gt;&lt;/i&gt;
+        &lt;/span&gt;
+        &lt;span class="d-none d-sm-inline"&gt;Upload Photo&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="active"&gt;
+      &lt;a href="#" tabindex="-1"&gt;
+        &lt;span class="step-indicator step-indicator-icon"&gt;
+          &lt;i class="oi oi-people"&gt;&lt;/i&gt;
+        &lt;/span&gt;
+        &lt;span class="d-none d-sm-inline"&gt;Find People&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="#" tabindex="-1"&gt;
+        &lt;span class="step-indicator step-indicator-icon"&gt;
+          &lt;i class="oi oi-wrench"&gt;&lt;/i&gt;
+        &lt;/span&gt;
+        &lt;span class="d-none d-sm-inline"&gt;Account Details&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre><!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Class references </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.active</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>&lt;li&gt;</code> to shows the current step that user is on. </dd>
+                        <dt class="col-lg-4">
+                          <code>.success</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>&lt;li&gt;</code> to shows the done/competed step. </dd>
+                        <dt class="col-lg-4">
+                          <code>.error</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>&lt;li&gt;</code> to shows the current step in error state. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                  <div class="alert alert-secondary">
+                    <strong>Pro Tips:</strong>
+                    <ul>
+                      <li>Keep your steps short and not overwhelming, the max number of step item is 6. If a task needs more than 6 steps, consider simplifying the process or breaking it up into multiple tasks. </li>
+                      <li>Use labels that clearly indicate the purpose of the step. When writing, keep options to a single line of text (1-2 words), be short and clear. </li>
+                    </ul>
+                  </div>
+                  <h2 class="section-title"> Progress List </h2>
+                  <p> This is an alternative approach to guide user to completed a task. Used the same use case as steps. </p><!-- .progress-list -->
+                  <ol class="progress-list mb-5">
+                    <li class="success">
+                      <button type="button">
+                        <!-- progress indicator -->
+                        <span class="progress-indicator"></span></button> <span class="progress-label d-none d-sm-inline-block">Connecting</span>
+                    </li>
+                    <li class="active">
+                      <button type="button">
+                        <!-- progress indicator -->
+                        <span class="progress-indicator"></span></button> <span class="progress-label d-none d-sm-inline-block">Authentication</span>
+                    </li>
+                    <li>
+                      <button type="button">
+                        <!-- progress indicator -->
+                        <span class="progress-indicator"></span></button> <span class="progress-label d-none d-sm-inline-block">Fetching Data</span>
+                    </li>
+                  </ol><!-- /.progress-list -->
+                  <pre><code class="html">&lt;ol class="progress-list"&gt;
+  &lt;li class="success"&gt;
+    &lt;button type="button"&gt;
+      &lt;!-- progress indicator --&gt;
+      &lt;span class="progress-indicator"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;span class="progress-label d-none d-sm-inline-block"&gt;Connecting&lt;/span&gt;
+  &lt;/li&gt;
+  &lt;li class="active"&gt;
+    &lt;button type="button"&gt;
+      &lt;!-- progress indicator --&gt;
+      &lt;span class="progress-indicator"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;span class="progress-label d-none d-sm-inline-block"&gt;Authentication&lt;/span&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;button type="button"&gt;
+      &lt;!-- progress indicator --&gt;
+      &lt;span class="progress-indicator"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;span class="progress-label d-none d-sm-inline-block"&gt;Fetching Data&lt;/span&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="sticker" class="section-title"> Sticker </h2>
+                  <p> Enhance the way we use decorative images and background. Sticker can be used in any component, keep in mind that these components must use `position: relative`. </p><!-- sticker as a decoration -->
+                  <div class="position-relative py-5 mb-5">
+                    <!-- .sticker -->
+                    <div class="sticker">
+                      <div class="sticker-item sticker-middle sticker-soften">
+                        <img src="images/decoration/bubble1.svg" alt="">
+                      </div>
+                    </div><!-- /.sticker -->
+                    <!-- .card -->
+                    <div class="card mx-auto rounded-lg" style="max-width: 400px">
+                      <img class="img-fluid rounded-lg" src="images/dummy/happy-client.jpg" alt="">
+                    </div><!-- /.card -->
+                  </div><!-- sticker as a decoration -->
+                  <!-- sticker as a separator -->
+                  <div class="position-relative py-4 mb-5">
+                    <!-- .sticker -->
+                    <div class="sticker">
+                      <!-- .sticker-item -->
+                      <div class="sticker-item sticker-top-left w-100">
+                        <!-- wave1.svg => height: 32px/2rem -->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="32" viewbox="0 0 1440 240" preserveaspectratio="none">
+                          <path class="fill-primary" fill-rule="evenodd" d="M1070.39 25.041c107.898 11.22 244.461 20.779 369.477 51.164L1440 240H0L.133 72.135C350.236-17.816 721.61-11.228 1070.391 25.04z"></path>
+                        </svg>
+                      </div><!-- /.sticker-item -->
+                      <!-- .sticker-item -->
+                      <div class="sticker-item sticker-bottom-left w-100">
+                        <!-- wave1.svg -->
+                        <svg class="flip-y" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="32" viewbox="0 0 1440 240" preserveaspectratio="none">
+                          <path class="fill-primary" fill-rule="evenodd" d="M1070.39 25.041c107.898 11.22 244.461 20.779 369.477 51.164L1440 240H0L.133 72.135C350.236-17.816 721.61-11.228 1070.391 25.04z"></path>
+                        </svg>
+                      </div><!-- /.sticker-item -->
+                    </div><!-- /.sticker -->
+                    <div class="bg-primary text-white p-4">
+                      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse repellat quam veniam cupiditate ad nemo, iusto debitis officia quas in at vitae, eum officiis est incidunt. Itaque laboriosam porro, quaerat? </p>
+                    </div>
+                  </div><!-- sticker as a separator -->
+                  <pre><code class="html">&lt;!-- sticker as a decoration --&gt;
+&lt;div class="position-relative py-5 mb-5"&gt;
+  &lt;!-- .sticker --&gt;
+  &lt;div class="sticker"&gt;
+    &lt;div class="sticker-item sticker-middle sticker-soften"&gt;
+      &lt;img src="images/decoration/bubble1.svg" alt=""&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- /.sticker --&gt;
+  &lt;!-- .card --&gt;
+  &lt;div class="card mx-auto rounded-lg" style="max-width: 400px"&gt;
+    &lt;img class="img-fluid rounded-lg" src="images/dummy/happy-client.jpg" alt=""&gt;
+  &lt;/div&gt;
+  &lt;!-- /.card --&gt;
+&lt;/div&gt;
+&lt;!-- sticker as a decoration --&gt;
+
+&lt;!-- sticker as a separator --&gt;
+&lt;div class="position-relative py-4 mb-5"&gt;
+  &lt;!-- .sticker --&gt;
+  &lt;div class="sticker"&gt;
+    &lt;!-- .sticker-item --&gt;
+    &lt;div class="sticker-item sticker-top-left w-100"&gt;
+      &lt;!-- wave1.svg =&gt; height: 32px/2rem --&gt;
+      &lt;svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="32" viewBox="0 0 1440 240" preserveAspectRatio="none"&gt;
+        &lt;path class="fill-primary" fill-rule="evenodd" d="M1070.39 25.041c107.898 11.22 244.461 20.779 369.477 51.164L1440 240H0L.133 72.135C350.236-17.816 721.61-11.228 1070.391 25.04z"&gt;&lt;/path&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+    &lt;!-- /.sticker-item --&gt;
+    &lt;!-- .sticker-item --&gt;
+    &lt;div class="sticker-item sticker-bottom-left w-100"&gt;
+      &lt;!-- wave1.svg --&gt;
+      &lt;svg class="flip-y" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="32" viewBox="0 0 1440 240" preserveAspectRatio="none"&gt;
+        &lt;path class="fill-primary" fill-rule="evenodd" d="M1070.39 25.041c107.898 11.22 244.461 20.779 369.477 51.164L1440 240H0L.133 72.135C350.236-17.816 721.61-11.228 1070.391 25.04z"&gt;&lt;/path&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+    &lt;!-- /.sticker-item --&gt;
+  &lt;/div&gt;
+  &lt;!-- /.sticker --&gt;
+  &lt;div class="bg-primary text-white p-4"&gt;
+    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse repellat quam veniam cupiditate ad nemo, iusto debitis officia quas in at vitae, eum officiis est incidunt. Itaque laboriosam porro, quaerat?&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- sticker as a separator --&gt;</code></pre><!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Class references </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.sticker-item</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>&lt;div&gt;</code> to create a sticker. </dd>
+                        <dt class="col-lg-4">
+                          <code>.sticker-soft</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.sticker-item</code> to decrease opacity to 54%. </dd>
+                        <dt class="col-lg-4">
+                          <code>.sticker-soften</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.sticker-item</code> to decrease opacity to 12%. </dd>
+                        <dt class="col-lg-4">
+                          <code>.sticker-middle</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.sticker-item</code> to positioning the sticker in the middle of the parent. </dd>
+                        <dt class="col-lg-4">
+                          <code>.sticker-middle-right</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.sticker-item</code> to positioning the sticker in the middle-right of the parent. </dd>
+                        <dt class="col-lg-4">
+                          <code>.sticker-middle-left</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.sticker-item</code> to positioning the sticker in the middle-left of the parent. </dd>
+                        <dt class="col-lg-4">
+                          <code>.sticker-top-right</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.sticker-item</code> to positioning the sticker in the top-right of the parent. </dd>
+                        <dt class="col-lg-4">
+                          <code>.sticker-top-center</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.sticker-item</code> to positioning the sticker in the top-center of the parent. </dd>
+                        <dt class="col-lg-4">
+                          <code>.sticker-top-left</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.sticker-item</code> to positioning the sticker in the top-left of the parent. </dd>
+                        <dt class="col-lg-4">
+                          <code>.sticker-bottom-right</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.sticker-item</code> to positioning the sticker in the bottom-right of the parent. </dd>
+                        <dt class="col-lg-4">
+                          <code>.sticker-bottom-center</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.sticker-item</code> to positioning the sticker in the bottom-center of the parent. </dd>
+                        <dt class="col-lg-4">
+                          <code>.sticker-bottom-left</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.sticker-item</code> to positioning the sticker in the bottom-left of the parent. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="tasks" class="section-title"> Tasks </h2>
+                  <p> A tasks gives you a clear visual overview of what is being worked on and who is working on it and other information that used for project management purpose. </p><!-- .tasks -->
+                  <div class="tasks mb-3">
+                    <!-- .tasks-header -->
+                    <div class="task-header">
+                      <h3 class="task-title mr-auto"> Task title </h3>
+                      <div class="dropdown">
+                        <button class="btn btn-icon btn-light"><i class="fa fa-ellipsis-v"></i></button>
+                      </div>
+                    </div><!-- /.tasks-header -->
+                    <!-- .task-body -->
+                    <div class="task-body">
+                      <!-- .task-issue -->
+                      <div class="task-issue">
+                        <!-- .card -->
+                        <div class="card">
+                          <!-- .card-header -->
+                          <div class="card-header">
+                            <h4 class="card-title">
+                              <a href="#">Issue Title</a>
+                            </h4>
+                            <h6 class="card-subtitle text-muted">
+                              <span class="text-muted">03:11</span> / <span class="text-muted">6:00</span> <span class="mx-1">·</span> <span class="due-date"><i class="far fa-fw fa-clock"></i> Apr 07</span>
+                            </h6>
+                          </div><!-- /.card-header -->
+                          <!-- .card-body -->
+                          <div class="card-body pt-0">
+                            <!-- .list-group -->
+                            <div class="list-group">
+                              <!-- .list-group-item -->
+                              <div class="list-group-item">
+                                <a href="#" class="stretched-link"></a> <!-- .list-group-item-body -->
+                                <div class="list-group-item-body">
+                                  <!-- members -->
+                                  <figure class="user-avatar user-avatar-sm" data-toggle="tooltip" title="Beni Arisandi">
+                                    <img src="images/avatars/uifaces4.jpg" alt="Beni Arisandi">
+                                  </figure>
+                                  <figure class="user-avatar user-avatar-sm" data-toggle="tooltip" title="Sarah Bishop">
+                                    <img src="images/avatars/uifaces5.jpg" alt="Sarah Bishop">
+                                  </figure><!-- /members -->
+                                </div><!-- /.list-group-item-body -->
+                              </div><!-- /.list-group-item -->
+                            </div><!-- /.list-group -->
+                          </div><!-- /.card-body -->
+                          <!-- .card-footer -->
+                          <div class="card-footer">
+                            <a href="#" class="card-footer-item card-footer-item-bordered text-muted"><i class="oi oi-comment-square mr-1"></i> 36</a> <a href="#" class="card-footer-item card-footer-item-bordered text-muted"><i class="fa fa-play text-teal"></i></a>
+                          </div><!-- /.card-footer -->
+                        </div><!-- .card -->
+                      </div><!-- /.task-issue -->
+                    </div><!-- /.task-body -->
+                  </div><!-- /.task -->
+                  <pre><code class="html">&lt;div class="tasks"&gt;
+  &lt;!-- .tasks-header --&gt;
+  &lt;div class="task-header"&gt;
+    &lt;h3 class="task-title mr-auto"&gt;Task title&lt;/h3&gt;
+    &lt;div class="dropdown"&gt;
+      &lt;button class="btn btn-icon btn-light"&gt;&lt;i class="fa fa-ellipsis-v"&gt;&lt;/i&gt;&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- /.tasks-header --&gt;
+
+  &lt;!-- .task-body --&gt;
+  &lt;div class="task-body"&gt;
+    &lt;!-- .task-issue --&gt;
+    &lt;div class="task-issue"&gt;
+      &lt;!-- .card --&gt;
+      &lt;div class="card"&gt;
+        &lt;!-- .card-header --&gt;
+        &lt;div class="card-header"&gt;
+          &lt;h4 class="card-title"&gt;
+            &lt;a href="#"&gt;Issue Title&lt;/a&gt;
+          &lt;/h4&gt;
+          &lt;h6 class="card-subtitle text-muted"&gt;
+            &lt;span class="text-muted"&gt;03:11&lt;/span&gt; / &lt;span class="text-muted"&gt;6:00&lt;/span&gt;
+            &lt;span class="mx-1"&gt;&amp;middot;&lt;/span&gt;
+            &lt;span class="due-date"&gt;&lt;i class="far fa-fw fa-clock"&gt;&lt;/i&gt; Apr 07&lt;/span&gt;
+          &lt;/h6&gt;
+        &lt;/div&gt;
+        &lt;!-- /.card-header --&gt;
+
+        &lt;!-- .card-body --&gt;
+        &lt;div class="card-body pt-0"&gt;
+          &lt;!-- .list-group --&gt;
+          &lt;div class="list-group"&gt;
+            &lt;!-- .list-group-item --&gt;
+            &lt;div class="list-group-item"&gt;
+              &lt;a href="#" class="stretched-link"&gt;&lt;/a&gt;
+              &lt;!-- .list-group-item-body --&gt;
+              &lt;div class="list-group-item-body"&gt;
+                &lt;!-- members --&gt;
+                &lt;figure class="user-avatar user-avatar-sm" data-toggle="tooltip" title="Johnny Day"&gt;
+                  &lt;img src="avatar.jpg" alt="Johnny Day"&gt;
+                &lt;/figure&gt;
+                &lt;figure class="user-avatar user-avatar-sm" data-toggle="tooltip" title="Sarah Bishop"&gt;
+                  &lt;img src="avatar.jpg" alt="Sarah Bishop"&gt;
+                &lt;/figure&gt;
+                &lt;!-- /members --&gt;
+              &lt;/div&gt;
+              &lt;!-- /.list-group-item-body --&gt;
+            &lt;/div&gt;
+            &lt;!-- /.list-group-item --&gt;
+          &lt;/div&gt;
+          &lt;!-- /.list-group --&gt;
+        &lt;/div&gt;
+        &lt;!-- /.card-body --&gt;
+
+        &lt;!-- .card-footer --&gt;
+        &lt;div class="card-footer"&gt;
+          &lt;a href="#" class="card-footer-item card-footer-item-bordered text-muted"&gt;
+            &lt;i class="oi oi-comment-square mr-1"&gt;&lt;/i&gt; 36
+          &lt;/a&gt;
+          &lt;a href="#" class="card-footer-item card-footer-item-bordered text-muted"&gt;
+            &lt;i class="fa fa-play text-teal"&gt;&lt;/i&gt;
+          &lt;/a&gt;
+        &lt;/div&gt;
+        &lt;!-- /.card-footer --&gt;
+      &lt;/div&gt;
+      &lt;!-- .card --&gt;
+    &lt;/div&gt;
+    &lt;!-- /.task-issue --&gt;
+  &lt;/div&gt;
+  &lt;!-- /.task-body --&gt;
+&lt;/div&gt;</code></pre>
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="tiles" class="section-title"> Tiles </h2>
+                  <p> A tile is a wrapper for initial letter, object icon or image that can be used to illustrated list of data. It also used for <a href="#avatar" class="smooth-scroll">avatar</a> fallback when users doesn't upload their photo. </p>
+                  <div class="tile tile-lg">
+                    <span class="oi oi-person"></span>
+                  </div>
+                  <div class="tile">
+                    <span class="oi oi-person"></span>
+                  </div>
+                  <div class="tile tile-sm">
+                    <span class="oi oi-person"></span>
+                  </div>
+                  <div class="tile tile-xs mr-3">
+                    <span class="oi oi-person"></span>
+                  </div><a href="#" class="tile bg-primary tile-lg">BA</a> <a href="#" class="tile bg-primary">BA</a> <a href="#" class="tile bg-primary tile-sm">B</a> <a href="#" class="tile bg-primary tile-xs">B</a>
+                  <hr>
+                  <div class="tile tile-circle tile-lg">
+                    <span class="oi oi-person"></span>
+                  </div>
+                  <div class="tile tile-circle">
+                    <span class="oi oi-person"></span>
+                  </div>
+                  <div class="tile tile-circle tile-sm">
+                    <span class="oi oi-person"></span>
+                  </div>
+                  <div class="tile tile-circle tile-xs mr-3">
+                    <span class="oi oi-person"></span>
+                  </div><a href="#" class="tile bg-primary tile-circle tile-lg">BA</a> <a href="#" class="tile bg-primary tile-circle">BA</a> <a href="#" class="tile bg-primary tile-circle tile-sm">B</a> <a href="#" class="tile bg-primary tile-circle tile-xs">B</a>
+                  <hr>
+                  <div class="tile tile-img tile-lg">
+                    <img src="images/dummy/img-3.jpg" alt="">
+                  </div>
+                  <div class="tile tile-img">
+                    <img src="images/dummy/img-3.jpg" alt="">
+                  </div>
+                  <div class="tile tile-img tile-sm">
+                    <img src="images/dummy/img-3.jpg" alt="">
+                  </div>
+                  <div class="tile tile-img tile-xs mr-3">
+                    <img src="images/dummy/img-3.jpg" alt="">
+                  </div><a href="#" class="tile tile-circle tile-img tile-lg"><img src="images/dummy/img-5.jpg" alt=""></a> <a href="#" class="tile tile-circle tile-img"><img src="images/dummy/img-5.jpg" alt=""></a> <a href="#" class="tile tile-circle tile-img tile-sm"><img src="images/dummy/img-5.jpg" alt=""></a> <a href="#" class="tile tile-circle tile-img tile-xs"><img src="images/dummy/img-5.jpg" alt=""></a>
+                  <pre class="mt-3"><code class="html">&lt;div class="tile tile-lg"&gt;&lt;span class="oi oi-person"&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;a href="#" class="tile tile-lg bg-primary"&gt;BA&lt;/a&gt;
+
+&lt;div class="tile tile-circle tile-lg"&gt;&lt;span class="oi oi-person"&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;a href="#" class="tile tile-circle tile-lg bg-primary"&gt;BA&lt;/a&gt;
+
+&lt;div class="tile tile-img"&gt;
+  &lt;img class="img-fluid" src="img.jpg" alt="Card image cap"&gt;
+&lt;/div&gt;
+&lt;a href="#" class="tile tile-img"&gt;
+  &lt;img class="img-fluid" src="img.jpg" alt="Card image cap"&gt;
+&lt;/a&gt;</code></pre><!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Class References </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.tile-circle</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.tile</code> to increase border radius to 100%. </dd>
+                        <dt class="col-lg-4">
+                          <code>.tile-img</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.tile</code> when use image instead of letter or icon. </dd>
+                        <dt class="col-lg-4">
+                          <code>.tile-lg</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.tile</code> to increate tile size to large. </dd>
+                        <dt class="col-lg-4">
+                          <code>.tile-sm</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.tile</code> to increate tile size to small. </dd>
+                        <dt class="col-lg-4">
+                          <code>.tile-xs</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.tile</code> to increate tile size to extra small. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="timeline" class="section-title"> Timeline </h2>
+                  <p> Displays each of the user’s upcoming, current, and past activities/events. </p><!-- .timeline -->
+                  <ul class="timeline mb-3">
+                    <!-- .timeline-item -->
+                    <li class="timeline-item">
+                      <!-- .timeline-figure -->
+                      <div class="timeline-figure">
+                        <span class="tile tile-circle tile-sm"><i class="fa fa-cube fa-lg"></i></span>
+                      </div><!-- /.timeline-figure -->
+                      <!-- .timeline-body -->
+                      <div class="timeline-body">
+                        <!-- .media -->
+                        <div class="media">
+                          <!-- .media-body -->
+                          <div class="media-body">
+                            <h6 class="timeline-heading">
+                              <a href="#" class="text-link">Project updated by Sara Carr</a>
+                            </h6>
+                            <p class="mb-0">
+                              <a href="#">Sara Carr</a> updated <strong>Online Store App</strong> to <a href="#">Online Store</a>
+                            </p>
+                            <p class="timeline-date d-sm-none"> at 3:21 AM </p>
+                          </div><!-- /.media-body -->
+                          <!-- .media-right -->
+                          <div class="d-none d-sm-block">
+                            <span class="timeline-date">3:21am</span>
+                          </div><!-- /.media-right -->
+                        </div><!-- /.media -->
+                      </div><!-- /.timeline-body -->
+                    </li><!-- /.timeline-item -->
+                    <!-- .timeline-item -->
+                    <li class="timeline-item">
+                      <!-- .timeline-figure -->
+                      <div class="timeline-figure">
+                        <span class="tile tile-circle tile-sm"><i class="fa fa-tasks fa-lg"></i></span>
+                      </div><!-- /.timeline-figure -->
+                      <!-- .timeline-body -->
+                      <div class="timeline-body">
+                        <!-- .media -->
+                        <div class="media">
+                          <!-- .media-body -->
+                          <div class="media-body">
+                            <h6 class="timeline-heading">
+                              <a href="#" class="text-link">Someone assigned you to a task</a>
+                            </h6>
+                            <p class="mb-0">
+                              <a href="#">Angela Peterson</a> assign <a href="#">Make lemonade from scratch</a> to you </p>
+                            <p class="timeline-date d-sm-none"> at 5:21pm </p>
+                          </div><!-- /.media-body -->
+                          <!-- .media-right -->
+                          <div class="d-none d-sm-block">
+                            <span class="timeline-date">5:21pm</span>
+                          </div><!-- /.media-right -->
+                        </div><!-- /.media -->
+                      </div><!-- /.timeline-body -->
+                    </li><!-- /.timeline-item -->
+                  </ul><!-- /.timeline-item -->
+                  <pre><code class="html">&lt;ul class="timeline"&gt;
+  &lt;!-- .timeline-item --&gt;
+  &lt;li class="timeline-item"&gt;
+    &lt;!-- .timeline-figure --&gt;
+    &lt;div class="timeline-figure"&gt;
+      &lt;span class="tile tile-circle tile-sm"&gt;&lt;i class="fa fa-cube fa-lg"&gt;&lt;/i&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;!-- /.timeline-figure --&gt;
+
+    &lt;!-- .timeline-body --&gt;
+    &lt;div class="timeline-body"&gt;
+      &lt;!-- .media --&gt;
+      &lt;div class="media"&gt;
+        &lt;!-- .media-body --&gt;
+        &lt;div class="media-body"&gt;
+          &lt;h6 class="timeline-heading"&gt;
+            &lt;a href="#" class="text-link"&gt;Project updated by Sara Carr&lt;/a&gt;
+          &lt;/h6&gt;
+          &lt;p class="mb-0"&gt;
+            &lt;a href="#"&gt;Sara Carr&lt;/a&gt; updated &lt;strong&gt;Online Store App&lt;/strong&gt; to &lt;a href="#"&gt;Online Store&lt;/a&gt;
+          &lt;/p&gt;
+          &lt;p class="timeline-date d-sm-none"&gt;
+            at 3:21 AM
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;!-- /.media-body --&gt;
+
+        &lt;!-- .media-right --&gt;
+        &lt;div class="d-none d-sm-block"&gt;
+          &lt;span class="timeline-date"&gt;3:21am&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;!-- /.media-right --&gt;
+      &lt;/div&gt;
+      &lt;!-- /.media --&gt;
+    &lt;/div&gt;
+    &lt;!-- /.timeline-body --&gt;
+  &lt;/li&gt;
+  &lt;!-- /.timeline-item --&gt;
+&lt;/ul&gt;</code></pre><!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Class references </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.timeline-reflow</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.timeline</code> to remove line tracker. </dd>
+                      </dl>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.timeline-dashed-line</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.timeline</code> to change line tracker style to dashed. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="visual-picker" class="section-title"> Visual picker </h2>
+                  <p> Radio buttons, checkboxes, or links that are visually enhanced. </p><!-- .visual-picker -->
+                  <div class="visual-picker has-peek px-3">
+                    <!-- visual-picker input -->
+                    <input type="radio" id="vpr01" name="paymentMethod"> <!-- .visual-picker-figure -->
+                    <label class="visual-picker-figure" for="vpr01">
+                      <!-- .visual-picker-content -->
+                      <span class="visual-picker-content"><span class="tile tile-lg bg-teal"><i class="fa fa-credit-card"></i></span></span> <!-- /.visual-picker-content --></label> <!-- /.visual-picker-figure -->
+                    <!-- .visual-picker-peek -->
+                    <span class="visual-picker-peek">Credit Card</span>
+                  </div><!-- /.visual-picker -->
+                  <!-- .visual-picker -->
+                  <div class="visual-picker has-peek px-3">
+                    <!-- visual-picker input -->
+                    <input type="radio" id="vpr02" name="paymentMethod"> <!-- .visual-picker-figure -->
+                    <label class="visual-picker-figure" for="vpr02">
+                      <!-- .visual-picker-content -->
+                      <span class="visual-picker-content"><span class="tile tile-lg bg-indigo"><i class="fab fa-paypal"></i></span></span> <!-- /.visual-picker-content --></label> <!-- /.visual-picker-figure -->
+                    <!-- .visual-picker-peek -->
+                    <span class="visual-picker-peek">Paypal</span>
+                  </div><!-- /.visual-picker -->
+                  <pre><code class="html">&lt;div class="visual-picker has-peek"&gt;
+  &lt;input type="checkbox" id="visual-picker-01"&gt;
+  &lt;label class="visual-picker-figure" for="visual-picker-01"&gt;
+    &lt;span class="visual-picker-content"&gt;
+      &lt;span class="tile tile-lg bg-info"&gt;
+        &lt;i class="fa fa-credit-card"&gt;&lt;/i&gt;
+      &lt;/span&gt;
+    &lt;/span&gt;
+  &lt;/label&gt;
+
+  &lt;span class="visual-picker-peek"&gt;Peek Text&lt;/span&gt;
+&lt;/div&gt;</code></pre><!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Class references </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.has-peek</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.visual-picker</code> to add padding bottom that give space for text peek. </dd>
+                        <dt class="col-lg-4">
+                          <code>.visual-picker-fluid</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.visual-picker</code> to increase visual picker width to 100%. </dd>
+                        <dt class="col-lg-4">
+                          <code>.visual-picker-lg</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.visual-picker</code> to increase visual picker size to large. </dd>
+                        <dt class="col-lg-4">
+                          <code>.visual-picker-sm</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.visual-picker</code> to decrease visual picker size to small. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+              </div><!-- /.page-section -->
+            </div><!-- /.page-inner -->
+            <!-- .page-sidebar -->
+            <div class="page-sidebar page-sidebar-fixed">
+              <!-- .sidebar-header -->
+              <header class="sidebar-header d-sm-none">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                      <a href="#" onclick="Looper.toggleSidebar()"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Back</a>
+                    </li>
+                  </ol>
+                </nav>
+              </header><!-- /.sidebar-header -->
+              <!-- .sidebar-section-fill -->
+              <div class="sidebar-section-fill">
+                <nav id="nav-content" class="nav flex-column mt-4">
+                  <a href="#avatar" class="nav-link smooth-scroll">Avatar</a> <a href="#conversation" class="nav-link smooth-scroll">Conversation</a> <a href="#expansion-cards" class="nav-link smooth-scroll">Expansion cards</a> <a href="#feeds" class="nav-link smooth-scroll">Feeds</a> <a href="#figures" class="nav-link smooth-scroll">Figures</a> <a href="#icons" class="nav-link smooth-scroll">Icons</a> <a href="#metrics" class="nav-link smooth-scroll">Metrics</a> <a href="#publisher" class="nav-link smooth-scroll">Publisher</a> <a href="#steps" class="nav-link smooth-scroll">Steps</a> <a href="#sticker" class="nav-link smooth-scroll">Sticker</a> <a href="#tasks" class="nav-link smooth-scroll">Tasks</a> <a href="#tiles" class="nav-link smooth-scroll">Tiles</a> <a href="#timeline" class="nav-link smooth-scroll">Timeline</a> <a href="#visual-picker" class="nav-link smooth-scroll">Visual picker</a>
+                </nav>
+              </div><!-- /.sidebar-section-fill -->
+            </div><!-- /.page-sidebar -->
+          </div><!-- /.page -->
+        </div><!-- /.wrapper -->
+      </main><!-- /.app-main -->
+    </div><!-- /.app -->
+    <!-- BEGIN BASE JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script> <!-- END BASE JS -->
+    <!-- BEGIN PLUGINS JS -->
+    <script src="vendor/highlightjs/highlight.pack.js"></script> <!-- END PLUGINS JS -->
+    <!-- BEGIN THEME JS -->
+    <script src="javascript/theme.min.js"></script> <!-- END THEME JS -->
+    <script>
+      hljs.initHighlightingOnLoad();
+
+      function highlightText(el)
+      {
+        if (document.selection)
+        {
+          var range = document.body.createTextRange();
+          range.moveToElementText(el);
+          range.select();
+        }
+        else if (window.getSelection)
+        {
+          var range = document.createRange();
+          range.selectNodeContents(el);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+        }
+      }
+    </script>
+  </body>
+</html>

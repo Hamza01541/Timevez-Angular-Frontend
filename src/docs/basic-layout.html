@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title> Basic Layout | Looper - Bootstrap 4 Admin Theme </title>
+    <meta property="og:title" content="Basic Layout">
+    <meta name="author" content="Beni Arisandi">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="Responsive admin theme build on top of Bootstrap 4">
+    <meta property="og:description" content="Responsive admin theme build on top of Bootstrap 4">
+    <link rel="canonical" href="https://uselooper.com">
+    <meta property="og:url" content="https://uselooper.com">
+    <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme">
+    <script type="application/ld+json">
+      {
+        "name": "Looper - Bootstrap 4 Admin Theme",
+        "description": "Responsive admin theme build on top of Bootstrap 4",
+        "author":
+        {
+          "@type": "Person",
+          "name": "Beni Arisandi"
+        },
+        "@type": "WebSite",
+        "url": "",
+        "headline": "Basic Layout",
+        "@context": "http://schema.org"
+      }
+    </script><!-- End SEO tag -->
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End Google font -->
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="theme-color" content="#070B0F"><!-- End Favicons -->
+    <!-- BEGIN PLUGINS STYLES -->
+    <link rel="stylesheet" href="vendor/open-iconic/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.css">
+    <link rel="stylesheet" href="vendor/highlightjs/styles/ocean.css"><!-- END PLUGINS STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="stylesheets/theme.min.css" data-skin="default">
+    <link rel="stylesheet" href="stylesheets/theme-dark.min.css" data-skin="dark">
+    <script>
+      var skin = localStorage.getItem('skin') || 'default';
+      var isCompact = JSON.parse(localStorage.getItem('hasCompactMenu'));
+      var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+      // Disable unused skin immediately
+      disabledSkinStylesheet.setAttribute('rel', '');
+      disabledSkinStylesheet.setAttribute('disabled', true);
+      // add flag class to html immediately
+      if (isCompact == true) document.querySelector('html').classList.add('preparing-compact-menu');
+    </script><!-- END THEME STYLES -->
+  </head>
+  <body data-spy="scroll" data-target="#nav-content" data-offset="76">
+    <!-- .app -->
+    <div class="app">
+      <!--[if lt IE 10]>
+      <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
+      <![endif]-->
+      <!-- .app-header -->
+      <header class="app-header app-header-dark bg-black">
+        <!-- .top-bar -->
+        <div class="top-bar">
+          <!-- .top-bar-brand -->
+          <div class="top-bar-brand">
+            <a href="index.html" class="d-flex"><svg class="mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28" viewbox="0 0 94 68">
+                <defs>
+                  <path id="a" d="M156.538 45.644v1.04a6.347 6.347 0 0 1-1.847 3.98L127.708 77.67a6.338 6.338 0 0 1-3.862 1.839h-1.272a6.34 6.34 0 0 1-3.862-1.839L91.728 50.664a6.353 6.353 0 0 1 0-9l9.11-9.117-2.136-2.138a3.171 3.171 0 0 0-4.498 0L80.711 43.913a3.177 3.177 0 0 0-.043 4.453l-.002.003.048.047 24.733 24.754-4.497 4.5a6.339 6.339 0 0 1-3.863 1.84h-1.27a6.337 6.337 0 0 1-3.863-1.84L64.971 50.665a6.353 6.353 0 0 1 0-9l26.983-27.008a6.336 6.336 0 0 1 4.498-1.869c1.626 0 3.252.622 4.498 1.87l26.986 27.006a6.353 6.353 0 0 1 0 9l-9.11 9.117 2.136 2.138a3.171 3.171 0 0 0 4.498 0l13.49-13.504a3.177 3.177 0 0 0 .046-4.453l.002-.002-.047-.048-24.737-24.754 4.498-4.5a6.344 6.344 0 0 1 8.996 0l26.983 27.006a6.347 6.347 0 0 1 1.847 3.98zm-46.707-4.095l-2.362 2.364a3.178 3.178 0 0 0 0 4.501l2.362 2.364 2.361-2.364a3.178 3.178 0 0 0 0-4.501l-2.361-2.364z"></path>
+                </defs>
+                <use fill="currentColor" fill-rule="evenodd" transform="translate(-63 -12)" xlink:href="#a"></use>
+              </svg> <span>Documentation</span></a>
+          </div><!-- /.top-bar-brand -->
+          <!-- .top-bar-list -->
+          <div class="top-bar-list">
+            <!-- .top-bar-item -->
+            <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+              <!-- toggle menu -->
+              <button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button> <!-- /toggle menu -->
+            </div><!-- /.top-bar-item -->
+            <!-- .top-bar-item -->
+            <!-- .top-bar-item -->
+            <div class="top-bar-item top-bar-item-right pr-3 pr-lg-4">
+              <!-- .nav -->
+              <ul class="header-nav nav">
+                <!-- .nav-item -->
+                <li class="nav-item">
+                  <a class="nav-link" href="support.html"><i class="fa fa-life-ring d-sm-none"></i> <span class="d-none d-sm-inline">Support</span></a>
+                </li><!-- /.nav-item -->
+                <!-- .nav-item -->
+                <li class="nav-item has-notified">
+                  <a class="nav-link" href="whats-new.html"><i class="fa fa-bell d-sm-none"></i> <span class="d-none d-sm-inline">What's new</span></a>
+                </li><!-- /.nav-item -->
+              </ul><!-- /.nav -->
+              <a href="https://themes.getbootstrap.com/product/looper-responsive-admin-template" class="btn btn-subtle-success border-0">Download Now</a>
+            </div><!-- /.top-bar-item -->
+          </div><!-- /.top-bar-list -->
+        </div><!-- /.top-bar -->
+      </header><!-- /.app-header -->
+      <!-- .app-aside -->
+      <aside class="app-aside app-aside-expand-md app-aside-light">
+        <!-- .aside-content -->
+        <div class="aside-content">
+          <!-- .aside-menu -->
+          <div class="aside-menu p-3">
+            <!-- .stacked-menu -->
+            <nav id="stacked-menu" class="stacked-menu">
+              <!-- .menu -->
+              <ul class="menu">
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="index.html" class="menu-link"><span class="menu-text">Getting Started</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item has-active">
+                  <a href="basic-layout.html" class="menu-link"><span class="menu-text">Basic Layout</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="build-tools.html" class="menu-link"><span class="menu-text">Build Tools</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="theming.html" class="menu-link"><span class="menu-text">Theming</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-header -->
+                <li class="menu-header">Components </li><!-- /.menu-header -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-bootstrap.html" class="menu-link"><span class="menu-text">Bootstrap</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-looper.html" class="menu-link"><span class="menu-text">Looper</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-plugins.html" class="menu-link"><span class="menu-text">Plugins</span></a>
+                </li><!-- /.menu-item -->
+              </ul><!-- /.menu -->
+            </nav><!-- /.stacked-menu -->
+          </div><!-- /.aside-menu -->
+          <!-- Skin changer -->
+          <footer class="aside-footer border-top p-2">
+            <button class="btn btn-light btn-block text-primary" data-toggle="skin"><span class="d-compact-menu-none">Night mode</span> <i class="fas fa-moon ml-1"></i></button>
+          </footer><!-- /Skin changer -->
+        </div><!-- /.aside-content -->
+      </aside><!-- /.app-aside -->
+      <!-- .app-main -->
+      <main class="app-main">
+        <!-- .wrapper -->
+        <div class="wrapper">
+          <!-- .page -->
+          <div class="page has-sidebar has-sidebar-expand-xl">
+            <!-- .page-inner -->
+            <div class="page-inner">
+              <!-- .page-title-bar -->
+              <header class="page-title-bar">
+                <h1 class="page-title"> Basic Layout </h1>
+                <p class="text-muted"> Be sure to have your pages set up with Looper layout components. That means you must placing your navigations, content, etc inside layout components. </p><button class="btn btn-dark btn-floated d-sm-block d-xl-none" type="button" data-toggle="sidebar"><i class="fa fa-th-list"></i></button>
+              </header><!-- /.page-title-bar -->
+              <!-- .page-section -->
+              <div class="page-section">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="app" class="section-title"> App </h2>
+                  <p> Looper layout should be wrapped into the <code>.app</code> component. </p>
+                  <pre><code class="html">&lt;!-- .app --&gt;
+&lt;div class="app"&gt;
+  &lt;!-- app layout goes here --&gt;
+&lt;/div&gt;
+&lt;!-- /.app --&gt;</code></pre>
+                  <p> As Looper comes with some layout variants that you can see on the <a href="https://uselooper.com/layout-blank.html" target="_blank">Demo Pages</a>. The app component give you ability to control layout variants. For example if you want to clipped the header to align the app content, you just need to add <code>.has-clipped-header</code> class into app component. </p>
+                  <p> Looper has 3 layout components (header, aside, and page content), each component are not required but recommended. Lets see the basic template for each part. Please refer to <a href="https://uselooper.com/layout-blank.html" target="_blank">Layouts Demo</a> template for more details. </p>
+                  <pre><code class="html">&lt;!-- .app --&gt;
+&lt;div class="app"&gt;
+  &lt;!-- .app-header --&gt;
+  &lt;header class="app-header app-header-dark"&gt;
+    &lt;!-- your brand and navigations goes here --&gt;
+  &lt;/header&gt;
+  &lt;!-- /.app-header --&gt;
+
+  &lt;!-- .app-aside --&gt;
+  &lt;aside class="app-aside app-aside-light app-aside-expand-md"&gt;
+    &lt;!-- the app navigations goes here --&gt;
+  &lt;/aside&gt;
+  &lt;!-- /.app-aside --&gt;
+
+  &lt;!-- .app-main --&gt;
+  &lt;main class="app-main"&gt;
+    &lt;!-- .wrapper --&gt;
+    &lt;div class="wrapper"&gt;
+      &lt;!-- your awesome app content goes here --&gt;
+    &lt;/div&gt;
+    &lt;!-- /.wrapper --&gt;
+  &lt;/main&gt;
+  &lt;!-- /.app-main --&gt;
+&lt;/div&gt;
+&lt;!-- /.app --&gt;</code></pre>
+                  <h2 id="header" class="section-title"> Header </h2>
+                  <pre><code class="html">&lt;header class="app-header app-header-dark"&gt;
+  &lt;!-- .top-bar --&gt;
+  &lt;div class="top-bar"&gt;
+    &lt;!-- .top-bar-brand --&gt;
+    &lt;div class="top-bar-brand"&gt;
+      &lt;a href="/"&gt;
+        &lt;img src="assets/images/brand.png" height="32px" alt=""&gt;
+      &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;!-- /.top-bar-brand --&gt;
+
+    &lt;!-- .top-bar-list --&gt;
+    &lt;div class="top-bar-list"&gt;
+      &lt;!-- .top-bar-item --&gt;
+      &lt;div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none"&gt;
+        &lt;!-- toggle menu --&gt;
+        &lt;button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu" aria-controls="navigation"&gt;
+          &lt;span class="hamburger-box"&gt;
+            &lt;span class="hamburger-inner"&gt;&lt;/span&gt;
+          &lt;/span&gt;
+        &lt;/button&gt;
+        &lt;!-- /toggle menu --&gt;
+      &lt;/div&gt;
+      &lt;!-- /.top-bar-item --&gt;
+
+      &lt;!-- .top-bar-item --&gt;
+      &lt;div class="top-bar-item top-bar-item-full"&gt;
+        &lt;!-- .top-bar-search --&gt;
+        &lt;div class="top-bar-search"&gt;
+          &lt;div class="input-group input-group-search"&gt;
+            &lt;div class="input-group-prepend"&gt;
+              &lt;span class="input-group-text"&gt;
+                &lt;span class="oi oi-magnifying-glass"&gt;&lt;/span&gt;
+              &lt;/span&gt;
+            &lt;/div&gt;
+            &lt;input type="text" class="form-control" aria-label="Search" placeholder="Search"&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!-- /.top-bar-search --&gt;
+      &lt;/div&gt;
+      &lt;!-- /.top-bar-item --&gt;
+
+      &lt;!-- .top-bar-item --&gt;
+      &lt;div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex"&gt;
+        &lt;!-- .nav --&gt;
+        &lt;ul class="header-nav nav"&gt;
+          &lt;!-- .nav-item --&gt;
+          &lt;li class="nav-item"&gt;
+            &lt;a class="nav-link" href="#"&gt;
+              &lt;span class="oi oi-grid-three-up"&gt;&lt;/span&gt;
+            &lt;/a&gt;
+          &lt;/li&gt;
+          &lt;!-- /.nav-item --&gt;
+        &lt;/ul&gt;
+        &lt;!-- /.nav --&gt;
+
+        &lt;!-- .btn-account --&gt;
+        &lt;div class="dropdown"&gt;
+          &lt;button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
+            &lt;span class="user-avatar"&gt;
+              &lt;img src="assets/images/avatars/profile.jpg" alt=""&gt;
+            &lt;/span&gt;
+            &lt;span class="account-summary pr-lg-4 d-none d-lg-block"&gt;
+              &lt;span class="account-name"&gt;John Doe&lt;/span&gt;
+              &lt;span class="account-description"&gt;@johndoe&lt;/span&gt;
+            &lt;/span&gt;
+          &lt;/button&gt;
+          &lt;!-- .dropdown-menu --&gt;
+          &lt;div class="dropdown-menu"&gt;
+            &lt;div class="dropdown-arrow"&gt;&lt;/div&gt;
+            &lt;h6 class="dropdown-header d-none d-md-block d-lg-none"&gt;John Doe&lt;/h6&gt;
+            &lt;a class="dropdown-item" href="#"&gt;&lt;span class="dropdown-icon oi oi-person"&gt;&lt;/span&gt; Profile&lt;/a&gt;
+            &lt;a class="dropdown-item" href="#"&gt;&lt;span class="dropdown-icon oi oi-account-logout"&gt;&lt;/span&gt; Logout&lt;/a&gt;
+            &lt;div class="dropdown-divider"&gt;&lt;/div&gt;
+            &lt;a class="dropdown-item" href="#"&gt;Help Center&lt;/a&gt;
+            &lt;a class="dropdown-item" href="#"&gt;Ask Forum&lt;/a&gt;
+            &lt;a class="dropdown-item" href="#"&gt;Keyboard Shortcuts&lt;/a&gt;
+          &lt;/div&gt;
+          &lt;!-- /.dropdown-menu --&gt;
+        &lt;/div&gt;
+        &lt;!-- /.btn-account --&gt;
+      &lt;/div&gt;
+      &lt;!-- /.top-bar-item --&gt;
+    &lt;/div&gt;
+    &lt;!-- /.top-bar-list --&gt;
+  &lt;/div&gt;
+  &lt;!-- /.top-bar --&gt;
+&lt;/header&gt;</code></pre>
+                  <h2 id="aside" class="section-title"> Aside </h2>
+                  <pre><code class="html">&lt;aside class="app-aside app-aside-light app-aside-expand-md"&gt;
+  &lt;!-- .aside-content --&gt;
+  &lt;div class="aside-content"&gt;
+    &lt;!-- .aside-header --&gt;
+    &lt;header class="aside-header d-block d-md-none"&gt;
+      &lt;!-- .btn-account --&gt;
+      &lt;button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside"&gt;
+        &lt;span class="user-avatar user-avatar-lg"&gt;
+          &lt;img src="assets/images/avatars/profile.jpg" alt=""&gt;
+        &lt;/span&gt;
+        &lt;span class="account-icon"&gt;
+          &lt;span class="fa fa-caret-down fa-lg"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+        &lt;span class="account-summary"&gt;
+          &lt;span class="account-name"&gt;John Doe&lt;/span&gt;
+          &lt;span class="account-description"&gt;@johndoe&lt;/span&gt;
+        &lt;/span&gt;
+      &lt;/button&gt;
+      &lt;!-- /.btn-account --&gt;
+
+      &lt;!-- .dropdown-aside --&gt;
+      &lt;div id="dropdown-aside" class="dropdown-aside collapse"&gt;
+        &lt;!-- dropdown-items --&gt;
+        &lt;div class="pb-3"&gt;
+          &lt;a class="dropdown-item" href="#"&gt;&lt;span class="dropdown-icon oi oi-person"&gt;&lt;/span&gt; Profile&lt;/a&gt;
+          &lt;a class="dropdown-item" href="#"&gt;&lt;span class="dropdown-icon oi oi-account-logout"&gt;&lt;/span&gt; Logout&lt;/a&gt;
+          &lt;div class="dropdown-divider"&gt;&lt;/div&gt;
+          &lt;a class="dropdown-item" href="#"&gt;Help Center&lt;/a&gt;
+          &lt;a class="dropdown-item" href="#"&gt;Ask Forum&lt;/a&gt;
+          &lt;a class="dropdown-item" href="#"&gt;Keyboard Shortcuts&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;!-- /dropdown-items --&gt;
+      &lt;/div&gt;
+      &lt;!-- /.dropdown-aside --&gt;
+    &lt;/header&gt;
+    &lt;!-- /.aside-header --&gt;
+
+    &lt;!-- .aside-menu --&gt;
+    &lt;section class="aside-menu perfect-scrollbar"&gt;
+      &lt;!-- .stacked-menu --&gt;
+      &lt;nav id="stacked-menu" class="stacked-menu"&gt;
+        &lt;!-- .menu --&gt;
+        &lt;ul class="menu"&gt;
+          &lt;li class="menu-header"&gt;Menus&lt;/li&gt;
+          &lt;!-- .menu-item --&gt;
+          &lt;li class="menu-item"&gt;
+            &lt;!-- .menu-link --&gt;
+            &lt;a href="#" class="menu-link"&gt;
+              &lt;span class="menu-icon oi oi-dashboard"&gt;&lt;/span&gt;
+              &lt;span class="menu-text"&gt;Dashboard&lt;/span&gt;
+              &lt;span class="badge badge-success"&gt;20+&lt;/span&gt;
+            &lt;/a&gt;
+            &lt;!-- /.menu-link --&gt;
+          &lt;/li&gt;
+          &lt;!-- /.menu-item --&gt;
+        &lt;/ul&gt;
+        &lt;!-- /.menu --&gt;
+      &lt;/nav&gt;
+      &lt;!-- /.stacked-menu --&gt;
+    &lt;/section&gt;
+    &lt;!-- /.aside-menu --&gt;
+  &lt;/div&gt;
+  &lt;!-- /.aside-content --&gt;
+&lt;/aside&gt;</code></pre>
+                  <h2 id="page-content" class="section-title"> Page content </h2>
+                  <pre><code class="html">&lt;!-- .app-main --&gt;
+&lt;main class="app-main"&gt;
+  &lt;!-- .wrapper --&gt;
+  &lt;div class="wrapper"&gt;
+    &lt;!-- .page --&gt;
+    &lt;div class="page"&gt;
+      &lt;!-- .page-inner --&gt;
+      &lt;div class="page-inner"&gt;
+        &lt;!-- .page-title-bar --&gt;
+        &lt;header class="page-title-bar"&gt;
+          &lt;!-- page title stuff goes here --&gt;
+          &lt;h1 class="page-title"&gt;Page title&lt;/h1&gt;
+        &lt;/header&gt;
+        &lt;!-- /.page-title-bar --&gt;
+
+        &lt;!-- .page-section --&gt;
+        &lt;div class="page-section"&gt;
+          &lt;!-- page content goes here --&gt;
+          &lt;p&gt;Hellow world!&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;!-- /.page-section --&gt;
+      &lt;/div&gt;
+      &lt;!-- /.page-inner --&gt;
+    &lt;/div&gt;
+    &lt;!-- /.page --&gt;
+  &lt;/div&gt;
+  &lt;!-- /.wrapper --&gt;
+&lt;/main&gt;
+&lt;!-- /.app-main --&gt;</code></pre>
+                </div><!-- /.section-block -->
+              </div><!-- /.page-section -->
+            </div><!-- /.page-inner -->
+            <!-- .page-sidebar -->
+            <div class="page-sidebar page-sidebar-fixed">
+              <!-- .sidebar-header -->
+              <header class="sidebar-header d-sm-none">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                      <a href="#" onclick="Looper.toggleSidebar()"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Back</a>
+                    </li>
+                  </ol>
+                </nav>
+              </header><!-- /.sidebar-header -->
+              <!-- .sidebar-section-fill -->
+              <div class="sidebar-section-fill">
+                <nav id="nav-content" class="nav flex-column mt-4">
+                  <a href="#app" class="nav-link smooth-scroll">App</a> <a href="#header" class="nav-link smooth-scroll">Header</a> <a href="#aside" class="nav-link smooth-scroll">Aside</a> <a href="#page-content" class="nav-link smooth-scroll">Page content</a>
+                </nav>
+              </div><!-- /.sidebar-section-fill -->
+            </div><!-- /.page-sidebar -->
+          </div><!-- /.page -->
+        </div><!-- /.wrapper -->
+      </main><!-- /.app-main -->
+    </div><!-- /.app -->
+    <!-- BEGIN BASE JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script> <!-- END BASE JS -->
+    <!-- BEGIN PLUGINS JS -->
+    <script src="vendor/highlightjs/highlight.pack.js"></script> <!-- END PLUGINS JS -->
+    <!-- BEGIN THEME JS -->
+    <script src="javascript/theme.min.js"></script> <!-- END THEME JS -->
+    <script>
+      hljs.initHighlightingOnLoad();
+
+      function highlightText(el)
+      {
+        if (document.selection)
+        {
+          var range = document.body.createTextRange();
+          range.moveToElementText(el);
+          range.select();
+        }
+        else if (window.getSelection)
+        {
+          var range = document.createRange();
+          range.selectNodeContents(el);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+        }
+      }
+    </script>
+  </body>
+</html>

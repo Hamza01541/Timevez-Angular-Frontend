@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title> Plugins | Looper - Bootstrap 4 Admin Theme </title>
+    <meta property="og:title" content="Plugins">
+    <meta name="author" content="Beni Arisandi">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="Responsive admin theme build on top of Bootstrap 4">
+    <meta property="og:description" content="Responsive admin theme build on top of Bootstrap 4">
+    <link rel="canonical" href="https://uselooper.com">
+    <meta property="og:url" content="https://uselooper.com">
+    <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme">
+    <script type="application/ld+json">
+      {
+        "name": "Looper - Bootstrap 4 Admin Theme",
+        "description": "Responsive admin theme build on top of Bootstrap 4",
+        "author":
+        {
+          "@type": "Person",
+          "name": "Beni Arisandi"
+        },
+        "@type": "WebSite",
+        "url": "",
+        "headline": "Plugins",
+        "@context": "http://schema.org"
+      }
+    </script><!-- End SEO tag -->
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End Google font -->
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="theme-color" content="#070B0F"><!-- End Favicons -->
+    <!-- BEGIN PLUGINS STYLES -->
+    <link rel="stylesheet" href="vendor/open-iconic/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.css">
+    <link rel="stylesheet" href="vendor/highlightjs/styles/ocean.css"><!-- END PLUGINS STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="stylesheets/theme.min.css" data-skin="default">
+    <link rel="stylesheet" href="stylesheets/theme-dark.min.css" data-skin="dark">
+    <script>
+      var skin = localStorage.getItem('skin') || 'default';
+      var isCompact = JSON.parse(localStorage.getItem('hasCompactMenu'));
+      var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+      // Disable unused skin immediately
+      disabledSkinStylesheet.setAttribute('rel', '');
+      disabledSkinStylesheet.setAttribute('disabled', true);
+      // add flag class to html immediately
+      if (isCompact == true) document.querySelector('html').classList.add('preparing-compact-menu');
+    </script><!-- END THEME STYLES -->
+  </head>
+  <body data-spy="scroll" data-target="#nav-content" data-offset="76">
+    <!-- .app -->
+    <div class="app">
+      <!--[if lt IE 10]>
+      <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
+      <![endif]-->
+      <!-- .app-header -->
+      <header class="app-header app-header-dark bg-black">
+        <!-- .top-bar -->
+        <div class="top-bar">
+          <!-- .top-bar-brand -->
+          <div class="top-bar-brand">
+            <a href="index.html" class="d-flex"><svg class="mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28" viewbox="0 0 94 68">
+                <defs>
+                  <path id="a" d="M156.538 45.644v1.04a6.347 6.347 0 0 1-1.847 3.98L127.708 77.67a6.338 6.338 0 0 1-3.862 1.839h-1.272a6.34 6.34 0 0 1-3.862-1.839L91.728 50.664a6.353 6.353 0 0 1 0-9l9.11-9.117-2.136-2.138a3.171 3.171 0 0 0-4.498 0L80.711 43.913a3.177 3.177 0 0 0-.043 4.453l-.002.003.048.047 24.733 24.754-4.497 4.5a6.339 6.339 0 0 1-3.863 1.84h-1.27a6.337 6.337 0 0 1-3.863-1.84L64.971 50.665a6.353 6.353 0 0 1 0-9l26.983-27.008a6.336 6.336 0 0 1 4.498-1.869c1.626 0 3.252.622 4.498 1.87l26.986 27.006a6.353 6.353 0 0 1 0 9l-9.11 9.117 2.136 2.138a3.171 3.171 0 0 0 4.498 0l13.49-13.504a3.177 3.177 0 0 0 .046-4.453l.002-.002-.047-.048-24.737-24.754 4.498-4.5a6.344 6.344 0 0 1 8.996 0l26.983 27.006a6.347 6.347 0 0 1 1.847 3.98zm-46.707-4.095l-2.362 2.364a3.178 3.178 0 0 0 0 4.501l2.362 2.364 2.361-2.364a3.178 3.178 0 0 0 0-4.501l-2.361-2.364z"></path>
+                </defs>
+                <use fill="currentColor" fill-rule="evenodd" transform="translate(-63 -12)" xlink:href="#a"></use>
+              </svg> <span>Documentation</span></a>
+          </div><!-- /.top-bar-brand -->
+          <!-- .top-bar-list -->
+          <div class="top-bar-list">
+            <!-- .top-bar-item -->
+            <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+              <!-- toggle menu -->
+              <button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button> <!-- /toggle menu -->
+            </div><!-- /.top-bar-item -->
+            <!-- .top-bar-item -->
+            <!-- .top-bar-item -->
+            <div class="top-bar-item top-bar-item-right pr-3 pr-lg-4">
+              <!-- .nav -->
+              <ul class="header-nav nav">
+                <!-- .nav-item -->
+                <li class="nav-item">
+                  <a class="nav-link" href="support.html"><i class="fa fa-life-ring d-sm-none"></i> <span class="d-none d-sm-inline">Support</span></a>
+                </li><!-- /.nav-item -->
+                <!-- .nav-item -->
+                <li class="nav-item has-notified">
+                  <a class="nav-link" href="whats-new.html"><i class="fa fa-bell d-sm-none"></i> <span class="d-none d-sm-inline">What's new</span></a>
+                </li><!-- /.nav-item -->
+              </ul><!-- /.nav -->
+              <a href="https://themes.getbootstrap.com/product/looper-responsive-admin-template" class="btn btn-subtle-success border-0">Download Now</a>
+            </div><!-- /.top-bar-item -->
+          </div><!-- /.top-bar-list -->
+        </div><!-- /.top-bar -->
+      </header><!-- /.app-header -->
+      <!-- .app-aside -->
+      <aside class="app-aside app-aside-expand-md app-aside-light">
+        <!-- .aside-content -->
+        <div class="aside-content">
+          <!-- .aside-menu -->
+          <div class="aside-menu p-3">
+            <!-- .stacked-menu -->
+            <nav id="stacked-menu" class="stacked-menu">
+              <!-- .menu -->
+              <ul class="menu">
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="index.html" class="menu-link"><span class="menu-text">Getting Started</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="basic-layout.html" class="menu-link"><span class="menu-text">Basic Layout</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="build-tools.html" class="menu-link"><span class="menu-text">Build Tools</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="theming.html" class="menu-link"><span class="menu-text">Theming</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-header -->
+                <li class="menu-header">Components </li><!-- /.menu-header -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-bootstrap.html" class="menu-link"><span class="menu-text">Bootstrap</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-looper.html" class="menu-link"><span class="menu-text">Looper</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item has-active">
+                  <a href="components-plugins.html" class="menu-link"><span class="menu-text">Plugins</span></a>
+                </li><!-- /.menu-item -->
+              </ul><!-- /.menu -->
+            </nav><!-- /.stacked-menu -->
+          </div><!-- /.aside-menu -->
+          <!-- Skin changer -->
+          <footer class="aside-footer border-top p-2">
+            <button class="btn btn-light btn-block text-primary" data-toggle="skin"><span class="d-compact-menu-none">Night mode</span> <i class="fas fa-moon ml-1"></i></button>
+          </footer><!-- /Skin changer -->
+        </div><!-- /.aside-content -->
+      </aside><!-- /.app-aside -->
+      <!-- .app-main -->
+      <main class="app-main">
+        <!-- .wrapper -->
+        <div class="wrapper">
+          <!-- .page -->
+          <div class="page has-sidebar has-sidebar-expand-xl">
+            <!-- .page-inner -->
+            <div class="page-inner">
+              <!-- .page-title-bar -->
+              <header class="page-title-bar">
+                <h1 class="page-title text-center"> Plugins </h1>
+                <p class="text-muted text-center"> Lists of third party components that included in Looper package. </p>
+                <div class="input-group has-clearable">
+                  <button type="button" class="close" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle"></i></span></button> <label class="input-group-prepend" for="searchClients"><span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span></label> <input type="text" id="searchClients" class="form-control form-control-lg" data-filter=".card" placeholder="Filter plugins">
+                </div>
+              </header><!-- /.page-title-bar -->
+              <!-- .page-section -->
+              <div class="page-section">
+                <!-- .section-block -->
+                <div id="required" class="section-block">
+                  <h2 class="section-title"> Required </h2>
+                </div><!-- .section-block -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-purple mr-2">B</span> Bootstrap </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code4" aria-expanded="false" aria-controls="code4"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code4">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install bootstrap</code></pre>
+                    </div>
+                    <div> The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/twbs/bootstrap" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://getbootstrap.com/docs" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-yellow mr-2">P</span> Popper.js </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code33" aria-expanded="false" aria-controls="code33"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code33">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install popper.js</code></pre>
+                    </div>
+                    <div> A library used to position poppers in web applications. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/FezVrasta/popper.js" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://popper.js.org/popper-documentation.html" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-indigo mr-2">J</span> jQuery </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code44" aria-expanded="false" aria-controls="code44"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code44">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install jquery</code></pre>
+                    </div>
+                    <div> A fast, small, and feature-rich JavaScript library. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/jquery/jquery" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="http://api.jquery.com/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div id="recommended" class="section-block">
+                  <h2 class="section-title"> Recommended </h2>
+                </div><!-- .section-block -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-teal mr-2">F</span> Font Awesome </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code17" aria-expanded="false" aria-controls="code17"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code17">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install @fortawesome/fontawesome-free</code></pre>
+                    </div>
+                    <div> The iconic SVG, font, and CSS toolkit. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/FortAwesome/Font-Awesome" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://fontawesome.com/icons?d=gallery&amp;m=free" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-green mr-2">O</span> Open Iconic </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code26" aria-expanded="false" aria-controls="code26"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code26">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install open-iconic</code></pre>
+                    </div>
+                    <div> An open source icon set with 223 marks in SVG, webfont and raster formats. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/iconic/open-iconic" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://useiconic.com/open" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-pink mr-2">P</span> Pace </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code27" aria-expanded="false" aria-controls="code27"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code27">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install pace-progress</code></pre>
+                    </div>
+                    <div> Automatically add a progress bar to your site. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/HubSpot/pace" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="http://github.hubspot.com/pace/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-cyan mr-2">P</span> Perfect Scrollbar </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code30" aria-expanded="false" aria-controls="code30"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code30">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install perfect-scrollbar</code></pre>
+                    </div>
+                    <div> Minimalistic but perfect custom scrollbar plugin. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/utatti/perfect-scrollbar" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/utatti/perfect-scrollbar#how-to-use" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-orange mr-2">S</span> Stacked Menu </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code39" aria-expanded="false" aria-controls="code39"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code39">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install gitlab:bent10/stacked-menu</code></pre>
+                    </div>
+                    <div> A flexible stacked navigation menu. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://gitlab.com/bent10/stacked-menu" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="http://docs.stilearning.com/drawerjs/latest/StackedMenu.html" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div id="optionals" class="section-block">
+                  <h2 class="section-title"> Optional </h2>
+                </div><!-- .section-block -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-blue mr-2">A</span> Ace </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code1" aria-expanded="false" aria-controls="code1"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code1">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install ace-builds</code></pre>
+                    </div>
+                    <div> A standalone code editor written in JavaScript. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/ajaxorg/ace" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://ace.c9.io/#nav=howto" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-green mr-2">A</span> AOS </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code2" aria-expanded="false" aria-controls="code2"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code2">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install aos</code></pre>
+                    </div>
+                    <div> Animate on scroll library. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/michalsnik/aos" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="http://michalsnik.github.io/aos/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-yellow mr-2">A</span> At.js </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code3" aria-expanded="false" aria-controls="code3"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code3">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install at.js jquery.caret</code></pre>
+                    </div>
+                    <div> Add Github like mentions autocomplete to your application. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/ichord/At.js" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/ichord/At.js/wiki" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-purple mr-2">B</span> Bootstrap Icons </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code5" aria-expanded="false" aria-controls="code5"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code5">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install bootstrap-icons</code></pre>
+                    </div>
+                    <div> Official open source SVG icon library for Bootstrap. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/twbs/icons" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://icons.getbootstrap.com/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-orange mr-2">B</span> Bootstrap Colorpicker </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code6" aria-expanded="false" aria-controls="code6"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code6">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install bootstrap-colorpicker</code></pre>
+                    </div>
+                    <div> Simple and customizable colorpicker component for jQuery, which is also compatible with Bootstrap. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/farbelous/bootstrap-colorpicker" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://farbelous.io/bootstrap-colorpicker/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-teal mr-2">B</span> Bootstrap Select </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code7" aria-expanded="false" aria-controls="code7"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code7">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install bootstrap-select</code></pre>
+                    </div>
+                    <div> Brings select elements with intuitive multiselection, searching, and much more. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/snapappointments/bootstrap-select" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://developer.snapappointments.com/bootstrap-select" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-purple mr-2">B</span> Bootstrap Session Timeout </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code8" aria-expanded="false" aria-controls="code8"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code8">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install github:orangehill/bootstrap-session-timeout</code></pre>
+                    </div>
+                    <div> Session timeout and keep-alive control with a nice Bootstrap warning dialog. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/orangehill/bootstrap-session-timeout" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/orangehill/bootstrap-session-timeout#documentation" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-dark mr-2">B</span> Bootstrap TouchSpin </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code9" aria-expanded="false" aria-controls="code9"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code9">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install bootstrap-touchspin</code></pre>
+                    </div>
+                    <div> A mobile and touch friendly input spinner component for Bootstrap. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/istvan-ujjmeszaros/bootstrap-touchspin" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://www.virtuosoft.eu/code/bootstrap-touchspin/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-red mr-2">B</span> BS Stepper </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code10" aria-expanded="false" aria-controls="code10"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code10">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install bs-stepper</code></pre>
+                    </div>
+                    <div> A stepper for Bootstrap 4.x. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/Johann-S/bs-stepper" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/Johann-S/bs-stepper/tree/v1.3.0#how-to-use-it" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-pink mr-2">C</span> Chart.js </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code11" aria-expanded="false" aria-controls="code11"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code11">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install chart.js</code></pre>
+                    </div>
+                    <div> Simple yet flexible JavaScript charting for designers & developers. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/chartjs/Chart.js" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="http://www.chartjs.org/docs/latest/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-teal mr-2">C</span> Cookie Consent </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code12" aria-expanded="false" aria-controls="code12"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code12">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install cookieconsent</code></pre>
+                    </div>
+                    <div> A lightweight JavaScript plugin for alerting users about the use of cookies on your website. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/insites/cookieconsent/" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://cookieconsent.insites.com/documentation/about-cookie-consent/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-purple mr-2">D</span> Datatables </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code13" aria-expanded="false" aria-controls="code13"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code13">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install datatables.net datatables.net-bs4 datatables.net-autofill datatables.net-autofill-bs4 datatables.net-buttons datatables.net-buttons-bs4 datatables.net-colreorder datatables.net-colreorder-bs4 datatables.net-fixedcolumns datatables.net-fixedcolumns-bs4 datatables.net-fixedheader datatables.net-fixedheader-bs4 datatables.net-keytable datatables.net-keytable-bs4 datatables.net-rowgroup datatables.net-rowgroup-bs4 datatables.net-rowreorder datatables.net-rowreorder-bs4 datatables.net-responsive datatables.net-responsive-bs4 datatables.net-scroller datatables.net-scroller-bs4 datatables.net-select datatables.net-select-bs4</code></pre>
+                    </div>
+                    <div> A table enhancing plug-in for the jQuery Javascript library, adding sorting, paging and filtering abilities to plain HTML tables with minimal effort. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/DataTables/DataTables" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://datatables.net/manual/installation" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-green mr-2">E</span> Easy Pie Chart </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code14" aria-expanded="false" aria-controls="code14"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code14">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install easy-pie-chart</code></pre>
+                    </div>
+                    <div> A lightweight plugin to draw simple, animated pie charts for single values. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/rendro/easy-pie-chart" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://rendro.github.io/easy-pie-chart/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-blue mr-2">F</span> Flatpickr </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code15" aria-expanded="false" aria-controls="code15"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code15">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install flatpickr</code></pre>
+                    </div>
+                    <div> A lightweight and powerful datetime picker with no dependencies. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/flatpickr/flatpickr" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://flatpickr.js.org/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-red mr-2">F</span> Flot </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code16" aria-expanded="false" aria-controls="code16"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code16">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install github:flot/flot</code></pre>
+                    </div>
+                    <div> Attractive JavaScript charts for jQuery. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/flot/flot" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/flot/flot/blob/master/API.md" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-blue mr-2">F</span> Fullcalendar </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code18" aria-expanded="false" aria-controls="code18"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code18">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install datatables.net datatables.net-bs4 datatables.net-autofill datatables.net-autofill-bs4 datatables.net-buttons datatables.net-buttons-bs4 datatables.net-colreorder datatables.net-colreorder-bs4 datatables.net-fixedcolumns datatables.net-fixedcolumns-bs4 datatables.net-fixedheader datatables.net-fixedheader-bs4 datatables.net-keytable datatables.net-keytable-bs4 datatables.net-rowgroup datatables.net-rowgroup-bs4 datatables.net-rowreorder datatables.net-rowreorder-bs4 datatables.net-responsive datatables.net-responsive-bs4 datatables.net-scroller datatables.net-scroller-bs4 datatables.net-select datatables.net-select-bs4</code></pre>
+                    </div>
+                    <div> A JavaScript event calendar. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/DataTables/DataTables" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://datatables.net/manual/installation" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-green mr-2">G</span> Gantt </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code19" aria-expanded="false" aria-controls="code19"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code19">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install frappe-gantt-v2</code></pre>
+                    </div>
+                    <div> A simple, interactive, modern gantt chart library for the web </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/frappe/gantt" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://frappe.io/gantt" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-orange mr-2">H</span> Headroom.js </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code20" aria-expanded="false" aria-controls="code20"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code20">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install headroom.js</code></pre>
+                    </div>
+                    <div> Give your pages some headroom. Hide your header until you need it. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://www.github.com/WickyNilliams/headroom.js" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://wicky.nillia.ms/headroom.js/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-teal mr-2">H</span> Highlight.js </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code21" aria-expanded="false" aria-controls="code21"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code21">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install highlight.js highlightjs-line-numbers.js</code></pre>
+                    </div>
+                    <div> Javascript syntax highlighter. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/isagalaev/highlight.js" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="http://highlightjs.readthedocs.io/en/latest/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-blue mr-2">H</span> html2pdf.js </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code22" aria-expanded="false" aria-controls="code22"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code22">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install html2pdf.js</code></pre>
+                    </div>
+                    <div> Client-side HTML-to-PDF rendering using pure JS. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/eKoopmans/html2pdf.js" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/eKoopmans/html2pdf.js#getting-started" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-purple mr-2">J</span> JQVmap </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code23" aria-expanded="false" aria-controls="code23"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code23">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install jqvmap</code></pre>
+                    </div>
+                    <div> jQuery Vector Map Library. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/10bestdesign/jqvmap/" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://www.10bestdesign.com/jqvmap/documentation/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-pink mr-2">M</span> Masonry </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code24" aria-expanded="false" aria-controls="code24"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code24">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install masonry-layout</code></pre>
+                    </div>
+                    <div> Cascading grid layout library. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/desandro/masonry" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://masonry.desandro.com/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-black mr-2">N</span> Nestable2 </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code25" aria-expanded="false" aria-controls="code25"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code25">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install nestable2</code></pre>
+                    </div>
+                    <div> Drag & drop hierarchical list with mouse and touch compatibility. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/RamonSmit/Nestable2" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/RamonSmit/Nestable2#usage" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-teal mr-2">P</span> Parsley </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code28" aria-expanded="false" aria-controls="code28"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code28">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install parsleyjs</code></pre>
+                    </div>
+                    <div> Validate your forms, frontend, without writing a single line of javascript. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/guillaumepotier/Parsley.js/" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="http://parsleyjs.org/doc/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-orange mr-2">P</span> Particles.js </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code29" aria-expanded="false" aria-controls="code29"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code29">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install particles.js</code></pre>
+                    </div>
+                    <div> A lightweight JavaScript library for creating particles. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/VincentGarreau/particles.js/" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://vincentgarreau.com/particles.js/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-gray mr-2">P</span> PhotoSwipe </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code31" aria-expanded="false" aria-controls="code31"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code31">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install photoswipe</code></pre>
+                    </div>
+                    <div> JavaScript image gallery for mobile and desktop, modular, framework independent. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/dimsemenov/PhotoSwipe" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="http://photoswipe.com/documentation/getting-started.html" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-indigo mr-2">P</span> Plyr </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code32" aria-expanded="false" aria-controls="code32"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code32">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install plyr</code></pre>
+                    </div>
+                    <div> A simple, accessible and customisable media player for Video, Audio, YouTube and Vimeo. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/sampotts/plyr" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/sampotts/plyr#quick-setup" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-yellow mr-2">Q</span> Quill </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code34" aria-expanded="false" aria-controls="code34"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code34">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install quill katex</code></pre>
+                    </div>
+                    <div> a modern WYSIWYG editor built for compatibility and extensibility. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/quilljs/quill" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://quilljs.com/docs/quickstart/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-red mr-2">S</span> Select2 </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code35" aria-expanded="false" aria-controls="code35"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code35">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install select2</code></pre>
+                    </div>
+                    <div> A jQuery-based replacement for select boxes. It supports searching, remote data sets, and pagination of results. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/select2/select2" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://select2.org/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-green mr-2">S</span> SimpleMDE </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code36" aria-expanded="false" aria-controls="code36"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code36">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install simplemde</code></pre>
+                    </div>
+                    <div> A simple, beautiful, and embeddable JavaScript Markdown editor. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/sparksuite/simplemde-markdown-editor" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/sparksuite/simplemde-markdown-editor#install" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-red mr-2">S</span> Sortable </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code37" aria-expanded="false" aria-controls="code37"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code37">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install sortablejs</code></pre>
+                    </div>
+                    <div> A JavaScript library for reorderable drag-and-drop lists on modern browsers and touch devices. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/RubaXa/Sortable" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/RubaXa/Sortable#usage" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-purple mr-2">S</span> Sparklines </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code38" aria-expanded="false" aria-controls="code38"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code38">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install jquery.sparkline</code></pre>
+                    </div>
+                    <div> A plugin for the jQuery javascript library to generate small sparkline charts directly in the browser. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/gwatts/jquery.sparkline" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://omnipotent.net/jquery.sparkline/#s-docs" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-orange mr-2">T</span> Toastr </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code40" aria-expanded="false" aria-controls="code40"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code40">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install toastr</code></pre>
+                    </div>
+                    <div> Simple javascript toast notifications. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/CodeSeven/toastr" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/CodeSeven/toastr#quick-start" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-cyan mr-2">T</span> Tribute </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code41" aria-expanded="false" aria-controls="code41"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code41">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install tributejs</code></pre>
+                    </div>
+                    <div> A cross-browser @mention engine written in ES6, no dependencies. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/zurb/tribute" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/zurb/tribute#installing" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-twitter mr-2">T</span> Typeahead.js </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code42" aria-expanded="false" aria-controls="code42"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code42">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install typeahead.js handlebars</code></pre>
+                    </div>
+                    <div> A fast and fully-featured autocomplete library. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/twitter/typeahead.js" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-green mr-2">C</span> clipboard.js </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code43" aria-expanded="false" aria-controls="code43"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code43">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install clipboard</code></pre>
+                    </div>
+                    <div> Cascading grid layout library. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/zenorocha/clipboard.js" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://clipboardjs.com/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-red mr-2">J</span> jQuery Countdown </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code45" aria-expanded="false" aria-controls="code45"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code45">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install jquery-countdown</code></pre>
+                    </div>
+                    <div> A simple and html agnostic date countdown plugin for jQuery. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/hilios/jQuery.countdown" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="http://hilios.github.io/jQuery.countdown/documentation.html" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-gray mr-2">J</span> jQuery File Upload </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code46" aria-expanded="false" aria-controls="code46"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code46">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install blueimp-file-upload</code></pre>
+                    </div>
+                    <div> File Upload widget with multiple file selection, drag&amp;drop support, progress bars, validation and preview images, audio and video for jQuery. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/blueimp/jQuery-File-Upload" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/blueimp/jQuery-File-Upload/wiki" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-yellow mr-2">J</span> jQuery Knob </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code47" aria-expanded="false" aria-controls="code47"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code47">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install jquery-knob</code></pre>
+                    </div>
+                    <div> Nice, downward compatible, touchable, jQuery dial. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/aterrien/jQuery-Knob" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="http://anthonyterrien.com/knob/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-teal mr-2">J</span> jsTree </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code48" aria-expanded="false" aria-controls="code48"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code48">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install jstree</code></pre>
+                    </div>
+                    <div> A jQuery plugin that provides interactive trees. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/vakata/jstree" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/vakata/jstree#getting-started" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-pink mr-2">N</span> noUiSlider </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code49" aria-expanded="false" aria-controls="code49"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code49">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install nouislider wnumb</code></pre>
+                    </div>
+                    <div> A javaScript range slider. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/leongersen/noUiSlider" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://refreshless.com/nouislider/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-orange mr-2">S</span> summernote </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code50" aria-expanded="false" aria-controls="code50"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code50">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install summernote</code></pre>
+                    </div>
+                    <div> Super simple WYSIWYG Editor. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/summernote/summernote" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://summernote.org/getting-started/" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-yellow mr-2">T</span> Text Mask </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code51" aria-expanded="false" aria-controls="code51"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code51">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install vanilla-text-mask text-mask-addons</code></pre>
+                    </div>
+                    <div> Input mask for React, Angular, Ember, Vue, & plain JavaScript. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/text-mask/text-mask" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/text-mask/text-mask/blob/master/componentDocumentation.md#readme" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <p>
+                        <span class="tile tile-sm bg-green mr-2">Z</span> zxcvbn </p><button type="button" class="btn btn-reset text-muted" data-toggle="collapse" data-target="#code52" aria-expanded="false" aria-controls="code52"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="collapse" id="code52">
+                      <pre><code class="bash" onclick="highlightText(this)">npm install zxcvbn</code></pre>
+                    </div>
+                    <div> Low-Budget Password Strength Estimation. </div>
+                  </div><!-- /.card-body -->
+                  <!-- .card-footer -->
+                  <div class="card-footer">
+                    <a class="card-footer-item card-footer-item-bordered" href="https://github.com/dropbox/zxcvbn" target="_blank">Repo</a> <a class="card-footer-item card-footer-item-bordered" href="https://github.com/dropbox/zxcvbn#usage" target="_blank">Docs</a>
+                  </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+              </div><!-- /.page-section -->
+            </div><!-- /.page-inner -->
+            <!-- .page-sidebar -->
+            <div class="page-sidebar page-sidebar-fixed">
+              <nav id="nav-content" class="nav flex-column mt-4">
+                <a href="#required" class="nav-link smooth-scroll">Required</a> <a href="#recommended" class="nav-link smooth-scroll">Recommended</a> <a href="#optionals" class="nav-link smooth-scroll">Optionals</a>
+              </nav>
+            </div><!-- /.page-sidebar -->
+          </div><!-- /.page -->
+        </div><!-- /.wrapper -->
+      </main><!-- /.app-main -->
+    </div><!-- /.app -->
+    <!-- BEGIN BASE JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script> <!-- END BASE JS -->
+    <!-- BEGIN PLUGINS JS -->
+    <script src="vendor/highlightjs/highlight.pack.js"></script> <!-- END PLUGINS JS -->
+    <!-- BEGIN THEME JS -->
+    <script src="javascript/theme.min.js"></script> <!-- END THEME JS -->
+    <script>
+      hljs.initHighlightingOnLoad();
+
+      function highlightText(el)
+      {
+        if (document.selection)
+        {
+          var range = document.body.createTextRange();
+          range.moveToElementText(el);
+          range.select();
+        }
+        else if (window.getSelection)
+        {
+          var range = document.createRange();
+          range.selectNodeContents(el);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+        }
+      }
+    </script>
+  </body>
+</html>

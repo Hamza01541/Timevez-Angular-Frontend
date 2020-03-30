@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title> Bootstrap Components | Looper - Bootstrap 4 Admin Theme </title>
+    <meta property="og:title" content="Bootstrap Components">
+    <meta name="author" content="Beni Arisandi">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="Responsive admin theme build on top of Bootstrap 4">
+    <meta property="og:description" content="Responsive admin theme build on top of Bootstrap 4">
+    <link rel="canonical" href="https://uselooper.com">
+    <meta property="og:url" content="https://uselooper.com">
+    <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme">
+    <script type="application/ld+json">
+      {
+        "name": "Looper - Bootstrap 4 Admin Theme",
+        "description": "Responsive admin theme build on top of Bootstrap 4",
+        "author":
+        {
+          "@type": "Person",
+          "name": "Beni Arisandi"
+        },
+        "@type": "WebSite",
+        "url": "",
+        "headline": "Bootstrap Components",
+        "@context": "http://schema.org"
+      }
+    </script><!-- End SEO tag -->
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End Google font -->
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="theme-color" content="#070B0F"><!-- End Favicons -->
+    <!-- BEGIN PLUGINS STYLES -->
+    <link rel="stylesheet" href="vendor/open-iconic/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.css">
+    <link rel="stylesheet" href="vendor/highlightjs/styles/ocean.css"><!-- END PLUGINS STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="stylesheets/theme.min.css" data-skin="default">
+    <link rel="stylesheet" href="stylesheets/theme-dark.min.css" data-skin="dark">
+    <script>
+      var skin = localStorage.getItem('skin') || 'default';
+      var isCompact = JSON.parse(localStorage.getItem('hasCompactMenu'));
+      var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+      // Disable unused skin immediately
+      disabledSkinStylesheet.setAttribute('rel', '');
+      disabledSkinStylesheet.setAttribute('disabled', true);
+      // add flag class to html immediately
+      if (isCompact == true) document.querySelector('html').classList.add('preparing-compact-menu');
+    </script><!-- END THEME STYLES -->
+  </head>
+  <body data-spy="scroll" data-target="#nav-content" data-offset="76">
+    <!-- .app -->
+    <div class="app">
+      <!--[if lt IE 10]>
+      <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
+      <![endif]-->
+      <!-- .app-header -->
+      <header class="app-header app-header-dark bg-black">
+        <!-- .top-bar -->
+        <div class="top-bar">
+          <!-- .top-bar-brand -->
+          <div class="top-bar-brand">
+            <a href="index.html" class="d-flex"><svg class="mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28" viewbox="0 0 94 68">
+                <defs>
+                  <path id="a" d="M156.538 45.644v1.04a6.347 6.347 0 0 1-1.847 3.98L127.708 77.67a6.338 6.338 0 0 1-3.862 1.839h-1.272a6.34 6.34 0 0 1-3.862-1.839L91.728 50.664a6.353 6.353 0 0 1 0-9l9.11-9.117-2.136-2.138a3.171 3.171 0 0 0-4.498 0L80.711 43.913a3.177 3.177 0 0 0-.043 4.453l-.002.003.048.047 24.733 24.754-4.497 4.5a6.339 6.339 0 0 1-3.863 1.84h-1.27a6.337 6.337 0 0 1-3.863-1.84L64.971 50.665a6.353 6.353 0 0 1 0-9l26.983-27.008a6.336 6.336 0 0 1 4.498-1.869c1.626 0 3.252.622 4.498 1.87l26.986 27.006a6.353 6.353 0 0 1 0 9l-9.11 9.117 2.136 2.138a3.171 3.171 0 0 0 4.498 0l13.49-13.504a3.177 3.177 0 0 0 .046-4.453l.002-.002-.047-.048-24.737-24.754 4.498-4.5a6.344 6.344 0 0 1 8.996 0l26.983 27.006a6.347 6.347 0 0 1 1.847 3.98zm-46.707-4.095l-2.362 2.364a3.178 3.178 0 0 0 0 4.501l2.362 2.364 2.361-2.364a3.178 3.178 0 0 0 0-4.501l-2.361-2.364z"></path>
+                </defs>
+                <use fill="currentColor" fill-rule="evenodd" transform="translate(-63 -12)" xlink:href="#a"></use>
+              </svg> <span>Documentation</span></a>
+          </div><!-- /.top-bar-brand -->
+          <!-- .top-bar-list -->
+          <div class="top-bar-list">
+            <!-- .top-bar-item -->
+            <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+              <!-- toggle menu -->
+              <button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button> <!-- /toggle menu -->
+            </div><!-- /.top-bar-item -->
+            <!-- .top-bar-item -->
+            <!-- .top-bar-item -->
+            <div class="top-bar-item top-bar-item-right pr-3 pr-lg-4">
+              <!-- .nav -->
+              <ul class="header-nav nav">
+                <!-- .nav-item -->
+                <li class="nav-item">
+                  <a class="nav-link" href="support.html"><i class="fa fa-life-ring d-sm-none"></i> <span class="d-none d-sm-inline">Support</span></a>
+                </li><!-- /.nav-item -->
+                <!-- .nav-item -->
+                <li class="nav-item has-notified">
+                  <a class="nav-link" href="whats-new.html"><i class="fa fa-bell d-sm-none"></i> <span class="d-none d-sm-inline">What's new</span></a>
+                </li><!-- /.nav-item -->
+              </ul><!-- /.nav -->
+              <a href="https://themes.getbootstrap.com/product/looper-responsive-admin-template" class="btn btn-subtle-success border-0">Download Now</a>
+            </div><!-- /.top-bar-item -->
+          </div><!-- /.top-bar-list -->
+        </div><!-- /.top-bar -->
+      </header><!-- /.app-header -->
+      <!-- .app-aside -->
+      <aside class="app-aside app-aside-expand-md app-aside-light">
+        <!-- .aside-content -->
+        <div class="aside-content">
+          <!-- .aside-menu -->
+          <div class="aside-menu p-3">
+            <!-- .stacked-menu -->
+            <nav id="stacked-menu" class="stacked-menu">
+              <!-- .menu -->
+              <ul class="menu">
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="index.html" class="menu-link"><span class="menu-text">Getting Started</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="basic-layout.html" class="menu-link"><span class="menu-text">Basic Layout</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="build-tools.html" class="menu-link"><span class="menu-text">Build Tools</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="theming.html" class="menu-link"><span class="menu-text">Theming</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-header -->
+                <li class="menu-header">Components </li><!-- /.menu-header -->
+                <!-- .menu-item -->
+                <li class="menu-item has-active">
+                  <a href="components-bootstrap.html" class="menu-link"><span class="menu-text">Bootstrap</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-looper.html" class="menu-link"><span class="menu-text">Looper</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-plugins.html" class="menu-link"><span class="menu-text">Plugins</span></a>
+                </li><!-- /.menu-item -->
+              </ul><!-- /.menu -->
+            </nav><!-- /.stacked-menu -->
+          </div><!-- /.aside-menu -->
+          <!-- Skin changer -->
+          <footer class="aside-footer border-top p-2">
+            <button class="btn btn-light btn-block text-primary" data-toggle="skin"><span class="d-compact-menu-none">Night mode</span> <i class="fas fa-moon ml-1"></i></button>
+          </footer><!-- /Skin changer -->
+        </div><!-- /.aside-content -->
+      </aside><!-- /.app-aside -->
+      <!-- .app-main -->
+      <main class="app-main">
+        <!-- .wrapper -->
+        <div class="wrapper">
+          <!-- .page -->
+          <div class="page has-sidebar has-sidebar-expand-xl">
+            <!-- .page-inner -->
+            <div class="page-inner">
+              <!-- .page-title-bar -->
+              <header class="page-title-bar">
+                <h1 class="page-title"> Bootstrap Components </h1>
+                <p class="text-muted"> Looper uses the native Bootstrap components to create a straightforward and beautiful experience. </p><button class="btn btn-dark btn-floated d-sm-block d-xl-none" type="button" data-toggle="sidebar"><i class="fa fa-th-list"></i></button>
+              </header><!-- /.page-title-bar -->
+              <!-- .page-section -->
+              <div class="page-section">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="alerts" class="section-title"> Alerts </h2>
+                  <p> Use the native Bootstrap Alerts element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/alerts/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p>
+                  <div class="alert alert-primary has-icon" role="alert">
+                    <div class="alert-icon">
+                      <span class="oi oi-flag"></span>
+                    </div>
+                    <h5 class="alert-heading"> Primary Alerts </h5>Dolore sunt porro nisi repellendus blanditiis perspiciatis nihil vitae mollitia, beatae ipsam!
+                  </div>
+                  <div class="alert alert-secondary" role="alert"> A simple secondary alert—check it out! </div>
+                  <div class="alert alert-success" role="alert"> A simple success alert—check it out! </div>
+                  <div class="alert alert-danger" role="alert"> A simple danger alert—check it out! </div>
+                  <div class="alert alert-warning" role="alert"> A simple warning alert—check it out! </div>
+                  <div class="alert alert-info" role="alert"> A simple info alert—check it out! </div>
+                  <div class="alert alert-dark" role="alert"> A simple dark alert—check it out! </div><!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Additional Classes </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.has-icon</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.alert</code> to increase padding left for icon space. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="badge" class="section-title"> Badges </h2>
+                  <p> Use the native Bootstrap Badges element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/badge/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- .card -->
+                  <div class="card">
+                    <div class="card-body">
+                      <h6> Number <span class="badge badge-pill badge-success">20</span>
+                      </h6>
+                      <h6> Text <span class="badge badge-info">20+</span>
+                      </h6>
+                      <h6> Statuses <span class="badge badge-warning">New</span>
+                      </h6>
+                      <h6> Actions <span class="badge badge-pill badge-subtle badge-success">+6</span>
+                      </h6>
+                      <h6> Removed <span class="badge badge-subtle badge-danger">4</span>
+                      </h6>
+                    </div>
+                  </div><!-- /.card -->
+                  <!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Additional Classes </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.badge-subtle</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.badge</code> to use light background and dark text. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="breadcrumb" class="section-title"> Breadcrumb </h2>
+                  <p> Use the native Bootstrap Breadcrumb element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/breadcrumb/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- .card -->
+                  <div class="card">
+                    <!-- .card-body -->
+                    <div class="card-body">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item active">
+                          <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Back</a>
+                        </li>
+                      </ol>
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                          <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                          <a href="#">Library</a>
+                        </li>
+                        <li class="breadcrumb-item active">Data </li>
+                      </ol>
+                    </div><!-- /.card-body -->
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="buttons" class="section-title"> Buttons </h2>
+                  <p> Use the native Bootstrap Buttons element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/buttons/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- .card -->
+                  <div class="card card-fluid">
+                    <!-- .card-body -->
+                    <div class="card-body">
+                      <!-- example block -->
+                      <div class="el-example">
+                        <button type="button" class="btn btn-primary">Primary</button> <button type="button" class="btn btn-secondary">Secondary</button> <button type="button" class="btn btn-success">Success</button> <button type="button" class="btn btn-info">Info</button> <button type="button" class="btn btn-warning">Warning</button> <button type="button" class="btn btn-danger">Danger</button> <button type="button" class="btn btn-light">Light</button> <button type="button" class="btn btn-dark">Dark</button> <button type="button" class="btn btn-link">Link</button>
+                      </div><!-- /example block -->
+                    </div><!-- /.card-body -->
+                    <!-- .card-body -->
+                    <div class="card-body border-top">
+                      <!-- example block -->
+                      <div class="el-example">
+                        <button type="button" class="btn btn-success btn-lg">Large</button> <button type="button" class="btn btn-primary">Default</button> <button type="button" class="btn btn-outline-info btn-sm">Small</button> <button type="button" class="btn btn-danger btn-xs" disabled>XSmall</button>
+                      </div><!-- /example block -->
+                    </div><!-- /.card-body -->
+                  </div><!-- /.card -->
+                  <!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Additional Classes </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.btn-subtle-{context}</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.btn</code> to add subtle context color. </dd>
+                        <dt class="col-lg-4">
+                          <code>.btn-icon</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.btn</code> to make a circle button. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="card" class="section-title"> Cards </h2>
+                  <p> Use the native Bootstrap Cards element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/card/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- .card -->
+                  <div class="card">
+                    <!-- .card-header -->
+                    <div class="card-header"> Card Header </div><!-- .card-body -->
+                    <div class="card-body">
+                      <h5 class="card-title"> Special title treatment </h5>
+                      <h6 class="card-subtitle text-muted"> Support card subtitle </h6>
+                    </div><!-- /.card-body -->
+                    <!-- 21:9 aspect ratio -->
+                    <figure class="embed-responsive embed-responsive-21by9 mb-0">
+                      <img class="embed-responsive-item" src="images/dummy/img-4.jpg" alt="Card image">
+                    </figure><!-- /.embed-responsive -->
+                    <!-- .card-body -->
+                    <div class="card-body">
+                      <p class="card-text"> Blanditiis architecto quaerat fugit sit ab veritatis ipsam assumenda doloremque repellendus expedita. <a href="#">@stilearningTwit</a> . <a href="#">#looper</a> <a href="#">#admin</a><br>
+                        <time datetime="2018-02-12">Feb 12, 2018 at 08:19pm</time>
+                      </p>
+                    </div><!-- /.card-body -->
+                    <!-- .card-footer -->
+                    <div class="card-footer">
+                      <a href="#" class="card-footer-item card-footer-item-bordered">Like</a> <a href="#" class="card-footer-item card-footer-item-bordered">Comment</a> <a href="#" class="card-footer-item card-footer-item-bordered">Share</a>
+                    </div><!-- /.card-footer -->
+                  </div><!-- /.card -->
+                  <!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Additional Classes </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.card-reflow</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.card</code> to remove background color, shadow and margin bottom. </dd>
+                        <dt class="col-lg-4">
+                          <code>.card-fluid</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.card</code> to remove border radius on small screen. </dd>
+                        <dt class="col-lg-4">
+                          <code>.card-inverse</code>
+                        </dt>
+                        <dd class="col-lg-8"> Inverse text within a card for use with dark backgrounds. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="dropdowns" class="section-title"> Dropdowns </h2>
+                  <p> Use the native Bootstrap Dropdowns element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/dropdowns/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- .dropdown -->
+                  <div class="d-inline-block dropdown mb-4">
+                    <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Open Dropdown <i class="fa fa-caret-down"></i></button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <div class="dropdown-arrow"></div>
+                      <h6 class="dropdown-header"> Beni Arisandi </h6><a class="dropdown-item" href="#"><span class="dropdown-icon oi oi-person"></span> Profile</a> <a class="dropdown-item" href="#"><span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
+                      <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Help Center</a> <a class="dropdown-item" href="#">Ask Forum</a> <a class="dropdown-item" href="#">Keyboard Shortcuts</a>
+                    </div>
+                  </div><!-- /.dropdown -->
+                  <!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Additional Element </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.dropdown-arrow</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply <code>&lt;div&gt;</code> inside <code>.dropdown-menu</code> to add arrow of dropdown menu. </dd>
+                        <dt class="col-lg-4">
+                          <code>.dropdown-arrow-{left/right}</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.dropdown-arrow</code> to positioning the arrow to left/right. </dd>
+                        <dt class="col-lg-4">
+                          <code>.dropdown-menu-rich</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.dropdown-menu</code> to remove padding & give 20rem static width. </dd>
+                        <dt class="col-lg-4">
+                          <code>.dropdown-menu-md</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.dropdown-menu</code> to give 18rem min width. </dd>
+                        <dt class="col-lg-4">
+                          <code>.dropdown-menu-lg</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.dropdown-menu</code> to give 24rem min width. </dd>
+                        <dt class="col-lg-4">
+                          <code>.dropdown-menu-xl</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.dropdown-menu</code> to give 30rem min width. </dd>
+                        <dt class="col-lg-4">
+                          <code>.dropdown-menu-sheet</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.dropdown-menu-rich</code> to support 3 column layout inside dropdown. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="forms" class="section-title"> Forms </h2>
+                  <p> Use the native Bootstrap Forms element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/forms/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- .card -->
+                  <div class="card">
+                    <div class="card-header"> Form group </div><!-- .card-body -->
+                    <div class="card-body">
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                      </div><!-- /.form-group -->
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <div class="form-label-group">
+                          <input type="text" name="floatingLabel" class="form-control" id="exampleFloatingLabel" aria-describedby="floatingHelp" placeholder="Floating label"> <label id="floatingHelp" for="exampleFloatingLabel">Floating label</label>
+                        </div>
+                      </div><!-- /.form-group -->
+                    </div><!-- /.card-body -->
+                  </div><!-- /.card -->
+                  <!-- .card -->
+                  <div class="card">
+                    <div class="card-header"> Input Sizes </div><!-- .card-body -->
+                    <div class="card-body">
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" id="inputLarge">
+                      </div><!-- /.form-group -->
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Default input" id="inputDefault">
+                      </div><!-- /.form-group -->
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm" id="inputSmall">
+                      </div><!-- /.form-group -->
+                    </div><!-- /.card-body -->
+                  </div><!-- /.card -->
+                  <!-- .card -->
+                  <div class="card">
+                    <div class="card-header"> Input group </div><!-- .card-body -->
+                    <div class="card-body">
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <!-- .input-group -->
+                        <div class="input-group input-group-alt">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                          </div><input type="text" class="form-control" placeholder="Type something...">
+                          <div class="input-group-append">
+                            <button class="btn btn-secondary">Search</button>
+                          </div>
+                        </div><!-- /.input-group -->
+                      </div><!-- /.form-group -->
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <!-- .input-group -->
+                        <div class="input-group has-clearable">
+                          <button type="button" class="close" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle"></i></span></button>
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                          </div><input type="text" class="form-control" placeholder="Type something..." value="Moonlight">
+                        </div><!-- /.input-group -->
+                      </div><!-- /.form-group -->
+                    </div><!-- /.card-body -->
+                  </div><!-- /.card -->
+                  <!-- .card -->
+                  <div class="card">
+                    <div class="card-header"> Custom Input </div><!-- .card-body -->
+                    <div class="card-body">
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <select id="exampleSelect1" class="custom-select">
+                          <option selected> Open this select menu </option>
+                          <option value="1"> One </option>
+                          <option value="2"> Two </option>
+                          <option value="3"> Three </option>
+                        </select>
+                      </div><!-- /.form-group -->
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="customFile" multiple> <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                      </div><!-- /.form-group -->
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <div class="btn btn-primary fileinput-button">
+                          <i class="fa fa-plus fa-fw"></i> <span>Add files...</span> <input type="file" multiple>
+                        </div>
+                      </div><!-- /.form-group -->
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <input type="range" class="custom-range" min="0" max="5" step="0.5">
+                      </div><!-- /.form-group -->
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" name="customRadio" class="custom-control-input" id="customRadio1" checked> <label class="custom-control-label" for="customRadio1">Custom radio #1</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" name="customRadio" class="custom-control-input" id="customRadio2"> <label class="custom-control-label" for="customRadio2">Custom radio #2</label>
+                        </div>
+                      </div><!-- /.form-group -->
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck1"> <label class="custom-control-label" for="customCheck1">Custom checkbox</label>
+                        </div>
+                      </div><!-- /.form-group -->
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <!-- .custom-control-stacked -->
+                        <div class="custom-control-stacked">
+                          <!-- .switcher-control -->
+                          <label class="switcher-control"><input type="checkbox" name="onoffswitch" class="switcher-input" checked> <span class="switcher-indicator"></span></label> <!-- /.switcher-control -->
+                          <!-- .custom-switch -->
+                          <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch1"> <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+                          </div><!-- /.custom-switch -->
+                        </div><!-- /.custom-control-stacked -->
+                      </div><!-- /.form-group -->
+                      <!-- .form-group -->
+                      <div class="form-group">
+                        <!-- .rating-block -->
+                        <div class="rating-block">
+                          <!-- .rating -->
+                          <span class="rating"><input type="radio" name="ratingstar" id="rating05" value="5"> <label for="rating05"><span class="fa fa-star"></span></label> <input type="radio" name="ratingstar" id="rating04" value="4"> <label for="rating04"><span class="fa fa-star"></span></label> <input type="radio" name="ratingstar" id="rating03" value="3" checked> <label for="rating03"><span class="fa fa-star"></span></label> <input type="radio" name="ratingstar" id="rating02" value="2"> <label for="rating02"><span class="fa fa-star"></span></label> <input type="radio" name="ratingstar" id="rating01" value="1"> <label for="rating01"><span class="fa fa-star"></span></label></span> <!-- /.rating -->
+                        </div><!-- /.rating-block -->
+                      </div><!-- /.form-group -->
+                    </div><!-- /.card-body -->
+                  </div><!-- /.card -->
+                  <!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Additional Classes </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.input-group-reflow</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.input-group</code> to remove background color and border. </dd>
+                        <dt class="col-lg-4">
+                          <code>.form-control-reflow</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.form-control</code> to remove background color and border. </dd>
+                        <dt class="col-lg-4">
+                          <code>.custom-label-hint</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply in <code>.custom-control</code> to visible content when the input (checkbox & radio) has checked states. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="list-group" class="section-title"> List Group </h2>
+                  <p> Use the native Bootstrap List Group element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/list-group/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- .list-group -->
+                  <div class="list-group list-group-divider mb-3">
+                    <a href="#" class="list-group-item list-group-item-action">
+                      <div class="list-group-item-figure">
+                        <span class="fa fa-lg fa-fw fa-briefcase"></span>
+                      </div>
+                      <div class="list-group-item-body">
+                        <span class="list-group-item-text">Business</span>
+                      </div>
+                    </a> <a href="#" class="list-group-item list-group-item-action">
+                      <div class="list-group-item-figure">
+                        <span class="fa fa-lg fa-fw fa-comments"></span>
+                      </div>
+                      <div class="list-group-item-body d-flex justify-content-between align-items-center">
+                        <span class="list-group-item-text">Communication</span> <span class="badge badge-danger badge-pill">14</span>
+                      </div>
+                    </a>
+                    <div class="list-group-header"> List header </div><a href="#" class="list-group-item list-group-item-action">
+                      <div class="list-group-item-figure">
+                        <span class="fa fa-lg fa-fw fa-paint-brush"></span>
+                      </div>
+                      <div class="list-group-item-body">
+                        <span class="list-group-item-text">Design</span>
+                      </div>
+                    </a> <a href="#" class="list-group-item list-group-item-action active">
+                      <div class="list-group-item-figure">
+                        <span class="fa fa-lg fa-fw fa-graduation-cap"></span>
+                      </div>
+                      <div class="list-group-item-body">
+                        <span class="list-group-item-text">Education</span>
+                      </div>
+                    </a> <a href="#" class="list-group-item list-group-item-action">
+                      <div class="list-group-item-figure">
+                        <span class="fa fa-lg fa-fw fa-chart-line"></span>
+                      </div>
+                      <div class="list-group-item-body">
+                        <span class="list-group-item-text">Finance</span>
+                      </div>
+                    </a> <a href="#" class="list-group-item list-group-item-action">
+                      <div class="list-group-item-figure">
+                        <span class="fa fa-lg fa-fw fa-utensils"></span>
+                      </div>
+                      <div class="list-group-item-body">
+                        <span class="list-group-item-text">Food</span>
+                      </div>
+                    </a>
+                  </div><!-- /.list-group -->
+                  <!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Additional Classes </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.list-group-media</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.list-group</code> to construct highly repetitive components like <a href="https://getbootstrap.com/docs/4.2/layout/media-object/" target="_blank">Media Object</a>. </dd>
+                        <dt class="col-lg-4">
+                          <code>.list-group-reflow</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.list-group</code> to remove background color and shadow. </dd>
+                        <dt class="col-lg-4">
+                          <code>.list-group-bordered</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.list-group</code> to add border between list group item. </dd>
+                        <dt class="col-lg-4">
+                          <code>.list-group-divider</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.list-group</code> to add alternative border style. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="modal" class="section-title"> Modal </h2>
+                  <p> Use the native Bootstrap Modal element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/modal/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p>
+                  <p>
+                    <button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#exampleModal">Open: modal</button>
+                  </p><!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Additional Classes </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.modal-alert</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.modal</code> to add alert state animation. </dd>
+                        <dt class="col-lg-4">
+                          <code>.modal-dialog-scrollable</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.modal-dialog</code> to add scroll on modal dialog. </dd>
+                        <dt class="col-lg-4">
+                          <code>.modal-drawer</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.modal</code> to add scroll on modal dialog. </dd>
+                        <dt class="col-lg-4">
+                          <code>.modal-drawer-right</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.modal-dialog</code> to put <code>.modal-drawer</code> on the right position. </dd>
+                        <dt class="col-lg-4">
+                          <code>.modal-drawer-left</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.modal-dialog</code> to put <code>.modal-drawer</code> on the left position. </dd>
+                        <dt class="col-lg-4">
+                          <code>.modal-docked</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.modal</code> to put <code>.modal</code> on the bottom left position (like chat widget). </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                  <!-- Normal modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <!-- .modal-dialog -->
+                    <div class="modal-dialog" role="document">
+                      <!-- .modal-content -->
+                      <div class="modal-content">
+                        <!-- .modal-header -->
+                        <div class="modal-header">
+                          <h5 id="exampleModalLabel" class="modal-title"> Modal title </h5>
+                        </div><!-- /.modal-header -->
+                        <!-- .modal-body -->
+                        <div class="modal-body">
+                          <p> Laudantium praesentium similique natus consequuntur, quae amet, sequi non velit placeat distinctio excepturi tempore quos expedita veritatis at corporis beatae maiores iste. </p>
+                          <p> Omnis velit praesentium, incidunt voluptatibus voluptatem iure corporis minima error ipsum itaque magnam vero laborum molestiae vel. Saepe modi atque, iure dolores nulla dolor quia, eius libero ullam dicta explicabo! </p>
+                        </div><!-- /.modal-body -->
+                        <!-- .modal-footer -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        </div><!-- /.modal-footer -->
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                  </div><!-- /.modal -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="navbar" class="section-title"> Navbar </h2>
+                  <p> Use the native Bootstrap Navbar element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/navbar/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- .navbar -->
+                  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                    <a class="navbar-brand" href="#">Looper</a> <!-- toggle menu -->
+                    <button class="hamburger hamburger-squeeze hamburger-toggle d-lg-none" type="button" data-toggle="collapse" data-target="#navbarDemo" aria-controls="navbarDemo" aria-expanded="false" aria-label="Toggle navigation"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button> <!-- /toggle menu -->
+                    <!-- .navbar-collapse -->
+                    <div class="collapse navbar-collapse" id="navbarDemo">
+                      <!-- .navbar-nav -->
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">About</a>
+                        </li>
+                      </ul><!-- /.navbar-nav -->
+                      <!-- .navbar-form -->
+                      <form class="form-inline">
+                        <button class="btn btn-primary my-2 my-sm-0" type="button">Sign In</button>
+                      </form><!-- /.navbar-form -->
+                    </div><!-- /.navbar-collapse -->
+                  </nav><!-- /.navbar -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="navs" class="section-title"> Navs </h2>
+                  <p> Use the native Bootstrap Navs element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/navs/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- .card -->
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title"> Horizontal </h4>
+                      <ul class="nav">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="#">Active</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link disabled" href="#">Disabled</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div><!-- /.card -->
+                  <!-- .card -->
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title"> Vertical </h4>
+                      <nav class="nav flex-column">
+                        <a class="nav-link active" href="#">Active</a> <a class="nav-link" href="#">Link</a> <a class="nav-link" href="#">Link</a> <a class="nav-link disabled" href="#">Disabled</a>
+                      </nav>
+                    </div>
+                  </div><!-- /.card -->
+                  <!-- .card -->
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title"> Tabs </h4><!-- Nav tabs -->
+                      <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Tab 1</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Tab 2</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Tab 3</a>
+                        </li>
+                      </ul><!-- Tab panes -->
+                      <div class="tab-content p-3">
+                        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                          <span class="lead">Tab 1 content</span>
+                        </div>
+                        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2">
+                          <span class="lead">Tab 2 content</span>
+                        </div>
+                        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3">
+                          <span class="lead">Tab 3 content</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="paginations" class="section-title"> Paginations </h2>
+                  <p> Use the native Bootstrap Paginations element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/paginations/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p>
+                  <ul class="pagination">
+                    <li class="page-item disabled">
+                      <a class="page-link" href="#">«</a>
+                    </li>
+                    <li class="page-item active">
+                      <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">4</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">5</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">»</a>
+                    </li>
+                  </ul>
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="popovers" class="section-title"> Popovers </h2>
+                  <p> Use the native Bootstrap Popovers element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/popovers/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- .card -->
+                  <div class="card">
+                    <div class="card-body">
+                      <p class="text-muted"> Click buttons below to see Popover. </p>
+                      <div class="el-example">
+                        <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="Popover Title">Popover Left</button> <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="Popover Title">Popover Top</button> <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="Popover Title">Popover Bottom</button> <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="Popover Title">Popover Right</button>
+                      </div>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="progress" class="section-title"> Progress </h2>
+                  <p> Use the native Bootstrap Progress element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/progress/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- .progress -->
+                  <div class="progress mb-3">
+                    <div class="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div><!-- /.progress -->
+                  <!-- .progress -->
+                  <div class="progress mb-3">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div><!-- /.progress -->
+                  <!-- .progress -->
+                  <div class="progress mb-3">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div><!-- /.progress -->
+                  <!-- .progress -->
+                  <div class="progress mb-3">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div><!-- /.progress -->
+                  <!-- .progress -->
+                  <div class="progress mb-4">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div><!-- /.progress -->
+                  <!-- .card -->
+                  <div class="card bg-muted p-2">
+                    <div class="card-body">
+                      <p class="font-weight-bold"> Additional Classes </p>
+                      <dl class="row justfiy-content-between">
+                        <dt class="col-lg-4">
+                          <code>.progress-lg</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.progress</code> to increase the progress height large size. </dd>
+                        <dt class="col-lg-4">
+                          <code>.progress-sm</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.progress</code> to decrease the progress height small size. </dd>
+                        <dt class="col-lg-4">
+                          <code>.progress-xs</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.progress</code> to decrease the progress height extra small size. </dd>
+                        <dt class="col-lg-4">
+                          <code>.progress-animated</code>
+                        </dt>
+                        <dd class="col-lg-8"> Apply to <code>.progress</code> to animated progress bar on browser load. </dd>
+                      </dl>
+                    </div>
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="spinners" class="section-title"> Spinners </h2>
+                  <p> Indicate the loading state of a component or page. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/spinners/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p>
+                  <div class="mb-3">
+                    <!-- .spinner-border -->
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-border -->
+                    <!-- .spinner-border -->
+                    <div class="spinner-border text-secondary" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-border -->
+                    <!-- .spinner-border -->
+                    <div class="spinner-border text-success" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-border -->
+                    <!-- .spinner-border -->
+                    <div class="spinner-border text-danger" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-border -->
+                    <!-- .spinner-border -->
+                    <div class="spinner-border text-warning" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-border -->
+                    <!-- .spinner-border -->
+                    <div class="spinner-border text-info" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-border -->
+                    <!-- .spinner-border -->
+                    <div class="spinner-border text-muted" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-border -->
+                    <!-- .spinner-border -->
+                    <div class="spinner-border text-dark" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-border -->
+                  </div>
+                  <div class="mb-3">
+                    <!-- .spinner-grow -->
+                    <div class="spinner-grow text-primary" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-grow -->
+                    <!-- .spinner-grow -->
+                    <div class="spinner-grow text-secondary" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-grow -->
+                    <!-- .spinner-grow -->
+                    <div class="spinner-grow text-success" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-grow -->
+                    <!-- .spinner-grow -->
+                    <div class="spinner-grow text-danger" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-grow -->
+                    <!-- .spinner-grow -->
+                    <div class="spinner-grow text-warning" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-grow -->
+                    <!-- .spinner-grow -->
+                    <div class="spinner-grow text-info" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-grow -->
+                    <!-- .spinner-grow -->
+                    <div class="spinner-grow text-muted" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-grow -->
+                    <!-- .spinner-grow -->
+                    <div class="spinner-grow text-dark" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div><!-- /.spinner-grow -->
+                  </div>
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="toasts" class="section-title"> Toasts </h2>
+                  <p> Push notifications to your visitors with a toast, a lightweight and easily customizable alert message. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/toasts/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- toasts container -->
+                  <div aria-live="polite" aria-atomic="true">
+                    <button type="button" class="btn btn-secondary" onclick="$('#toast1').toast('show')">Toast</button> <button type="button" class="btn btn-secondary" onclick="$('#toast1, #toast2').toast('show')">Stacked</button> <button type="button" class="btn btn-secondary" onclick="$('#toast3').toast('show')">Bottom right + custom color</button> <!-- Top right & stacked -->
+                    <div style="position: fixed; top: 4.5rem; right: 1rem; z-index: 1050">
+                      <!-- .toast -->
+                      <div id="toast1" class="toast fade hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+                        <div class="toast-header">
+                          <img class="rounded mr-2" src="images/avatars/bootstrap.svg" alt="" width="20"> <strong class="mr-auto">Bootstrap toast</strong>
+                        </div>
+                        <div class="toast-body">
+                          <p> Hello, world! This is a toast message. </p>
+                        </div>
+                      </div><!-- /.toast -->
+                      <!-- .toast -->
+                      <div id="toast2" class="toast fade hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+                        <div class="toast-header">
+                          <img class="rounded mr-2" src="images/avatars/bootstrap.svg" alt="" width="20"> <strong class="mr-auto">Stacked</strong>
+                        </div>
+                        <div class="toast-body">
+                          <p> Hello, world! This is a toast message. </p>
+                        </div>
+                      </div><!-- /.toast -->
+                    </div><!-- /positioning -->
+                    <!-- Bottom right -->
+                    <div style="position: fixed; bottom: 1rem; right: 1rem; z-index: 1050">
+                      <!-- .toast -->
+                      <div id="toast3" class="toast bg-info text-white fade hide" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+                        <div class="toast-header bg-info text-white">
+                          <strong class="mr-auto">You have notofications</strong> <button type="button" class="close text-white mb-1" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="toast-body">
+                          <strong>Holy guacamole!</strong> You should check in on some of those fields below. </div>
+                      </div><!-- /.toast -->
+                    </div><!-- /positioning -->
+                  </div><!-- toasts container -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="tables" class="section-title"> Tables </h2>
+                  <p> Use the native Bootstrap Tables element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/content/tables/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- .table-responsive -->
+                  <div class="table-responsive">
+                    <!-- .table -->
+                    <table class="table">
+                      <!-- thead -->
+                      <thead>
+                        <tr>
+                          <th style="min-width:260px"> Task </th>
+                          <th> Due Date </th>
+                          <th> Estimate </th>
+                          <th> Worked </th>
+                        </tr>
+                      </thead><!-- /thead -->
+                      <!-- tbody -->
+                      <tbody>
+                        <!-- tr -->
+                        <tr>
+                          <td class="align-middle text-truncate">
+                            <a href="#project" class="tile tile-circle bg-success text-white mr-1">OS</a> <a href="#task">Ride a roller coaster</a>
+                          </td>
+                          <td class="align-middle"> Tomorrow </td>
+                          <td class="align-middle"> 48:00 </td>
+                          <td class="align-middle"> 50:02 </td>
+                        </tr><!-- /tr -->
+                        <!-- tr -->
+                        <tr>
+                          <td class="align-middle text-truncate">
+                            <a href="#project" class="tile tile-circle bg-yellow text-white mr-1">OS</a> <a href="#task">Have a picnic in the park</a>
+                          </td>
+                          <td class="align-middle"> In 2 days </td>
+                          <td class="align-middle"> 12:00 </td>
+                          <td class="align-middle"> 08:36 </td>
+                        </tr><!-- /tr -->
+                        <!-- tr -->
+                        <tr>
+                          <td class="align-middle text-truncate">
+                            <a href="#project" class="tile tile-circle bg-pink text-white mr-1">SP</a> <a href="#task">Dangle your feet off a dock</a>
+                          </td>
+                          <td class="align-middle"> Apr 07 </td>
+                          <td class="align-middle"> 6:00 </td>
+                          <td class="align-middle"> 03:11 </td>
+                        </tr><!-- /tr -->
+                      </tbody><!-- /tbody -->
+                    </table><!-- /.table -->
+                  </div><!-- /.table-responsive -->
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 id="tooltips" class="section-title"> Tooltips </h2>
+                  <p> Use the native Bootstrap Tooltips element. See the Bootstrap documentation for details. </p>
+                  <p class="mb-4">
+                    <a target="_blank" href="https://getbootstrap.com/docs/4.2/components/tooltips/"><i class="oi oi-external-link mr-2"></i>View on Bootstrap</a>
+                  </p><!-- .card -->
+                  <div class="card">
+                    <!-- .card-body -->
+                    <div class="card-body">
+                      <p class="text-muted"> Hover on buttons below to see tooltips. </p>
+                      <div class="el-example">
+                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button> <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button> <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button> <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button> <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="&lt;em&gt;Tooltip&lt;/em&gt; &lt;u&gt;with&lt;/u&gt; &lt;b&gt;HTML&lt;/b&gt;">Tooltip with HTML</button>
+                      </div>
+                    </div><!-- /.card-body -->
+                  </div><!-- /.card -->
+                </div><!-- /.section-block -->
+              </div><!-- /.page-section -->
+            </div><!-- /.page-inner -->
+            <!-- .page-sidebar -->
+            <div class="page-sidebar page-sidebar-fixed">
+              <!-- .sidebar-header -->
+              <header class="sidebar-header d-sm-none">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                      <a href="#" onclick="Looper.toggleSidebar()"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Back</a>
+                    </li>
+                  </ol>
+                </nav>
+              </header><!-- /.sidebar-header -->
+              <!-- .sidebar-section-fill -->
+              <div class="sidebar-section-fill">
+                <nav id="nav-content" class="nav flex-column mt-4">
+                  <a href="#alerts" class="nav-link smooth-scroll">Alerts</a> <a href="#badge" class="nav-link smooth-scroll">Badge</a> <a href="#breadcrumb" class="nav-link smooth-scroll">Breadcrumb</a> <a href="#buttons" class="nav-link smooth-scroll">Buttons</a> <a href="#card" class="nav-link smooth-scroll">Card</a> <a href="#dropdowns" class="nav-link smooth-scroll">Dropdowns</a> <a href="#forms" class="nav-link smooth-scroll">Forms</a> <a href="#list-group" class="nav-link smooth-scroll">List Group</a> <a href="#modal" class="nav-link smooth-scroll">Modal</a> <a href="#navbar" class="nav-link smooth-scroll">Navbar</a> <a href="#navs" class="nav-link smooth-scroll">Navs</a> <a href="#paginations" class="nav-link smooth-scroll">Paginations</a> <a href="#popovers" class="nav-link smooth-scroll">Popovers</a> <a href="#progress" class="nav-link smooth-scroll">Progress</a> <a href="#spinners" class="nav-link smooth-scroll">Spinners</a> <a href="#toasts" class="nav-link smooth-scroll">Toasts</a> <a href="#tables" class="nav-link smooth-scroll">Tables</a> <a href="#tooltips" class="nav-link smooth-scroll">Tooltips</a>
+                </nav>
+              </div><!-- /.sidebar-section-fill -->
+            </div><!-- /.page-sidebar -->
+          </div><!-- /.page -->
+        </div><!-- /.wrapper -->
+      </main><!-- /.app-main -->
+    </div><!-- /.app -->
+    <!-- BEGIN BASE JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script> <!-- END BASE JS -->
+    <!-- BEGIN PLUGINS JS -->
+    <script src="vendor/highlightjs/highlight.pack.js"></script> <!-- END PLUGINS JS -->
+    <!-- BEGIN THEME JS -->
+    <script src="javascript/theme.min.js"></script> <!-- END THEME JS -->
+    <script>
+      hljs.initHighlightingOnLoad();
+
+      function highlightText(el)
+      {
+        if (document.selection)
+        {
+          var range = document.body.createTextRange();
+          range.moveToElementText(el);
+          range.select();
+        }
+        else if (window.getSelection)
+        {
+          var range = document.createRange();
+          range.selectNodeContents(el);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+        }
+      }
+    </script>
+  </body>
+</html>

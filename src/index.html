@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <title>timevez</title>
@@ -11,53 +10,67 @@
   <script type=”text/javascript” src=”cordova.js”></script>
   <!-- Cordova end-->
 
-  <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon.png">
-  <link rel="shortcut icon" href="assets/favicon.ico">
-  <meta name="theme-color" content="#3063A0"><!-- End FAVICONS -->
-  <!-- GOOGLE FONT -->
-  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End GOOGLE FONT -->
-  <!-- BEGIN PLUGINS STYLES -->
-  <link rel="stylesheet" href="assets/vendor/open-iconic/css/open-iconic-bootstrap.min.css">
-  <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.css">
-  <link rel="stylesheet" href="assets/vendor/flatpickr/flatpickr.min.css"><!-- END PLUGINS STYLES -->
   <!-- font-awesome -->
-  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <!-- BEGIN THEME JS -->
-  <!-- <script src="assets/javascript/theme.js"></script> -->
-  <!-- END THEME JS -->
-  <!-- BEGIN PLUGINS STYLES -->
-  <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.css"><!-- END PLUGINS STYLES -->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-  <!-- BEGIN THEME STYLES -->
-  <link rel="stylesheet" href="assets/stylesheets/theme.min.css" data-skin="default">
-  <link rel="stylesheet" href="assets/stylesheets/custom.css">
-  <!-- BEGIN BASE JS -->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/popper.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-  <script src="assets/vendor/particles.js/particles.min.js"></script>
 
   <link rel="stylesheet" href="https://openlayers.org/en/v6.1.1/css/ol.css" type="text/css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css"
-    integrity="sha256-a/jNbtm7jpeKiXCShJ8YC+eNL9Abh7CBiYXHgaofUVs=" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" integrity="sha256-a/jNbtm7jpeKiXCShJ8YC+eNL9Abh7CBiYXHgaofUVs=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 
+
+  <!-- BEGIN THEME JS -->
+  <script src="assets/javascript/theme.js"></script> <!-- END THEME JS -->
+
+
+  <!-- BEGIN PLUGINS JS -->
+  <script src="assets/vendor/particles.js/particles.min.js"></script>
+  <script>
+    /**
+     * Keep in mind that your scripts may not always be executed after the theme is completely ready,
+     * you might need to observe the `theme:load` event to make sure your scripts are executed after the theme is ready.
+     */
+    $(document).on('theme:init', () =>
+    {
+      /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+      particlesJS.load('auth-header', 'assets/javascript/pages/particles.json');
+    })
+  </script> <!-- END PLUGINS JS -->
+
+
+ <!-- BEGIN BASE JS -->
+ <script src="assets/vendor/jquery/jquery.min.js"></script>
+ <script src="assets/vendor/bootstrap/js/popper.min.js"></script>
+ <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script> <!-- END BASE JS -->
+
+
+ <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon.png">
+ <link rel="shortcut icon" href="assets/favicon.ico">
+ <meta name="theme-color" content="#3063A0"><!-- Google font -->
+ <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End Google font -->
+ <!-- BEGIN PLUGINS STYLES -->
+ <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.css"><!-- END PLUGINS STYLES -->
+ <!-- BEGIN THEME STYLES -->
+ <link rel="stylesheet" href="assets/stylesheets/theme.min.css" data-skin="default">
+ <link rel="stylesheet" href="assets/stylesheets/theme-dark.min.css" data-skin="dark">
+ <link rel="stylesheet" href="assets/stylesheets/custom.css">
+ <script>
+   var skin = localStorage.getItem('skin') || 'default';
+   var isCompact = JSON.parse(localStorage.getItem('hasCompactMenu'));
+   var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+   // Disable unused skin immediately
+   disabledSkinStylesheet.setAttribute('rel', '');
+   disabledSkinStylesheet.setAttribute('disabled', true);
+   // add flag class to html immediately
+   if (isCompact == true) document.querySelector('html').classList.add('preparing-compact-menu');
+ </script><!-- END THEME STYLES -->
+     <link rel="canonical" href="https://uselooper.com">
 
 </head>
-
 <body>
   <app-root></app-root>
 </body>
-
 </html>

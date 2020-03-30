@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title> What's New | Looper - Bootstrap 4 Admin Theme </title>
+    <meta property="og:title" content="What's New">
+    <meta name="author" content="Beni Arisandi">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="Responsive admin theme build on top of Bootstrap 4">
+    <meta property="og:description" content="Responsive admin theme build on top of Bootstrap 4">
+    <link rel="canonical" href="https://uselooper.com">
+    <meta property="og:url" content="https://uselooper.com">
+    <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme">
+    <script type="application/ld+json">
+      {
+        "name": "Looper - Bootstrap 4 Admin Theme",
+        "description": "Responsive admin theme build on top of Bootstrap 4",
+        "author":
+        {
+          "@type": "Person",
+          "name": "Beni Arisandi"
+        },
+        "@type": "WebSite",
+        "url": "",
+        "headline": "What's New",
+        "@context": "http://schema.org"
+      }
+    </script><!-- End SEO tag -->
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End Google font -->
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="theme-color" content="#070B0F"><!-- End Favicons -->
+    <!-- BEGIN PLUGINS STYLES -->
+    <link rel="stylesheet" href="vendor/open-iconic/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.css">
+    <link rel="stylesheet" href="vendor/highlightjs/styles/ocean.css"><!-- END PLUGINS STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="stylesheets/theme.min.css" data-skin="default">
+    <link rel="stylesheet" href="stylesheets/theme-dark.min.css" data-skin="dark">
+    <script>
+      var skin = localStorage.getItem('skin') || 'default';
+      var isCompact = JSON.parse(localStorage.getItem('hasCompactMenu'));
+      var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+      // Disable unused skin immediately
+      disabledSkinStylesheet.setAttribute('rel', '');
+      disabledSkinStylesheet.setAttribute('disabled', true);
+      // add flag class to html immediately
+      if (isCompact == true) document.querySelector('html').classList.add('preparing-compact-menu');
+    </script><!-- END THEME STYLES -->
+  </head>
+  <body data-spy="scroll" data-target="#nav-content" data-offset="76">
+    <!-- .app -->
+    <div class="app">
+      <!--[if lt IE 10]>
+      <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
+      <![endif]-->
+      <!-- .app-header -->
+      <header class="app-header app-header-dark bg-black">
+        <!-- .top-bar -->
+        <div class="top-bar">
+          <!-- .top-bar-brand -->
+          <div class="top-bar-brand">
+            <a href="index.html" class="d-flex"><svg class="mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28" viewbox="0 0 94 68">
+                <defs>
+                  <path id="a" d="M156.538 45.644v1.04a6.347 6.347 0 0 1-1.847 3.98L127.708 77.67a6.338 6.338 0 0 1-3.862 1.839h-1.272a6.34 6.34 0 0 1-3.862-1.839L91.728 50.664a6.353 6.353 0 0 1 0-9l9.11-9.117-2.136-2.138a3.171 3.171 0 0 0-4.498 0L80.711 43.913a3.177 3.177 0 0 0-.043 4.453l-.002.003.048.047 24.733 24.754-4.497 4.5a6.339 6.339 0 0 1-3.863 1.84h-1.27a6.337 6.337 0 0 1-3.863-1.84L64.971 50.665a6.353 6.353 0 0 1 0-9l26.983-27.008a6.336 6.336 0 0 1 4.498-1.869c1.626 0 3.252.622 4.498 1.87l26.986 27.006a6.353 6.353 0 0 1 0 9l-9.11 9.117 2.136 2.138a3.171 3.171 0 0 0 4.498 0l13.49-13.504a3.177 3.177 0 0 0 .046-4.453l.002-.002-.047-.048-24.737-24.754 4.498-4.5a6.344 6.344 0 0 1 8.996 0l26.983 27.006a6.347 6.347 0 0 1 1.847 3.98zm-46.707-4.095l-2.362 2.364a3.178 3.178 0 0 0 0 4.501l2.362 2.364 2.361-2.364a3.178 3.178 0 0 0 0-4.501l-2.361-2.364z"></path>
+                </defs>
+                <use fill="currentColor" fill-rule="evenodd" transform="translate(-63 -12)" xlink:href="#a"></use>
+              </svg> <span>Documentation</span></a>
+          </div><!-- /.top-bar-brand -->
+          <!-- .top-bar-list -->
+          <div class="top-bar-list">
+            <!-- .top-bar-item -->
+            <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+              <!-- toggle menu -->
+              <button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button> <!-- /toggle menu -->
+            </div><!-- /.top-bar-item -->
+            <!-- .top-bar-item -->
+            <!-- .top-bar-item -->
+            <div class="top-bar-item top-bar-item-right pr-3 pr-lg-4">
+              <!-- .nav -->
+              <ul class="header-nav nav">
+                <!-- .nav-item -->
+                <li class="nav-item">
+                  <a class="nav-link" href="support.html"><i class="fa fa-life-ring d-sm-none"></i> <span class="d-none d-sm-inline">Support</span></a>
+                </li><!-- /.nav-item -->
+                <!-- .nav-item -->
+                <li class="nav-item has-notified">
+                  <a class="nav-link active" href="whats-new.html"><i class="fa fa-bell d-sm-none"></i> <span class="d-none d-sm-inline">What's new</span></a>
+                </li><!-- /.nav-item -->
+              </ul><!-- /.nav -->
+              <a href="https://themes.getbootstrap.com/product/looper-responsive-admin-template" class="btn btn-subtle-success border-0">Download Now</a>
+            </div><!-- /.top-bar-item -->
+          </div><!-- /.top-bar-list -->
+        </div><!-- /.top-bar -->
+      </header><!-- /.app-header -->
+      <!-- .app-aside -->
+      <aside class="app-aside app-aside-expand-md app-aside-light">
+        <!-- .aside-content -->
+        <div class="aside-content">
+          <!-- .aside-menu -->
+          <div class="aside-menu p-3">
+            <!-- .stacked-menu -->
+            <nav id="stacked-menu" class="stacked-menu">
+              <!-- .menu -->
+              <ul class="menu">
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="index.html" class="menu-link"><span class="menu-text">Getting Started</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="basic-layout.html" class="menu-link"><span class="menu-text">Basic Layout</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="build-tools.html" class="menu-link"><span class="menu-text">Build Tools</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="theming.html" class="menu-link"><span class="menu-text">Theming</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-header -->
+                <li class="menu-header">Components </li><!-- /.menu-header -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-bootstrap.html" class="menu-link"><span class="menu-text">Bootstrap</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-looper.html" class="menu-link"><span class="menu-text">Looper</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-plugins.html" class="menu-link"><span class="menu-text">Plugins</span></a>
+                </li><!-- /.menu-item -->
+              </ul><!-- /.menu -->
+            </nav><!-- /.stacked-menu -->
+          </div><!-- /.aside-menu -->
+          <!-- Skin changer -->
+          <footer class="aside-footer border-top p-2">
+            <button class="btn btn-light btn-block text-primary" data-toggle="skin"><span class="d-compact-menu-none">Night mode</span> <i class="fas fa-moon ml-1"></i></button>
+          </footer><!-- /Skin changer -->
+        </div><!-- /.aside-content -->
+      </aside><!-- /.app-aside -->
+      <!-- .app-main -->
+      <main class="app-main">
+        <!-- .wrapper -->
+        <div class="wrapper">
+          <!-- .page -->
+          <div class="page">
+            <!-- .page-inner -->
+            <div class="page-inner container">
+              <!-- .page-title-bar -->
+              <header class="page-title-bar">
+                <h1 class="page-title"> What's New </h1>
+                <p class="text-muted"> Be sure to back up your files before updating! </p>
+              </header><!-- /.page-title-bar -->
+              <!-- .page-section -->
+              <div class="page-section">
+                <div class="section-block">
+                  <p>
+                    <strong>We are nothing without you!</strong> Thanks to all of you who have contributed in every update. That let me know about bugs, feature requests, pages, or just ask about how to get started. We really appreciate it! </p>
+                </div><!-- .section-block -->
+                <div class="section-block">
+                  <h2 class="section-title">
+                    <i class="fa fa-tag fa-fw"></i> v1.4.1 (Dec 1, 2019) </h2>
+                  <ul>
+                    <li>Enhancement: Update Bootstrap 4.4.1 </li>
+                  </ul>
+                </div><!-- /.section-block -->
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 class="section-title">
+                    <i class="fa fa-tag fa-fw"></i> v1.4.0 (Nov 27, 2019) </h2>
+                  <ul>
+                    <li>Enhancement: Update Bootstrap 4.4.0 and all dependencies to latest version </li>
+                    <li>Enhancement: Support aside Compact Menu </li>
+                    <li>Enhancement: Support nested dropdown </li>
+                    <li>Enhancement: Invoice demo script to support generating invoice dynamically </li>
+                    <li>Enhancement: Move up <code>variable-custom.scss</code> order in <code>theme.scss</code> and <code>theme-dark.scss</code>
+                    </li>
+                    <li>Enhancement: Integrate nested dropdown on <code>layout-horizontal-menu.html</code>
+                    </li>
+                    <li>Enhancement: Rename <code>aside</code> fn to <code>toggleAside</code>
+                    </li>
+                    <li>New: Bootstrap Icons </li>
+                    <li>New: Optional build commands through <code>npm</code>
+                    </li>
+                    <li>Fixed: Toasts button have same color with the header in dark mode </li>
+                    <li>Fixed: Avoid hard coded <code>.page-inner-fill</code> height calculation </li>
+                    <li>Fixed: dark theme input color as <code>.input-list-item</code>
+                    </li>
+                    <li>Fixed: Data uri encoded on svg background css – see <code>$custom-select-indicator</code>
+                    </li>
+                    <li>Fixed: Instant search mobile responsive </li>
+                    <li>Remove: @import "default/components/site" </li>
+                    <li>Remove: <code>.section</code> class </li>
+                  </ul>
+                </div><!-- /.section-block -->
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 class="section-title">
+                    <i class="fa fa-tag fa-fw"></i> v1.3.0 (July 7, 2019) </h2>
+                  <ul>
+                    <li>Enhancement: Rename <code>.overflow-x</code> to <code>overflow-x-auto</code> and <code>.overflow-y</code> to <code>.overflow-y-auto</code>
+                    </li>
+                    <li>Enhancement: Make todos section (client page) dragable </li>
+                    <li>New: Bootstrap-select plugin </li>
+                    <li>New: <code>.sticker</code> component </li>
+                    <li>New: Landing page </li>
+                    <li>New: Translate position, oversizing, scaling, rotate and flip utility classes </li>
+                    <li>New: Horizontal menu layout example </li>
+                    <li>New: Instant search suggestions </li>
+                    <li>New: Password strength meter plugin </li>
+                    <li>New: Responsive headings, display(s), and lead text </li>
+                    <li>New: Responsive <code>.card-deck</code> classes (<code>.card-deck-{xs|sm|md|lg|xl}</code>) </li>
+                    <li>New: Responsive <code>.container</code> and <code>.container-fluid</code> (<code>.container-{xs|sm|md|lg|xl}</code> and <code>.container-fluid-{xs|sm|md|lg|xl}</code>) </li>
+                    <li>Fixed: Floating button position on mobile devices </li>
+                    <li>Fixed: Header alignment bug on ie11 </li>
+                    <li>Fixed: Select menu bug on dark skin </li>
+                    <li>Fixed: Member list modal </li>
+                    <li>Fixed: Placeholder bug on <code>.form-label-group</code> autofocus </li>
+                    <li>Fixed: <code>.dropdown-arrow</code> placement bug </li>
+                    <li>Fixed: Dropup, dropleft, and dropright placement bug </li>
+                    <li>Fixed: Flatpickr daterange data-default-date selection </li>
+                    <li>Fixed: Datatables copy notification on dark skin </li>
+                    <li>Fixed: Font color datatables print view on dark skin </li>
+                    <li>Fixed: <code>.input-group</code> validation feedback text </li>
+                    <li>Deprecated: <code>.section-deck</code> class. Please use <code>.card-deck-xl</code> instead </li>
+                    <li>Deprecated: <code>.section</code> class </li>
+                    <li>Deprecated: <code>default/components/site.scss</code> file </li>
+                    <li>Removed: <code>.gitignore</code> from ship package </li>
+                  </ul>
+                </div><!-- /.section-block -->
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 class="section-title">
+                    <i class="fa fa-tag fa-fw"></i> v1.2.1 (March 5, 2019) </h2>
+                  <ul>
+                    <li>Enhancement: Update Bootstrap v4.3.1 and all dependencies to latest version </li>
+                    <li>Enhancement: Rename <code>.modal-dialog-overflow</code> to <code>.modal-dialog-scrollable</code>
+                    </li>
+                    <li>New: Custom input number </li>
+                    <li>Fixed: Validation classes on <code>.input-group</code>
+                    </li>
+                    <li>Removed: Loader component (please use Bootstrap spinner instead) </li>
+                  </ul>
+                </div><!-- /.section-block -->
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 class="section-title">
+                    <i class="fa fa-tag fa-fw"></i> v1.2.0 (January 29, 2019) </h2>
+                  <ul>
+                    <li>Enhancement: Update Bootstrap v4.2.1 and all dependencies to latest version </li>
+                    <li>Enhancement: Integrate our steps component width bs-stepper </li>
+                    <li>Enhancement: Make switchers accessible, label support, and size lg variant </li>
+                    <li>Enhancement: Separate our <code>@mixin</code>s to <code>_mixins.scss</code> file </li>
+                    <li>New: Invoice pages (list and details) </li>
+                    <li>New: Datatables responsive view with nested rows </li>
+                    <li>New: Flatpickr month view demo (beta) </li>
+                    <li>New: Text mask plugin </li>
+                    <li>New: Parsley.js – form validation </li>
+                    <li>New: bs-stepper plugin </li>
+                    <li>New: html2pdf plugin </li>
+                    <li>Fixed: NPM security issues and <code>404</code> error </li>
+                    <li>Fixed: Some minor bugs with zindex </li>
+                    <li>Deprecated: Looper loading component – please use bootstrap spinners instead </li>
+                    <li>Removed: Deprecated plugins </li>
+                  </ul>
+                </div><!-- /.section-block -->
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 class="section-title">
+                    <i class="fa fa-tag fa-fw"></i> v1.1.1 (November 15, 2018) </h2>
+                  <ul>
+                    <li>Enhancement: Generate series of <code>.app-aside-expand-*</code> responsive classes on <code>.aside</code> (now we dont need <code>.has-fullwidth</code> class) </li>
+                    <li>Enhancement: Adding <code>.modal-docked</code> behavior to <code>.modal</code> – see <code>component-general.html</code> page </li>
+                    <li>Enhancement: skinPerform method – avoid fade transition and white splash background on page load </li>
+                    <li>Fixed: Gantt chart dragging bugs on firefox </li>
+                    <li>Fixed: <code>.top-bar-seacrh</code> input color on dark skin </li>
+                    <li>Fixed: object-fit issue on IE </li>
+                    <li>Fixed: Floating label bug on IE </li>
+                  </ul>
+                </div><!-- /.section-block -->
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 class="section-title">
+                    <i class="fa fa-tag fa-fw"></i> v1.1.0 (November 05, 2018) </h2>
+                  <ul>
+                    <li>Enhancement: Make content layout fluid </li>
+                    <li>Enhancement: Merge <code>pace.scss</code> and <code>quill.scss</code> to <code>_plugin.scss</code>
+                    </li>
+                    <li>Enhancement: Handle autofocus input in modal/dropdown components </li>
+                    <li>Enhancement: Increase <code>.app-aside</code> zindex on screen md & up </li>
+                    <li>Enhancement: Re-order main menu </li>
+                    <li>Enhancement: Rewrite theme script using ES2015 class </li>
+                    <li>Enhancement: Refactoring SCSS files and folders </li>
+                    <li>Enhancement: Switching between aside with light or dark background </li>
+                    <li>Enhancement: Switching between header with light or dark background </li>
+                    <li>Enhancement: Adding fluid width & expand classes for sidebar (now you can show the sidebar only when you need it) </li>
+                    <li>Enhancement: Page fullscreen behavior </li>
+                    <li>Enhancement: Board page </li>
+                    <li>Enhancement: Message page </li>
+                    <li>Enhancement: Dropdown datepicker </li>
+                    <li>Enhancement: Banner message component </li>
+                    <li>Enhancement: Subtle colors (use rgba format) </li>
+                    <li>Enhancement: Jqvmap zoomin/out buttons </li>
+                    <li>Enhancement: Pagination active bg </li>
+                    <li>Enhancement: Update stacked-menu bg to transparent </li>
+                    <li>Enhancement: Update default sidebar-bg to white </li>
+                    <li>Enhancement: Update datatables sort icons </li>
+                    <li>Enhancement: Update browserlist in <code>gulpfile.js</code>
+                    </li>
+                    <li>New: Dark skin </li>
+                    <li>New: Client page </li>
+                    <li>New: Teams page </li>
+                    <li>New: Team page </li>
+                    <li>New: Project page </li>
+                    <li>New: Gantt chart </li>
+                    <li>New: Gantt view page </li>
+                    <li>New: Calendar page </li>
+                    <li>New: Create new task modal </li>
+                    <li>New: View / edit task modal </li>
+                    <li>New: New tasks list input </li>
+                    <li>New: Payment method section to user-billing page </li>
+                    <li>New: Mention component </li>
+                    <li>New: Avatar-group transition <code>.avatar-group-animated</code>
+                    </li>
+                    <li>New: Custom varibles file <code>_variable-custom.scss</code> to easily override theme variables </li>
+                    <li>New: Filterlist fn to theme script </li>
+                    <li>New: Scrollable content to tasks component </li>
+                    <li>New: Modal right & left </li>
+                    <li>New: Flagging class for macos due to line-height render issue between font-family </li>
+                    <li>Fixed: Perfect scrollbar appearance issue in <code>.aside-menu</code>
+                    </li>
+                    <li>Fixed: Overlap flatpickr zindex in modal </li>
+                    <li>Fixed: <code>.message-title</code> line-height </li>
+                    <li>Fixed: Form group size height </li>
+                    <li>Fixed: Knobify footer item </li>
+                    <li>Deprecated: Toastr </li>
+                  </ul>
+                </div><!-- /.section-block -->
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 class="section-title">
+                    <i class="fa fa-tag fa-fw"></i> v1.0.3 (Not Published) </h2>
+                  <ul>
+                    <li>Enhancement: Update Bootstrap v4.1.3 and all dependencies to latest version </li>
+                    <li>Enhancement: Improve grays color </li>
+                    <li>Enhancement: Clean up and refactoring some scss files </li>
+                    <li>New: Animation to <code>.progress</code>
+                    </li>
+                    <li>Fixed: Minor bugs and more </li>
+                  </ul>
+                </div><!-- /.section-block -->
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 class="section-title">
+                    <i class="fa fa-tag fa-fw"></i> v1.0.2 (June 22, 2018) </h2>
+                  <ul>
+                    <li>Enhancement: Addressing details information for plugins (plugins docs) </li>
+                    <li>Enhancement: Renamed <code>.app-tasks</code> page to <code>.app-board</code>
+                    </li>
+                    <li>Enhancement: Truncated long menu and <code>.btn-account</code> on aside panel </li>
+                    <li>Enhancement: README file </li>
+                    <li>New: footer section </li>
+                    <li>New: <code>package-lock.json</code> to ship folder to avoid failed installation on windows machines </li>
+                    <li>New: Table filter page (big filtering form for table view) </li>
+                    <li>New: Summernote plugin </li>
+                    <li>New: Bootstrap TouchSpin plugin (number input) </li>
+                    <li>New: jsTree plugin </li>
+                    <li>Fixed: loader on floating label (form input) </li>
+                    <li>Fixed: missing <code>.tile-xl</code> and <code>.tile-xxl</code>
+                    </li>
+                    <li>Fixed: not appropriate line-height on some components (button, input, nav-link, tile, avatar, etc) </li>
+                    <li>Fixed: some minor bugs and broken links </li>
+                    <li>Deprecated: Bootstrap Treeview plugin (will remove on next release) </li>
+                    <li>Removed: Bower from our Build System </li>
+                  </ul>
+                </div><!-- /.section-block -->
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 class="section-title">
+                    <i class="fa fa-tag fa-fw"></i> v1.0.1 (May 13, 2018) </h2>
+                  <ul>
+                    <li>Enhancement: Update Bootstrap v4.1.1 and all dependencies to latest version </li>
+                    <li>Enhancement: Refactoring form-basic page to provide a better experience for you </li>
+                    <li>Enhancement: Included datatables buttons to datatables page </li>
+                    <li>Enhancement: Integrated photoswipe to feeds and conversation page </li>
+                    <li>New: Interactivity checkbox on table-basic page </li>
+                    <li>Fixed: Unconsistent style on some components states (btn-account, form validation, etc) </li>
+                    <li>Fixed: Minor bugs on looper styles </li>
+                  </ul>
+                </div><!-- /.section-block -->
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 class="section-title">
+                    <i class="fa fa-tag fa-fw"></i> v1.0.0 (April 28, 2018) </h2>
+                  <ul>
+                    <li>Initial release </li>
+                  </ul>
+                </div><!-- /.section-block -->
+              </div><!-- /.page-section -->
+            </div><!-- /.page-inner -->
+          </div><!-- /.page -->
+        </div><!-- /.wrapper -->
+      </main><!-- /.app-main -->
+    </div><!-- /.app -->
+    <!-- BEGIN BASE JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script> <!-- END BASE JS -->
+    <!-- BEGIN PLUGINS JS -->
+    <script src="vendor/highlightjs/highlight.pack.js"></script> <!-- END PLUGINS JS -->
+    <!-- BEGIN THEME JS -->
+    <script src="javascript/theme.min.js"></script> <!-- END THEME JS -->
+    <script>
+      hljs.initHighlightingOnLoad();
+
+      function highlightText(el)
+      {
+        if (document.selection)
+        {
+          var range = document.body.createTextRange();
+          range.moveToElementText(el);
+          range.select();
+        }
+        else if (window.getSelection)
+        {
+          var range = document.createRange();
+          range.selectNodeContents(el);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+        }
+      }
+    </script>
+  </body>
+</html>

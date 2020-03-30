@@ -9,6 +9,7 @@ import {
     UserListComponent,
     AttendanceFormComponent,
     AttendanceListComponent,
+    DashboardComponent
 } from "./components/index";
 
 
@@ -22,8 +23,9 @@ const routes: Routes = [
             { path: 'user-form', component: UserFormComponent },
             { path: 'attendance-form', component: AttendanceFormComponent },
             { path: 'attendance', component: AttendanceListComponent },
+            { path: 'dashboard', component: DashboardComponent },
             // otherwise redirect to home
-            { path: '**', redirectTo: "user" },
+            { path: '**', redirectTo: "dashboard" },
         ]
     }
 ];

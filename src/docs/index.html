@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title> Getting Started | Looper - Bootstrap 4 Admin Theme </title>
+    <meta property="og:title" content="Getting Started">
+    <meta name="author" content="Beni Arisandi">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="Responsive admin theme build on top of Bootstrap 4">
+    <meta property="og:description" content="Responsive admin theme build on top of Bootstrap 4">
+    <link rel="canonical" href="https://uselooper.com">
+    <meta property="og:url" content="https://uselooper.com">
+    <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme">
+    <script type="application/ld+json">
+      {
+        "name": "Looper - Bootstrap 4 Admin Theme",
+        "description": "Responsive admin theme build on top of Bootstrap 4",
+        "author":
+        {
+          "@type": "Person",
+          "name": "Beni Arisandi"
+        },
+        "@type": "WebSite",
+        "url": "",
+        "headline": "Getting Started",
+        "@context": "http://schema.org"
+      }
+    </script><!-- End SEO tag -->
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End Google font -->
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="theme-color" content="#070B0F"><!-- End Favicons -->
+    <!-- BEGIN PLUGINS STYLES -->
+    <link rel="stylesheet" href="vendor/open-iconic/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.css">
+    <link rel="stylesheet" href="vendor/highlightjs/styles/ocean.css"><!-- END PLUGINS STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="stylesheets/theme.min.css" data-skin="default">
+    <link rel="stylesheet" href="stylesheets/theme-dark.min.css" data-skin="dark">
+    <script>
+      var skin = localStorage.getItem('skin') || 'default';
+      var isCompact = JSON.parse(localStorage.getItem('hasCompactMenu'));
+      var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+      // Disable unused skin immediately
+      disabledSkinStylesheet.setAttribute('rel', '');
+      disabledSkinStylesheet.setAttribute('disabled', true);
+      // add flag class to html immediately
+      if (isCompact == true) document.querySelector('html').classList.add('preparing-compact-menu');
+    </script><!-- END THEME STYLES -->
+  </head>
+  <body data-spy="scroll" data-target="#nav-content" data-offset="76">
+    <!-- .app -->
+    <div class="app">
+      <!--[if lt IE 10]>
+      <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
+      <![endif]-->
+      <!-- .app-header -->
+      <header class="app-header app-header-dark bg-black">
+        <!-- .top-bar -->
+        <div class="top-bar">
+          <!-- .top-bar-brand -->
+          <div class="top-bar-brand">
+            <a href="index.html" class="d-flex"><svg class="mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28" viewbox="0 0 94 68">
+                <defs>
+                  <path id="a" d="M156.538 45.644v1.04a6.347 6.347 0 0 1-1.847 3.98L127.708 77.67a6.338 6.338 0 0 1-3.862 1.839h-1.272a6.34 6.34 0 0 1-3.862-1.839L91.728 50.664a6.353 6.353 0 0 1 0-9l9.11-9.117-2.136-2.138a3.171 3.171 0 0 0-4.498 0L80.711 43.913a3.177 3.177 0 0 0-.043 4.453l-.002.003.048.047 24.733 24.754-4.497 4.5a6.339 6.339 0 0 1-3.863 1.84h-1.27a6.337 6.337 0 0 1-3.863-1.84L64.971 50.665a6.353 6.353 0 0 1 0-9l26.983-27.008a6.336 6.336 0 0 1 4.498-1.869c1.626 0 3.252.622 4.498 1.87l26.986 27.006a6.353 6.353 0 0 1 0 9l-9.11 9.117 2.136 2.138a3.171 3.171 0 0 0 4.498 0l13.49-13.504a3.177 3.177 0 0 0 .046-4.453l.002-.002-.047-.048-24.737-24.754 4.498-4.5a6.344 6.344 0 0 1 8.996 0l26.983 27.006a6.347 6.347 0 0 1 1.847 3.98zm-46.707-4.095l-2.362 2.364a3.178 3.178 0 0 0 0 4.501l2.362 2.364 2.361-2.364a3.178 3.178 0 0 0 0-4.501l-2.361-2.364z"></path>
+                </defs>
+                <use fill="currentColor" fill-rule="evenodd" transform="translate(-63 -12)" xlink:href="#a"></use>
+              </svg> <span>Documentation</span></a>
+          </div><!-- /.top-bar-brand -->
+          <!-- .top-bar-list -->
+          <div class="top-bar-list">
+            <!-- .top-bar-item -->
+            <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+              <!-- toggle menu -->
+              <button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button> <!-- /toggle menu -->
+            </div><!-- /.top-bar-item -->
+            <!-- .top-bar-item -->
+            <!-- .top-bar-item -->
+            <div class="top-bar-item top-bar-item-right pr-3 pr-lg-4">
+              <!-- .nav -->
+              <ul class="header-nav nav">
+                <!-- .nav-item -->
+                <li class="nav-item">
+                  <a class="nav-link" href="support.html"><i class="fa fa-life-ring d-sm-none"></i> <span class="d-none d-sm-inline">Support</span></a>
+                </li><!-- /.nav-item -->
+                <!-- .nav-item -->
+                <li class="nav-item has-notified">
+                  <a class="nav-link" href="whats-new.html"><i class="fa fa-bell d-sm-none"></i> <span class="d-none d-sm-inline">What's new</span></a>
+                </li><!-- /.nav-item -->
+              </ul><!-- /.nav -->
+              <a href="https://themes.getbootstrap.com/product/looper-responsive-admin-template" class="btn btn-subtle-success border-0">Download Now</a>
+            </div><!-- /.top-bar-item -->
+          </div><!-- /.top-bar-list -->
+        </div><!-- /.top-bar -->
+      </header><!-- /.app-header -->
+      <!-- .app-aside -->
+      <aside class="app-aside app-aside-expand-md app-aside-light">
+        <!-- .aside-content -->
+        <div class="aside-content">
+          <!-- .aside-menu -->
+          <div class="aside-menu p-3">
+            <!-- .stacked-menu -->
+            <nav id="stacked-menu" class="stacked-menu">
+              <!-- .menu -->
+              <ul class="menu">
+                <!-- .menu-item -->
+                <li class="menu-item has-active">
+                  <a href="index.html" class="menu-link"><span class="menu-text">Getting Started</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="basic-layout.html" class="menu-link"><span class="menu-text">Basic Layout</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="build-tools.html" class="menu-link"><span class="menu-text">Build Tools</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="theming.html" class="menu-link"><span class="menu-text">Theming</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-header -->
+                <li class="menu-header">Components </li><!-- /.menu-header -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-bootstrap.html" class="menu-link"><span class="menu-text">Bootstrap</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-looper.html" class="menu-link"><span class="menu-text">Looper</span></a>
+                </li><!-- /.menu-item -->
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="components-plugins.html" class="menu-link"><span class="menu-text">Plugins</span></a>
+                </li><!-- /.menu-item -->
+              </ul><!-- /.menu -->
+            </nav><!-- /.stacked-menu -->
+          </div><!-- /.aside-menu -->
+          <!-- Skin changer -->
+          <footer class="aside-footer border-top p-2">
+            <button class="btn btn-light btn-block text-primary" data-toggle="skin"><span class="d-compact-menu-none">Night mode</span> <i class="fas fa-moon ml-1"></i></button>
+          </footer><!-- /Skin changer -->
+        </div><!-- /.aside-content -->
+      </aside><!-- /.app-aside -->
+      <!-- .app-main -->
+      <main class="app-main">
+        <!-- .wrapper -->
+        <div class="wrapper">
+          <!-- .page -->
+          <div class="page has-sidebar has-sidebar-expand-xl">
+            <!-- .page-inner -->
+            <div class="page-inner">
+              <!-- .page-title-bar -->
+              <header class="page-title-bar">
+                <h1 id="overview" class="page-title"> Overview </h1>
+                <p class="text-muted"> Everthing you need to know to get up and running with Looper. </p><button class="btn btn-dark btn-floated d-sm-block d-xl-none" type="button" data-toggle="sidebar"><i class="fa fa-th-list"></i></button>
+              </header><!-- /.page-title-bar -->
+              <!-- .page-section -->
+              <div class="page-section">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h2 class="section-title"> Intro </h2>
+                  <p> Hi there! Thank you for using Looper Theme! This theme build on top of latest Bootstrap 4 to help you speed up your project. Rather than focusing on pixels, you can focus on application logic. This theme has been lovingly and carefully crafted by Me—<a href="https://twitter.com/StilearningTwit" target="_blank">Beni Arisandi</a> with focus on simplicity, user experience, interactions and flows. Since this theme is based on Bootstrap, you can does everything that Bootstrap itself does. There are also a lot of custom and new components with usage example on <a href="https://uselooper.com" target="_blank">Demo Pages</a>, and easy to use build tools. </p>
+                  <p> To get better result, please familiarize your self with following: </p>
+                  <ul>
+                    <li>If you are not familiar with Bootstrap. Please get an overview of <a href="http://getbootstrap.com/docs" target="_blank">Official Bootstrap Documentations</a> including markup, styles, components, features and everthing that bootstrap does. </li>
+                    <li>Explore the <a href="https://uselooper.com/component-general.html" target="_blank">Looper Demo</a> page (especially on Interfaces section) to familiarize your self with existing components and plugins which you can incorporate into your designs. </li>
+                    <li>Review the <a href="https://uselooper.com/component-general.html" target="_blank">Looper Pages</a> section, each pages provides reusable class and components. You can minimalize your custom styles by understanding the flows. </li>
+                    <li>Considering about limitation; Since this theme based on Bootstrap please see <a href="http://getbootstrap.com/docs/4.4/getting-started/browsers-devices/" target="_blank">Browsers and Devices</a> that are supported by Bootstrap. </li>
+                  </ul>
+                  <p> For more explanation about using Looper, theming and custom build, read through the docs. Please let me know about your pain-point with Looper and how we can make it better for you. </p>
+                  <div class="alert alert-info"> For me, writing in english is 10x more harder than writing in code. I apologize for any typo and grammar, both on Demo Pages and this Documentation. </div>
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h1 id="content" class="page-title"> Contents </h1>
+                  <p> Once downloaded, unzip the compressed folder. On top level directory structure of Looper Theme, you'll see something like this: </p>
+                  <pre><code class="markdown">looper-v1.4.1/
+├── dist/
+├── src/
+├── .babelrc
+├── .editorconfig
+├── .gitattributes
+├── .gitignore
+├── CHANGELOG.md
+├── gulpfile.js
+├── package-lock.json
+├── package.json
+└── README.md</code></pre>
+                  <h2 class="section-title"> Dist </h2>
+                  <p> The <code>dist</code> directory is where all compiled files goes. <strong>The easiest</strong> way to using this theme is copying the <code>assets</code> folder in this directory to your existing project. This directory also contains the <code>docs</code> folder. See our <a href="build-tools.html">Gulp tasks</a> for more information about how this directory was created. </p>
+                  <h2 class="section-title"> Src </h2>
+                  <p> The <code>src</code> directory is where all <strong>Source Files</strong> are located, including demo files, data generator, snippets, assets, and docs. </p>
+                </div><!-- /.section-block -->
+                <hr class="my-5">
+                <!-- .section-block -->
+                <div class="section-block">
+                  <h1 id="quick-start" class="page-title"> Quick Start </h1>
+                  <p> Be sure you have minimal requirement with the latest version of Looper template. After copying the <code>assets</code> folder in <code>dist</code> directory to your existing project, then following steps below: </p>
+                  <h2 class="section-title"> HTML5 doctype </h2>
+                  <p> Looper utilizing certain HTML and CSS elements that requires a applications. So make sure that you use it at your project documents. </p>
+                  <pre><code class="html">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  ...
+&lt;/html&gt;</code></pre>
+                  <h2 class="section-title"> Responsive meta tag </h2>
+                  <p> Looper is mobile first design, so you should include the <strong>responsive viewport meta tag</strong> to your <code>&lt;head&gt;</code>
+                  </p>
+                  <pre><code class="html">&lt;meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;</code></pre>
+                  <h2 class="section-title"> Stylesheets </h2>
+                  <p> All css files that you get are the result of compilation of SCSS files. We have divided it into small pieces which are easy to customized. </p>
+                  <p> Below is required css that you need to include into your project: </p>
+                  <pre><code class="html">&lt;!-- BEGIN PLUGINS STYLES --&gt;
+&lt;!-- plugins styles goes here --&gt;
+&lt;!-- END PLUGINS STYLES --&gt;
+
+&lt;!-- BEGIN THEME STYLES --&gt;
+&lt;link rel="stylesheet" href="assets/stylesheets/theme.min.css" data-skin="default"&gt;
+&lt;link rel="stylesheet" href="assets/stylesheets/theme-dark.min.css" data-skin="dark"&gt;
+&lt;link rel="stylesheet" href="assets/stylesheets/custom.css"&gt;
+&lt;!-- Disable unused skin immediately --&gt;
+&lt;script&gt;
+  var skin = localStorage.getItem('skin') || 'default';
+  var unusedLink = document.querySelector('link[data-skin]:not([data-skin="'+ skin +'"])');
+
+  unusedLink.setAttribute('rel', '');
+  unusedLink.setAttribute('disabled', true);
+&lt;/script&gt;
+&lt;!-- END THEME STYLES --&gt;
+
+&lt;!-- BEGIN PAGE LEVEL STYLES --&gt;
+&lt;!-- styles for specific page goes here --&gt;
+&lt;!-- END PAGE LEVEL STYLES --&gt;</code></pre>
+                  <p> You should put the css files in the order above. <strong>You don't need</strong> to include <code>bootstrap.min.css</code> as we already have it in <code>theme{-*}.min.css</code> file. If you consider to write your own styles, then <code>custom.scss</code> file is a great place to go. Feel free to remove <code>custom.css</code> from your markup if you don't need it. </p>
+                  <h2 class="section-title"> Javascript </h2>
+                  <p> Below is required JS files that you need to add to your markup when using Looper. </p>
+                  <pre><code class="html">&lt;!-- BEGIN BASE JS --&gt;
+&lt;script src="assets/vendor/jquery/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/vendor/bootstrap/js/popper.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/vendor/bootstrap/js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;!-- END BASE JS --&gt;
+
+&lt;!-- BEGIN PLUGINS JS --&gt;
+&lt;script src="assets/vendor/stacked-menu/stacked-menu.min.js"&gt;&lt;/script&gt;
+&lt;!-- END PLUGINS JS --&gt;
+
+&lt;!-- BEGIN THEME JS --&gt;
+&lt;script src="assets/javascript/theme.min.js"&gt;&lt;/script&gt;
+&lt;!-- END THEME JS --&gt;
+
+&lt;!-- BEGIN PAGE LEVEL JS --&gt;
+&lt;!-- your js for specific page goes here --&gt;
+&lt;!-- END PAGE LEVEL JS --&gt;</code></pre>
+                  <p> Our <code>theme.js</code> is writed in ES2015 class. Looper also provide blank template that you can use to write your own scripts (just duplicate and rename it) or you can use your own style. </p>
+                  <p>
+                    <strong>Keep in mind</strong> that (sometimes) your scripts may not always be executed after the theme is completely ready, you might need to observe the `theme:init` event to make sure your scripts are executed after the theme is ready. </p>
+                  <pre><code class="javascript">$(document).on('theme:init', () =&gt; {
+  // write your script here
+})</code></pre>
+                  <h2 class="section-title"> Starter template </h2>
+                  <p> Put it all together and your pages should look like this: </p>
+                  <pre><code class="html">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;!-- Required meta tags --&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
+
+    &lt;!-- BEGIN PLUGINS STYLES --&gt;
+    &lt;!-- plugins styles goes here --&gt;
+    &lt;!-- END PLUGINS STYLES --&gt;
+
+    &lt;!-- BEGIN THEME STYLES --&gt;
+    &lt;link rel="stylesheet" href="assets/stylesheets/theme.min.css" data-skin="default"&gt;
+    &lt;link rel="stylesheet" href="assets/stylesheets/theme-dark.min.css" data-skin="dark"&gt;
+    &lt;link rel="stylesheet" href="assets/stylesheets/custom.css"&gt;
+    &lt;!-- Disable unused skin immediately --&gt;
+    &lt;script&gt;
+      var skin = localStorage.getItem('skin') || 'default';
+      var unusedLink = document.querySelector('link[data-skin]:not([data-skin="'+ skin +'"])');
+
+      unusedLink.setAttribute('rel', '');
+      unusedLink.setAttribute('disabled', true);
+    &lt;/script&gt;
+    &lt;!-- END THEME STYLES --&gt;
+
+    &lt;!-- BEGIN PAGE LEVEL STYLES --&gt;
+    &lt;!-- styles for specific page goes here --&gt;
+    &lt;!-- END PAGE LEVEL STYLES --&gt;
+
+    &lt;title&gt;Hello, world!&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class="app"&gt;
+      Hello, world!
+    &lt;/div&gt;
+
+    &lt;!-- jQuery first, then Popper.js, then Bootstrap JS --&gt;
+    &lt;!-- BEGIN BASE JS --&gt;
+    &lt;script src="assets/vendor/jquery/jquery.min.js"&gt;&lt;/script&gt;
+    &lt;script src="assets/vendor/bootstrap/js/popper.min.js"&gt;&lt;/script&gt;
+    &lt;script src="assets/vendor/bootstrap/js/bootstrap.min.js"&gt;&lt;/script&gt;
+    &lt;!-- END BASE JS --&gt;
+
+    &lt;!-- BEGIN PLUGINS JS --&gt;
+    &lt;script src="assets/vendor/stacked-menu/stacked-menu.min.js"&gt;&lt;/script&gt;
+    &lt;!-- END PLUGINS JS --&gt;
+
+    &lt;!-- BEGIN THEME JS --&gt;
+    &lt;script src="assets/javascript/theme.min.js"&gt;&lt;/script&gt;
+    &lt;!-- END THEME JS --&gt;
+
+    &lt;!-- BEGIN PAGE LEVEL JS --&gt;
+    &lt;!-- your js for specific page goes here --&gt;
+    &lt;!-- END PAGE LEVEL JS --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div><!-- /.section-block -->
+              </div><!-- /.page-section -->
+            </div><!-- /.page-inner -->
+            <!-- .page-sidebar -->
+            <div class="page-sidebar page-sidebar-fixed">
+              <!-- .sidebar-header -->
+              <header class="sidebar-header d-sm-none">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                      <a href="#" onclick="Looper.toggleSidebar()"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Back</a>
+                    </li>
+                  </ol>
+                </nav>
+              </header><!-- /.sidebar-header -->
+              <!-- .sidebar-section-fill -->
+              <div class="sidebar-section-fill">
+                <nav id="nav-content" class="nav flex-column mt-4">
+                  <a href="#overview" class="nav-link smooth-scroll">Overview</a> <a href="#content" class="nav-link smooth-scroll">Content</a> <a href="#quick-start" class="nav-link smooth-scroll">Quick start</a>
+                </nav>
+              </div><!-- /.sidebar-section-fill -->
+            </div><!-- /.page-sidebar -->
+          </div><!-- /.page -->
+        </div><!-- /.wrapper -->
+      </main><!-- /.app-main -->
+    </div><!-- /.app -->
+    <!-- BEGIN BASE JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script> <!-- END BASE JS -->
+    <!-- BEGIN PLUGINS JS -->
+    <script src="vendor/highlightjs/highlight.pack.js"></script> <!-- END PLUGINS JS -->
+    <!-- BEGIN THEME JS -->
+    <script src="javascript/theme.min.js"></script> <!-- END THEME JS -->
+    <script>
+      hljs.initHighlightingOnLoad();
+
+      function highlightText(el)
+      {
+        if (document.selection)
+        {
+          var range = document.body.createTextRange();
+          range.moveToElementText(el);
+          range.select();
+        }
+        else if (window.getSelection)
+        {
+          var range = document.createRange();
+          range.selectNodeContents(el);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -4,3 +4,4 @@ export * from './user/form/user-form.component';
 export * from './user/list/user-list.component';
 export * from './attendance/form/attendance-form.component';
 export * from './attendance/list/attendance-list.component';
+export * from './dashboard/dashboard.component';

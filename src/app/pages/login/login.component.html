@@ -21,33 +21,40 @@
     </header>
     <form class="auth-form" style="width: 100%;" name="loginForm" #loginForm="ngForm">
         <div class="form-group">
-            <mat-form-field>
-                <input matInput type="text" required #userName="ngModel" id="name" name="name"
-                    [(ngModel)]="loginModel.username" placeholder="Enter UserName">
-            </mat-form-field>
-
+            <div class="form-label-group">
+                <input type="text" id="username" name="username" required class="form-control" #userName="ngModel"
+                    placeholder="Enter UserName" [(ngModel)]="loginModel.username" autofocus=""> <label
+                    for="inputUser">Username</label>
+            </div>
             <div *ngIf="userName.errors?.required && userName.touched " class="alert alert-danger">
                 User Name is Required.
             </div>
         </div>
         <div class="form-group">
-            <mat-form-field>
-                <input matInput type="password" required #password="ngModel" id="description" name="description"
-                    [(ngModel)]="loginModel.password" placeholder="Enter Password">
-            </mat-form-field>
-
+            <div class="form-label-group">
+                <input type="password" id="inputPassword" required #password="ngModel" id="password" name="password"
+                    class="form-control" [(ngModel)]="loginModel.password" placeholder="Enter Password"> <label
+                    for="inputPassword">Password</label>
+            </div>
             <div *ngIf="password.errors?.required && password.touched " class="alert alert-danger">
                 Password is Required.
             </div>
         </div>
         <div class="form-group">
-            <button class="btn btn-lg btn-primary btn-block" (click)="login()" [disabled]="loginForm.invalid" type="submit">Sign In</button>
+            <button class="btn btn-lg btn-primary btn-block" (click)="login()" [disabled]="loginForm.invalid"
+                type="submit">Sign In</button>
         </div>
-        <div class="text-center pt-3">
-            <a href="auth-recovery-username.html" class="link">Forgot Username?</a> <span class="mx-2">·</span> <a
-                href="auth-recovery-password.html" class="link">Forgot Password?</a>
+        <div class="form-group text-center">
+            <div class="custom-control custom-control-inline custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="remember-me"> <label
+                    class="custom-control-label" for="remember-me">Keep me sign in</label>
+            </div>
         </div>
     </form>
+    <div class="text-center pt-3">
+        <a href="auth-recovery-username.html" class="link">Forgot Username?</a> <span class="mx-2">·</span> <a
+            href="auth-recovery-password.html" class="link">Forgot Password?</a>
+    </div>
     <footer class="auth-footer"> © 2018 All Rights Reserved. <a href="#">Privacy</a> and <a href="#">Terms</a>
     </footer>
 </main>
