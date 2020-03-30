@@ -18,12 +18,13 @@ const routes: Routes = [
         path: '',
         component: AdminRootComponent,
         children: [
-            { path: '', redirectTo: "/user", pathMatch: 'full' },
+            { path: '', redirectTo: "/dashboard", pathMatch: 'full' },
+            { path: 'dashboard', component: DashboardComponent },
             { path: 'user', component: UserListComponent },
             { path: 'user-form', component: UserFormComponent },
             { path: 'attendance-form', component: AttendanceFormComponent },
             { path: 'attendance', component: AttendanceListComponent },
-            { path: 'dashboard', component: DashboardComponent },
+ 
             // otherwise redirect to home
             { path: '**', redirectTo: "dashboard" },
         ]

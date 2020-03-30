@@ -37,6 +37,8 @@
     "fa-icons": "^0.2.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
+    "jquery-ui": "^1.12.1",
+    "jquery-ui-dist": "^1.12.1",
     "jsgrid": "^1.5.3",
     "moment": "^2.24.0",
     "ng-pick-datetime": "^7.0.0",
