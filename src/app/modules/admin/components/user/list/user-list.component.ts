@@ -45,11 +45,9 @@ export class UserListComponent implements OnInit {
         let _this = this;
         this.jscolumnDefs = [
             {
-                title: 'Name', name: "firstName", width: 75, itemTemplate: function (__, user) {
-                    console.log("user:",user)
+                title: 'Name', name: "fullname", width: 75, itemTemplate: function (__, user) {
                     return `${user.firstname} ${user.lastname}`;
-                }
-            },
+                }},
             { title: 'Username', width: 92, name: 'username' },
             { title: 'CNIC', width: 44, name: 'CNIC' },
             { title: 'Address', width: 50, name: 'address' },

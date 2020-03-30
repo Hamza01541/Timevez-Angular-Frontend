@@ -42,22 +42,23 @@ export class AttendanceListComponent implements OnInit {
          * Initializing the Grid with Data
          */
     getColumnDefs() {
-        console.log("new Date(attendance.date):",new Date(2/2/2020))
-        const _this = this;
         this.jscolumnDefs = [
+            {
+                title: 'Name', name: "fullname", width: 75, itemTemplate: function (__, attendance) {
+                    return attendance.user ? `${attendance.user.firstname} ${attendance.user.lastname}`: '';
+                }},
             { title: 'Checkin', width: 92, name: 'checkIn', itemTemplate: function (__, attendance) {
                 return new Date(attendance.checkIn).toLocaleTimeString('en-US');
+            }},
+            { title: 'Break Start', width: 92, name: 'breakStartTime', itemTemplate: function (__, attendance) {
+                return attendance.breakStartTime? new Date(attendance.breakStartTime).toLocaleTimeString('en-US'):'';
+            }},
+            { title: 'Break End', width: 92, name: 'breakEndTime', itemTemplate: function (__, attendance) {
+                return attendance.breakEndTime ? new Date(attendance.breakEndTime).toLocaleTimeString('en-US'): '';
             }},
             { title: 'Checkout', width: 92, name: 'checkOut', itemTemplate: function (__, attendance) {
                 return attendance.checkOut ? new Date(attendance.checkOut).toLocaleTimeString('en-US'):'';
             }},
-            { title: 'Break Start', width: 92, name: 'breakStartTime', itemTemplate: function (__, attendance) {
-                return attendance.breakStart? new Date(attendance.breakStart).toLocaleTimeString('en-US'):'';
-            }},
-            { title: 'Break End', width: 92, name: 'breakStartTime', itemTemplate: function (__, attendance) {
-                return attendance.breakEnd ? new Date(attendance.breakEnd).toLocaleTimeString('en-US'): '';
-            }},
-            // { title: 'Date', width: 44, name: 'date' },
             { title: 'Date', width: 60, name: 'date', itemTemplate: function (__, attendance) {
                 return new Date(attendance.date).toLocaleDateString('en-GB', {day: '2-digit', month: 'short', year: 'numeric', weekday:'short'})
             }},
