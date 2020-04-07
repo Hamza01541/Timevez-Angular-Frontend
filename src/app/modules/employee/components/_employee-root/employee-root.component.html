@@ -303,16 +303,16 @@
         <div class="dropdown d-flex">
           <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false"><span class="user-avatar user-avatar-md"><img src="assets/images/avatars/profile.jpg"
-                alt=""></span> <span class="account-summary pr-lg-4 d-none d-lg-block"><span
-                class="account-name">{{fullname.toUpperCase()}}</span>
-              <span class="account-description">{{role.toUpperCase()}}</span></span></button>
+                alt=""></span> <span class="account-summary pr-lg-4 d-none d-lg-block"><span class="account-name"> {{fullname.toUpperCase()}}
+          </span> <span class="account-description">{{role.toUpperCase()}}</span></span></button>
           <!-- .dropdown-menu -->
           <div class="dropdown-menu">
-            <div class="dropdown-arrow ml-3"></div><a class="dropdown-item" [routerLink]="['/admin/profile']"><span
-                class="dropdown-icon oi oi-person"></span> Profile
+            <div class="dropdown-arrow ml-3"></div>
+            <a class="dropdown-item"
+              [routerLink]="['/admin/profile']"><span class="dropdown-icon oi oi-person"></span> Profile
             </a> <a class="dropdown-item" [routerLink]="['/login']" [queryParams]="{logout: true}"><span
                 class="dropdown-icon oi oi-account-logout"></span> Logout</a>
-            <div class="dropdown-divider"></div><a class="dropdown-item" [routerLink]="['/admin/changePassword']">Change
+            <div class="dropdown-divider"></div><a class="dropdown-item" [routerLink]="['/employee/changePassword']">Change
               Password</a>
           </div><!-- /.dropdown-menu -->
         </div><!-- /.btn-account -->
@@ -324,7 +324,6 @@
 <aside class="app-aside app-aside-expand-md app-aside-light">
   <!-- .aside-content -->
   <div class="aside-content">
-
     <!-- .aside-menu -->
     <div class="aside-menu overflow-hidden">
       <!-- .stacked-menu -->
@@ -332,9 +331,9 @@
         <!-- .menu -->
         <ul class="menu">
           <!-- .menu-item -->
-          <li class="menu-item has-active">
-            <a class="menu-link"><span class="menu-icon fas fa-home" [routerLink]="['/admin/dashboard']"></span> <span
-                class="menu-text" [routerLink]="['/admin/dashboard']">Dashboard</span></a>
+          <li class="menu-item has-active" style="cursor: pointer;">
+            <a class="menu-link"><span class="menu-icon fas fa-home" [routerLink]="['/employee/dashboard']"></span> <span
+                class="menu-text"  [routerLink]="['/admin/dashboard']">Dashboard</span></a>
           </li><!-- /.menu-item -->
           <!-- .menu-header -->
           <li class="menu-header"> App Pages </li><!-- /.menu-header -->
@@ -342,8 +341,8 @@
           <!-- .menu-item -->
           <li class="menu-item has-child" *ngFor="let tab of navbarTabs" class=""
             [ngClass]="{'active': currentPage.toLowerCase() == tab.route.toLowerCase()}"
-            routerLink="/admin/{{tab.route}}">
-            <a class="menu-link"><span></span> <span class="menu-text">
+            routerLink="/employee/{{tab.route}}" style="cursor: pointer;">
+            <a class="menu-link"><span></span> <span class="menu-icon fa fa-file">
                 {{tab.name}}</span> </a> <!-- child menu -->
           </li><!-- /.menu-item -->
         </ul><!-- /.menu -->

@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RequestInterceptor } from 'src/app/core/interceptors';
 
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 //OWL Data time
@@ -15,7 +16,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 // Common Components
 import {
-  LoginComponent, timesheetComponent
+  LoginComponent
 } from 'src/app/pages';
 
 //Shared Module
@@ -28,7 +29,6 @@ import {
   declarations: [
     AppComponent,
     LoginComponent,
-    timesheetComponent,
     LoaderComponent
   ],
   imports: [
@@ -37,15 +37,15 @@ import {
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     FontAwesomeModule,
+
     Routing,
   ],
   providers: [
-    
-    
-    // { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
-  
-  
-  
+
+
+
+
+
   ],
   bootstrap: [AppComponent]
 })

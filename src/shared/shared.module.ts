@@ -6,6 +6,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { RequestInterceptor } from 'src/app/core/interceptors';
+
 //auth Guard
 import { AuthGuard } from 'src/app/core/guards';
 
@@ -34,6 +35,8 @@ import {
   GridComponent,ConfirmationDialogueComponent
 } from 'src/shared/components/index';
 
+
+
 const SHARED_MODULES = [
   FormsModule,
   HttpModule,
@@ -43,6 +46,7 @@ const SHARED_MODULES = [
   MatCheckboxModule,
   MatInputModule,
   MatFormFieldModule,
+
   MatTabsModule,
   MatDialogModule,
   MatStepperModule,

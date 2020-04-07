@@ -1,3 +1,464 @@
-<jsgrid *ngIf="users" [jscolumnDefs]="jscolumnDefs" [jsfilter]="jsfilter" [isShowAdd]="false" [rowData]="users" [pageCount]="totalUsers"
+<!-- <jsgrid *ngIf="users" [jscolumnDefs]="jscolumnDefs" [jsfilter]="jsfilter" [isShowAdd]="false" [rowData]="users" [pageCount]="totalUsers"
     (performOperation)="performOperation($event)" (filter)="getUsers($event)">
-</jsgrid>
+</jsgrid> -->
+
+  <aside class="app-aside app-aside-expand-md app-aside-light">
+  
+    
+  </aside><!-- /.app-aside -->
+
+
+  
+  <!-- .app-main -->
+  <main class="app-main">
+    <!-- .wrapper -->
+    <div class="wrapper">
+      <!-- .page -->
+      <div class="page has-sidebar has-sidebar-fluid has-sidebar-expand-xl">
+        <!-- .page-inner -->
+        <div class="page-inner page-inner-fill position-relative">
+          <header class="page-navs bg-light shadow-sm">
+            <!-- .input-group -->
+          </header><button type="button" class="btn btn-primary btn-floated position-absolute" data-toggle="modal"
+            data-target="#clientNewModal" title="Add new client"><i class="fa fa-plus"></i></button> <!-- board -->
+          <!-- <perfect-scrollbar [config]="config"> -->
+          <perfect-scrollbar [config]="config" >
+            <!-- .list-group -->
+            <div class=" list-group list-group-flush list-group-divider border-top" data-toggle="radiolist"
+            *ngFor="let user of allUsers ; let i = index">
+            <!-- .list-group-item -->
+            <div class="list-group-item active" data-toggle="sidebar" data-sidebar="show">
+              <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 432px;"></div>
+              <a (click)="getUserDetails(user)" style="cursor: pointer;" class="stretched-link"></a>
+              <!-- .list-group-item-figure -->
+
+              <div class="list-group-item-figure">
+                <div class="tile tile-circle bg-blue"> {{user.firstname.charAt(0).toUpperCase()}} </div>
+              </div><!-- /.list-group-item-figure -->
+              <!-- .list-group-item-body -->
+              <div class="list-group-item-body">
+                <h4 class="list-group-item-title"> {{user.firstname}} {{user.lastname}} </h4>
+                <p class="list-group-item-text"> {{user.address}} , Pakistan </p>
+              </div><!-- /.list-group-item-body -->
+            </div><!-- /.list-group-item -->
+
+        </div><!-- /.list-group -->
+
+
+
+        </perfect-scrollbar><!-- /board -->
+        <!-- </perfect-scrollbar> -->
+      </div><!-- /.page-inner -->
+      <!-- .page-sidebar -->
+      <div class="page-sidebar bg-light">
+        <!-- .sidebar-header -->
+        <header class="sidebar-header d-xl-none">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active">
+                <a onclick="Looper.toggleSidebar()"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Back</a>
+              </li>
+            </ol>
+          </nav>
+        </header><!-- /.sidebar-header -->
+        <!-- .sidebar-section -->
+        <div class="sidebar-section sidebar-section-fill" *ngIf="allUsers && allUsers.length">
+          <h1 class="page-title">
+            <i class="fas fa-user text-muted mr-2"></i> {{selected.firstname}} {{selected.lastname}} </h1>
+          <p class="text-muted"> Pakistan </p><!-- .nav-scroller -->
+          <div class="nav-scroller border-bottom">
+            <!-- .nav-tabs -->
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active show" data-toggle="tab" href="#client-billing-contact">Billing & Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#attendance">Attendance</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#leave">Leave</a>
+              </li>
+            </ul><!-- /.nav-tabs -->
+          </div><!-- /.nav-scroller -->
+          <!-- .tab-content -->
+          <div class="tab-content pt-4" id="clientDetailsTabs">
+            <!-- .tab-pane -->
+            <div class="tab-pane fade show active" id="client-billing-contact" role="tabpanel"
+              aria-labelledby="client-billing-contact-tab">
+              <!-- .card -->
+              <div class="card">
+                <!-- .card-body -->
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h2 id="client-billing-contact-tab" class="card-title"> Address </h2>
+                  </div>
+                  <address> {{selected.address}}<br> Pakistan </address>
+                </div><!-- /.card-body -->
+              </div><!-- /.card -->
+              <!-- .card -->
+              <div class="card mt-4">
+                <!-- .card-body -->
+                <div class="card-body">
+                  <h2 class="card-title"> Contacts </h2><!-- .table-responsive -->
+                  <div class="table-responsive">
+                    <table class="table table-hover" style="min-width: 678px">
+                      <thead>
+                        <tr>
+                          <th> Name </th>
+                          <th> Email </th>
+                          <th> Phone </th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="align-middle">{{selected.firstname}} {{selected.lastname}} </td>
+                          <td class="align-middle">{{selected.email}}</td>
+                          <td class="align-middle">{{selected.phone}} </td>
+                          <td class="align-middle text-right">
+                            <button type="button" class="btn btn-sm btn-icon btn-secondary" data-toggle="modal"
+                              data-target="#clientContactEditModal"><i class="fa fa-pencil-alt"></i> <span
+                                class="sr-only">Edit</span></button> <button type="button"
+                              class="btn btn-sm btn-icon btn-secondary"><i class="far fa-trash-alt"></i> <span
+                                class="sr-only">Remove</span></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div><!-- /.table-responsive -->
+                </div><!-- /.card-body -->
+              </div><!-- /.card -->
+            </div><!-- /.tab-pane -->
+            <!-- .tab-pane -->
+            <div class="tab-pane fade" id="attendance" role="tabpanel" aria-labelledby="attendance-tab">
+              <!-- .card -->
+              <div class="card">
+                <div class="wrapper">
+                  <!-- .page -->
+                  <div class="page">
+                    <!-- .page-inner -->
+                    <div class="page-inner">
+                      <!-- .page-title-bar -->
+                      <header class="page-title-bar">
+                        <!-- .breadcrumb -->
+                        <nav aria-label="breadcrumb">
+                          <ol class="breadcrumb">
+                            <li class="breadcrumb-item active">
+                              <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Tables</a>
+                            </li>
+                          </ol>
+                        </nav><!-- /.breadcrumb -->
+                        <!-- floating action -->
+                        <!-- title and toolbar -->
+                        <div class="d-md-flex align-items-md-start">
+                          <h1 class="page-title mr-sm-auto"> Attendance Table </h1><!-- .btn-toolbar -->
+                          <div class="btn-toolbar">
+                            <button type="button" class="btn btn-light"><i class="oi oi-data-transfer-download"></i> <span class="ml-1">Export</span></button> <button type="button" class="btn btn-light"><i class="oi oi-data-transfer-upload"></i> <span class="ml-1">Import</span></button>
+                           
+                          </div><!-- /.btn-toolbar -->
+                        </div><!-- /title and toolbar -->
+                      </header><!-- /.page-title-bar -->
+                      <!-- .page-section -->
+                      <div class="page-section">
+                        <!-- .card -->
+                        <div class="card card-fluid"> 
+                          <div class="card-body">
+                            <!-- .form-group -->
+                            <div class="form-group">
+                              <!-- .input-group -->
+                              <div class="input-group input-group-alt">
+                                <!-- .input-group-prepend -->
+                            
+                                <!-- .input-group -->
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                                  </div><input type="text" class="form-control" placeholder="Search record">
+                                </div><!-- /.input-group -->
+                              </div><!-- /.input-group -->
+                            </div><!-- /.form-group -->
+                            <!-- .table-responsive -->
+                           <div >
+                            <div class="text-muted"> {{userAttendance.message}} </div>
+                            <div class="table-responsive">
+                              <!-- .table -->
+                              <table class="table" >
+                                <!-- thead -->
+                                <thead>
+                                  <tr>
+                                    <th  >
+                                      
+                                    </th>
+                                    <th> Date </th>
+                                    <th> Check In </th>
+                                    <th> Break Start </th>
+                                    <th> Break End </th>
+                                    <th> Check Out </th>
+                                    <th> Total Hours </th>
+                                  
+                                  </tr>
+                                </thead><!-- /thead -->
+                                <!-- tbody -->
+                                <div *ngIf="userAttendance && userAttendance.data.length">
+                                <tbody *ngFor="let attendance of userAttendance.data">
+                                  <!-- tr -->
+                                  <tr>
+                                
+          
+                                    <td class="align-middle"> {{attendance.date}} </td>
+                                    <td class="align-middle"> {{attendance.checkIn}} </td>
+                                    <td class="align-middle"> {{attendance.breakStartTime}} </td>
+                                    <td class="align-middle"> {{attendance.breakEndTime}} </td>
+                                    <td class="align-middle"> {{attendance.checkOut}} </td>
+                                    <td class="align-middle"> {{getAvailableTime(attendance)}} </td>
+                                    <td class="align-middle text-right">
+                                      <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i> <span class="sr-only">Edit</span></a> <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="far fa-trash-alt"></i> <span class="sr-only">Remove</span></a>
+                                    </td>
+                                  </tr><!-- /tr -->
+                                  <!-- tr -->
+                                 
+                                 
+                                 
+                                 
+                                
+                                
+                     
+                                </tbody><!-- /tbody -->
+                              </div>
+                              </table><!-- /.table -->
+                            </div><!-- /.table-responsive -->
+                          </div>
+                            <!-- .pagination -->
+                            <ul class="pagination justify-content-center mt-4">
+                              <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1"><i class="fa fa-lg fa-angle-left"></i></a>
+                              </li>
+                              <li class="page-item">
+                                <a class="page-link" href="#">1</a>
+                              </li>
+                              <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">...</a>
+                              </li>
+                              <li class="page-item">
+                                <a class="page-link" href="#">13</a>
+                              </li>
+                              <li class="page-item active">
+                                <a class="page-link" href="#">14</a>
+                              </li>
+                              <li class="page-item">
+                                <a class="page-link" href="#">15</a>
+                              </li>
+                              <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">...</a>
+                              </li>
+                              <li class="page-item">
+                                <a class="page-link" href="#">24</a>
+                              </li>
+                              <li class="page-item">
+                                <a class="page-link" href="#"><i class="fa fa-lg fa-angle-right"></i></a>
+                              </li>
+                            </ul><!-- /.pagination -->
+                          </div><!-- /.card-body -->
+                        </div><!-- /.card -->
+                       
+                     
+                      
+        
+                   
+                      </div><!-- /.page-section -->
+                    </div><!-- /.page-inner -->
+                  </div><!-- /.page -->
+                </div><!-- .app-footer -->
+
+
+
+
+
+
+              </div><!-- /.card -->
+            </div><!-- /.tab-pane -->
+          
+          </div><!-- /.tab-content -->
+        </div><!-- /.sidebar-section -->
+      </div><!-- /.page-sidebar -->
+      <!-- Keep in mind that modals should be placed outsite of page sidebar -->
+      <!-- .modal -->
+
+
+      <form name="form" #form="ngForm">
+        <div class="modal fade" id="clientNewModal" tabindex="-1" role="dialog" aria-labelledby="clientNewModalLabel"
+          aria-hidden="true">
+          <!-- .modal-dialog -->
+          <div class="modal-dialog" role="document">
+            <!-- .modal-content -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 id="clientNewModalLabel" class="modal-title inline-editable">
+                  <span class="sr-only">Client name</span> <input type="text" class="form-control form-control-lg"
+                    placeholder="E.g. Stilearning, Inc." required="">
+                </h6>
+              </div><!-- /.modal-header -->
+
+              <!-- .modal-body -->
+              <div class="modal-body">
+                <!-- .form-row -->
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="firstname">First Name</label>
+                      <input type="text" required #firstname="ngModel" id="FirstName" name="firstname"
+                        [(ngModel)]="model.firstname" placeholder="Enter First Name" class="form-control">
+                    </div>
+                    <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger">
+                      <label>
+                        First Name is Required
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="lastname">Last Name</label>
+                      <input type="text" required #lastname="ngModel" id="LastName" name="lastname"
+                        [(ngModel)]="model.lastname" placeholder="Enter Last Name" class="form-control">
+                    </div>
+                    <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">
+                      <label>
+                        Last Name is Required
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="username">User Name</label>
+                      <input type="text" required #username="ngModel" id="UserName" name="username"
+                        [(ngModel)]="model.username" placeholder="Enter User Name" class="form-control">
+                    </div>
+                    <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+                      <label>
+                        User Name is Required
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" required #password="ngModel" id="Password" name="password"
+                        [(ngModel)]="model.password" placeholder="Enter Password" pattern="^.{6,10}$"
+                        class="form-control">
+                    </div>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                      <label>
+                        Password is Required
+                      </label>
+                    </div>
+                    <div *ngIf="password.errors?.pattern" id="card-errors" class="alert alert-danger col-12"
+                      style="color:#f2665c;" role="alert">
+                      Password Must be more than 6 to 10 Chracter or Number
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="confirmpassword">Confirm Password</label>
+                      <input type="password" type="password" id="confirmpassword" name="confirmpassword"
+                        placeholder=" Confirm Password" #confirmPassword="ngModel" ngModel required
+                        class="form-control">
+                    </div>
+                    <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)"
+                      class="alert alert-danger">
+                      <label>
+                        Confirm Password is Required
+                      </label>
+                    </div>
+                    <div *ngIf="confirmPassword.valid && model.password !== confirmPassword.value" id="card-errors"
+                      class="alert alert-danger col-12" style="color:#f2665c;" role="alert">
+                      Password does not match
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="cnic">CNIC</label>
+                      <input type="text" required #CNIC="ngModel" id="cnic" name="cnic" [(ngModel)]="model.cnic"
+                        placeholder="Enter CNIC" pattern="^[0-9]{13}$" class="form-control">
+                    </div>
+                    <div *ngIf="CNIC.errors?.required && (CNIC.dirty || CNIC.touched)" class="alert alert-danger">
+                      <label>
+                        Invalid CNIC Number
+                      </label>
+                    </div>
+                    <div *ngIf="CNIC.errors?.pattern" id="card-errors" class="alert alert-danger col-12"
+                      style="color:#f2665c;" role="alert">
+                      Invalid CNIC Number Must be Like:1234590832617
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="phonenumber">Phone Number</label>
+                      <input type="text" required #phoneNumber="ngModel" id="PhoneNumber" name="phoneNumber"
+                        [(ngModel)]="model.phone" placeholder="Enter Phone Number" maxlength="15" pattern="^[0-9]{11}$"
+                        class="form-control">
+                    </div>
+                    <div *ngIf="phoneNumber.errors?.required && (phoneNumber.dirty || phoneNumber.touched)"
+                      class="alert alert-danger">
+                      <label>
+                        Invalid Phone Number
+                      </label>
+                    </div>
+                    <div *ngIf="phoneNumber.errors?.pattern" id="card-errors" class="alert alert-danger col-12"
+                      style="color:#f2665c;" role="alert">
+                      Invalid Phone Number Must be Like:03001234567
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="emailaddress">Email Address</label>
+                      <input type="text" required #emailAddress="ngModel" id="emailAddress" name="emailAddress"
+                        [(ngModel)]="model.email" placeholder="Enter Email Address"
+                        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" class="form-control">
+                    </div>
+                    <div *ngIf="emailAddress.invalid && emailAddress.touched" class="alert alert-danger">
+                      <label>
+                        Email Address is Required
+                      </label>
+                    </div>
+                    <div *ngIf="emailAddress.errors?.pattern" class="alert alert-danger">
+                      <label>
+                        Invalid Email address
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="address">Address</label>
+                      <input type="text" required #address="ngModel" id="Address" name="address"
+                        [(ngModel)]="model.address" placeholder="Enter Address" class="form-control">
+                    </div>
+                    <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+                      <label>
+                        Address is Required
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" [(ngModel)]="model.active" name="active">
+                        <label class="custom-control-label" for="todo2"><span>Active</span></label>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- /.form-row -->
+              </div><!-- /.modal-body -->
+              <!-- .modal-footer -->
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="form.invalid"
+                  (click)="save()">Save</button> <button type="button" class="btn btn-light"
+                  data-dismiss="modal">Close</button>
+              </div><!-- /.modal-footer -->
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div>
+      </form><!-- /.modal -->
+    </div><!-- /.page -->
+</div><!-- /.wrapper -->
+</main><!-- /.app-main -->

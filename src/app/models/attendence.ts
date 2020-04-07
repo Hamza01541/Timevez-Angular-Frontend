@@ -4,7 +4,7 @@ export class attendence {
     breakStartTime:Date;
     breakEndTime: Date;
     date: String;
-    status: Boolean;
+    active: Boolean;
     comment: String;
     userId: number;
 }

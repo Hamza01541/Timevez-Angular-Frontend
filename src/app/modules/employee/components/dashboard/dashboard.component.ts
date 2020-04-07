@@ -1,26 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService, LoaderService, AttendanceService } from 'src/app/core/services/';
+import { Router, ActivatedRoute } from '@angular/router';
+import { attendence } from "src/app/models/attendence";
+import { AlertService, LoaderService, AttendanceService, UserService } from 'src/app/core/services/index';
 
 
 
 @Component({
-  selector: 'timesheet-component',
-  templateUrl: './timesheet.component.html',
-  styleUrls: ['./timesheet.component.css']
+  selector: 'app-dashboard-form',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
-export class timesheetComponent implements OnInit {
-fullname: string;
+export class DashboardComponent implements OnInit {
+  fullname: string;
 
   constructor(
     private alertService: AlertService,
     private loaderService: LoaderService,
     private attendanceService: AttendanceService,
+   
   ) {
+
+
   }
 
   ngOnInit() {
-     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-     this.fullname = `${currentUser.firstname} ${currentUser.lastname}`
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.fullname = `${currentUser.firstname} ${currentUser.lastname}`
   }
 
   /**
@@ -35,7 +40,6 @@ fullname: string;
       this.hideLoader();
       this.alertService.warningToastr("Already Clocked In", false);
     });
-
   }
 
   /**
@@ -50,7 +54,6 @@ fullname: string;
       this.hideLoader();
       this.alertService.warningToastr("Already Checekd Out", false);
     });
-
   }
 
   /**
@@ -81,9 +84,9 @@ fullname: string;
     });
   }
 
-/**
- * Show loader
- */
+  /**
+   * Show loader
+   */
   showLoader() {
     this.loaderService.show();
   }
@@ -94,4 +97,8 @@ fullname: string;
   hideLoader() {
     this.loaderService.hide();
   }
+
+
+
+ 
 }

@@ -63,7 +63,7 @@ export class AttendanceListComponent implements OnInit {
                 return new Date(attendance.date).toLocaleDateString('en-GB', {day: '2-digit', month: 'short', year: 'numeric', weekday:'short'})
             }},
             {
-                title: 'Status', width: 50, name: 'status', itemTemplate: function (active) {
+                title: 'Active', width: 50, name: 'active', itemTemplate: function (active) {
                     var iconClass = "";
                     if (active == true) {
                         iconClass = "fa fa-check";

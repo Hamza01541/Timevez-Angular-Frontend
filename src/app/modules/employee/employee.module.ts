@@ -9,49 +9,35 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { AdminRoutingModule } from './admin.routing.module';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { EmployeeRoutingModule } from './employee.routing.module';
 import {
-    AdminIndexComponent,
-    AdminRootComponent,
-    UserFormComponent,
-    UserListComponent,
-    AttendanceFormComponent,
-    AttendanceListComponent,
+    EmployeeIndexComponent,
+    EmployeeRootComponent,
     DashboardComponent,
-    ChangePasswordComponent
+    timesheetComponent
+
 } from "./components";
 
 import { SharedModule } from '.././../../shared/shared.module';
 
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-    suppressScrollX: true
-};
-
 @NgModule({
     declarations: [
-        AdminIndexComponent,
-        AdminRootComponent,
-        UserFormComponent,
-        UserListComponent,
-        AttendanceFormComponent,
-        AttendanceListComponent,
-        ChangePasswordComponent,
-        DashboardComponent
+        EmployeeIndexComponent,
+        EmployeeRootComponent,
+        DashboardComponent,
+        timesheetComponent
     ],
 
     imports: [
         A11yModule,
         DragDropModule,
-        PerfectScrollbarModule,
         ScrollingModule,
         CdkStepperModule,
+ 
         CdkTableModule,
         CdkTreeModule,
         MatCheckboxModule,
-        AdminRoutingModule,
+        EmployeeRoutingModule,
         HttpClientModule,
         NgbModule,
         SharedModule,
@@ -60,12 +46,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ],
 
     providers: [
-        {
-            provide: PERFECT_SCROLLBAR_CONFIG,
-            useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-        }
 
     ],
 
 })
-export class AdminModule { }
+export class EmployeeModule { }

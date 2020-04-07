@@ -63,9 +63,6 @@ var Theme =
         this.objectFitFallback(); // handle bootstrap components
         // =============================================================
 
-        this.tooltips();
-        this.popovers();
-        this.nestedDropdown();
         this.inputClearable();
         this.inputGroup();
         this.inputNumber();

@@ -1,6 +1,8 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { AdminNavigationMenu} from 'src/app/models/navigation-menu';
+import { AdminNavigationMenu } from 'src/app/models/navigation-menu';
+import { Role } from 'src/app/models/role';
+import { LocalStorageService } from 'src/app/core/services/';
 
 @Injectable()
 @Component({
@@ -9,6 +11,8 @@ import { AdminNavigationMenu} from 'src/app/models/navigation-menu';
   styleUrls: ['./admin-root.component.scss']
 })
 export class AdminRootComponent implements OnInit {
+  fullname: string;
+  role:string;
   navbarTabs: any;
   currentPage: string = "";
   currentUser: any;
@@ -17,15 +21,18 @@ export class AdminRootComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private storageService: LocalStorageService
 
   ) { }
 
   ngOnInit() {
 
-    this.navbarTabs = AdminNavigationMenu;
+    this.currentUser = this.storageService.get('currentUser');
+    this.fullname = `${this.currentUser.firstname} ${this.currentUser.lastname}`;
+    this.role=`${this.currentUser.role}`;
 
-    if (this.currentUser && this.currentUser.roles) {
-      if (this.currentUser.role == 'Admin') {
+    if (this.currentUser && this.currentUser.role) {
+      if (this.currentUser.role == Role.Admin) {
         this.navbarTabs = AdminNavigationMenu;
       }
     }

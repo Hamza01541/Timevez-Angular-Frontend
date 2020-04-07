@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
       if (user.role == Role.Admin) {
         this.router.navigate(['/admin/dashboard']);
       } else {
-        this.router.navigate(['/timesheet'], { queryParams: { id: user.id } });
+        this.router.navigate(['/employee/dashboard'], { queryParams: { id: user.id } });
       }
     }
   }

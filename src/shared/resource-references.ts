@@ -23,6 +23,7 @@ export class ApiUrl {
     // Pagination
     static getPagedAttendances = `PagedAttendances`;
     static getPagedUsers = `PagedUsers`
+    static getUserPageAttendance = `pagedUserAttendances`;
 }
 
 /**

@@ -1,14 +1,19 @@
 export const AdminNavigationMenu = [
-  
-    {
-      "name": "User",
-      "route": "user"
-    },
-    {
-      "name": "Attendance",
-      "route": "attendance"
-    },
-  ];
-  
 
-  
+  {
+    "name": "User",
+    "route": "user"
+  },
+  {
+    "name": "Attendance",
+    "route": "attendance"
+  },
+];
+
+export const  EmployeeNavigationMenu = [
+
+  {
+    "name": "History",
+    "route": "timesheet"
+  },
+];

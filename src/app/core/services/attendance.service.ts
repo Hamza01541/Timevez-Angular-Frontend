@@ -75,11 +75,20 @@ export class AttendanceService {
     }
 
     /**
- * Return  role 
+ * Return  attandance 
  * @param pageNumber is to get page based data 
  */
     getPagedAttendance(pageNumber) {
         const attendance = `${this.attendance}/${ApiUrl.getPagedAttendances}/${pageNumber}`;
+        return this.RequestService.getData(attendance);
+    }
+
+    /**
+* Return  attandance 
+* @param pageNumber is to get page based data 
+*/
+    getUserAttendance(pageNumber, userId) {
+        const attendance = `${this.attendance}/${ApiUrl.getUserPageAttendance}/${pageNumber}/${userId}`;
         return this.RequestService.getData(attendance);
     }
 

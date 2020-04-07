@@ -3,12 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Admin Components
 import {
-    AdminIndexComponent,
     AdminRootComponent,
     UserFormComponent,
     UserListComponent,
     AttendanceFormComponent,
     AttendanceListComponent,
+    ChangePasswordComponent,
     DashboardComponent
 } from "./components/index";
 
@@ -24,7 +24,7 @@ const routes: Routes = [
             { path: 'user-form', component: UserFormComponent },
             { path: 'attendance-form', component: AttendanceFormComponent },
             { path: 'attendance', component: AttendanceListComponent },
- 
+            { path: 'changePassword', component: ChangePasswordComponent },
             // otherwise redirect to home
             { path: '**', redirectTo: "dashboard" },
         ]
