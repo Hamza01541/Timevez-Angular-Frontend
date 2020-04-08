@@ -66,7 +66,7 @@
         </div>
         <div class="form-group col-md-6 col-12 ">
             <mat-form-field>
-                <input matInput type="text" required #CNIC="ngModel" id="cnic" name="cnic" [(ngModel)]="model.cnic"
+                <input matInput type="text" required #CNIC="ngModel" id="CNIC" name="CNIC" [(ngModel)]="model.CNIC"
                     placeholder="Enter CNIC" pattern="^[0-9]{13}$">
             </mat-form-field>
             <div *ngIf="CNIC.errors?.required && (CNIC.dirty || CNIC.touched)" class="alert alert-danger">

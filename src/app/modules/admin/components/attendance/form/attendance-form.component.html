@@ -14,6 +14,8 @@
         <input matInput type="text" #comment="ngModel" id="comment" name="comment" [(ngModel)]="model.comment"
           minlength="3" placeholder="Enter Comment">
       </mat-form-field>
+
+
       <div class="input-wrapper">
         <mat-form-field>
           <input matInput [min]="min" [max]="max" placeholder="Select CheckIn Date and Time" [(ngModel)]="model.checkIn"
@@ -24,6 +26,9 @@
         <owl-date-time #dtPicker1 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
           [pickerMode]="pickerMode" [pickerType]="'timer'"></owl-date-time>
       </div>
+
+
+
       <div class="input-wrapper">
         <mat-form-field>
           <input matInput [min]="min" [max]="max" placeholder="Select CheckOut Date and Time"
@@ -34,6 +39,8 @@
         <owl-date-time #dtPicker2 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
           [pickerMode]="pickerMode" [pickerType]="'timer'"></owl-date-time>
       </div>
+
+      
       <div class="input-wrapper">
         <mat-form-field>
           <input matInput [min]="min" [max]="max" placeholder="Select Break Start Date and Time"

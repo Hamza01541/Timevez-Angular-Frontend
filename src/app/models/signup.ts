@@ -6,7 +6,7 @@ export class signUp {
     phone: string;
     email: string;
     address: string;
-    cnic: string;
+    CNIC: string;
     roles: [];
     active: boolean = true;
 }

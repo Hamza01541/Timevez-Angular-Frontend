@@ -1,30 +1,21 @@
-<!-- <jsgrid *ngIf="users" [jscolumnDefs]="jscolumnDefs" [jsfilter]="jsfilter" [isShowAdd]="false" [rowData]="users" [pageCount]="totalUsers"
-    (performOperation)="performOperation($event)" (filter)="getUsers($event)">
-</jsgrid> -->
+<aside class="app-aside app-aside-expand-md app-aside-light">
+</aside><!-- /.app-aside -->
+<!-- .app-main -->
+<main class="app-main">
+  <!-- .wrapper -->
+  <div class="wrapper">
+    <!-- .page -->
+    <div class="page has-sidebar has-sidebar-fluid has-sidebar-expand-xl">
+      <!-- .page-inner -->
+      <div class="page-inner page-inner-fill position-relative">
+        <header class="page-navs bg-light shadow-sm">
+          <!-- .input-group -->
+        </header><button type="button" class="btn btn-primary btn-floated position-absolute" data-toggle="modal"
+          data-target="#clientNewModal" title="Add new client"><i class="fa fa-plus"></i></button> <!-- board -->
 
-  <aside class="app-aside app-aside-expand-md app-aside-light">
-  
-    
-  </aside><!-- /.app-aside -->
-
-
-  
-  <!-- .app-main -->
-  <main class="app-main">
-    <!-- .wrapper -->
-    <div class="wrapper">
-      <!-- .page -->
-      <div class="page has-sidebar has-sidebar-fluid has-sidebar-expand-xl">
-        <!-- .page-inner -->
-        <div class="page-inner page-inner-fill position-relative">
-          <header class="page-navs bg-light shadow-sm">
-            <!-- .input-group -->
-          </header><button type="button" class="btn btn-primary btn-floated position-absolute" data-toggle="modal"
-            data-target="#clientNewModal" title="Add new client"><i class="fa fa-plus"></i></button> <!-- board -->
-          <!-- <perfect-scrollbar [config]="config"> -->
-          <perfect-scrollbar [config]="config" >
-            <!-- .list-group -->
-            <div class=" list-group list-group-flush list-group-divider border-top" data-toggle="radiolist"
+        <perfect-scrollbar [config]="config">
+          <!-- .list-group -->
+          <div class=" list-group list-group-flush list-group-divider border-top" data-toggle="radiolist"
             *ngFor="let user of allUsers ; let i = index">
             <!-- .list-group-item -->
             <div class="list-group-item active" data-toggle="sidebar" data-sidebar="show">
@@ -42,12 +33,8 @@
               </div><!-- /.list-group-item-body -->
             </div><!-- /.list-group-item -->
 
-        </div><!-- /.list-group -->
-
-
-
+          </div><!-- /.list-group -->
         </perfect-scrollbar><!-- /board -->
-        <!-- </perfect-scrollbar> -->
       </div><!-- /.page-inner -->
       <!-- .page-sidebar -->
       <div class="page-sidebar bg-light">
@@ -116,9 +103,10 @@
                           <td class="align-middle">{{selected.email}}</td>
                           <td class="align-middle">{{selected.phone}} </td>
                           <td class="align-middle text-right">
-                            <button type="button" class="btn btn-sm btn-icon btn-secondary" data-toggle="modal"
-                              data-target="#clientContactEditModal"><i class="fa fa-pencil-alt"></i> <span
-                                class="sr-only">Edit</span></button> <button type="button"
+                            <button type="button" (click)="performOperation('user','edit',selected._id)" class="btn btn-sm btn-icon btn-secondary" data-toggle="modal"
+                             ><i class="fa fa-pencil-alt"></i> <span
+                                class="sr-only">Edit</span></button>
+                            <button type="button" (click)="performOperation('user','delete',selected._id)"
                               class="btn btn-sm btn-icon btn-secondary"><i class="far fa-trash-alt"></i> <span
                                 class="sr-only">Remove</span></button>
                           </td>
@@ -140,6 +128,7 @@
                     <div class="page-inner">
                       <!-- .page-title-bar -->
                       <header class="page-title-bar">
+
                         <!-- .breadcrumb -->
                         <nav aria-label="breadcrumb">
                           <ol class="breadcrumb">
@@ -153,22 +142,28 @@
                         <div class="d-md-flex align-items-md-start">
                           <h1 class="page-title mr-sm-auto"> Attendance Table </h1><!-- .btn-toolbar -->
                           <div class="btn-toolbar">
-                            <button type="button" class="btn btn-light"><i class="oi oi-data-transfer-download"></i> <span class="ml-1">Export</span></button> <button type="button" class="btn btn-light"><i class="oi oi-data-transfer-upload"></i> <span class="ml-1">Import</span></button>
-                           
+                            <button type="button" class="btn btn-light"><i class="oi oi-data-transfer-download"></i>
+                              <span class="ml-1">Export</span></button>
+                            <button type="button" class="btn btn-light"><i class="oi oi-data-transfer-upload"></i> <span
+                                class="ml-1">Import</span></button>
+                            <button type="button" class="btn btn-primary btn-floated position-initial"
+                              data-toggle="modal" data-target="#attendanceNewModal" title="Add new Attendance"><i
+                                class="fa fa-plus"></i></button>
                           </div><!-- /.btn-toolbar -->
                         </div><!-- /title and toolbar -->
                       </header><!-- /.page-title-bar -->
+                      <!-- board -->
                       <!-- .page-section -->
                       <div class="page-section">
                         <!-- .card -->
-                        <div class="card card-fluid"> 
+                        <div class="card card-fluid">
                           <div class="card-body">
                             <!-- .form-group -->
                             <div class="form-group">
                               <!-- .input-group -->
                               <div class="input-group input-group-alt">
                                 <!-- .input-group-prepend -->
-                            
+
                                 <!-- .input-group -->
                                 <div class="input-group">
                                   <div class="input-group-prepend">
@@ -178,56 +173,50 @@
                               </div><!-- /.input-group -->
                             </div><!-- /.form-group -->
                             <!-- .table-responsive -->
-                           <div >
-                            <div class="text-muted"> {{userAttendance.message}} </div>
-                            <div class="table-responsive">
-                              <!-- .table -->
-                              <table class="table" >
-                                <!-- thead -->
-                                <thead>
-                                  <tr>
-                                    <th  >
-                                      
-                                    </th>
-                                    <th> Date </th>
-                                    <th> Check In </th>
-                                    <th> Break Start </th>
-                                    <th> Break End </th>
-                                    <th> Check Out </th>
-                                    <th> Total Hours </th>
-                                  
-                                  </tr>
-                                </thead><!-- /thead -->
-                                <!-- tbody -->
-                                <div *ngIf="userAttendance && userAttendance.data.length">
-                                <tbody *ngFor="let attendance of userAttendance.data">
-                                  <!-- tr -->
-                                  <tr>
-                                
-          
-                                    <td class="align-middle"> {{attendance.date}} </td>
-                                    <td class="align-middle"> {{attendance.checkIn}} </td>
-                                    <td class="align-middle"> {{attendance.breakStartTime}} </td>
-                                    <td class="align-middle"> {{attendance.breakEndTime}} </td>
-                                    <td class="align-middle"> {{attendance.checkOut}} </td>
-                                    <td class="align-middle"> {{getAvailableTime(attendance)}} </td>
-                                    <td class="align-middle text-right">
-                                      <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i> <span class="sr-only">Edit</span></a> <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="far fa-trash-alt"></i> <span class="sr-only">Remove</span></a>
-                                    </td>
-                                  </tr><!-- /tr -->
-                                  <!-- tr -->
-                                 
-                                 
-                                 
-                                 
-                                
-                                
-                     
-                                </tbody><!-- /tbody -->
-                              </div>
-                              </table><!-- /.table -->
-                            </div><!-- /.table-responsive -->
-                          </div>
+                            <div>
+                              <div class="text-muted"> {{userAttendance.message}} </div>
+                              <div class="table-responsive">
+                                <!-- .table -->
+                                <table class="table">
+                                  <!-- thead -->
+                                  <thead>
+                                    <tr>
+                                      <th>
+                                      </th>
+                                      <th> Date </th>
+                                      <th> Check In </th>
+                                      <th> Break Start </th>
+                                      <th> Break End </th>
+                                      <th> Check Out </th>
+                                      <th> Total Hours </th>
+                                    </tr>
+                                  </thead><!-- /thead -->
+                                  <!-- tbody -->
+                                  <div *ngIf="userAttendance && userAttendance.data && userAttendance.data.length">
+                                    <tbody *ngFor="let attendance of userAttendance.data">
+                                      <!-- tr -->
+                                      <tr>
+                                        <td class="align-middle"> {{attendance.date}} </td>
+                                        <td class="align-middle"> {{attendance.checkIn}} </td>
+                                        <td class="align-middle"> {{attendance.breakStartTime}} </td>
+                                        <td class="align-middle"> {{attendance.breakEndTime}} </td>
+                                        <td class="align-middle"> {{attendance.checkOut}} </td>
+                                        <td class="align-middle"> {{getAvailableTime(attendance)}} </td>
+                                        <td class="align-middle text-right">
+                                          <a class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"  (click)="performOperation('attendance','edit',attendance._id)" ></i>
+                                            <span class="sr-only">Edit</span></a> <a
+                                            class="btn btn-sm btn-icon btn-secondary"><i class="far fa-trash-alt"
+                                              (click)="performOperation('attendance','delete',attendance._id)"></i> <span
+                                              class="sr-only">Remove</span></a>
+                                        </td>
+                                      </tr><!-- /tr -->
+                                      <!-- tr -->
+
+                                    </tbody><!-- /tbody -->
+                                  </div>
+                                </table><!-- /.table -->
+                              </div><!-- /.table-responsive -->
+                            </div>
                             <!-- .pagination -->
                             <ul class="pagination justify-content-center mt-4">
                               <li class="page-item disabled">
@@ -260,11 +249,11 @@
                             </ul><!-- /.pagination -->
                           </div><!-- /.card-body -->
                         </div><!-- /.card -->
-                       
-                     
-                      
-        
-                   
+
+
+
+
+
                       </div><!-- /.page-section -->
                     </div><!-- /.page-inner -->
                   </div><!-- /.page -->
@@ -277,7 +266,7 @@
 
               </div><!-- /.card -->
             </div><!-- /.tab-pane -->
-          
+
           </div><!-- /.tab-content -->
         </div><!-- /.sidebar-section -->
       </div><!-- /.page-sidebar -->
@@ -377,15 +366,15 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="cnic">CNIC</label>
-                      <input type="text" required #CNIC="ngModel" id="cnic" name="cnic" [(ngModel)]="model.cnic"
+                      <input type="text" required #cnic="ngModel" id="cnic" name="cnic" [(ngModel)]="model.CNIC"
                         placeholder="Enter CNIC" pattern="^[0-9]{13}$" class="form-control">
                     </div>
-                    <div *ngIf="CNIC.errors?.required && (CNIC.dirty || CNIC.touched)" class="alert alert-danger">
+                    <div *ngIf="cnic.errors?.required && (cnic.dirty || cnic.touched)" class="alert alert-danger">
                       <label>
                         Invalid CNIC Number
                       </label>
                     </div>
-                    <div *ngIf="CNIC.errors?.pattern" id="card-errors" class="alert alert-danger col-12"
+                    <div *ngIf="cnic.errors?.pattern" id="card-errors" class="alert alert-danger col-12"
                       style="color:#f2665c;" role="alert">
                       Invalid CNIC Number Must be Like:1234590832617
                     </div>
@@ -451,8 +440,129 @@
               </div><!-- /.modal-body -->
               <!-- .modal-footer -->
               <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="form.invalid"
-                  (click)="save()">Save</button> <button type="button" class="btn btn-light"
+                <button type="submit" class="btn btn-primary" [disabled]="form.invalid"
+                  (click)="save('user')">Save</button> <button type="button" class="btn btn-light"
+                  data-dismiss="modal">Close</button>
+              </div><!-- /.modal-footer -->
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div>
+      </form><!-- /.modal -->
+
+
+
+
+
+      <form name="form" #form="ngForm">
+        <div class="modal fade" id="attendanceNewModal" tabindex="-1" role="dialog"
+          aria-labelledby="clientNewModalLabel" aria-hidden="true">
+          <!-- .modal-dialog -->
+          <div class="modal-dialog" role="document">
+            <!-- .modal-content -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 id="clientNewModalLabel" class="modal-title inline-editable">
+                  <span class="sr-only"> {{selected.firstname}} {{selected.lastname}}</span>
+                </h6>
+              </div><!-- /.modal-header -->
+              <!-- .modal-body -->
+              <div class="modal-body">
+                <!-- .form-row -->
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="comment">Comment</label>
+                      <input type="text" #comment="ngModel" id="comment" name="comment"
+                        [(ngModel)]="modelAttendance.comment" minlength="3" placeholder="Enter Comment"
+                        class="form-control">
+                    </div>
+                    <div *ngIf="comment.errors?.minlength" id="card-errors" class="alert alert-danger col-12"
+                      style="color:#f2665c;" role="alert">
+                      Comment Must be Greator then 3 Chracter
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="checkIn">Check in Date and Time</label>
+                      <input  [min]="min" [max]="max" placeholder="CheckIn Date and Time"
+                        [(ngModel)]="modelAttendance.checkIn" name="checkIndate" class="form-control"
+                        [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1" #checkInDate="ngModel" required>
+                      <owl-date-time #dtPicker1 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
+                        [pickerMode]="pickerMode" [pickerType]="'timer'"></owl-date-time>
+                    </div>
+                    <div *ngIf="checkInDate.invalid && (checkInDate.dirty || checkInDate.touched)"
+                      class="alert alert-danger">
+                      <label>
+                        Check In Date is Required
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="checkOut">CheckOut Date and Time</label>
+                      <input  [min]="min" [max]="max" placeholder="CheckOut Date and Time"
+                        [(ngModel)]="modelAttendance.checkOut" name="checkOutdate" class="form-control"
+                        [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2" #checkOutDate="ngModel" required>
+                      <owl-date-time #dtPicker2 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
+                        [pickerMode]="pickerMode" [pickerType]="'timer'"></owl-date-time>
+                    </div>
+                    <div *ngIf="checkOutDate.invalid && (checkOutDate.dirty || checkOutDate.touched)"
+                      class="alert alert-danger">
+                      <label>
+                        Check Out Date is Required
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="breakStart">Break Start Date and Time</label>
+                      <input [min]="min" [max]="max" placeholder="Break Start Date and Time"
+                        [(ngModel)]="modelAttendance.breakStartTime" name="breakStart date" class="form-control"
+                        [owlDateTimeTrigger]="dtPicker3" [owlDateTime]="dtPicker3" #breakStartTimeDate="ngModel">
+                      <owl-date-time #dtPicker3 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
+                        [pickerMode]="pickerMode" [pickerType]="'timer'"></owl-date-time>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="breakEnd">Break End Date and Time</label>
+                      <input [min]="min" [max]="max" placeholder="Break End Date and Time"
+                        [(ngModel)]="modelAttendance.breakEndTime" name="breakEnd date" class="form-control"
+                        [owlDateTimeTrigger]="dtPicker4" [owlDateTime]="dtPicker4" #breakEndTimeDate="ngModel">
+                      <owl-date-time #dtPicker4 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
+                        [pickerMode]="pickerMode" [pickerType]="'timer'"></owl-date-time>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="date">Date</label>
+                      <input  [min]="min" [max]="max" placeholder="Select Date "
+                        [(ngModel)]="modelAttendance.date" name=" date" class="form-control"
+                        [owlDateTimeTrigger]="dtPicker5" [owlDateTime]="dtPicker5" #Date="ngModel" required>
+                      <owl-date-time #dtPicker5 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
+                        [pickerMode]="pickerMode" [pickerType]="'calendar'"></owl-date-time>
+                      <div *ngIf="Date.errors?.required && (Date.dirty || Date.touched)" class="alert alert-danger">
+                        <label>
+                          Please Select Date
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" [(ngModel)]="modelAttendance.active"
+                            name="active">
+                          <label class="custom-control-label" for="todo2"><span>Active</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- /.form-row -->
+              </div><!-- /.modal-body -->
+              <!-- .modal-footer -->
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" [disabled]="form.invalid"
+                  (click)="save('attendance')">Save</button> <button type="button" class="btn btn-light"
                   data-dismiss="modal">Close</button>
               </div><!-- /.modal-footer -->
             </div><!-- /.modal-content -->
@@ -460,5 +570,5 @@
         </div>
       </form><!-- /.modal -->
     </div><!-- /.page -->
-</div><!-- /.wrapper -->
+  </div><!-- /.wrapper -->
 </main><!-- /.app-main -->

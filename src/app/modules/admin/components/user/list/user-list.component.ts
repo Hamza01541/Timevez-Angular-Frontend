@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService, LoaderService, UserService, AttendanceService } from 'src/app/core/services/index';
 import { GridComponent, ConfirmationDialogueComponent } from 'src/shared/components/index';
-import { signUp, rolesType } from "src/app/models/signup";
-import { PerfectScrollbarConfigInterface, PerfectScrollbarComponent, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
-
+import { signUp, } from "src/app/models/signup";
+import { attendence } from "src/app/models/attendence";
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+declare var jQuery: any;
 
 @Component({
     selector: 'app-user-list',
@@ -25,7 +26,20 @@ export class UserListComponent implements OnInit {
 
     public config: PerfectScrollbarConfigInterface = { suppressScrollX: false };
 
+    // Max moment: January 1 2020, 20:30
+    public min = new Date(2020, 0, 1, 10, 30);
+    // Max moment: April 1 2020, 20:30
+    public max = new Date(2020, 3, 1, 20, 30);
+    //First day of week starts from Monday on Value 1
+    firstDayofWeek = 1;
+    //12 Hour Timer Set if true
+    hour12Timer = true;
+    //Picker Mode Opening style of Time Picker Like, (Default)PopUp & Dialog
+    pickerMode = "popup";
+
+
     model: signUp;
+    modelAttendance: attendence
     id: number;
     operation = "add";
     selected: any = {};
@@ -39,7 +53,7 @@ export class UserListComponent implements OnInit {
         private loaderService: LoaderService,
         public dialog: MatDialog) {
         this.model = new signUp();
-
+        this.modelAttendance = new attendence();
     }
 
     ngOnInit() {
@@ -48,16 +62,35 @@ export class UserListComponent implements OnInit {
 
 
 
-    save() {
-        this.showLoader();
-        this.operation = this.id ? 'updateData' : 'addData';
-        this.showLoader();
-        this.userService[this.operation](this.model).subscribe(res => {
-            this.hideLoader();
-            this.alertService.successToastr(`SuccessFully ${this.operation} Of Users.`, false);
-            this.router.navigate(['/admin/user']);
-        });
-
+    save(type: string) {
+        if (type == 'attendance') {
+            this.showLoader();
+            this.operation = this.id ? 'updateData' : 'addData';
+            this.showLoader();
+            this.attendanceService[this.operation](this.modelAttendance).subscribe(res => {
+                this.hideLoader();
+                jQuery('#attendanceNewModal').modal('hide');
+                this.alertService.successToastr(`SuccessFully ${this.operation} Of Attendance.`, false);
+            }, error => {
+                this.hideLoader();
+                this.alertService.errorToastr(`Error in ${this.operation} Attendance.`, false);
+                jQuery('#attendanceNewModal').modal('show');
+            });
+        }
+        else {
+            this.showLoader();
+            this.operation = this.id ? 'updateData' : 'addData';
+            this.showLoader();
+            this.userService[this.operation](this.model).subscribe(res => {
+                this.hideLoader();
+                jQuery('#clientNewModal').modal('hide');
+                this.alertService.successToastr(`SuccessFully ${this.operation} Of User.`, false);
+            }, error => {
+                this.hideLoader();
+                jQuery('#clientNewModal').modal('show');
+                this.alertService.errorToastr(`Error in ${this.operation} User.`, false);
+            });
+        }
     }
 
 
@@ -181,13 +214,50 @@ export class UserListComponent implements OnInit {
     }
 
     /**
-         * Perform Add Operation
+         * Performed delete and update Operation
          */
-    performOperation(event: any) {
-        switch (event.action) {
-            case 'add':
-                this.router.navigate(['/admin/user-form']);
-                break;
+    performOperation(type: string, operation: string, Id: any) {
+        if (type == 'user') {
+            if (operation == 'delete') {
+                this.showLoader();
+                this.userService.deleteData(Id).subscribe(res => {
+                    this.hideLoader();
+                    this.alertService.successToastr("Selected User Deleted Successfully.", false);
+                }, error => {
+                    this.hideLoader();
+                    this.alertService.errorToastr("Error in Deleting Selected User.", false);
+                });
+            }
+            else if(operation=='edit'){
+                this.id=Id;
+                jQuery('#clientNewModal').modal('show');
+                this.userService.getById(Id).subscribe(res=>{
+                    this.model=res.data;
+                });
+            }
+        }
+        else {
+            if (operation == 'delete') {
+
+            this.showLoader();
+            this.attendanceService.deleteData(Id).subscribe(res => {
+                this.hideLoader();
+                this.alertService.successToastr("Selected Attendance Deleted Successfully.", false);
+                location.reload();
+            }, error => {
+                this.hideLoader();
+                this.alertService.errorToastr("Error in Deleting Selected Attendance.", false);
+            });
+        }
+        else if(operation=='edit'){
+            this.id=Id;
+                jQuery('#attendanceNewModal').modal('show');
+                this.attendanceService.getById(Id).subscribe(res=>{
+                    this.attendanceService=res.data;
+                });
+           
+        }
+
         }
     }
 
