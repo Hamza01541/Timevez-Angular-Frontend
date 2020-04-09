@@ -6,6 +6,7 @@ import { GridComponent, ConfirmationDialogueComponent } from 'src/shared/compone
 import { signUp, } from "src/app/models/signup";
 import { attendence } from "src/app/models/attendence";
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import flatpickr from "flatpickr";
 declare var jQuery: any;
 
 @Component({
@@ -16,14 +17,12 @@ declare var jQuery: any;
 export class UserListComponent implements OnInit {
     @ViewChild(GridComponent) gridComponent: GridComponent;
 
+
+
     jscolumnDefs: any[];
     users: any[];
     totalUsers: number;
     allUsers: any[];
-    jsfilter: any = {};
-    selectedRowId;
-    isShowAdd: boolean = false;
-
     public config: PerfectScrollbarConfigInterface = { suppressScrollX: false };
 
     // Max moment: January 1 2020, 20:30
@@ -36,7 +35,6 @@ export class UserListComponent implements OnInit {
     hour12Timer = true;
     //Picker Mode Opening style of Time Picker Like, (Default)PopUp & Dialog
     pickerMode = "popup";
-
 
     model: signUp;
     modelAttendance: attendence
@@ -57,12 +55,13 @@ export class UserListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getGridData();
+        this.getAllUser();
     }
 
 
 
     save(type: string) {
+
         if (type == 'attendance') {
             this.showLoader();
             this.operation = this.id ? 'updateData' : 'addData';
@@ -70,6 +69,7 @@ export class UserListComponent implements OnInit {
             this.attendanceService[this.operation](this.modelAttendance).subscribe(res => {
                 this.hideLoader();
                 jQuery('#attendanceNewModal').modal('hide');
+
                 this.alertService.successToastr(`SuccessFully ${this.operation} Of Attendance.`, false);
             }, error => {
                 this.hideLoader();
@@ -93,76 +93,18 @@ export class UserListComponent implements OnInit {
         }
     }
 
+  
 
-    /**
-         * Call the Column and Users.
-         */
-    getGridData() {
-        // this.getColumnDefs();
-        this.getAllUser();
-    }
-
-    /**
-      * Initializing the Grid with Data
-      */
-    getColumnDefs() {
-        let _this = this;
-        this.jscolumnDefs = [
-            {
-                title: 'Name', name: "fullname", width: 75, itemTemplate: function (__, user) {
-                    return `${user.firstname} ${user.lastname}`;
-                }
-            },
-            { title: 'Username', width: 92, name: 'username' },
-            { title: 'CNIC', width: 44, name: 'CNIC' },
-            { title: 'Address', width: 50, name: 'address' },
-            { title: 'Email', width: 92, name: 'email' },
-            { title: 'Phone', width: 60, name: 'phone' },
-            { title: 'Role', width: 50, name: 'role' },
-            {
-                title: 'Active', width: 34, name: 'active', itemTemplate: function (active) {
-                    var iconClass = "";
-                    var iconStyle = "";
-                    if (active == true) {
-                        iconClass = "fa fa-check";
-                        iconStyle = "color:green";
-                    }
-                    else {
-                        iconClass = "fa fa-close";
-                        iconStyle = "color:red"
-                    }
-                    return $("<span>").attr("class", iconClass).attr("style", iconStyle);
-                }
-            },
-            {
-                title: 'Action', width: 70, name: "username", itemTemplate: (__, data) => {
-                    const updateIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Edit'>").append("<i class='fa fa-pencil-square-o mr-3'  >").on("click", () => this.performCurdOperation('update', data._id));
-                    const deleteIcon = $("<span data-toggle='tooltip' data-placement='bottom' title='Disabled'>").append("<i class='fas fa-trash-alt mr-3'>").on("click", () => this.openDialog(data._id));
-                    return $("<span>").append(updateIcon).append(deleteIcon);
-                }
+    filterAttendance(event) {
+        if (event.target.value) {
+            if (event.target.value == "custom") {
+                console.log("selection is", event.target.value);
             }
-        ];
-    }
+            else {
 
-    /**
-     * Perform Update or Delete Operation..
-     */
-    performCurdOperation(action: string, selectedRowId: number) {
-        switch (action) {
-            case 'update':
-                this.router.navigate(['/admin/user-form'], { queryParams: { id: selectedRowId } });
-                break;
-            case 'delete':
-                this.showLoader();
-                this.userService.deleteData(selectedRowId).subscribe(res => {
-                    this.hideLoader();
-                    this.alertService.successToastr("Selected User Deleted Successfully.", false);
-                    this.gridComponent.deleteRowListener(selectedRowId);
-                }, error => {
-                    this.hideLoader();
-                    this.alertService.errorToastr("Error in Deleting User.", false);
-                });
-                break;
+
+            }
+
         }
     }
 
@@ -181,29 +123,11 @@ export class UserListComponent implements OnInit {
         if (dialogRef) {
             dialogRef.afterClosed().subscribe(result => {
                 if (result) {
-                    this.performCurdOperation('delete', selectedRowId);
+                    // this.performCurdOperation('delete', selectedRowId);
                 }
             });
         }
     }
-
-    /**
-     * Get Users on the base of page index.
-     */
-    getUsers(pageindex: number = 1) {
-        this.showLoader();
-        this.userService.getPagedUsers(pageindex).subscribe((users: any) => {
-            this.hideLoader();
-            // this.users = users.data;
-
-            this.getUserAttendance(this.selected._id);
-            this.totalUsers = users.total;
-        }, error => {
-            this.hideLoader();
-            this.alertService.errorToastr("Error in Getting Users.", false);
-        });
-    }
-
 
     getAllUser() {
         this.userService.getData().subscribe((users: any) => {
@@ -228,36 +152,34 @@ export class UserListComponent implements OnInit {
                     this.alertService.errorToastr("Error in Deleting Selected User.", false);
                 });
             }
-            else if(operation=='edit'){
-                this.id=Id;
+            else if (operation == 'edit') {
+                this.id = Id;
                 jQuery('#clientNewModal').modal('show');
-                this.userService.getById(Id).subscribe(res=>{
-                    this.model=res.data;
+                this.userService.getById(Id).subscribe(res => {
+                    this.model = res.data;
                 });
             }
         }
         else {
             if (operation == 'delete') {
-
-            this.showLoader();
-            this.attendanceService.deleteData(Id).subscribe(res => {
-                this.hideLoader();
-                this.alertService.successToastr("Selected Attendance Deleted Successfully.", false);
-                location.reload();
-            }, error => {
-                this.hideLoader();
-                this.alertService.errorToastr("Error in Deleting Selected Attendance.", false);
-            });
-        }
-        else if(operation=='edit'){
-            this.id=Id;
-                jQuery('#attendanceNewModal').modal('show');
-                this.attendanceService.getById(Id).subscribe(res=>{
-                    this.attendanceService=res.data;
+                debugger;
+                this.showLoader();
+                this.attendanceService.deleteData(Id).subscribe(res => {
+                    this.hideLoader();
+                    this.alertService.successToastr("Selected Attendance Deleted Successfully.", false);
+                    location.reload();
+                }, error => {
+                    this.hideLoader();
+                    this.alertService.errorToastr("Error in Deleting Selected Attendance.", false);
                 });
-           
-        }
-
+            }
+            else if (operation == 'edit') {
+                this.id = Id;
+                jQuery('#attendanceNewModal').modal('show');
+                this.attendanceService.getById(Id).subscribe(res => {
+                    this.attendanceService = res.data;
+                });
+            }
         }
     }
 
@@ -267,7 +189,6 @@ export class UserListComponent implements OnInit {
             this.userAttendance = attendance;
         });
     }
-
 
     getAvailableTime(attendance) {
         var timeDiff = new Date(attendance.checkOut).getTime() - new Date(attendance.checkIn).getTime();
@@ -279,7 +200,6 @@ export class UserListComponent implements OnInit {
 
         return timeDiff;
     }
-
 
     getUserDetails(userDetails) {
         this.selected = userDetails;

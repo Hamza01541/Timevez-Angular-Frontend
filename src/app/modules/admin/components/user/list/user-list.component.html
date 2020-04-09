@@ -103,9 +103,9 @@
                           <td class="align-middle">{{selected.email}}</td>
                           <td class="align-middle">{{selected.phone}} </td>
                           <td class="align-middle text-right">
-                            <button type="button" (click)="performOperation('user','edit',selected._id)" class="btn btn-sm btn-icon btn-secondary" data-toggle="modal"
-                             ><i class="fa fa-pencil-alt"></i> <span
-                                class="sr-only">Edit</span></button>
+                            <button type="button" (click)="performOperation('user','edit',selected._id)"
+                              class="btn btn-sm btn-icon btn-secondary" data-toggle="modal"><i
+                                class="fa fa-pencil-alt"></i> <span class="sr-only">Edit</span></button>
                             <button type="button" (click)="performOperation('user','delete',selected._id)"
                               class="btn btn-sm btn-icon btn-secondary"><i class="far fa-trash-alt"></i> <span
                                 class="sr-only">Remove</span></button>
@@ -163,6 +163,17 @@
                               <!-- .input-group -->
                               <div class="input-group input-group-alt">
                                 <!-- .input-group-prepend -->
+                                <div class="input-group-prepend">
+                                  <select class="custom-select" (change)="filterAttendance($event)">
+                                    <option selected disabled> Filter By </option>
+                                    <option value="currentDate"> Current Date </option>
+                                    <option value="currentMonth"> Current Month </option>
+                                    <option value="lastMonth"> last Month </option>
+                                    <option value="currentYear"> CurrentYear </option>
+                                    <option value="lastYear"> LastYear </option>
+                                    <option value="custom"> Custom </option>
+                                  </select>
+                                </div><!-- /.input-group-prepend -->
 
                                 <!-- .input-group -->
                                 <div class="input-group">
@@ -181,8 +192,7 @@
                                   <!-- thead -->
                                   <thead>
                                     <tr>
-                                      <th>
-                                      </th>
+
                                       <th> Date </th>
                                       <th> Check In </th>
                                       <th> Break Start </th>
@@ -196,18 +206,19 @@
                                     <tbody *ngFor="let attendance of userAttendance.data">
                                       <!-- tr -->
                                       <tr>
-                                        <td class="align-middle"> {{attendance.date}} </td>
-                                        <td class="align-middle"> {{attendance.checkIn}} </td>
-                                        <td class="align-middle"> {{attendance.breakStartTime}} </td>
-                                        <td class="align-middle"> {{attendance.breakEndTime}} </td>
-                                        <td class="align-middle"> {{attendance.checkOut}} </td>
+                                        <td class="align-middle"> {{attendance.date |date}} </td>
+                                        <td class="align-middle"> {{attendance.checkIn | date:'shortTime'}} </td>
+                                        <td class="align-middle"> {{attendance.breakStartTime| date:'shortTime'}} </td>
+                                        <td class="align-middle"> {{attendance.breakEndTime| date:'shortTime'}} </td>
+                                        <td class="align-middle"> {{attendance.checkOut| date:'shortTime'}} </td>
                                         <td class="align-middle"> {{getAvailableTime(attendance)}} </td>
                                         <td class="align-middle text-right">
-                                          <a class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"  (click)="performOperation('attendance','edit',attendance._id)" ></i>
+                                          <a class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"
+                                              (click)="performOperation('attendance','edit',attendance._id)"></i>
                                             <span class="sr-only">Edit</span></a> <a
                                             class="btn btn-sm btn-icon btn-secondary"><i class="far fa-trash-alt"
-                                              (click)="performOperation('attendance','delete',attendance._id)"></i> <span
-                                              class="sr-only">Remove</span></a>
+                                              (click)="performOperation('attendance','delete',attendance._id)"></i>
+                                            <span class="sr-only">Remove</span></a>
                                         </td>
                                       </tr><!-- /tr -->
                                       <!-- tr -->
@@ -219,54 +230,19 @@
                             </div>
                             <!-- .pagination -->
                             <ul class="pagination justify-content-center mt-4">
-                              <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1"><i class="fa fa-lg fa-angle-left"></i></a>
-                              </li>
+
                               <li class="page-item">
                                 <a class="page-link" href="#">1</a>
-                              </li>
-                              <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">...</a>
-                              </li>
-                              <li class="page-item">
-                                <a class="page-link" href="#">13</a>
-                              </li>
-                              <li class="page-item active">
-                                <a class="page-link" href="#">14</a>
-                              </li>
-                              <li class="page-item">
-                                <a class="page-link" href="#">15</a>
-                              </li>
-                              <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">...</a>
-                              </li>
-                              <li class="page-item">
-                                <a class="page-link" href="#">24</a>
-                              </li>
-                              <li class="page-item">
-                                <a class="page-link" href="#"><i class="fa fa-lg fa-angle-right"></i></a>
                               </li>
                             </ul><!-- /.pagination -->
                           </div><!-- /.card-body -->
                         </div><!-- /.card -->
-
-
-
-
-
                       </div><!-- /.page-section -->
                     </div><!-- /.page-inner -->
                   </div><!-- /.page -->
                 </div><!-- .app-footer -->
-
-
-
-
-
-
               </div><!-- /.card -->
             </div><!-- /.tab-pane -->
-
           </div><!-- /.tab-content -->
         </div><!-- /.sidebar-section -->
       </div><!-- /.page-sidebar -->
@@ -484,7 +460,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="checkIn">Check in Date and Time</label>
-                      <input  [min]="min" [max]="max" placeholder="CheckIn Date and Time"
+                      <input [min]="min" [max]="max" placeholder="CheckIn Date and Time"
                         [(ngModel)]="modelAttendance.checkIn" name="checkIndate" class="form-control"
                         [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1" #checkInDate="ngModel" required>
                       <owl-date-time #dtPicker1 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
@@ -500,7 +476,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="checkOut">CheckOut Date and Time</label>
-                      <input  [min]="min" [max]="max" placeholder="CheckOut Date and Time"
+                      <input [min]="min" [max]="max" placeholder="CheckOut Date and Time"
                         [(ngModel)]="modelAttendance.checkOut" name="checkOutdate" class="form-control"
                         [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2" #checkOutDate="ngModel" required>
                       <owl-date-time #dtPicker2 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
@@ -536,9 +512,9 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="date">Date</label>
-                      <input  [min]="min" [max]="max" placeholder="Select Date "
-                        [(ngModel)]="modelAttendance.date" name=" date" class="form-control"
-                        [owlDateTimeTrigger]="dtPicker5" [owlDateTime]="dtPicker5" #Date="ngModel" required>
+                      <input [min]="min" [max]="max" placeholder="Select Date " [(ngModel)]="modelAttendance.date"
+                        name=" date" class="form-control" [owlDateTimeTrigger]="dtPicker5" [owlDateTime]="dtPicker5"
+                        #Date="ngModel" required>
                       <owl-date-time #dtPicker5 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
                         [pickerMode]="pickerMode" [pickerType]="'calendar'"></owl-date-time>
                       <div *ngIf="Date.errors?.required && (Date.dirty || Date.touched)" class="alert alert-danger">

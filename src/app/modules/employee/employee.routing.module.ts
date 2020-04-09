@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Admin Components
 import {
-    EmployeeRootComponent, timesheetComponent,DashboardComponent
+    EmployeeRootComponent, timesheetComponent,DashboardComponent,LeaveComponent
 } from "./components/index";
 
 
@@ -15,6 +15,7 @@ const routes: Routes = [
             { path: '', redirectTo: "/dashboard", pathMatch: 'full' },
             { path: 'timesheet', component: timesheetComponent },
             { path: 'dashboard', component: DashboardComponent },
+            { path: 'leave', component: LeaveComponent },
             // otherwise redirect to home
             { path: '**', redirectTo: "dashboard" },
         ]

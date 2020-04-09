@@ -10,10 +10,16 @@ export const AdminNavigationMenu = [
   },
 ];
 
-export const  EmployeeNavigationMenu = [
+export const EmployeeNavigationMenu = [
 
   {
     "name": "History",
     "route": "timesheet"
   },
+  {
+    "name": "Leave",
+    "route": "leave"
+  },
+
+
 ];

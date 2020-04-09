@@ -733,7 +733,7 @@
             <!-- .page-title-bar -->
             <header class="page-title-bar">
               <!-- floating action -->
-              
+
               <!-- /floating action -->
               <!-- title and toolbar -->
               <div class="d-md-flex align-items-md-start">
@@ -760,11 +760,13 @@
                       <div class="input-group-prepend">
                         <select class="custom-select">
                           <option selected> Filter By </option>
-                          <option value="1"> Tags </option>
-                          <option value="2"> Vendor </option>
-                          <option value="3"> Variants </option>
-                          <option value="4"> Prices </option>
-                          <option value="5"> Sales </option>
+
+                          <option value="currentDate"> Current Date </option>
+                          <option value="currentMonth"> Current Month </option>
+                          <option value="lastMonth"> last Month </option>
+                          <option value="currentYear"> CurrentYear </option>
+                          <option value="lastYear"> LastYear </option>
+                          <option value="custome"> Custom </option>
                         </select>
                       </div><!-- /.input-group-prepend -->
                       <!-- .input-group -->
@@ -783,8 +785,6 @@
                       <!-- thead -->
                       <thead>
                         <tr>
-                          <th>
-                          </th>
                           <th> Date </th>
                           <th> Check In </th>
                           <th> Break Start </th>
@@ -798,13 +798,13 @@
                         <tbody>
                           <!-- tr -->
                           <tr *ngFor="let attendance of userAttendance">
-                            <td class="align-middle"> {{attendance.date}} </td>
-                            <td class="align-middle"> {{attendance.checkIn}} </td>
-                            <td class="align-middle"> {{attendance.breakStartTime}} </td>
-                            <td class="align-middle"> {{attendance.breakEndTime}} </td>
-                            <td class="align-middle"> {{attendance.checkOut}} </td>
+                            <td class="align-middle"> {{attendance.date |date}} </td>
+                            <td class="align-middle"> {{attendance.checkIn | date:'shortTime'}} </td>
+                            <td class="align-middle"> {{attendance.breakStartTime | date:'shortTime'}} </td>
+                            <td class="align-middle"> {{attendance.breakEndTime | date:'shortTime'}} </td>
+                            <td class="align-middle"> {{attendance.checkOut | date:'shortTime'}} </td>
                             <td class="align-middle"> {{getAvailableTime(attendance)}} </td>
-                        
+
                           </tr>
                           <!-- tr -->
                         </tbody><!-- /tbody -->
