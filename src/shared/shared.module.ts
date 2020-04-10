@@ -32,7 +32,7 @@ import {
 
 //Shared Module
 import {
-  GridComponent,ConfirmationDialogueComponent,ProfileComponent
+  GridComponent,ConfirmationDialogueComponent
 } from 'src/shared/components/index';
 
 
@@ -58,7 +58,6 @@ const SHARED_MODULES = [
 const SHARED_COMPONENTS = [
   //Shared Component
   GridComponent,
-  ProfileComponent,
   ConfirmationDialogueComponent,
   
 ];

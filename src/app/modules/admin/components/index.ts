@@ -6,3 +6,4 @@ export * from './user/list/user-list.component';
 export * from './attendance/form/attendance-form.component';
 export * from './attendance/list/attendance-list.component';
 export * from './change-password/change-password.component';
+export * from './profile/profile.component';

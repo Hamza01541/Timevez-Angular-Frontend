@@ -312,7 +312,7 @@
                 class="dropdown-icon oi oi-person"></span> Profile
             </a> <a class="dropdown-item" [routerLink]="['/login']" [queryParams]="{logout: true}"><span
                 class="dropdown-icon oi oi-account-logout"></span> Logout</a>
-            <div class="dropdown-divider"></div><a class="dropdown-item" [routerLink]="['/admin/changePassword']">Change
+            <div class="dropdown-divider"></div><a class="dropdown-item" [routerLink]="['/admin/change-password']">Change
               Password</a>
           </div><!-- /.dropdown-menu -->
         </div><!-- /.btn-account -->
@@ -342,7 +342,7 @@
           <!-- .menu-item -->
           <li class="menu-item has-child" *ngFor="let tab of navbarTabs" class=""
             [ngClass]="{'active': currentPage.toLowerCase() == tab.route.toLowerCase()}"
-            routerLink="/admin/{{tab.route}}">
+            routerLink="/admin/{{tab.route}}" style="cursor: pointer;">
             <a class="menu-link"><span></span> <span class="menu-text">
                 {{tab.name}}</span> </a> <!-- child menu -->
           </li><!-- /.menu-item -->

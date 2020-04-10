@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService, LoaderService  } from 'src/app/core/services/index';
+import { AlertService, LoaderService } from 'src/app/core/services/index';
 import { changePassword } from "src/app/models/change-password";
 
 @Component({
-    selector: 'admin-change-password',
+    selector: 'employee-change-password',
     templateUrl: './change-password.component.html',
     styleUrls: ['./change-password.component.scss']
 })

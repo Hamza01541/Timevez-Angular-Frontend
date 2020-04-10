@@ -1,5 +1,7 @@
 export class leave {
-   oldPassword:string;
-   newPassword:string;
-  
+    leaveType: string;
+    description: string;
+    startDate: string;
+    endDate: string
+
 }

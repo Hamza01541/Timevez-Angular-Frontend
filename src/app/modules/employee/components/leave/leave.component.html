@@ -3,76 +3,49 @@
     <aside class="app-aside app-aside-expand-md app-aside-light">
     </aside>
     <main class="app-main">
-        <!-- .wrapper -->
         <div class="wrapper">
-            <!-- .page -->
             <div class="page">
-                <!-- .page-inner -->
                 <div class="page-inner">
-                    <!-- .page-title-bar -->
-                    <!-- .page-section -->
                     <div class="page-section">
+                        <form class="auth-form" style="width: 100%;" name="form" #form="ngForm">
+                  
+                            <div class="input-group-prepend">
+                                <select class="custom-select" (change)="leaveType($event)">
+                                    <option selected disabled> Choose Leave Type </option>
+                                    <option value="sickLeave"> Sick Leave </option>
+                                    <option value="weedingLeave"> Weeding Leave </option>
+                                    <option value="personalLeave"> Personal Leave </option>
+                                    <option value="bereavement"> Bereavement Leave </option>
+                                    <option value="examsLeave"> Exams Leave </option>
+                                    <option value="emergencyLeave"> Emergency Leave </option>
+                                </select>
+                            </div><!-- /.input-group-prepend -->
 
-                        <div style="color: red;"> This screen is for changing password due to desing issue i created this on Leave page will
-                        implement it later on change password components</div>
-                        <!-- .section-block -->
-                        <!-- grid row -->
-                        <form class="auth-form" style="width: 100%;" name="loginForm" #loginForm="ngForm">
+                            <br>
                             <div class="form-group">
+                                <label>Description About Leave</label>
                                 <div class="form-label-group">
-                                    <input type="text" id="oldPassword" name="oldPassword" required class="form-control"
-                                        #oldPassword="ngModel" placeholder="Enter Old Password"
-                                        [(ngModel)]="model.oldPassword" autofocus=""> <label for="inputUser">Old
-                                        Password</label>
+                                   
+                                    <textarea  id="leaveDescription" style="height: 100px;" name="leaveDescription" required
+                                        class="form-control" #leaveDescription="ngModel" [(ngModel)]="model.description"></textarea>
                                 </div>
-                                <div *ngIf="oldPassword.errors?.required && oldPassword.touched "
+                                <div *ngIf="leaveDescription.errors?.required && leaveDescription.touched "
                                     class="alert alert-danger">
-                                    Old Password is Required.
+                                    Description is Required.
                                 </div>
                             </div>
+                          
+                          
                             <div class="form-group">
                                 <div class="form-label-group">
-
-                                    <input type="password" required #password="ngModel" id="Password" name="password"
-                                        [(ngModel)]="model.newPassword" placeholder="Enter New Password" class="form-control"
-                                        pattern="^.{6,10}$">
-
-                                    <div *ngIf="password.invalid && (password.dirty || password.touched)"
-                                        class="alert alert-danger">
-                                        <label>
-                                            Password is Required
-                                        </label>
-                                    </div>
-                                    <div *ngIf="password.errors?.pattern" id="card-errors"
-                                        class="alert alert-danger col-12" style="color:#f2665c;" role="alert">
-                                        Password Must be more than 6 to 10 Chracter or Number
-                                    </div>
+                                    <button type="submit" class="btn btn-primary"
+                                        [disabled]="form.invalid || !model.leaveType">Submit Leave</button>
                                 </div>
-
-                            </div>
-                            <div class="form-group">
-                                <div class="form-label-group">
-                                <input type="password" id="confirmpassword" name="confirmpassword" class="form-control"
-                                    placeholder=" Confirm Password" #confirmPassword="ngModel" ngModel required>
-
-                                <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)"
-                                    class="alert alert-danger">
-                                    <label>
-                                        Confirm Password is Required
-                                    </label>
-                                </div>
-                                <div *ngIf="confirmPassword.valid && model.newPassword !== confirmPassword.value"
-                                    id="card-errors" class="alert alert-danger col-12" style="color:#f2665c;"
-                                    role="alert">
-                                    Password does not match
-                                </div>
-                            </div>
                             </div>
                         </form>
-                    </div><!-- /.page-section -->
-                </div><!-- /.page-inner -->
-            </div><!-- /.page -->
-        </div><!-- .app-footer -->
-        <!-- /.wrapper -->
-    </main><!-- /.app-main -->
-</div><!-- /.app -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

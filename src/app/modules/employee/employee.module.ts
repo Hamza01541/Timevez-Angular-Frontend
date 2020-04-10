@@ -15,7 +15,9 @@ import {
     EmployeeRootComponent,
     DashboardComponent,
     timesheetComponent,
-    LeaveComponent
+    LeaveComponent,
+    ChangePasswordComponent,
+    ProfileComponent
 
 } from "./components";
 
@@ -27,7 +29,9 @@ import { SharedModule } from '.././../../shared/shared.module';
         EmployeeRootComponent,
         DashboardComponent,
         timesheetComponent,
-        LeaveComponent
+        LeaveComponent,
+        ChangePasswordComponent,
+        ProfileComponent
     ],
 
     imports: [

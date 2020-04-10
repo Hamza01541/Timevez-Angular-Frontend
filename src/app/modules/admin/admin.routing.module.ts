@@ -9,7 +9,8 @@ import {
     AttendanceFormComponent,
     AttendanceListComponent,
     ChangePasswordComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProfileComponent
 } from "./components/index";
 
 
@@ -24,7 +25,8 @@ const routes: Routes = [
             { path: 'user-form', component: UserFormComponent },
             { path: 'attendance-form', component: AttendanceFormComponent },
             { path: 'attendance', component: AttendanceListComponent },
-            { path: 'changePassword', component: ChangePasswordComponent },
+            { path: 'change-password', component: ChangePasswordComponent },
+            { path: 'profile', component: ProfileComponent },
             // otherwise redirect to home
             { path: '**', redirectTo: "dashboard" },
         ]

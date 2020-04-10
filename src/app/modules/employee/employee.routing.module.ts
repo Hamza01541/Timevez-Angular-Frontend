@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Admin Components
 import {
-    EmployeeRootComponent, timesheetComponent,DashboardComponent,LeaveComponent
+    EmployeeRootComponent, timesheetComponent, DashboardComponent, LeaveComponent, ChangePasswordComponent, ProfileComponent
 } from "./components/index";
 
 
@@ -14,8 +14,10 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: "/dashboard", pathMatch: 'full' },
             { path: 'timesheet', component: timesheetComponent },
+            { path: 'change-password', component: ChangePasswordComponent },
             { path: 'dashboard', component: DashboardComponent },
             { path: 'leave', component: LeaveComponent },
+            { path: 'profile', component: ProfileComponent },
             // otherwise redirect to home
             { path: '**', redirectTo: "dashboard" },
         ]

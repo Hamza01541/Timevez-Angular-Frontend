@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { attendence } from "src/app/models/attendence";
 import { AlertService, LoaderService, AttendanceService, UserService } from 'src/app/core/services/index';
 import { leave } from "src/app/models/leave";
+import flatpickr from "flatpickr";
 
 
 
@@ -27,8 +28,16 @@ export class LeaveComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log("flatPicker", flatpickr)
+
   }
 
+
+  leaveType(event) {
+    if (event.target.value) {
+      this.model.leaveType = event.target.value;
+    }
+  }
 
   /**
    * Show loader
