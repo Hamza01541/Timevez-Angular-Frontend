@@ -56,4 +56,14 @@ export class AdminRootComponent implements OnInit {
       this.currentPage = url.includes('?') ? url.split('?')[0] : url;
     }
   }
+
+  /**
+   * Toggle theme skin color
+   */
+  toggleThemeColor() {
+    let skin = localStorage.getItem('skin') || 'default';
+    skin = skin === 'default' ? 'dark' : 'default';
+    localStorage.setItem('skin', skin);
+    window.location.reload();
+  }
 }
