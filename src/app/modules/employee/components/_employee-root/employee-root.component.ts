@@ -12,7 +12,7 @@ import { LocalStorageService } from 'src/app/core/services/';
 })
 export class EmployeeRootComponent implements OnInit {
     fullname: string;
-    role:string;
+    role: string;
     navbarTabs: any;
     currentPage: string = "";
     currentUser: any;
@@ -29,7 +29,7 @@ export class EmployeeRootComponent implements OnInit {
 
         this.currentUser = this.storageService.get('currentUser');
         this.fullname = `${this.currentUser.firstname} ${this.currentUser.lastname}`;
-        this.role=`${this.currentUser.role}`;
+        this.role = `${this.currentUser.role}`;
         if (this.currentUser && this.currentUser.role) {
             if (this.currentUser.role == Role.Employee) {
                 this.navbarTabs = EmployeeNavigationMenu;
@@ -54,5 +54,15 @@ export class EmployeeRootComponent implements OnInit {
             let url = returnUrl.split('employee/')[1];
             this.currentPage = url.includes('?') ? url.split('?')[0] : url;
         }
+    }
+
+    /**
+   * Toggle theme skin color
+   */
+    toggleThemeColor() {
+        let skin = localStorage.getItem('skin') || 'default';
+        skin = skin === 'default' ? 'dark' : 'default';
+        localStorage.setItem('skin', skin);
+        window.location.reload();
     }
 }
