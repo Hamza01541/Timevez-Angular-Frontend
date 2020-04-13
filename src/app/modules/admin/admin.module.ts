@@ -9,7 +9,6 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { AdminRoutingModule } from './admin.routing.module';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -61,9 +60,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SharedModule,
         OwlDateTimeModule,
         OwlNativeDateTimeModule,
-        Ng2FlatpickrModule,
 
 
+        
     ],
 
     providers: [

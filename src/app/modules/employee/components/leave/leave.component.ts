@@ -27,8 +27,15 @@ export class LeaveComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.flatPickr()
+  }
 
-    console.log("flatPicker", flatpickr)
+  flatPickr() {
+    const startDate = flatpickr("#startdate", {
+      dateFormat: "d.m.Y",
+    }); const endDate = flatpickr("#enddate", {
+      dateFormat: "d.m.Y",
+    });
 
   }
 

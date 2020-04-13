@@ -758,23 +758,26 @@
                     <div class="input-group input-group-alt">
                       <!-- .input-group-prepend -->
                       <div class="input-group-prepend">
-                        <select class="custom-select">
-                          <option selected> Filter By </option>
-
-                          <option value="currentDate"> Current Date </option>
+                        <select class="custom-select" (change)="filterAttendance($event)">
+                          <option selected value="currentDate"> Current Date </option>
                           <option value="currentMonth"> Current Month </option>
                           <option value="lastMonth"> last Month </option>
                           <option value="currentYear"> CurrentYear </option>
-                          <option value="lastYear"> LastYear </option>
-                          <option value="custome"> Custom </option>
+                          <option value="lastYear"> Last Year </option>
+                          <option value="custom"> Custom </option>
                         </select>
+
+
+
+
                       </div><!-- /.input-group-prepend -->
-                      <!-- .input-group -->
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                        </div><input type="text" class="form-control" placeholder="Search record">
-                      </div><!-- /.input-group -->
+
+                      <div class="form-group" [hidden]="showDate">
+                        <input placeholder="Select Start Date " [(ngModel)]="startDate" id="startdate" name="startdate"
+                          class="form-control">
+                        <input placeholder="Select End Date " [(ngModel)]="endDate" id="enddate" name="enddate"
+                          class="form-control">
+                      </div>
                     </div><!-- /.input-group -->
                   </div><!-- /.form-group -->
                   <!-- .table-responsive -->

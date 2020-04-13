@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
   loginModel: any = { username: "", password: "" }
   logout: boolean = false;
   currentUser: any;
-
   constructor(
     private alertService: AlertService,
     private userService: UserService,
@@ -26,6 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.logout = this.route.snapshot.queryParams['logout'] || false;
     this.currentUser = this.storageService.get('currentUser');
 

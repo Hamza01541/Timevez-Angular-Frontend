@@ -9,10 +9,14 @@
       <!-- .page-inner -->
       <div class="page-inner page-inner-fill position-relative">
         <header class="page-navs bg-light shadow-sm">
-            <!-- .input-group -->
-            <div class="input-group has-clearable">
-              <button type="button" class="close" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle"></i></span></button> <label class="input-group-prepend" for="searchClients"><span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span></label> <input type="text" class="form-control" id="searchClients" data-filter=".board .list-group-item" placeholder="Find User">
-            </div><!-- /.input-group -->
+          <!-- .input-group -->
+          <div class="input-group has-clearable">
+            <button type="button" class="close" aria-label="Close"><span aria-hidden="true"><i
+                  class="fa fa-times-circle"></i></span></button> <label class="input-group-prepend"
+              for="searchClients"><span class="input-group-text"><span
+                  class="oi oi-magnifying-glass"></span></span></label> <input type="text" class="form-control"
+              id="searchClients" data-filter=".board .list-group-item" placeholder="Find User">
+          </div><!-- /.input-group -->
           <!-- .input-group -->
         </header><button type="button" class="btn btn-primary btn-floated position-absolute" data-toggle="modal"
           data-target="#clientNewModal" title="Add new client"><i class="fa fa-plus"></i></button> <!-- board -->
@@ -169,22 +173,20 @@
                                 <!-- .input-group-prepend -->
                                 <div class="input-group-prepend">
                                   <select class="custom-select" (change)="filterAttendance($event)">
-                                    <option selected disabled> Filter By </option>
-                                    <option value="currentDate"> Current Date </option>
+                                    <option selected value="currentDate"> Current Date </option>
                                     <option value="currentMonth"> Current Month </option>
                                     <option value="lastMonth"> last Month </option>
                                     <option value="currentYear"> CurrentYear </option>
-                                    <option value="lastYear"> LastYear </option>
+                                    <option value="lastYear"> Last Year </option>
                                     <option value="custom"> Custom </option>
                                   </select>
                                 </div><!-- /.input-group-prepend -->
-
-                                <!-- .input-group -->
-                                <div class="input-group">
-                                  <div class="input-group-prepend">
-                                    <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                  </div><input type="text" class="form-control" placeholder="Search record">
-                                </div><!-- /.input-group -->
+                                <div class="form-group" [hidden]="showDate">
+                                  <input placeholder="Select Start Date " [(ngModel)]="startDate" id="startdate" name="startdate"
+                                    class="form-control">
+                                  <input placeholder="Select End Date " [(ngModel)]="endDate" id="enddate" name="enddate"
+                                    class="form-control">
+                                </div>
                               </div><!-- /.input-group -->
                             </div><!-- /.form-group -->
                             <!-- .table-responsive -->
@@ -196,7 +198,6 @@
                                   <!-- thead -->
                                   <thead>
                                     <tr>
-
                                       <th> Date </th>
                                       <th> Check In </th>
                                       <th> Break Start </th>
@@ -447,6 +448,9 @@
               </div><!-- /.modal-header -->
               <!-- .modal-body -->
               <div class="modal-body">
+
+
+                <!--  Attendance Form-->
                 <!-- .form-row -->
                 <div class="form-row">
                   <div class="col-md-6">
@@ -463,23 +467,25 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="checkIn">Check in Date and Time</label>
-                      <input [min]="min" [max]="max" placeholder="CheckIn Date and Time"
+                      <label for="checkIn">Check in Time</label>
+                      <input id="flatpickr01" [(ngModel)]="modelAttendance.checkIn" name="flatpickr01"
+                        class="form-control" required>
+                      <!-- <input [min]="min" [max]="max" placeholder="CheckIn Date and Time"
                         [(ngModel)]="modelAttendance.checkIn" name="checkIndate" class="form-control"
                         [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1" #checkInDate="ngModel" required>
                       <owl-date-time #dtPicker1 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
-                        [pickerMode]="pickerMode" [pickerType]="'timer'"></owl-date-time>
+                        [pickerMode]="pickerMode" [pickerType]="'timer'"></owl-date-time> -->
                     </div>
-                    <div *ngIf="checkInDate.invalid && (checkInDate.dirty || checkInDate.touched)"
+                    <!-- <div *ngIf="checkInDate.invalid && (checkInDate.dirty || checkInDate.touched)"
                       class="alert alert-danger">
                       <label>
                         Check In Date is Required
                       </label>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="checkOut">CheckOut Date and Time</label>
+                      <label for="checkOut">CheckOut Time</label>
                       <input [min]="min" [max]="max" placeholder="CheckOut Date and Time"
                         [(ngModel)]="modelAttendance.checkOut" name="checkOutdate" class="form-control"
                         [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2" #checkOutDate="ngModel" required>
@@ -495,7 +501,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="breakStart">Break Start Date and Time</label>
+                      <label for="breakStart">Break Start Time</label>
                       <input [min]="min" [max]="max" placeholder="Break Start Date and Time"
                         [(ngModel)]="modelAttendance.breakStartTime" name="breakStart date" class="form-control"
                         [owlDateTimeTrigger]="dtPicker3" [owlDateTime]="dtPicker3" #breakStartTimeDate="ngModel">
@@ -505,7 +511,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="breakEnd">Break End Date and Time</label>
+                      <label for="breakEnd">Break End Time</label>
                       <input [min]="min" [max]="max" placeholder="Break End Date and Time"
                         [(ngModel)]="modelAttendance.breakEndTime" name="breakEnd date" class="form-control"
                         [owlDateTimeTrigger]="dtPicker4" [owlDateTime]="dtPicker4" #breakEndTimeDate="ngModel">
@@ -516,11 +522,9 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="date">Date</label>
-                      <input [min]="min" [max]="max" placeholder="Select Date " [(ngModel)]="modelAttendance.date"
-                        name=" date" class="form-control" [owlDateTimeTrigger]="dtPicker5" [owlDateTime]="dtPicker5"
-                        #Date="ngModel" required>
-                      <owl-date-time #dtPicker5 [firstDayOfWeek]="firstDayofWeek" [hour12Timer]="hour12Timer"
-                        [pickerMode]="pickerMode" [pickerType]="'calendar'"></owl-date-time>
+                      <input placeholder="Select Date " [(ngModel)]="modelAttendance.date" id="date" name=" date"
+                        class="form-control" #Date="ngModel" required>
+
                       <div *ngIf="Date.errors?.required && (Date.dirty || Date.touched)" class="alert alert-danger">
                         <label>
                           Please Select Date
@@ -549,6 +553,30 @@
           </div><!-- /.modal-dialog -->
         </div>
       </form><!-- /.modal -->
+
+      <div class="modal modal-alert fade" id="deleteModal" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalAlertWarningLabel" aria-hidden="true">
+        <!-- .modal-dialog -->
+        <div class="modal-dialog" role="document">
+          <!-- .modal-content -->
+          <div class="modal-content">
+            <!-- .modal-header -->
+            <div class="modal-header">
+              <h5 id="exampleModalAlertWarningLabel" class="modal-title">
+                <i class="fa fa-bullhorn text-warning mr-1"></i> Warning </h5>
+            </div><!-- /.modal-header -->
+            <!-- .modal-body -->
+            <div class="modal-body">
+              <p> Are you sure Do you want to Delete </p>
+            </div><!-- /.modal-body -->
+            <!-- .modal-footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+              <button type="button" class="btn btn-light">Yes</button>
+            </div><!-- /.modal-footer -->
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
     </div><!-- /.page -->
   </div><!-- /.wrapper -->
 </main><!-- /.app-main -->

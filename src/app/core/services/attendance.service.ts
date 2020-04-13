@@ -87,9 +87,9 @@ export class AttendanceService {
 * Return  attandance 
 * @param pageNumber is to get page based data 
 */
-    getUserAttendance(pageNumber, userId) {
+    getUserAttendance(pageNumber, userId,type) {
         const attendance = `${this.attendance}/${ApiUrl.getUserPageAttendance}/${pageNumber}/${userId}`;
-        return this.RequestService.getData(attendance);
+        return this.RequestService.addData(attendance,type);
     }
 
     /**

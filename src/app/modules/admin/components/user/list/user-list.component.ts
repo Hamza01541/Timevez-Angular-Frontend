@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService, LoaderService, UserService, AttendanceService } from 'src/app/core/services/index';
@@ -15,15 +15,10 @@ declare var jQuery: any;
     styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-    @ViewChild(GridComponent) gridComponent: GridComponent;
-
-
-
-    jscolumnDefs: any[];
+    public config: PerfectScrollbarConfigInterface = { suppressScrollX: false };
     users: any[];
     totalUsers: number;
     allUsers: any[];
-    public config: PerfectScrollbarConfigInterface = { suppressScrollX: false };
 
     // Max moment: January 1 2020, 20:30
     public min = new Date(2020, 0, 1, 10, 30);
@@ -42,6 +37,9 @@ export class UserListComponent implements OnInit {
     operation = "add";
     selected: any = {};
     userAttendance: any = [];
+    startDate: string;
+    endDate: string;
+    showDate: boolean = true;;
 
     constructor(
         private router: Router,
@@ -49,12 +47,29 @@ export class UserListComponent implements OnInit {
         private alertService: AlertService,
         private attendanceService: AttendanceService,
         private loaderService: LoaderService,
+        private ch: ChangeDetectorRef,
         public dialog: MatDialog) {
         this.model = new signUp();
         this.modelAttendance = new attendence();
     }
 
     ngOnInit() {
+
+        const fp = flatpickr("#date", {
+            dateFormat: "d.m.Y",
+        });
+        const sd = flatpickr("#enddate", {
+            dateFormat: "d.m.Y",
+        });
+        const ed = flatpickr("#startdate", {
+            dateFormat: "d.m.Y",
+        });
+
+        const ee = flatpickr("#flatpickr01", {
+            enableTime: true,
+            noCalendar: true,
+        });
+
         this.getAllUser();
     }
 
@@ -93,39 +108,32 @@ export class UserListComponent implements OnInit {
         }
     }
 
-  
+
 
     filterAttendance(event) {
+        let pageindex: number = 1
+        let filterType = {
+            type: event.target.value,
+            startDate: '',
+            endDate: '',
+        }
         if (event.target.value) {
             if (event.target.value == "custom") {
-                console.log("selection is", event.target.value);
+                this.showDate = false;
+                filterType.startDate = this.startDate;
+                filterType.endDate = this.endDate;
+                this.attendanceService.getUserAttendance(pageindex, this.selected._id, filterType).subscribe((attendance: any) => {
+                    this.userAttendance = attendance.data;
+                });
             }
             else {
-
-
+                filterType.startDate = '';
+                filterType.endDate = '';
+                this.showDate = true;
+                this.attendanceService.getUserAttendance(pageindex, this.selected._id, filterType).subscribe((attendance: any) => {
+                    this.userAttendance = attendance.data;
+                });
             }
-
-        }
-    }
-
-    /**
-     * Open confirmation dialogue.
-     * On confirmation, deletes selected row of grid.
-     */
-    openDialog(selectedRowId: number) {
-        const dialogRef = this.dialog.open(ConfirmationDialogueComponent, {
-            width: '250px',
-            data: {
-                message: 'Want to Delete Data?'
-            }
-        });
-
-        if (dialogRef) {
-            dialogRef.afterClosed().subscribe(result => {
-                if (result) {
-                    // this.performCurdOperation('delete', selectedRowId);
-                }
-            });
         }
     }
 
@@ -133,6 +141,7 @@ export class UserListComponent implements OnInit {
         this.userService.getData().subscribe((users: any) => {
             this.selected = users.data[0];
             this.allUsers = users.data;
+            console.log("users", users.data);
             this.getUserAttendance(this.selected._id);
         });
     }
@@ -144,9 +153,12 @@ export class UserListComponent implements OnInit {
         if (type == 'user') {
             if (operation == 'delete') {
                 this.showLoader();
+                jQuery('#deleteModal').modal('show');
+
                 this.userService.deleteData(Id).subscribe(res => {
                     this.hideLoader();
                     this.alertService.successToastr("Selected User Deleted Successfully.", false);
+                    location.reload();
                 }, error => {
                     this.hideLoader();
                     this.alertService.errorToastr("Error in Deleting Selected User.", false);
@@ -162,7 +174,7 @@ export class UserListComponent implements OnInit {
         }
         else {
             if (operation == 'delete') {
-                debugger;
+
                 this.showLoader();
                 this.attendanceService.deleteData(Id).subscribe(res => {
                     this.hideLoader();
@@ -185,7 +197,9 @@ export class UserListComponent implements OnInit {
 
     getUserAttendance(userId) {
         let pageindex: number = 1
-        this.attendanceService.getUserAttendance(pageindex, userId).subscribe((attendance: any) => {
+        let type = 'currentDate';
+        this.attendanceService.getUserAttendance(pageindex, userId, type).subscribe((attendance: any) => {
+            console.log("attendance", attendance);
             this.userAttendance = attendance;
         });
     }
