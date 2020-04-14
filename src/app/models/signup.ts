@@ -10,7 +10,3 @@ export class signUp {
     roles: [];
     active: boolean = true;
 }
-export enum rolesType {     
-    admin="Admin",
-    employee="employee"
-}

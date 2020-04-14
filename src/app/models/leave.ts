@@ -1,7 +1,8 @@
 export class leave {
-    leaveType: string;
+    type: string;
     description: string;
     startDate: string;
-    endDate: string
-
+    endDate: string;
+    status: string;
+    userId: string;
 }

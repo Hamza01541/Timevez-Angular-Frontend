@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageService, UserService } from 'src/app/core/services/';
+import { LocalStorageService, UserService } from 'src/app/core/services';
 @Component({
     selector: 'profile-component',
     templateUrl: './profile.component.html',

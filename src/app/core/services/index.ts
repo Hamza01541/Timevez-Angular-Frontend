@@ -4,3 +4,4 @@ export * from './loader.service';
 export * from './alert.service';
 export * from './user.service';
 export * from './attendance.service';
+export * from './leave.service';

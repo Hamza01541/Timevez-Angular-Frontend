@@ -1,5 +1,4 @@
 <div class="app">
-
     <aside class="app-aside app-aside-expand-md app-aside-light">
     </aside>
     <main class="app-main">
@@ -8,24 +7,18 @@
                 <div class="page-inner">
                     <div class="page-section">
                         <form class="auth-form" style="width: 100%;" name="form" #form="ngForm">
-
                             <div class="input-group-prepend">
-                                <select class="custom-select" (change)="leaveType($event)">
-                                    <option selected disabled> Choose Leave Type </option>
-                                    <option value="sickLeave"> Sick Leave </option>
-                                    <option value="weedingLeave"> Weeding Leave </option>
-                                    <option value="personalLeave"> Personal Leave </option>
-                                    <option value="bereavement"> Bereavement Leave </option>
-                                    <option value="examsLeave"> Exams Leave </option>
-                                    <option value="emergencyLeave"> Emergency Leave </option>
+                                <select class="custom-select" id="leaveType" name="leaveType" [(ngModel)]="model.type">
+                                    <option [value]="undefined" disabled selected> Select Leave Type</option>
+                                    <option *ngFor="let leave of leaveTypes" [value]="leave.value">{{leave.name}}
+                                    </option>
                                 </select>
-                            </div><!-- /.input-group-prepend -->
-
+                            </div>
                             <br>
                             <div class="form-group">
                                 <label for="date">Start Date</label>
-                                <input placeholder="Select Date " [(ngModel)]="model.startDate" id="startdate" name="startdate"
-                                    class="form-control" #StartDate="ngModel" required>
+                                <input placeholder="Select Date " [(ngModel)]="model.startDate" id="startdate"
+                                    name="startdate" class="form-control" #StartDate="ngModel" required>
 
                                 <div *ngIf="StartDate.errors?.required && (StartDate.dirty || StartDate.touched)"
                                     class="alert alert-danger">
@@ -36,9 +29,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="date">End Date</label>
-                                <input placeholder="Select Date " [(ngModel)]="model.endDate" id="enddate" name=" enddate"
-                                    class="form-control" #EndDate="ngModel" required>
-
+                                <input placeholder="Select Date " [(ngModel)]="model.endDate" id="enddate"
+                                    name=" enddate" class="form-control" #EndDate="ngModel" required>
                                 <div *ngIf="EndDate.errors?.required && (EndDate.dirty || EndDate.touched)"
                                     class="alert alert-danger">
                                     <label>
@@ -49,7 +41,6 @@
                             <div class="form-group">
                                 <label>Description About Leave</label>
                                 <div class="form-label-group">
-
                                     <textarea id="leaveDescription" style="height: 100px;" name="leaveDescription"
                                         required class="form-control" #leaveDescription="ngModel"
                                         [(ngModel)]="model.description"></textarea>
@@ -59,12 +50,10 @@
                                     Description is Required.
                                 </div>
                             </div>
-
-
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <button type="submit" class="btn btn-primary"
-                                        [disabled]="form.invalid || !model.leaveType">Submit Leave</button>
+                                    <button type="submit" class="btn btn-primary" (click)="leaveRequest()"
+                                        [disabled]="form.invalid || !model.type">Submit Leave</button>
                                 </div>
                             </div>
                         </form>

@@ -20,6 +20,9 @@ export class ApiUrl {
     static checkOut = `checkOut`;
     static startBreak = `startBreak`;
     static endBreak = `endBreak`;
+    static leave = `leave`;
+    static leaveRequest = `leaveRequest`;
+    static totalCount=`totalCount`;
     // Pagination
     static getPagedAttendances = `PagedAttendances`;
     static getPagedUsers = `PagedUsers`

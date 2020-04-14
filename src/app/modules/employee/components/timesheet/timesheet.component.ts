@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService, LoaderService, AttendanceService } from 'src/app/core/services/';
+import { AlertService, LoaderService, AttendanceService } from 'src/app/core/services';
+import { filterModel, dateTypesEnum } from "src/app/models/filter";
 import flatpickr from "flatpickr";
 declare var jQuery: any;
 
@@ -10,72 +11,69 @@ declare var jQuery: any;
 })
 
 export class timesheetComponent implements OnInit {
+
   fullname: string;
   userAttendance: any = [];
-  startDate: string;
-  endDate: string;
-  showDate: boolean = true;
   userId: number;
+  attendanceFilterModel: filterModel;
+
+  attendanceTypes: any[] = [
+    { value: dateTypesEnum.currentDate, name: 'Current Date' },
+    { value: dateTypesEnum.currentMonth, name: 'Current Month' },
+    { value: dateTypesEnum.lastMonth, name: 'Last Month' },
+    { value: dateTypesEnum.currentYear, name: 'Current Year' },
+    { value: dateTypesEnum.lastYear, name: 'Last Year' },
+    { value: dateTypesEnum.custom, name: 'Custom' }
+  ];
 
   constructor(
     private alertService: AlertService,
     private loaderService: LoaderService,
     private attendanceService: AttendanceService,
   ) {
+    this.attendanceFilterModel = new filterModel();
   }
 
   ngOnInit() {
-    const sd = flatpickr("#enddate", {
-      dateFormat: "d.m.Y",
-    });
-    const ed = flatpickr("#startdate", {
-      dateFormat: "d.m.Y",
-    });
-    this.userAttendance = [];
+
+  this.attendanceFilterModel.type=dateTypesEnum.currentDate;
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.fullname = `${currentUser.firstname} ${currentUser.lastname}`
     this.getUserAttendance(currentUser.userId);
+    this.flatPickrInit();
+  }
+
+  flatPickrInit() {
+    const startdate = flatpickr("#startdate", {
+      dateFormat: "d.m.Y",
+    });
+    const enddate = flatpickr("#enddate", {
+      dateFormat: "d.m.Y",
+    });
   }
 
   getUserAttendance(id) {
     this.userId = id;
-    let pageindex: number = 1
-    let type = "currentDate"
-    this.attendanceService.getUserAttendance(pageindex, id, type).subscribe((attendance: any) => {
+    let pageNumber: number = 1
+    this.attendanceService.getUserAttendance(id, pageNumber,this.attendanceFilterModel).subscribe((attendance: any) => {
       this.userAttendance = attendance.data;
     });
-
   }
 
-  filterAttendance(event) {
-    let pageindex: number = 1
-    let filterType = {
-      type: event.target.value,
-      startDate: '',
-      endDate: '',
+  filterAttendance() {
+    let pageNumber = 1;
+    if (this.attendanceFilterModel.type == dateTypesEnum.custom) {
+      this.attendanceService.getUserAttendance(this.userId, pageNumber, this.attendanceFilterModel).subscribe((attendance: any) => {
+        this.userAttendance = attendance.data;
+      });
     }
-    if (event.target.value) {
-      if (event.target.value == "custom") {
-        this.showDate = false;
-        filterType.startDate = this.startDate;
-        filterType.endDate = this.endDate;
-        this.attendanceService.getUserAttendance(pageindex, this.userId, filterType).subscribe((attendance: any) => {
-          this.userAttendance = attendance.data;
-        });
-      }
-      else {
-        filterType.startDate = '';
-        filterType.endDate = '';
-        this.startDate='';
-        this.endDate='';
-        this.showDate = true;
-        this.attendanceService.getUserAttendance(pageindex, this.userId, filterType).subscribe((attendance: any) => {
-          this.userAttendance = attendance.data;
-        });
-      }
+    else {
+      this.attendanceService.getUserAttendance(this.userId, pageNumber, this.attendanceFilterModel).subscribe((attendance: any) => {
+        this.userAttendance = attendance.data;
+      });
     }
   }
-  
+
   getAvailableTime(attendance) {
     var timeDiff = new Date(attendance.checkOut).getTime() - new Date(attendance.checkIn).getTime();
 
@@ -86,6 +84,4 @@ export class timesheetComponent implements OnInit {
 
     return timeDiff;
   }
-
-
 }

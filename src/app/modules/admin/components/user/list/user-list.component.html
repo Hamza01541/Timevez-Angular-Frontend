@@ -15,11 +15,11 @@
                   class="fa fa-times-circle"></i></span></button> <label class="input-group-prepend"
               for="searchClients"><span class="input-group-text"><span
                   class="oi oi-magnifying-glass"></span></span></label> <input type="text" class="form-control"
-              id="searchClients" data-filter=".board .list-group-item" placeholder="Find User">
+              id="searchUsers" placeholder="Find User">
           </div><!-- /.input-group -->
           <!-- .input-group -->
         </header><button type="button" class="btn btn-primary btn-floated position-absolute" data-toggle="modal"
-          data-target="#clientNewModal" title="Add new client"><i class="fa fa-plus"></i></button> <!-- board -->
+          data-target="#userModal" title="Add new client"><i class="fa fa-plus"></i></button> <!-- board -->
 
         <perfect-scrollbar [config]="config">
           <!-- .list-group -->
@@ -141,7 +141,7 @@
                         <nav aria-label="breadcrumb">
                           <ol class="breadcrumb">
                             <li class="breadcrumb-item active">
-                              <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Tables</a>
+                              <a><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Table</a>
                             </li>
                           </ol>
                         </nav><!-- /.breadcrumb -->
@@ -172,20 +172,18 @@
                               <div class="input-group input-group-alt">
                                 <!-- .input-group-prepend -->
                                 <div class="input-group-prepend">
-                                  <select class="custom-select" (change)="filterAttendance($event)">
-                                    <option selected value="currentDate"> Current Date </option>
-                                    <option value="currentMonth"> Current Month </option>
-                                    <option value="lastMonth"> last Month </option>
-                                    <option value="currentYear"> CurrentYear </option>
-                                    <option value="lastYear"> Last Year </option>
-                                    <option value="custom"> Custom </option>
+
+                                  <select class="custom-select" id="attendanceType" name="attendanceType"
+                                    (change)="filterAttendance()" [(ngModel)]="attendanceFilterModel.type">
+                                    <option *ngFor="let type of attendanceTypes" [value]="type.value">{{type.name}}
+                                    </option>
                                   </select>
                                 </div><!-- /.input-group-prepend -->
-                                <div class="form-group" [hidden]="showDate">
-                                  <input placeholder="Select Start Date " [(ngModel)]="startDate" id="startdate" name="startdate"
-                                    class="form-control">
-                                  <input placeholder="Select End Date " [(ngModel)]="endDate" id="enddate" name="enddate"
-                                    class="form-control">
+                                <div class="form-group">
+                                  <input placeholder="Select Start Date " [(ngModel)]="attendanceFilterModel.startDate"
+                                    id="startdate" name="startdate" class="form-control">
+                                  <input placeholder="Select End Date " [(ngModel)]="attendanceFilterModel.endDate"
+                                    id="enddate" name="enddate" class="form-control">
                                 </div>
                               </div><!-- /.input-group -->
                             </div><!-- /.form-group -->
@@ -208,7 +206,7 @@
                                   </thead><!-- /thead -->
                                   <!-- tbody -->
                                   <div *ngIf="userAttendance && userAttendance.data && userAttendance.data.length">
-                                    <tbody *ngFor="let attendance of userAttendance.data">
+                                    <tbody *ngFor="let attendance of userAttendance.data  let i = index">
                                       <!-- tr -->
                                       <tr>
                                         <td class="align-middle"> {{attendance.date |date}} </td>
@@ -256,17 +254,14 @@
 
 
       <form name="form" #form="ngForm">
-        <div class="modal fade" id="clientNewModal" tabindex="-1" role="dialog" aria-labelledby="clientNewModalLabel"
+        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="clientNewModalLabel"
           aria-hidden="true">
           <!-- .modal-dialog -->
           <div class="modal-dialog" role="document">
             <!-- .modal-content -->
             <div class="modal-content">
               <div class="modal-header">
-                <h6 id="clientNewModalLabel" class="modal-title inline-editable">
-                  <span class="sr-only">Client name</span> <input type="text" class="form-control form-control-lg"
-                    placeholder="E.g. Stilearning, Inc." required="">
-                </h6>
+                
               </div><!-- /.modal-header -->
 
               <!-- .modal-body -->
@@ -436,24 +431,21 @@
 
       <form name="form" #form="ngForm">
         <div class="modal fade" id="attendanceNewModal" tabindex="-1" role="dialog"
-          aria-labelledby="clientNewModalLabel" aria-hidden="true">
+          aria-labelledby="attendanceLabel" aria-hidden="true">
           <!-- .modal-dialog -->
           <div class="modal-dialog" role="document">
             <!-- .modal-content -->
             <div class="modal-content">
               <div class="modal-header">
                 <h6 id="clientNewModalLabel" class="modal-title inline-editable">
-                  <span class="sr-only"> {{selected.firstname}} {{selected.lastname}}</span>
+                  <span >{{selected.firstname}} {{selected.lastname}}</span>
                 </h6>
-              </div><!-- /.modal-header -->
-              <!-- .modal-body -->
+              </div>
+      
               <div class="modal-body">
-
-
-                <!--  Attendance Form-->
-                <!-- .form-row -->
                 <div class="form-row">
                   <div class="col-md-6">
+                    
                     <div class="form-group">
                       <label for="comment">Comment</label>
                       <input type="text" #comment="ngModel" id="comment" name="comment"

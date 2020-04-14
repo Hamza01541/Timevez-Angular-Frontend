@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { signUp, rolesType } from "src/app/models/signup";
+import { signUp } from "src/app/models/signup";
 import { UserService } from "src/app/core/services/index";
 import { AlertService, LoaderService } from 'src/app/core/services/index';
-
-
-
 
 @Component({
   selector: 'app-user-form',

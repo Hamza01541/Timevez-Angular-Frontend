@@ -87,9 +87,9 @@ export class AttendanceService {
 * Return  attandance 
 * @param pageNumber is to get page based data 
 */
-    getUserAttendance(pageNumber, userId,type) {
-        const attendance = `${this.attendance}/${ApiUrl.getUserPageAttendance}/${pageNumber}/${userId}`;
-        return this.RequestService.addData(attendance,type);
+    getUserAttendance(userId, pageNumber, attendance) {
+        const url = `${this.attendance}/${ApiUrl.getUserPageAttendance}?userId=${userId}&pageNo=${pageNumber}&type=${attendance.type}&startDate=${attendance.startDate}&endDate=${attendance.endDate}`;
+        return this.RequestService.getData(url);
     }
 
     /**
@@ -100,6 +100,18 @@ export class AttendanceService {
         const attendance = `${this.attendance}/${ApiUrl.checkIn}`;
         return this.RequestService.addData(attendance);
     }
+
+
+    
+    /**
+     * Total number of attendance
+     * It will return the total  absent or present 
+     * 
+     */
+    getTotalAttendance(model,present) {
+        const url = `${this.attendance}/${ApiUrl.totalCount}?present=${present}&type=${model.type}&startDate=${model.startDate}&endDate=${model.endDate}`;
+        return this.RequestService.getData(url);
+    }   
 
     /**
       *Check Out for Attendence By  Employee Id

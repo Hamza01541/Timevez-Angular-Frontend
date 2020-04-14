@@ -14,7 +14,7 @@ import { AuthGuard } from 'src/app/core/guards';
 import { ToastrModule } from 'ngx-toastr';
 // Service
 import {
-  AlertService, LoaderService, UserService, AttendanceService
+  AlertService, LoaderService, UserService, AttendanceService, LeaveService
 } from 'src/app/core/services';
 
 //Material Module Imports
@@ -32,7 +32,7 @@ import {
 
 //Shared Module
 import {
-  GridComponent,ConfirmationDialogueComponent
+  GridComponent, ConfirmationDialogueComponent
 } from 'src/shared/components/index';
 
 
@@ -59,7 +59,7 @@ const SHARED_COMPONENTS = [
   //Shared Component
   GridComponent,
   ConfirmationDialogueComponent,
-  
+
 ];
 
 const SHARED_SERVICES = [
@@ -70,15 +70,16 @@ const SHARED_SERVICES = [
   AttendanceService,
   UserService,
   AuthGuard,
+  LeaveService
 ];
 
 @NgModule({
   imports: [SHARED_MODULES],
   exports: [SHARED_MODULES, SHARED_COMPONENTS],
   declarations: [SHARED_COMPONENTS],
-  providers: [SHARED_SERVICES,{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
-  
-   
+  providers: [SHARED_SERVICES, { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
+
+
   ],
 })
 

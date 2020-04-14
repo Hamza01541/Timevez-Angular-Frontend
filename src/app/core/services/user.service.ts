@@ -18,8 +18,8 @@ export class UserService {
    * It Returns the Object 
    */
     getData() {
-        const user = `${this.user}/${ApiUrl.list}`;
-        return this.RequestService.getData(user);
+        const url = `${this.user}/${ApiUrl.list}`;
+        return this.RequestService.getData(url);
     }
 
     /**
@@ -27,8 +27,8 @@ export class UserService {
      * @param obj is the object to be added
      */
     addData(obj) {
-        const user = `${this.user}/${ApiUrl.register}`;
-        return this.RequestService.addData(user, obj);
+        const url = `${this.user}/${ApiUrl.register}`;
+        return this.RequestService.addData(url, obj);
     }
 
     /**
@@ -36,8 +36,8 @@ export class UserService {
     * @param obj is the object to Login the User
     */
     userLogin(obj) {
-        const user = `${this.user}/${ApiUrl.login}`;
-        return this.RequestService.addData(user, obj);
+        const url = `${this.user}/${ApiUrl.login}`;
+        return this.RequestService.addData(url, obj);
     }
 
     /**
@@ -45,8 +45,8 @@ export class UserService {
    * @param id Returns the user by Id
    */
     getById(id) {
-        const user = `${this.user}/${ApiUrl.list}/`;
-        return this.RequestService.getData(user + id);
+        const url = `${this.user}/${ApiUrl.list}/`;
+        return this.RequestService.getData(url + id);
     }
 
     /**
@@ -54,8 +54,8 @@ export class UserService {
 * @param obj it the object to update the data
 */
     updateData(obj) {
-        const user = `${this.user}/${ApiUrl.update}/${obj._id}`;
-        return this.RequestService.updateData(user, obj);
+        const url = `${this.user}/${ApiUrl.update}/${obj._id}`;
+        return this.RequestService.updateData(url, obj);
     }
 
     /**
@@ -63,8 +63,8 @@ export class UserService {
   * @param id is to delete the user on base of id
   */
     deleteData(id) {
-        const user = `${this.user}/${ApiUrl.delete}`;
-        return this.RequestService.deleteData(user, id);
+        const url = `${this.user}/${ApiUrl.delete}`;
+        return this.RequestService.deleteData(url, id);
     }
 
     /**
@@ -72,8 +72,28 @@ export class UserService {
   * @param pageNumber is to get page based data 
   */
     getPagedUsers(pageNumber) {
-        const user = `${this.user}/${ApiUrl.getPagedUsers}/${pageNumber}`;
-        return this.RequestService.getData(user);
+        const url = `${this.user}/${ApiUrl.getPagedUsers}/${pageNumber}`;
+        return this.RequestService.getData(url);
+    }
+
+    /**
+     * Total number of users
+     * It will return the total number of users
+     * 
+     */
+    getTotalUsers(model) {
+        const url = `${this.user}/${ApiUrl.totalCount}?type=${model.type}&startDate=${model.startDate}&endDate=${model.endDate}`;
+        return this.RequestService.getData(url);
+    }
+
+     /**
+     * Return the User that matched the value
+     * @param pageNo is the Numer of page
+     * @param search is the search string that user will type
+     */
+    searchUser(pageNo, search) {
+        const url = `${this.user}?pageNo=${pageNo}&search=${search}`;
+        return this.RequestService.getData(url);
     }
 
     /**
