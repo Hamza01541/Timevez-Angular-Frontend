@@ -1,29 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService, LoaderService, LeaveService, LocalStorageService } from 'src/app/core/services';
 import { leave } from "src/app/models";
-import { leaveTypeEnum, } from "src/app/models/filter";
-import flatpickr from "flatpickr";
+import { Router, ActivatedRoute } from '@angular/router';
+import { leaveType, } from "src/app/models/filter";
+import { Constants } from 'src/shared/constants';
 
 @Component({
   selector: 'leave',
   templateUrl: './leave.component.html',
   styleUrls: ['./leave.component.scss']
 })
+
 export class LeaveComponent implements OnInit {
 
   model: leave;
 
   leaveTypes: any[] = [
-    { value: leaveTypeEnum.sickLeave, name: 'Sick Leave' },
-    { value: leaveTypeEnum.weedingLeave, name: 'Weeding Leave' },
-    { value: leaveTypeEnum.personalLeave, name: 'Personal Leave' },
-    { value: leaveTypeEnum.bereavement, name: 'Bereavement Leave' },
-    { value: leaveTypeEnum.examsLeave, name: 'Exams Leave' },
-    { value: leaveTypeEnum.emergencyLeave, name: 'Emergency Leave' }
+    { value: leaveType.casual, name: 'Casual' },
+    { value: leaveType.annual, name: 'Annual' },
   ];
 
   constructor(
     private alertService: AlertService,
+    private router: Router,
     private loaderService: LoaderService,
     private leaveService: LeaveService,
     private storageService: LocalStorageService
@@ -34,25 +33,11 @@ export class LeaveComponent implements OnInit {
   }
 
   ngOnInit() {
-    const user = this.storageService.get('currentUser');
+    const user = this.storageService.get(Constants.currentUser);
     this.model.userId = user.userId;
-    this.flatPickrInit()
   }
 
-  /**
-      * Flat Pickr 
-      * This will allow to open date pickr on input fied through Id
-      */
-
-  flatPickrInit() {
-    const startDate = flatpickr("#startdate", {
-      dateFormat: "d.m.Y",
-    }); const endDate = flatpickr("#enddate", {
-      dateFormat: "d.m.Y",
-    });
-
-  }
-
+ 
   /**
      * Request for Leave 
      * It Submit the object to leave Request endpoint
@@ -60,6 +45,7 @@ export class LeaveComponent implements OnInit {
   leaveRequest() {
     this.leaveService.requestleave(this.model).subscribe((leave: any) => {
       this.alertService.successToastr(`Requested Leave  Sucessflly`, false);
+      this.router.navigate(['/employee/dashboard']);
     }, error => {
       this.alertService.errorToastr(`Error In Submission request for leave`, false);
     });
@@ -78,5 +64,4 @@ export class LeaveComponent implements OnInit {
   hideLoader() {
     this.loaderService.hide();
   }
-
 }

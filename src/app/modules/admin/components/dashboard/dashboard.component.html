@@ -20,25 +20,29 @@
           <header class="page-title-bar">
             <div class="d-flex flex-column flex-md-row">
               <p class="lead">
-                <span class="font-weight-bold">Hi, Beni.</span> <span class="d-block text-muted">Here’s what’s happening
-                  with your business today.</span>
+                <span class="font-weight-bold">Hi, {{fullName}}.</span>
               </p>
               <div class="ml-auto">
                 <!-- .dropdown -->
                 <div class="dropdown">
                   <select class="custom-select" id="attendanceType" name="attendanceType" (change)="filterAttendance()"
-                    [(ngModel)]="filterModel.type">
+                    [(ngModel)]="attendanceFilter.type">
                     <option *ngFor="let type of attendanceTypes" [value]="type.value">{{type.name}}
                     </option>
                   </select>
                 </div><!-- /.dropdown -->
-
-                <div class="form-group" [hidden]="isHidden">
-                  <input placeholder="Select Start Date " [(ngModel)]="filterModel.startDate" id="startdate"
-                    name="startdate" class="form-control">
-                  <input placeholder="Select End Date " [(ngModel)]="filterModel.endDate" id="enddate" name="enddate"
-                    class="form-control">
-                  <button class="btn btn-primary" (click)="filterResult()"> Search </button>
+                <div [hidden]="attendanceFilter.type !== 'custom'">
+                  <div class="form-group">
+                    <input placeholder="Select Start Date" [(ngModel)]="attendanceFilter.startDate" name="checkIndate"
+                      class="form-control" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1">
+                    <owl-date-time #dtPicker1 [firstDayOfWeek]="firstDayofWeek" [pickerType]="'calendar'">
+                    </owl-date-time>
+                    <input placeholder="Select End Date" [(ngModel)]="attendanceFilter.endDate" name="startDate"
+                      class="form-control" [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2">
+                    <owl-date-time #dtPicker2 [firstDayOfWeek]="firstDayofWeek" [pickerType]="'calendar'">
+                    </owl-date-time>
+                    <button class="btn btn-outline-primary form-control" (click)="filterResult()"> Search </button>
+                  </div>
                 </div>
 
               </div>
@@ -55,7 +59,7 @@
                     <!-- metric column -->
                     <div class="col">
                       <!-- .metric -->
-                      <a href="user-teams.html" class="metric metric-bordered align-items-center">
+                      <a class="metric metric-bordered align-items-center">
                         <h2 class="metric-label"> User </h2>
                         <p class="metric-value h3">
                           <sub><i class="oi oi-people"></i></sub> <span class="value">{{totalUsers}}</span>
@@ -65,7 +69,7 @@
                     <!-- metric column -->
                     <div class="col">
                       <!-- .metric -->
-                      <a href="user-projects.html" class="metric metric-bordered align-items-center">
+                      <a class="metric metric-bordered align-items-center">
                         <h2 class="metric-label"> Present </h2>
                         <p class="metric-value h3">
                           <sub><i class="oi oi-fork"></i></sub> <span class="value">{{totalPresent}}</span>
@@ -99,23 +103,5 @@
         </div><!-- /.page-inner -->
       </div><!-- /.page -->
     </div><!-- .app-footer -->
-    <footer class="app-footer">
-      <ul class="list-inline">
-        <li class="list-inline-item">
-          <a class="text-muted" href="#">Support</a>
-        </li>
-        <li class="list-inline-item">
-          <a class="text-muted" href="#">Help Center</a>
-        </li>
-        <li class="list-inline-item">
-          <a class="text-muted" href="#">Privacy</a>
-        </li>
-        <li class="list-inline-item">
-          <a class="text-muted" href="#">Terms of Service</a>
-        </li>
-      </ul>
-      <div class="copyright"> Copyright © 2018. All right reserved. </div>
-    </footer><!-- /.app-footer -->
-    <!-- /.wrapper -->
   </main><!-- /.app-main -->
 </div><!-- /.app -->

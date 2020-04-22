@@ -17,24 +17,29 @@
                             <br>
                             <div class="form-group">
                                 <label for="date">Start Date</label>
-                                <input placeholder="Select Date " [(ngModel)]="model.startDate" id="startdate"
-                                    name="startdate" class="form-control" #StartDate="ngModel" required>
-
-                                <div *ngIf="StartDate.errors?.required && (StartDate.dirty || StartDate.touched)"
+                                <input placeholder="Select Start Date" [(ngModel)]="model.startDate" name="startDate"
+                                    class="form-control" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1"
+                                    #startDate="ngModel" required>
+                                <owl-date-time #dtPicker1  [pickerType]="'calendar'">
+                                </owl-date-time>
+                                <div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)"
                                     class="alert alert-danger">
                                     <label>
-                                        Please Select Start Date
+                                        Start Date is Required
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="date">End Date</label>
-                                <input placeholder="Select Date " [(ngModel)]="model.endDate" id="enddate"
-                                    name=" enddate" class="form-control" #EndDate="ngModel" required>
-                                <div *ngIf="EndDate.errors?.required && (EndDate.dirty || EndDate.touched)"
+                                <input placeholder="Select End Date" [(ngModel)]="model.endDate" name="endDate"
+                                    class="form-control" [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2"
+                                    #endDate="ngModel" required>
+                                <owl-date-time #dtPicker2  [pickerType]="'calendar'">
+                                </owl-date-time>
+                                <div *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)"
                                     class="alert alert-danger">
                                     <label>
-                                        Please Select End Date
+                                        End Date is Required
                                     </label>
                                 </div>
                             </div>

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { Router, NavigationEnd } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { RequestInterceptor } from 'src/app/core/interceptors';
@@ -17,6 +16,9 @@ import {
   AlertService, LoaderService, UserService, AttendanceService, LeaveService
 } from 'src/app/core/services';
 
+//shared Services 
+import { UtilityService } from 'src/shared/services/utility.service'
+
 //Material Module Imports
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -30,12 +32,10 @@ import {
   LocalStorageService
 } from 'src/app/core/services/index';
 
-//Shared Module
+//Shared Component
 import {
   GridComponent, ConfirmationDialogueComponent
-} from 'src/shared/components/index';
-
-
+} from 'src/shared/components';
 
 const SHARED_MODULES = [
   FormsModule,
@@ -46,7 +46,6 @@ const SHARED_MODULES = [
   MatCheckboxModule,
   MatInputModule,
   MatFormFieldModule,
-
   MatTabsModule,
   MatDialogModule,
   MatStepperModule,
@@ -59,7 +58,6 @@ const SHARED_COMPONENTS = [
   //Shared Component
   GridComponent,
   ConfirmationDialogueComponent,
-
 ];
 
 const SHARED_SERVICES = [
@@ -70,7 +68,8 @@ const SHARED_SERVICES = [
   AttendanceService,
   UserService,
   AuthGuard,
-  LeaveService
+  LeaveService,
+  UtilityService
 ];
 
 @NgModule({
@@ -78,8 +77,6 @@ const SHARED_SERVICES = [
   exports: [SHARED_MODULES, SHARED_COMPONENTS],
   declarations: [SHARED_COMPONENTS],
   providers: [SHARED_SERVICES, { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
-
-
   ],
 })
 

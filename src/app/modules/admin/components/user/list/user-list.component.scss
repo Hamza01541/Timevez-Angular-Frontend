@@ -1,0 +1,13 @@
+.bg-light{
+z-index: 999;
+}
+
+.userIcon{
+    font-size: 20px;
+    color:#366CB0;
+    margin-left: 15px;
+}
+.cdk-overlay-container,
+.cdk-overlay-transparent-backdrop, .cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing{
+    z-index: 1050 !important;
+}

@@ -3,6 +3,7 @@ import { AlertService, LoaderService, UserService } from 'src/app/core/services'
 import { Router, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { Role } from 'src/app/models/role';
+import { Constants } from 'src/shared/constants';
 
 @Component({
   selector: 'login-component',
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
     this.logout = this.route.snapshot.queryParams['logout'] || false;
-    this.currentUser = this.storageService.get('currentUser');
+    this.currentUser = this.storageService.get(Constants.currentUser);
 
     if (!this.logout) {
       this.checkRole(this.currentUser);
@@ -39,12 +40,12 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.showLoader();
-    this.userService.userLogin(this.loginModel).subscribe((result: any) => {
-      this.alertService.successToastr("Logined", false);
-      if (result && result.token) {
-        this.storageService.set('currentUser', result);
+    this.userService.userLogin(this.loginModel).subscribe((user: any) => {
+      this.alertService.successToastr("Successfully Logined", false);
+      if (user && user.token) {
+        this.storageService.set(Constants.currentUser, user);
         this.hideLoader();
-        this.checkRole(result);
+        this.checkRole(user);
       }
     },
       error => {

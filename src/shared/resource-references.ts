@@ -22,11 +22,14 @@ export class ApiUrl {
     static endBreak = `endBreak`;
     static leave = `leave`;
     static leaveRequest = `leaveRequest`;
-    static totalCount=`totalCount`;
+    static totalCount = `totalCount`;
+    static totalCountByUserId=`totalCountByUserId`;
     // Pagination
     static getPagedAttendances = `PagedAttendances`;
     static getPagedUsers = `PagedUsers`
     static getUserPageAttendance = `pagedUserAttendances`;
+    static pagedUserLeaves = `pagedUserLeaves`;
+    static getPagedLeaves=`pagedLeaves`;
 }
 
 /**

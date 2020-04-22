@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService, UserService } from 'src/app/core/services/';
+import { Constants } from 'src/shared/constants';
 
 @Component({
     selector: 'profile-component',
@@ -18,7 +19,7 @@ export class ProfileComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        let currentUser = this.storageService.get('currentUser');
+        let currentUser = this.storageService.get(Constants.currentUser);
         this.role = `${currentUser.role}`;
         this.getuserDetail(currentUser.userId)
     }

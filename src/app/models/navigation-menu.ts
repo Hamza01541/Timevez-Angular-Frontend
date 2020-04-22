@@ -1,7 +1,7 @@
 export const AdminNavigationMenu = [
 
   {
-    "name": "User",
+    "name": "Employees",
     "route": "user"
   },
   {
@@ -13,11 +13,11 @@ export const AdminNavigationMenu = [
 export const EmployeeNavigationMenu = [
 
   {
-    "name": "History",
+    "name": "Employee History",
     "route": "timesheet"
   },
   {
-    "name": "Leave",
+    "name": "Leave Request",
     "route": "leave"
   },
 

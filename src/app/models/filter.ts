@@ -1,11 +1,11 @@
 
-export class filterModel {
+export class attendanceFilter {
     type: string;
     startDate: string;
     endDate: string;
 }
 
-export enum dateTypesEnum {
+export enum dateType {
     currentDate = "currentDate",
     currentMonth = "currentMonth",
     lastMonth = "lastMonth",
@@ -14,12 +14,18 @@ export enum dateTypesEnum {
     custom = "custom",
 }
 
-export enum leaveTypeEnum {
-    sickLeave = "sickLeave",
-    weedingLeave = "weedingLeave",
-    personalLeave = "personalLeave",
-    bereavement = "bereavement",
-    examsLeave = "examsLeave",
-    emergencyLeave = "emergencyLeave",
+export enum leaveType {
+    annual = "annual",
     casual = "casual"
+}
+
+
+export enum leaveStatus {
+    approved = "approved",
+    pending = "pending"
+}
+
+export class leaveFilter {
+    status: string;
+    type: string;
 }

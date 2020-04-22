@@ -1,11 +1,16 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { AlertService, LoaderService, UserService, AttendanceService } from 'src/app/core/services';
-import { signUp, attendence} from "src/app/models";
-import { filterModel, dateTypesEnum } from "src/app/models/filter";
+import { AlertService, LoaderService, UserService, AttendanceService, LeaveService } from 'src/app/core/services';
+import { signUp, attendence, leave } from "src/app/models";
+import { attendanceFilter, dateType } from "src/app/models/filter";
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import flatpickr from "flatpickr";
+import { Constants } from 'src/shared/constants';
+import { leaveType, leaveStatus } from "src/app/models/filter";
+import { ConfirmationDialogueComponent } from 'src/shared/components';
+import { Role } from 'src/app/models/role';
+import { UtilityService } from 'src/shared/services/utility.service';
+
 declare var jQuery: any;
 
 @Component({
@@ -19,75 +24,70 @@ export class UserListComponent implements OnInit {
 
     model: signUp;
     modelAttendance: attendence;
-    attendanceFilterModel: filterModel;
+    modelLeave: leave;
+    attendanceFilter: attendanceFilter;
     allUsers: any[];
+    totalAttendanceCounts: number[];
+    totalLeaveCounts: number[]
+    attendancePageNumber: number = 1;
+    leavePageNumber: number;
+    userAttendance: any = [];
+    userLeave: any = [];
+    id: number;
+    operation = Constants.add;
+    selectedUser: any = {};
+    userSearchStr: any;
+    startDate: string;
+    endDate: string;
 
 
     attendanceTypes: any[] = [
-        { value: dateTypesEnum.currentDate, name: 'Current Date' },
-        { value: dateTypesEnum.currentMonth, name: 'Current Month' },
-        { value: dateTypesEnum.lastMonth, name: 'Last Month' },
-        { value: dateTypesEnum.currentYear, name: 'Current Year' },
-        { value: dateTypesEnum.lastYear, name: 'Last Year' },
-        { value: dateTypesEnum.custom, name: 'Custom' }
+        { value: dateType.currentDate, name: 'Current Date' },
+        { value: dateType.currentMonth, name: 'Current Month' },
+        { value: dateType.lastMonth, name: 'Last Month' },
+        { value: dateType.currentYear, name: 'Current Year' },
+        { value: dateType.lastYear, name: 'Last Year' },
+        { value: dateType.custom, name: 'Custom' }
     ];
 
+    leaveTypes: any[] = [
+        { value: leaveType.casual, name: 'Casual' },
+        { value: leaveType.annual, name: 'Annual' },
+    ];
 
-    // Max moment: January 1 2020, 20:30
-    public min = new Date(2020, 0, 1, 10, 30);
-    // Max moment: April 1 2020, 20:30
-    public max = new Date(2020, 3, 1, 20, 30);
-    //First day of week starts from Monday on Value 1
-    firstDayofWeek = 1;
-    //12 Hour Timer Set if true
+    leaveStatuses: any[] = [
+        { value: leaveStatus.pending, name: 'Pending' },
+        { value: leaveStatus.approved, name: 'Approved' },
+    ];
+
+    firstDayofWeek = Constants.firstDayOfWeek;
     hour12Timer = true;
-    //Picker Mode Opening style of Time Picker Like, (Default)PopUp & Dialog
-    pickerMode = "popup";
 
-
-    id: number;
-    operation = "add";
-    selected: any = {};
-    userAttendance: any = [];
     constructor(
         private router: Router,
         private userService: UserService,
         private alertService: AlertService,
         private attendanceService: AttendanceService,
+        private leaveService: LeaveService,
         private loaderService: LoaderService,
+        private utilityService: UtilityService,
         public dialog: MatDialog) {
         this.model = new signUp();
         this.modelAttendance = new attendence();
-        this.attendanceFilterModel = new filterModel();
+        this.modelLeave = new leave();
+        this.attendanceFilter = new attendanceFilter();
     }
 
     ngOnInit() {
-        this.attendanceFilterModel.type = dateTypesEnum.currentDate;
-        this.flatPickrInit();
+        this.attendanceFilter.type = dateType.currentDate;
         this.getAllUser();
-    }
-
-    flatPickrInit() {
-        const date = flatpickr("#date", {
-            dateFormat: "d.m.Y",
-        });
-        const enddate = flatpickr("#enddate", {
-            dateFormat: "d.m.Y",
-        });
-        const startdate = flatpickr("#startdate", {
-            dateFormat: "d.m.Y",
-        });
-
-        const flatpickr01 = flatpickr("#flatpickr01", {
-            enableTime: true,
-            noCalendar: true,
-        });
+        this.modelAttendance.active = false;
     }
 
     save(type: string) {
-        if (type == 'attendance') {
+        if (type == Constants.attendance) {
             this.showLoader();
-            this.operation = this.id ? 'updateData' : 'addData';
+            this.operation = this.id ? Constants.updateData : Constants.addData;
             this.showLoader();
             this.attendanceService[this.operation](this.modelAttendance).subscribe(res => {
                 this.hideLoader();
@@ -96,110 +96,190 @@ export class UserListComponent implements OnInit {
             }, error => {
                 this.hideLoader();
                 this.alertService.errorToastr(`Error in ${this.operation} Attendance.`, false);
-                jQuery('#attendanceNewModal').modal('show');
+                jQuery('#attendanceNewModal').modal('hide');
             });
         }
-        else {
+        else if (type == Constants.user) {
             this.showLoader();
-            this.operation = this.id ? 'updateData' : 'addData';
+            this.operation = this.id ? Constants.updateData : Constants.addData;
             this.showLoader();
             this.userService[this.operation](this.model).subscribe(res => {
                 this.hideLoader();
                 jQuery('#userModal').modal('hide');
+                this.getAllUser();
                 this.alertService.successToastr(`SuccessFully ${this.operation} Of User.`, false);
             }, error => {
                 this.hideLoader();
-                jQuery('#userModal').modal('show');
+                jQuery('#userModal').modal('hide');
                 this.alertService.errorToastr(`Error in ${this.operation} User.`, false);
             });
         }
+        else {
+            this.modelLeave.userId = this.selectedUser._id;
+            this.showLoader();
+            this.operation = this.id ? Constants.updateData : Constants.addData;
+            this.showLoader();
+            this.leaveService[this.operation](this.modelLeave).subscribe(res => {
+                this.hideLoader();
+                jQuery('#leaveNewModal').modal('hide');
+                this.getAllUser();
+                this.alertService.successToastr(`SuccessFully ${this.operation} Of Leave.`, false);
+
+            }, error => {
+                this.hideLoader();
+                jQuery('#leaveNewModal').modal('hide');
+                this.alertService.errorToastr(`Error in ${this.operation} Leave.`, false);
+            });
+
+        }
     }
 
-    filterAttendance() {
-        let pageNumber = 1;
-        if (this.attendanceFilterModel.type == dateTypesEnum.custom) {
+    filterAttendanceAndLeave(type: string) {
+        if (this.attendanceFilter.type != dateType.custom) {
+            this.attendanceFilter.startDate = '';
+            this.attendanceFilter.endDate = '';
+            if (type == Constants.attendance) {
+                this.attendanceService.getUserAttendance(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
+                    this.userAttendance = attendance;
+                    this.calculateTotalGridPages(Constants.attendance, attendance.total);
 
-            this.attendanceService.getUserAttendance(this.selected._id, pageNumber, this.attendanceFilterModel).subscribe((attendance: any) => {
-                this.userAttendance = attendance.data;
-            });
-        }
-        else {
-            this.attendanceService.getUserAttendance(this.selected._id, pageNumber, this.attendanceFilterModel).subscribe((attendance: any) => {
-                this.userAttendance = attendance.data;
-            });
+                });
+            }
+            else {
+                this.leaveService.getUserLeave(this.selectedUser._id, this.leavePageNumber, this.attendanceFilter, this.startDate).subscribe((leave: any) => {
+                    this.userLeave = leave;
+                    this.calculateTotalGridPages(Constants.leave, leave.total);
+                });
+            }
         }
     }
 
     getAllUser() {
         this.userService.getData().subscribe((users: any) => {
-            this.selected = users.data[0];
-            this.allUsers = users.data;
-            this.getUserAttendance(this.selected._id);
+            let employees = users.filter(x => x.role == Role.Employee)
+            this.selectedUser = employees[0];
+            this.allUsers = employees;
+            this.getUserAttendance(this.selectedUser._id);
+            this.getUserLeave(this.selectedUser._id);
+
         });
     }
 
-    /**
-         * Performed delete and update Operation
-         */
-    performOperation(type: string, operation: string, Id: any) {
-        if (type == 'user') {
-            if (operation == 'delete') {
-                this.showLoader();
-                jQuery('#deleteModal').modal('show');
+    customAttendanceAndLeaveFilter(type: string) {
 
-                this.userService.deleteData(Id).subscribe(res => {
-                    this.hideLoader();
-                    
-                    this.alertService.successToastr("Selected User Deleted Successfully.", false);
+        if (type == Constants.attendance) {
+            this.startDate = this.utilityService.getCurrentDate(this.attendanceFilter.startDate);
+            this.endDate = this.utilityService.getCurrentDate(this.attendanceFilter.endDate);
+            this.attendanceService.getUserAttendance(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
+                this.userAttendance = attendance;
+                this.calculateTotalGridPages(Constants.attendance, attendance.total);
+            });
+        }
+        else {
+            this.startDate = this.utilityService.getCurrentDate(this.attendanceFilter.startDate);
+            this.leaveService.getUserLeave(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter, this.startDate).subscribe((leave: any) => {
+                this.userLeave = leave;
+                this.calculateTotalGridPages(Constants.leave, leave.total);
+            });
+        }
+    }
 
-
-                }, error => {
-                    this.hideLoader();
-                    this.alertService.errorToastr("Error in Deleting Selected User.", false);
-                });
+    calculateTotalGridPages(type: string, total: number) {
+        if (type == Constants.attendance) {
+            let totalPages = Math.ceil(total / 10);
+            this.totalAttendanceCounts = [];
+            if (totalPages > 0) {
+                for (let i = 1; i <= totalPages; i++) {
+                    this.totalAttendanceCounts.push(i);
+                }
             }
-            else if (operation == 'edit') {
+        }
+        else {
+            let totalPages = Math.ceil(total / 10);
+            this.totalLeaveCounts = [];
+            if (totalPages > 0) {
+                for (let i = 1; i <= totalPages; i++) {
+                    this.totalLeaveCounts.push(i);
+                }
+            }
+        }
+
+    }
+
+    /**
+         * Perform update & Delete Operation
+         */
+    performUpdateAndDeleteOperation(type: string, operation: string, Id: any) {
+        if (type == Constants.user) {
+            if (operation == Constants.delete) {
+                this.openDialog(type, Id);
+            }
+            else if (operation == Constants.edit) {
                 this.id = Id;
                 jQuery('#userModal').modal('show');
-                this.userService.getById(Id).subscribe(res => {
-                    this.model = res.data;
+                this.userService.getById(Id).subscribe(user => {
+                    this.model = user;
+                });
+            }
+        }
+        else if (type == Constants.attendance) {
+            if (operation == Constants.delete) {
+                this.openDialog(type, Id);
+            }
+            else if (operation == Constants.edit) {
+                this.id = Id;
+                jQuery('#attendanceNewModal').modal('show');
+                this.attendanceService.getById(Id).subscribe(attendance => {
+                    this.modelAttendance = attendance;
                 });
             }
         }
         else {
-            if (operation == 'delete') {
-
-                this.showLoader();
-                this.attendanceService.deleteData(Id).subscribe(res => {
-                    this.hideLoader();
-                    // this.userAttendance.data.splice(index,1);
-                    this.alertService.successToastr("Selected Attendance Deleted Successfully.", false);
-
-                }, error => {
-                    this.hideLoader();
-                    this.alertService.errorToastr("Error in Deleting Selected Attendance.", false);
-                });
+            if (operation == Constants.delete) {
+                this.openDialog(type, Id);
             }
-            else if (operation == 'edit') {
+            else if (operation == Constants.edit) {
                 this.id = Id;
-                jQuery('#attendanceNewModal').modal('show');
-                this.attendanceService.getById(Id).subscribe(res => {
-                    this.attendanceService = res.data;
+                jQuery('#leaveNewModal').modal('show');
+                this.leaveService.getById(Id).subscribe(leave => {
+                    this.modelLeave = leave;
                 });
             }
         }
     }
 
-    searchuser(){
+    getTablePageNumber(type: string, pageNo: number) {
+        if (type == Constants.attendance) {
+            this.attendancePageNumber = pageNo;
+            this.filterAttendanceAndLeave(Constants.attendance);
+        }
+        else {
+            this.leavePageNumber = pageNo;
+            this.filterAttendanceAndLeave(Constants.leave);
+        }
+    }
 
-        
+    searchUser() {
+        this.userService.searchUser(1, this.userSearchStr).subscribe((user: any) => {
+            this.allUsers = user.data;
+            this.selectedUser = user.data[0];
+        });
+    }
+
+    getUserLeave(userId: any) {
+        let pageNumber: number = 1
+        this.leaveService.getUserLeave(userId, pageNumber, this.attendanceFilter, this.startDate).subscribe((leave: any) => {
+            this.userLeave = leave;
+            this.calculateTotalGridPages(Constants.leave, leave.total);
+        });
     }
 
     getUserAttendance(userId) {
         let pageNumber: number = 1
-        this.attendanceService.getUserAttendance(userId, pageNumber, this.attendanceFilterModel).subscribe((attendance: any) => {
-            console.log("attendance", attendance);
+        this.attendanceService.getUserAttendance(userId, pageNumber, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
             this.userAttendance = attendance;
+            this.calculateTotalGridPages(Constants.attendance, attendance.total);
+        }, error => {
         });
     }
 
@@ -209,14 +289,88 @@ export class UserListComponent implements OnInit {
             var breakDiff = new Date(attendance.breakEndTime).getTime() - new Date(attendance.breakStartTime).getTime();
             timeDiff = timeDiff - breakDiff;
         }
-
-        return timeDiff;
+        var minutes = Math.floor((timeDiff % 60000) / 1000).toFixed(0) //in minutes
+        var hours = Math.floor(timeDiff / 3600 / 1000); //in hours
+        return hours + " hr " + minutes + " min ";
     }
 
     getUserDetails(userDetails) {
-        this.selected = userDetails;
-        this.getUserAttendance(this.selected._id);
+        this.selectedUser = userDetails;
+        this.getUserAttendance(this.selectedUser._id);
+        this.getUserLeave(this.selectedUser._id);
     }
+
+    /**
+      * Open confirmation dialogue.
+      * On confirmation, deletes selected row of grid.
+      * @param type is the type  is coming like user,attendance,leave
+      * @Id is the Identification of the type 
+      */
+    openDialog(type: string, Id: any) {
+        const dialogRef = this.dialog.open(ConfirmationDialogueComponent, {
+            width: '400px',
+            data: {
+                message: 'Do you want to Delete Data?',
+                type: type,
+                Id: Id,
+            }
+        });
+        if (dialogRef) {
+            dialogRef.afterClosed().subscribe(result => {
+                if (result) {
+                    this.performDeleteOperation(result);
+                }
+            });
+        }
+    }
+
+    /**
+            * Perform Delete Operation
+            * @param result which return mesage type and id on closing dialog with choosing yes option
+            */
+    performDeleteOperation(result) {
+        if (result.type == Constants.user) {
+            this.userService.deleteData(result.Id).subscribe(res => {
+                this.hideLoader();
+                let currentIndex = this.allUsers.findIndex(x => x._id === result.Id);
+                this.allUsers.splice(currentIndex, 1);
+                this.selectedUser = this.allUsers[0];
+                this.alertService.successToastr("Selected User Deleted Successfully.", false);
+            }, error => {
+                this.hideLoader();
+                this.alertService.errorToastr("Error in Deleting Selected User.", false);
+            });
+        }
+        else if (result.type == Constants.attendance) {
+
+            this.showLoader();
+            this.attendanceService.deleteData(result.Id).subscribe(res => {
+                this.hideLoader();
+                let currentIndex = this.userAttendance.data.findIndex(x => x._id == result.Id);
+                this.userAttendance.data.splice(currentIndex, 1);
+
+
+
+                this.alertService.successToastr("Selected Attendance Deleted Successfully.", false);
+            }, error => {
+                this.hideLoader();
+                this.alertService.errorToastr("Error in Deleting Selected Attendance.", false);
+            });
+        }
+        else {
+            this.showLoader();
+            this.leaveService.deleteData(result.Id).subscribe(res => {
+                this.hideLoader();
+                let currentIndex = this.userLeave.data.findIndex(x => x._id == result.Id);
+                this.userLeave.data.splice(currentIndex, 1);
+                this.alertService.successToastr("Selected Leave Deleted Successfully.", false);
+            }, error => {
+                this.hideLoader();
+                this.alertService.errorToastr("Error in Deleting Selected Leave.", false);
+            });
+        }
+    }
+
 
     /**
      * Show the loader screen

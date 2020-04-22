@@ -10,6 +10,63 @@
         <!-- .page-inner -->
         <div class="page-inner">
           <!-- .page-title-bar -->
+          <header class="page-title-bar">
+            <div class="d-flex flex-column flex-md-row">
+              <p class="lead">
+                <span class="font-weight-bold">Hi, {{fullName}}.</span>
+              </p>
+              <div class="ml-auto">
+                <div class="dropdown">
+                  <select class="custom-select" id="leaveStatusType" name="leaveStatusType" (change)="filterLeave('status')"
+                    [(ngModel)]="leaveFilter.status">
+                    <option *ngFor="let leave of leaveStatuses" [value]="leave.value">{{leave.name}}
+                    </option>
+                  </select>
+                </div><!-- /.dropdown -->
+                <div class="dropdown">
+                  <select class="custom-select" id="leaveType" name="leaveType" (change)="filterLeave('type')"
+                    [(ngModel)]="leaveFilter.type">
+                    <option *ngFor="let leave of leaveType" [value]="leave.value">{{leave.name}}
+                    </option>
+                  </select>
+                </div><!-- /.dropdown -->
+                <!-- .dropdown -->
+                <div class="dropdown">
+                  <select class="custom-select" id="attendanceType" name="attendanceType" (change)="filterAttendance()"
+                    [(ngModel)]="attendanceFilter.type">
+                    <option *ngFor="let type of attendanceTypes" [value]="type.value">{{type.name}}
+                    </option>
+                  </select>
+                </div><!-- /.dropdown -->
+                <div [hidden]="attendanceFilter.type !== 'custom'">
+                  <div class="form-group">
+                    <input placeholder="Select Start Date" [(ngModel)]="attendanceFilter.startDate" name="checkIndate"
+                      class="form-control" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1">
+                    <owl-date-time #dtPicker1 [firstDayOfWeek]="firstDayofWeek"
+                      [pickerType]="'calendar'"></owl-date-time>
+                    <input placeholder="Select End Date" [(ngModel)]="attendanceFilter.endDate" name="startDate"
+                      class="form-control" [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2">
+                    <owl-date-time #dtPicker2 [firstDayOfWeek]="firstDayofWeek"
+                      [pickerType]="'calendar'"></owl-date-time>
+                    <button class="btn btn-outline-primary form-control" (click)="filterResult()"> Search </button>
+                  </div>
+                </div>
+
+              </div>
+
+            
+                <!-- .dropdown -->
+            
+
+           
+
+
+
+            </div>
+          </header><!-- /.page-title-bar -->
+
+
+
           <!-- .page-section -->
           <div class="page-section">
             <!-- .section-block -->
@@ -21,30 +78,30 @@
                     <!-- metric column -->
                     <div class="col">
                       <!-- .metric -->
-                      <a href="user-teams.html" class="metric metric-bordered align-items-center">
-                        <h2 class="metric-label"> Teams </h2>
+                      <a  class="metric metric-bordered align-items-center">
+                        <h2 class="metric-label"> Attendance </h2>
                         <p class="metric-value h3">
-                          <sub><i class="oi oi-people"></i></sub> <span class="value">8</span>
+                          <sub><i class="oi oi-people"></i></sub> <span class="value">{{totalAttendance}}</span>
                         </p>
                       </a> <!-- /.metric -->
                     </div><!-- /metric column -->
                     <!-- metric column -->
                     <div class="col">
                       <!-- .metric -->
-                      <a href="user-projects.html" class="metric metric-bordered align-items-center">
-                        <h2 class="metric-label"> Projects </h2>
+                      <a  class="metric metric-bordered align-items-center">
+                        <h2 class="metric-label"> {{leaveFilter.status .toUpperCase()}} Leave </h2>
                         <p class="metric-value h3">
-                          <sub><i class="oi oi-fork"></i></sub> <span class="value">12</span>
+                          <sub><i class="oi oi-fork"></i></sub> <span class="value">{{totalLeaveStatus}}</span>
                         </p>
                       </a> <!-- /.metric -->
                     </div><!-- /metric column -->
                     <!-- metric column -->
                     <div class="col">
                       <!-- .metric -->
-                      <a href="user-tasks.html" class="metric metric-bordered align-items-center">
-                        <h2 class="metric-label"> Active Tasks </h2>
+                      <a class="metric metric-bordered align-items-center">
+                        <h2 class="metric-label"> {{leaveFilter.type .toUpperCase()}} Leave </h2>
                         <p class="metric-value h3">
-                          <sub><i class="fa fa-tasks"></i></sub> <span class="value">64</span>
+                          <sub><i class="fa fa-tasks"></i></sub> <span class="value">{{totalLeaveType}}</span>
                         </p>
                       </a> <!-- /.metric -->
                     </div><!-- /metric column -->
@@ -52,13 +109,13 @@
                 </div><!-- metric column -->
                 <div class="col-lg-3">
                   <!-- .metric -->
-                  <a href="user-tasks.html" class="metric metric-bordered">
+                  <a  class="metric metric-bordered">
                     <div class="metric-badge">
                       <span class="badge badge-lg badge-success"><span class="oi oi-media-record pulse mr-1"></span>
-                        ONGOING TASKS</span>
+                        Absent</span>
                     </div>
                     <p class="metric-value h3">
-                      <sub><i class="oi oi-timer"></i></sub> <span class="value">8</span>
+                      <sub><i class="oi oi-timer"></i></sub> <span class="value">{{totalAbsent}}</span>
                     </p>
                   </a> <!-- /.metric -->
                 </div><!-- /metric column -->

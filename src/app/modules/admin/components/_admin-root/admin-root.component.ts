@@ -3,19 +3,18 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AdminNavigationMenu } from 'src/app/models/navigation-menu';
 import { Role } from 'src/app/models/role';
 import { LocalStorageService } from 'src/app/core/services/';
+import { Constants } from 'src/shared/constants';
 
-@Injectable()
 @Component({
   selector: 'admin-root',
   templateUrl: './admin-root.component.html',
   styleUrls: ['./admin-root.component.scss']
 })
 export class AdminRootComponent implements OnInit {
-  fullname: string;
-  role:string;
+  fullName: string;
+  role: string;
   navbarTabs: any;
   currentPage: string = "";
-  currentUser: any;
   currentDate: Date;
 
   constructor(
@@ -26,23 +25,19 @@ export class AdminRootComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    this.currentUser = this.storageService.get('currentUser');
-    this.fullname = `${this.currentUser.firstname} ${this.currentUser.lastname}`;
-    this.role=`${this.currentUser.role}`;
-
-    if (this.currentUser && this.currentUser.role) {
-      if (this.currentUser.role == Role.Admin) {
+    let currentUser = JSON.parse(localStorage.getItem(Constants.currentUser));
+    this.fullName = `${currentUser.firstname} ${currentUser.lastname}`;
+    this.role = `${currentUser.role}`;
+    if (currentUser && currentUser.role) {
+      if (currentUser.role == Role.Admin) {
         this.navbarTabs = AdminNavigationMenu;
       }
     }
-
     /**
      * For initial routing, router.event doesn't subscribe any event.
      * And route.children only gives value on initial routing.
      */
     this.currentPage = this.route.children[0].routeConfig.path;
-
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.getcurrentPage(event.url);

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService, LoaderService, AttendanceService } from 'src/app/core/services';
-import { filterModel, dateTypesEnum } from "src/app/models/filter";
-import flatpickr from "flatpickr";
-declare var jQuery: any;
+import { attendanceFilter, dateType } from "src/app/models/filter";
+import { Constants } from 'src/shared/constants';
+import { UtilityService } from 'src/shared/services/utility.service';
 
 @Component({
   selector: 'timesheet-component',
@@ -12,63 +12,72 @@ declare var jQuery: any;
 
 export class timesheetComponent implements OnInit {
 
-  fullname: string;
+  fullName: string;
   userAttendance: any = [];
   userId: number;
-  attendanceFilterModel: filterModel;
+  attendanceFilter: attendanceFilter;
+  totalCounts: number[];
+  pageNumber = Constants.defaultPageNumber
+  firstDayofWeek = Constants.firstDayOfWeek;
+  startDate: string;
+  endDate: string;
 
   attendanceTypes: any[] = [
-    { value: dateTypesEnum.currentDate, name: 'Current Date' },
-    { value: dateTypesEnum.currentMonth, name: 'Current Month' },
-    { value: dateTypesEnum.lastMonth, name: 'Last Month' },
-    { value: dateTypesEnum.currentYear, name: 'Current Year' },
-    { value: dateTypesEnum.lastYear, name: 'Last Year' },
-    { value: dateTypesEnum.custom, name: 'Custom' }
+    { value: dateType.currentDate, name: 'Current Date' },
+    { value: dateType.currentMonth, name: 'Current Month' },
+    { value: dateType.lastMonth, name: 'Last Month' },
+    { value: dateType.currentYear, name: 'Current Year' },
+    { value: dateType.lastYear, name: 'Last Year' },
+    { value: dateType.custom, name: 'Custom' }
   ];
 
   constructor(
     private alertService: AlertService,
     private loaderService: LoaderService,
     private attendanceService: AttendanceService,
+    private utilityService: UtilityService
   ) {
-    this.attendanceFilterModel = new filterModel();
+    this.attendanceFilter = new attendanceFilter();
   }
 
   ngOnInit() {
-
-  this.attendanceFilterModel.type=dateTypesEnum.currentDate;
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.fullname = `${currentUser.firstname} ${currentUser.lastname}`
+    this.attendanceFilter.type = dateType.currentDate;
+    let currentUser = JSON.parse(localStorage.getItem(Constants.currentUser));
+    this.fullName = `${currentUser.firstname} ${currentUser.lastname}`;
     this.getUserAttendance(currentUser.userId);
-    this.flatPickrInit();
-  }
 
-  flatPickrInit() {
-    const startdate = flatpickr("#startdate", {
-      dateFormat: "d.m.Y",
-    });
-    const enddate = flatpickr("#enddate", {
-      dateFormat: "d.m.Y",
-    });
   }
 
   getUserAttendance(id) {
     this.userId = id;
-    let pageNumber: number = 1
-    this.attendanceService.getUserAttendance(id, pageNumber,this.attendanceFilterModel).subscribe((attendance: any) => {
+    this.attendanceService.getUserAttendance(id, this.pageNumber, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
+      this.userAttendance = attendance.data;
+      let totalPages = Math.ceil(attendance.total / 10);
+      this.totalCounts = [];
+      if (totalPages > 0) {
+        for (let i = 1; i <= totalPages; i++) {
+          this.totalCounts.push(i);
+        }
+      }
+    });
+  }
+
+  getPageNumber(pageNo: number) {
+    this.pageNumber = pageNo;
+    this.filterAttendance();
+  }
+
+  filterResult() {
+    this.startDate = this.utilityService.getCurrentDate(this.attendanceFilter.startDate);
+    this.endDate = this.utilityService.getCurrentDate(this.attendanceFilter.endDate);
+    this.attendanceService.getUserAttendance(this.userId, this.pageNumber, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
       this.userAttendance = attendance.data;
     });
   }
 
   filterAttendance() {
-    let pageNumber = 1;
-    if (this.attendanceFilterModel.type == dateTypesEnum.custom) {
-      this.attendanceService.getUserAttendance(this.userId, pageNumber, this.attendanceFilterModel).subscribe((attendance: any) => {
-        this.userAttendance = attendance.data;
-      });
-    }
-    else {
-      this.attendanceService.getUserAttendance(this.userId, pageNumber, this.attendanceFilterModel).subscribe((attendance: any) => {
+    if (this.attendanceFilter.type != dateType.custom) {
+      this.attendanceService.getUserAttendance(this.userId, this.pageNumber, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
         this.userAttendance = attendance.data;
       });
     }
@@ -81,7 +90,8 @@ export class timesheetComponent implements OnInit {
       var breakDiff = new Date(attendance.breakEndTime).getTime() - new Date(attendance.breakStartTime).getTime();
       timeDiff = timeDiff - breakDiff;
     }
-
-    return timeDiff;
+    var minutes = Math.floor((timeDiff % 60000) / 1000).toFixed(0) //in minutes
+    var hours = Math.floor(timeDiff / 3600 / 1000); //in hours
+    return hours + " hr " + minutes + " min ";
   }
 }

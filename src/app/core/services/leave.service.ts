@@ -10,7 +10,7 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
 export class LeaveService {
 
     constructor(private RequestService: RequestService, private storageService: LocalStorageService, ) { }
-    
+
     leave = `${ApiUrl.leave}`;
 
     /**
@@ -18,26 +18,26 @@ export class LeaveService {
    * It Returns the Object 
    */
     getData() {
-        const leave = `${this.leave}/${ApiUrl.list}`;
-        return this.RequestService.getData(leave);
+        const url = `${this.leave}/${ApiUrl.list}`;
+        return this.RequestService.getData(url);
     }
 
     /**
      * Request  for Leave  
      * It requires the Object 
      */
-    requestleave(obj) {
-        const leave = `${this.leave}/${ApiUrl.leaveRequest}`;
-        return this.RequestService.addData(leave, obj);
+    requestleave(leave) {
+        const url = `${this.leave}/${ApiUrl.leaveRequest}`;
+        return this.RequestService.addData(url, leave);
     }
 
     /**
      * Add Data to Leave
-     * @param obj is the object to be added
+     * @param leave is the object to be added
      */
-    addData(obj) {
-        const leave = `${this.leave}/${ApiUrl.add}`;
-        return this.RequestService.addData(leave, obj);
+    addData(leave) {
+        const url = `${this.leave}/${ApiUrl.add}`;
+        return this.RequestService.addData(url, leave);
     }
 
     /**
@@ -45,17 +45,17 @@ export class LeaveService {
    * @param id Returns the user by Id
    */
     getById(id) {
-        const leave = `${this.leave}/${ApiUrl.list}/`;
-        return this.RequestService.getData(leave + id);
+        const url = `${this.leave}/${ApiUrl.list}/`;
+        return this.RequestService.getData(url + id);
     }
 
     /**
    * Update Leave 
-   * @param obj it the object to update the data
+   * @param leave it the object to update the data
    */
-    updateData(obj) {
-        const leave = `${this.leave}/${ApiUrl.update}/${obj._id}`;
-        return this.RequestService.updateData(leave, obj);
+    updateData(leave) {
+        const url = `${this.leave}/${ApiUrl.update}/${leave.id}`;
+        return this.RequestService.updateData(url, leave);
     }
 
     /**
@@ -63,30 +63,36 @@ export class LeaveService {
   * @param id is to delete the user on base of id
   */
     deleteData(id) {
-        const leave = `${this.leave}/${ApiUrl.delete}`;
-        return this.RequestService.deleteData(leave, id);
+        const url = `${this.leave}/${ApiUrl.delete}`;
+        return this.RequestService.deleteData(url, id);
     }
 
     /**
   * Return  role 
   * @param pageNumber is to get page based data 
   */
-    getPagedUsers(pageNumber) {
-        const leave = `${this.leave}/${ApiUrl.getPagedUsers}/${pageNumber}`;
-        return this.RequestService.getData(leave);
+    getPagedleave(pageNumber) {
+        const url = `${this.leave}/${ApiUrl.getPagedLeaves}/${pageNumber}`;
+        return this.RequestService.getData(url);
     }
 
 
-    
+    getUserLeave(userId, pageNumber, leave,startDate) {
+        const url = `${this.leave}/${ApiUrl.pagedUserLeaves}?userId=${userId}&pageNo=${pageNumber}&type=${leave.type}&startDate=${startDate}`;
+        return this.RequestService.getData(url);
+    }
+
+    getUserLeaveCount(userId, status, model,startDate,endDate) {
+        const url = `${this.leave}/${ApiUrl.totalCountByUserId}?userId=${userId}&status=${status}&type=${model.type}&startDate=${startDate}&endDate=${endDate}`;
+        return this.RequestService.getData(url);
+    }
+
     /**
      * Total number of leave
      * It will return the total leave 
-     * 
      */
-    getTotalLeave(model,type) {
-        const url = `${this.leave}/${ApiUrl.totalCount}?status=${type}&type=${model.type}&startDate=${model.startDate}&endDate=${model.endDate}`;
+    getTotalLeave(model, type,startDate,endDate) {
+        const url = `${this.leave}/${ApiUrl.totalCount}?status=${type}&type=${model.type}&startDate=${startDate}&endDate=${endDate}`;
         return this.RequestService.getData(url);
-    }   
-
-
+    }
 }

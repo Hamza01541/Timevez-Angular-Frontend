@@ -24,20 +24,20 @@ export class UserService {
 
     /**
      * Add Data to User
-     * @param obj is the object to be added
+     * @param user is the object to be added
      */
-    addData(obj) {
+    addData(user) {
         const url = `${this.user}/${ApiUrl.register}`;
-        return this.RequestService.addData(url, obj);
+        return this.RequestService.addData(url, user);
     }
 
     /**
     * User Can Login
-    * @param obj is the object to Login the User
+    * @param user is the object to Login the User
     */
-    userLogin(obj) {
+    userLogin(user) {
         const url = `${this.user}/${ApiUrl.login}`;
-        return this.RequestService.addData(url, obj);
+        return this.RequestService.addData(url, user);
     }
 
     /**
@@ -51,11 +51,11 @@ export class UserService {
 
     /**
 * Update User 
-* @param obj it the object to update the data
+* @param user it the object to update the data
 */
-    updateData(obj) {
-        const url = `${this.user}/${ApiUrl.update}/${obj._id}`;
-        return this.RequestService.updateData(url, obj);
+    updateData(user) {
+        const url = `${this.user}/${ApiUrl.update}/${user._id}`;
+        return this.RequestService.updateData(url, user);
     }
 
     /**
@@ -79,10 +79,9 @@ export class UserService {
     /**
      * Total number of users
      * It will return the total number of users
-     * 
      */
-    getTotalUsers(model) {
-        const url = `${this.user}/${ApiUrl.totalCount}?type=${model.type}&startDate=${model.startDate}&endDate=${model.endDate}`;
+    getTotalUsers(model,startDate,endDate) {
+        const url = `${this.user}/${ApiUrl.totalCount}?type=${model.type}&startDate=${startDate}&endDate=${endDate}`;
         return this.RequestService.getData(url);
     }
 
@@ -92,7 +91,7 @@ export class UserService {
      * @param search is the search string that user will type
      */
     searchUser(pageNo, search) {
-        const url = `${this.user}?pageNo=${pageNo}&search=${search}`;
+        const url = `${this.user}/${ApiUrl.getPagedUsers}?pageNo=${pageNo}&search=${search}`;
         return this.RequestService.getData(url);
     }
 

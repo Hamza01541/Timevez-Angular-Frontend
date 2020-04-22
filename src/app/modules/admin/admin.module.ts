@@ -25,7 +25,6 @@ import {
     ChangePasswordComponent,
     ProfileComponent
 } from "./components";
-
 import { SharedModule } from '.././../../shared/shared.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -62,7 +61,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         OwlNativeDateTimeModule,
 
 
-        
+
     ],
 
     providers: [

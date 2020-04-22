@@ -16,8 +16,8 @@ export class AttendanceService {
    * It Returns the Object 
    */
     getData() {
-        const attendance = `${this.attendance}/${ApiUrl.list}`;
-        return this.RequestService.getData(attendance);
+        const url = `${this.attendance}/${ApiUrl.list}`;
+        return this.RequestService.getData(url);
     }
 
     /**
@@ -25,8 +25,8 @@ export class AttendanceService {
    * It Returns the Object of Attendence Detail
    */
     getAttendencedDetail() {
-        const attendance = `${this.attendance}/${ApiUrl.detail}`;
-        return this.RequestService.getData(attendance);
+        const url = `${this.attendance}/${ApiUrl.detail}`;
+        return this.RequestService.getData(url);
     }
 
     /**
@@ -34,17 +34,17 @@ export class AttendanceService {
    * @param id  Returns the Attendence Detail on specific Id
    */
     getAttendencedDetailById(id) {
-        const attendance = `${this.attendance}/${ApiUrl.detail}`;
-        return this.RequestService.getData(attendance + id);
+        const url = `${this.attendance}/${ApiUrl.detail}`;
+        return this.RequestService.getData(url + id);
     }
 
     /**
         * Add Data to Attendece
-        * @param Obj is the object to be added 
+        * @param attendance is the object to be added 
         */
-    addData(obj) {
-        const attendance = `${this.attendance}/${ApiUrl.add}`;
-        return this.RequestService.addData(attendance, obj)
+    addData(attendance) {
+        const url = `${this.attendance}/${ApiUrl.add}`;
+        return this.RequestService.addData(url, attendance)
     }
 
     /**
@@ -52,17 +52,17 @@ export class AttendanceService {
         * @param id Returns the attendence list on Specific Id
         */
     getById(id) {
-        const attendance = `${this.attendance}/${ApiUrl.list}/`;
-        return this.RequestService.getData(attendance + id);
+        const url = `${this.attendance}/${ApiUrl.list}/`;
+        return this.RequestService.getData(url + id);
     }
 
     /**
         *Update Data of Attendence By Id
-        * @param obj is the object to update the data
+        * @param attendance is the object to update the data
         */
-    updateData(obj) {
-        const attendance = `${this.attendance}/${ApiUrl.update}/${obj.id}`;
-        return this.RequestService.updateData(attendance, obj);
+    updateData(attendance) {
+        const url = `${this.attendance}/${ApiUrl.update}/${attendance.id}`;
+        return this.RequestService.updateData(url, attendance);
     }
 
     /**
@@ -70,8 +70,8 @@ export class AttendanceService {
           * @param id is to delete attendence data 
           */
     deleteData(id) {
-        const attendance = `${this.attendance}/${ApiUrl.delete}`;
-        return this.RequestService.deleteData(attendance, id);
+        const url = `${this.attendance}/${ApiUrl.delete}`;
+        return this.RequestService.deleteData(url, id);
     }
 
     /**
@@ -79,64 +79,65 @@ export class AttendanceService {
  * @param pageNumber is to get page based data 
  */
     getPagedAttendance(pageNumber) {
-        const attendance = `${this.attendance}/${ApiUrl.getPagedAttendances}/${pageNumber}`;
-        return this.RequestService.getData(attendance);
+        const url = `${this.attendance}/${ApiUrl.getPagedAttendances}/${pageNumber}`;
+        return this.RequestService.getData(url);
     }
 
     /**
 * Return  attandance 
 * @param pageNumber is to get page based data 
 */
-    getUserAttendance(userId, pageNumber, attendance) {
-        const url = `${this.attendance}/${ApiUrl.getUserPageAttendance}?userId=${userId}&pageNo=${pageNumber}&type=${attendance.type}&startDate=${attendance.startDate}&endDate=${attendance.endDate}`;
+    getUserAttendance(userId, pageNumber, attendance, startDate, endDate) {
+        const url = `${this.attendance}/${ApiUrl.getUserPageAttendance}?userId=${userId}&pageNo=${pageNumber}&type=${attendance.type}&startDate=${startDate}&endDate=${endDate}`;
         return this.RequestService.getData(url);
     }
 
     /**
-          *Check In for Attendence By  Employee Id
-          * @param id is to check in employee on the base  Id
+          *Check In for Attendence By Employee Id
           */
     checkIn() {
-        const attendance = `${this.attendance}/${ApiUrl.checkIn}`;
-        return this.RequestService.addData(attendance);
+        const url = `${this.attendance}/${ApiUrl.checkIn}`;
+        return this.RequestService.addData(url);
     }
 
 
-    
+
     /**
      * Total number of attendance
-     * It will return the total  absent or present 
-     * 
+     * It will return the total numer of  absent or present 
      */
-    getTotalAttendance(model,present) {
-        const url = `${this.attendance}/${ApiUrl.totalCount}?present=${present}&type=${model.type}&startDate=${model.startDate}&endDate=${model.endDate}`;
+    getTotalAttendance(model, present, startDate, endDate) {
+        const url = `${this.attendance}/${ApiUrl.totalCount}?present=${present}&type=${model.type}&startDate=${startDate}&endDate=${endDate}`;
         return this.RequestService.getData(url);
-    }   
+    }
 
     /**
       *Check Out for Attendence By  Employee Id
-      * @param id is to checkOut employee on the base  Id
       */
     checkOut() {
-        const attendance = `${this.attendance}/${ApiUrl.checkOut}`;
-        return this.RequestService.updateData(attendance);
+        const url = `${this.attendance}/${ApiUrl.checkOut}`;
+        return this.RequestService.updateData(url);
+    }
+
+
+    getUserAttendanceCount(userId, present, model, startDate, endDate) {
+        const url = `${this.attendance}/${ApiUrl.totalCountByUserId}?userId=${userId}&present=${present}&type=${model.type}&startDate=${startDate}&endDate=${endDate}`;
+        return this.RequestService.getData(url);
     }
 
     /**
       *Start Break for Specific Employee 
-      * @param id is to Start Break of employee on the base  Id
       */
     startBreak() {
-        const attendance = `${this.attendance}/${ApiUrl.startBreak}`;
-        return this.RequestService.updateData(attendance);
+        const url = `${this.attendance}/${ApiUrl.startBreak}`;
+        return this.RequestService.updateData(url);
     }
 
     /**
         *End Break for Specific Employee 
-        * @param id is to End Break of employee on the base  Id
         */
     endBreak() {
-        const attendance = `${this.attendance}/${ApiUrl.endBreak}`;
-        return this.RequestService.updateData(attendance);
+        const url = `${this.attendance}/${ApiUrl.endBreak}`;
+        return this.RequestService.updateData(url);
     }
 }

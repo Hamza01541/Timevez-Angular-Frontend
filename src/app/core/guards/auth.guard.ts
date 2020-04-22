@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/services';
+import { Constants } from 'src/shared/constants';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -16,7 +17,7 @@ export class AuthGuard implements CanActivate {
        * Other wise it will return to login page
        */
   canActivate(route: ActivatedRouteSnapshot) {
-    let currentUser = this.storageService.get('currentUser');
+    let currentUser = this.storageService.get(Constants.currentUser);
 
     if (currentUser && currentUser.role && currentUser.role.length && route.data && route.data.role && route.data.role.length) {
       let isValid = false;
