@@ -12,10 +12,10 @@ const path = require('path');
 const app = express();
 console.log("**app:",app)
 // Serve only the static files form the dist directory
-app.use(express.static('./dist'));
+app.use(express.static('./dist/timevez'));
 
 app.get('/*', function(req,res) {
-res.sendFile(path.join(__dirname,'/dist/index.html'));
+res.sendFile(path.join(__dirname,'/dist/timevez/index.html'));
 
 console.log("**App-get:",res)
 });
