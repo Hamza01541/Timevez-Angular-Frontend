@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-console.log("environment.test1:",environment.test1);
     this.logout = this.route.snapshot.queryParams['logout'] || false;
     this.currentUser = this.storageService.get(Constants.currentUser);
 
