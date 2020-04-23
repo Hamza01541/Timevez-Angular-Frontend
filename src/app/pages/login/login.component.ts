@@ -4,8 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { Role } from 'src/app/models/role';
 import { Constants } from 'src/shared/constants';
-import { environment } from 'src/environments/environment';
-import * as jsTest from '../../../../../timevez/server.js'
 
 @Component({
   selector: 'login-component',
@@ -28,11 +26,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-console.log("*window:", window);
-console.log("*jsTest:", jsTest);
-console.log("*testingVar:", jsTest.testingVar);
-console.log("*window['__env']:", window['_env']);
-    
     this.logout = this.route.snapshot.queryParams['logout'] || false;
     this.currentUser = this.storageService.get(Constants.currentUser);
 
