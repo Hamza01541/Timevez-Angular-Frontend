@@ -17,6 +17,8 @@ res.sendFile(path.join(__dirname,'/dist/timevez/index.html'));
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
 
+var testingVar = process.env.PORT
+
 (function (window) {
     window._env = window._env || {};
   
