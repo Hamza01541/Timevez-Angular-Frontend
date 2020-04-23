@@ -10,11 +10,10 @@
     "e2e": "ng e2e",
     "deploy": "git add . && git commit -m \"New code committed. \" && git push heroku master && heroku open && heroku logs"
   },
-  "engines": { 
-    "node": "10.16.0", 
-    "npm": "6.11.3" 
+  "engines": {
+    "node": "10.16.0",
+    "npm": "6.11.3"
   },
-
   "private": true,
   "dependencies": {
     "@angular/animations": "^9.0.7",
