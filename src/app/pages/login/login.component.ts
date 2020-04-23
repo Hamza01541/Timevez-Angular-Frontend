@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+console.log("process.env.testVar:",process.env.testVar);
+
     this.showLoader();
     this.userService.userLogin(this.loginModel).subscribe((user: any) => {
       this.alertService.successToastr("Successfully Logined", false);
