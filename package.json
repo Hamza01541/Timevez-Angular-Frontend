@@ -8,7 +8,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "heroku config:get testVar -s  >> .env",
     "deploy": "git add . && git commit -m \"New code committed. \" && git push origin master && git push heroku master && heroku open && heroku logs"
   },
   "engines": {
