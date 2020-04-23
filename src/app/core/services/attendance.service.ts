@@ -87,8 +87,8 @@ export class AttendanceService {
 * Return  attandance 
 * @param pageNumber is to get page based data 
 */
-    getUserAttendance(userId, pageNumber, attendance, startDate, endDate) {
-        const url = `${this.attendance}/${ApiUrl.getUserPageAttendance}?userId=${userId}&pageNo=${pageNumber}&type=${attendance.type}&startDate=${startDate}&endDate=${endDate}`;
+    getUserAttendance(userId: string, pageNumber: number, filterType: string, startDate: string, endDate: string) {
+        const url = `${this.attendance}/${ApiUrl.getUserPageAttendance}?userId=${userId}&pageNo=${pageNumber}&type=${filterType}&startDate=${startDate}&endDate=${endDate}`;
         return this.RequestService.getData(url);
     }
 
@@ -100,13 +100,11 @@ export class AttendanceService {
         return this.RequestService.addData(url);
     }
 
-
-
     /**
      * Total number of attendance
      * It will return the total numer of  absent or present 
      */
-    getTotalAttendance(model, present, startDate, endDate) {
+    getTotalAttendance(model, present: boolean, startDate:string, endDate: string) {
         const url = `${this.attendance}/${ApiUrl.totalCount}?present=${present}&type=${model.type}&startDate=${startDate}&endDate=${endDate}`;
         return this.RequestService.getData(url);
     }
@@ -120,7 +118,7 @@ export class AttendanceService {
     }
 
 
-    getUserAttendanceCount(userId, present, model, startDate, endDate) {
+    getUserAttendanceCount(userId, present, model, startDate: string, endDate: string) {
         const url = `${this.attendance}/${ApiUrl.totalCountByUserId}?userId=${userId}&present=${present}&type=${model.type}&startDate=${startDate}&endDate=${endDate}`;
         return this.RequestService.getData(url);
     }

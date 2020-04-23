@@ -10,6 +10,6 @@ export class Constants {
     static readonly attendance = 'attendance';
     static readonly type = `type`;
     static readonly status = `status`;
-    static readonly firstDayOfWeek=1;
-    static readonly defaultPageNumber=1;
+    static readonly firstDayOfWeek = 1;
+    static readonly defaultPageNumber = 1;
 }

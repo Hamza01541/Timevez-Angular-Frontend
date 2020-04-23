@@ -66,13 +66,13 @@
             <!-- .nav-tabs -->
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a class="nav-link active show" data-toggle="tab" href="#client-billing-contact">Billing & Contact</a>
+                <a class="nav-link active show" data-toggle="tab" href="#client-billing-contact">Contact</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#attendance">Attendance</a>
+                <a class="nav-link" data-toggle="tab" href="#attendance" (click)="filterAttendanceAndLeave(userTabs.attendance)">Attendance</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#leave">Leave</a>
+                <a class="nav-link" data-toggle="tab" href="#leave" (click)="filterAttendanceAndLeave(userTabs.leave)">Leave</a>
               </li>
             </ul><!-- /.nav-tabs -->
           </div><!-- /.nav-scroller -->
@@ -103,6 +103,7 @@
                           <th> Name </th>
                           <th> Email </th>
                           <th> Phone </th>
+                          <th> Active </th>
                           <th></th>
                         </tr>
                       </thead>
@@ -111,6 +112,7 @@
                           <td class="align-middle">{{selectedUser.firstname}} {{selectedUser.lastname}} </td>
                           <td class="align-middle">{{selectedUser.email}}</td>
                           <td class="align-middle">{{selectedUser.phone}} </td>
+                          <td class="align-middle">{{selectedUser.active}} </td>
                           <td class="align-middle text-right">
                             <button type="button"
                               (click)="performUpdateAndDeleteOperation('user','edit',selectedUser._id)"
@@ -129,6 +131,14 @@
               </div><!-- /.card -->
             </div><!-- /.tab-pane -->
 
+
+
+
+
+
+
+
+
             <!-- .tab-pane -->
             <div class="tab-pane fade" id="leave" role="tabpanel" aria-labelledby="leave-tab">
               <!-- .card -->
@@ -141,7 +151,7 @@
                       <!-- .page-title-bar -->
                       <header class="page-title-bar">
                         <div class="d-md-flex align-items-md-start">
-                          <h1 class="page-title mr-sm-auto">Employee Leave Table </h1><!-- .btn-toolbar -->
+                          <h1 class="page-title mr-sm-auto">Employee Leave </h1><!-- .btn-toolbar -->
                           <div class="btn-toolbar">
                             <!-- <button type="button" class="btn btn-light"><i class="oi oi-data-transfer-download"></i>
                               <span class="ml-1">Export</span></button>
@@ -259,7 +269,7 @@
                       <header class="page-title-bar">
                         <!-- title and toolbar -->
                         <div class="d-md-flex align-items-md-start">
-                          <h1 class="page-title mr-sm-auto"> Employee Attendance Table </h1><!-- .btn-toolbar -->
+                          <h1 class="page-title mr-sm-auto"> Employee Attendance </h1><!-- .btn-toolbar -->
                           <div class="btn-toolbar">
                             <!-- <button type="button" class="btn btn-light"><i class="oi oi-data-transfer-download"></i>
                               <span class="ml-1">Export</span></button>
@@ -281,7 +291,7 @@
                             <div class="form-group">
                               <!-- .input-group -->
                               <div class="input-group input-group-alt">
-                                <!-- .input-group-prepend -->
+                               
                                 <div class="input-group-prepend">
                                   <select class="custom-select" id="attendanceType" name="attendanceType"
                                     (change)="filterAttendanceAndLeave('attendance')"
@@ -289,7 +299,7 @@
                                     <option *ngFor="let type of attendanceTypes" [value]="type.value">{{type.name}}
                                     </option>
                                   </select>
-                                </div><!-- /.input-group-prepend -->
+                                </div>
 
                                   <div [hidden]="attendanceFilter.type !== 'custom'">
                                     <div class="form-group">
@@ -425,15 +435,15 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="password">Password</label>
-                      <input type="password" required #password="ngModel" id="Password" name="password"
+                      <input type="password"  #password="ngModel" id="Password" name="password"
                         [(ngModel)]="model.password" placeholder="Enter Password" pattern="^.{6,10}$"
                         class="form-control">
                     </div>
-                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                    <!-- <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
                       <label>
                         Password is Required
                       </label>
-                    </div>
+                    </div> -->
                     <div *ngIf="password.errors?.pattern" id="card-errors" class="alert alert-danger col-12"
                       style="color:#f2665c;" role="alert">
                       Password Must be more than 6 to 10 Chracter or Number
@@ -443,16 +453,16 @@
                     <div class="form-group">
                       <label for="confirmpassword">Confirm Password</label>
                       <input type="password" type="password" id="confirmpassword" name="confirmpassword"
-                        placeholder=" Confirm Password" #confirmPassword="ngModel" ngModel required
+                        placeholder=" Confirm Password" #confirmPassword="ngModel" ngModel
                         class="form-control">
                     </div>
-                    <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)"
+                    <!-- <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)"
                       class="alert alert-danger">
                       <label>
                         Confirm Password is Required
                       </label>
-                    </div>
-                    <div *ngIf="confirmPassword.valid && model.password !== confirmPassword.value" id="card-errors"
+                    </div> -->
+                    <div *ngIf="confirmPassword.touched && confirmPassword.valid && model.password !== confirmPassword.value" id="card-errors"
                       class="alert alert-danger col-12" style="color:#f2665c;" role="alert">
                       Password does not match
                     </div>
@@ -668,7 +678,7 @@
                 <div class="form-row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="date">Start Date</label>
+                      <label for="date">From Date</label>
                       <input placeholder="Select Start Date" [(ngModel)]="modelLeave.startDate" name="startDate"
                         class="form-control" [owlDateTimeTrigger]="dtPicker6" [owlDateTime]="dtPicker6" #startDate="ngModel"
                         required>
@@ -683,7 +693,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="date">Start Date</label>
+                      <label for="date">To Date</label>
                       <input placeholder="Select Start Date" [(ngModel)]="modelLeave.endDate" name="endDate"
                         class="form-control" [owlDateTimeTrigger]="dtPicker7" [owlDateTime]="dtPicker7" #endDate="ngModel"
                         required>

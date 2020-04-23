@@ -7,6 +7,7 @@ import { attendanceFilter, dateType } from "src/app/models/filter";
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { Constants } from 'src/shared/constants';
 import { leaveType, leaveStatus } from "src/app/models/filter";
+import { UserTabs } from 'src/app/models';
 import { ConfirmationDialogueComponent } from 'src/shared/components';
 import { Role } from 'src/app/models/role';
 import { UtilityService } from 'src/shared/services/utility.service';
@@ -30,7 +31,7 @@ export class UserListComponent implements OnInit {
     totalAttendanceCounts: number[];
     totalLeaveCounts: number[]
     attendancePageNumber: number = 1;
-    leavePageNumber: number;
+    leavePageNumber: number = 1;
     userAttendance: any = [];
     userLeave: any = [];
     id: number;
@@ -39,6 +40,7 @@ export class UserListComponent implements OnInit {
     userSearchStr: any;
     startDate: string;
     endDate: string;
+    userTabs = UserTabs;
 
 
     attendanceTypes: any[] = [
@@ -138,15 +140,15 @@ export class UserListComponent implements OnInit {
         if (this.attendanceFilter.type != dateType.custom) {
             this.attendanceFilter.startDate = '';
             this.attendanceFilter.endDate = '';
+
             if (type == Constants.attendance) {
-                this.attendanceService.getUserAttendance(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
+                this.attendanceService.getUserAttendance(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
                     this.userAttendance = attendance;
                     this.calculateTotalGridPages(Constants.attendance, attendance.total);
 
                 });
-            }
-            else {
-                this.leaveService.getUserLeave(this.selectedUser._id, this.leavePageNumber, this.attendanceFilter, this.startDate).subscribe((leave: any) => {
+            } else {
+                this.leaveService.getUserLeave(this.selectedUser._id, this.leavePageNumber, this.attendanceFilter.type, this.startDate).subscribe((leave: any) => {
                     this.userLeave = leave;
                     this.calculateTotalGridPages(Constants.leave, leave.total);
                 });
@@ -168,16 +170,25 @@ export class UserListComponent implements OnInit {
     customAttendanceAndLeaveFilter(type: string) {
 
         if (type == Constants.attendance) {
-            this.startDate = this.utilityService.getCurrentDate(this.attendanceFilter.startDate);
-            this.endDate = this.utilityService.getCurrentDate(this.attendanceFilter.endDate);
-            this.attendanceService.getUserAttendance(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
+            this.startDate = '';
+            this.endDate = '';
+            
+            if(this.attendanceFilter.startDate){
+                this.startDate = this.utilityService.getCurrentDate(this.attendanceFilter.startDate);
+            }
+
+            if(this.attendanceFilter.endDate){
+                this.endDate = this.utilityService.getCurrentDate(this.attendanceFilter.endDate);
+            }
+
+            this.attendanceService.getUserAttendance(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
                 this.userAttendance = attendance;
                 this.calculateTotalGridPages(Constants.attendance, attendance.total);
             });
         }
         else {
             this.startDate = this.utilityService.getCurrentDate(this.attendanceFilter.startDate);
-            this.leaveService.getUserLeave(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter, this.startDate).subscribe((leave: any) => {
+            this.leaveService.getUserLeave(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter.type, this.startDate).subscribe((leave: any) => {
                 this.userLeave = leave;
                 this.calculateTotalGridPages(Constants.leave, leave.total);
             });
@@ -268,7 +279,7 @@ export class UserListComponent implements OnInit {
 
     getUserLeave(userId: any) {
         let pageNumber: number = 1
-        this.leaveService.getUserLeave(userId, pageNumber, this.attendanceFilter, this.startDate).subscribe((leave: any) => {
+        this.leaveService.getUserLeave(userId, pageNumber, this.attendanceFilter.type, this.startDate).subscribe((leave: any) => {
             this.userLeave = leave;
             this.calculateTotalGridPages(Constants.leave, leave.total);
         });
@@ -276,7 +287,7 @@ export class UserListComponent implements OnInit {
 
     getUserAttendance(userId) {
         let pageNumber: number = 1
-        this.attendanceService.getUserAttendance(userId, pageNumber, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
+        this.attendanceService.getUserAttendance(userId, pageNumber, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
             this.userAttendance = attendance;
             this.calculateTotalGridPages(Constants.attendance, attendance.total);
         }, error => {
@@ -284,13 +295,14 @@ export class UserListComponent implements OnInit {
     }
 
     getAvailableTime(attendance) {
-        var timeDiff = new Date(attendance.checkOut).getTime() - new Date(attendance.checkIn).getTime();
+        let timeDiff = new Date(attendance.checkOut).getTime() - new Date(attendance.checkIn).getTime();
         if (attendance.breakStartTime && attendance.breakEndTime) {
-            var breakDiff = new Date(attendance.breakEndTime).getTime() - new Date(attendance.breakStartTime).getTime();
+            const breakDiff = new Date(attendance.breakEndTime).getTime() - new Date(attendance.breakStartTime).getTime();
             timeDiff = timeDiff - breakDiff;
         }
-        var minutes = Math.floor((timeDiff % 60000) / 1000).toFixed(0) //in minutes
-        var hours = Math.floor(timeDiff / 3600 / 1000); //in hours
+        const totalTimeInMinutes = Math.floor(timeDiff / 60000) // total time in minutes
+        const hours = Math.floor(totalTimeInMinutes / 60);
+        const minutes = Math.round(totalTimeInMinutes % 60);
         return hours + " hr " + minutes + " min ";
     }
 

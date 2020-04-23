@@ -77,8 +77,8 @@ export class LeaveService {
     }
 
 
-    getUserLeave(userId, pageNumber, leave,startDate) {
-        const url = `${this.leave}/${ApiUrl.pagedUserLeaves}?userId=${userId}&pageNo=${pageNumber}&type=${leave.type}&startDate=${startDate}`;
+    getUserLeave(userId, pageNumber, leave: string, startDate:string) {
+        const url = `${this.leave}/${ApiUrl.pagedUserLeaves}?userId=${userId}&pageNo=${pageNumber}&type=${leave}&startDate=${startDate}`;
         return this.RequestService.getData(url);
     }
 

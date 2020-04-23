@@ -49,3 +49,8 @@ border-bottom: 1px solid #f3f3f3;
 .jsgrid-grid-body{
   overflow-y: auto !important;
 }
+
+/** To display owl-time picker on modal popups */
+.cdk-overlay-container{
+  z-index: 9999 !important;
+}

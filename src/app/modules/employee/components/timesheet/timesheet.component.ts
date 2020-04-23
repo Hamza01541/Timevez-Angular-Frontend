@@ -14,7 +14,7 @@ export class timesheetComponent implements OnInit {
 
   fullName: string;
   userAttendance: any = [];
-  userId: number;
+  userId: string;
   attendanceFilter: attendanceFilter;
   totalCounts: number[];
   pageNumber = Constants.defaultPageNumber
@@ -50,7 +50,7 @@ export class timesheetComponent implements OnInit {
 
   getUserAttendance(id) {
     this.userId = id;
-    this.attendanceService.getUserAttendance(id, this.pageNumber, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
+    this.attendanceService.getUserAttendance(id, this.pageNumber, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
       this.userAttendance = attendance.data;
       let totalPages = Math.ceil(attendance.total / 10);
       this.totalCounts = [];
@@ -70,14 +70,14 @@ export class timesheetComponent implements OnInit {
   filterResult() {
     this.startDate = this.utilityService.getCurrentDate(this.attendanceFilter.startDate);
     this.endDate = this.utilityService.getCurrentDate(this.attendanceFilter.endDate);
-    this.attendanceService.getUserAttendance(this.userId, this.pageNumber, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
+    this.attendanceService.getUserAttendance(this.userId, this.pageNumber, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
       this.userAttendance = attendance.data;
     });
   }
 
   filterAttendance() {
     if (this.attendanceFilter.type != dateType.custom) {
-      this.attendanceService.getUserAttendance(this.userId, this.pageNumber, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
+      this.attendanceService.getUserAttendance(this.userId, this.pageNumber, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
         this.userAttendance = attendance.data;
       });
     }

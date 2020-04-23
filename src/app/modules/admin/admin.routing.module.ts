@@ -19,7 +19,6 @@ const routes: Routes = [
         path: '',
         component: AdminRootComponent,
         children: [
-            { path: '', redirectTo: "/dashboard", pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent },
             { path: 'user', component: UserListComponent },
             { path: 'user-form', component: UserFormComponent },
@@ -28,6 +27,7 @@ const routes: Routes = [
             { path: 'change-password', component: ChangePasswordComponent },
             { path: 'profile', component: ProfileComponent },
             // otherwise redirect to home
+            { path: '', redirectTo: "dashboard", pathMatch: 'full' },
             { path: '**', redirectTo: "dashboard" },
         ]
     }
