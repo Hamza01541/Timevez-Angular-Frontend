@@ -36,6 +36,7 @@
     "@ng-select/ng-select": "^3.7.3",
     "@types/jquery": "^3.3.33",
     "bootstrap": "^4.4.1",
+    "express": "^4.17.1",
     "fa-icons": "^0.2.0",
     "flatpickr": "^4.6.3",
     "font-awesome": "^4.7.0",
