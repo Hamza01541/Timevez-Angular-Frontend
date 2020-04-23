@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { Role } from 'src/app/models/role';
 import { Constants } from 'src/shared/constants';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'login-component',
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
+console.log("environment.test1:",environment.test1);
     this.logout = this.route.snapshot.queryParams['logout'] || false;
     this.currentUser = this.storageService.get(Constants.currentUser);
 
@@ -39,8 +40,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-console.log("process.env.testVar:",process.env.testVar);
-
     this.showLoader();
     this.userService.userLogin(this.loginModel).subscribe((user: any) => {
       this.alertService.successToastr("Successfully Logined", false);

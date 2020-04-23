@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "git add . && git commit -m \"New code committed. \" && git push heroku master && heroku open && heroku logs"
+    "deploy": "git add . && git commit -m \"New code committed. \" && git push origin master && git push heroku master && heroku open && heroku logs"
   },
   "engines": {
     "node": "10.16.0",
