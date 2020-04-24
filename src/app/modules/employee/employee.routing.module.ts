@@ -3,7 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Admin Components
 import {
-    EmployeeRootComponent, timesheetComponent, DashboardComponent, LeaveComponent, ChangePasswordComponent, ProfileComponent
+    EmployeeRootComponent,
+    timesheetComponent,
+    DashboardComponent,
+    LeaveComponent,
+    ChangePasswordComponent,
+    ProfileComponent
 } from "./components/index";
 
 

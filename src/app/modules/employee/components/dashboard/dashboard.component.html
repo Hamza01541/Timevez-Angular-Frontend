@@ -79,9 +79,21 @@
                     <div class="col">
                       <!-- .metric -->
                       <a  class="metric metric-bordered align-items-center">
-                        <h2 class="metric-label"> Attendance </h2>
+                        <h2 class="metric-label badge badge-lg badge-success"> Attendance </h2>
                         <p class="metric-value h3">
                           <sub><i class="oi oi-people"></i></sub> <span class="value">{{totalAttendance}}</span>
+                        </p>
+                      </a> <!-- /.metric -->
+                    </div><!-- /metric column -->
+                    <div class="col-lg-3">
+                      <!-- .metric -->
+                      <a  class="metric metric-bordered">
+                        <div class="metric-badge">
+                          <span class="badge badge-lg badge-danger"><span class="oi oi-media-record pulse mr-1"></span>
+                            Absent</span>
+                        </div>
+                        <p class="metric-value h3">
+                          <sub><i class="oi oi-timer"></i></sub> <span class="value">{{totalAbsent}}</span>
                         </p>
                       </a> <!-- /.metric -->
                     </div><!-- /metric column -->
@@ -89,9 +101,18 @@
                     <div class="col">
                       <!-- .metric -->
                       <a  class="metric metric-bordered align-items-center">
-                        <h2 class="metric-label"> {{leaveFilter.status .toUpperCase()}} Leave </h2>
+                        <h2 class="metric-label"> Approved Leaves </h2>
                         <p class="metric-value h3">
-                          <sub><i class="oi oi-fork"></i></sub> <span class="value">{{totalLeaveStatus}}</span>
+                          <sub><i class="oi oi-fork"></i></sub> <span class="value">{{leaveDetail.approved}}</span>
+                        </p>
+                      </a> <!-- /.metric -->
+                    </div><!-- /metric column -->
+                    <div class="col">
+                      <!-- .metric -->
+                      <a  class="metric metric-bordered align-items-center">
+                        <h2 class="metric-label"> Pending Leaves </h2>
+                        <p class="metric-value h3">
+                          <sub><i class="oi oi-fork"></i></sub> <span class="value">{{leaveDetail.pending}}</span>
                         </p>
                       </a> <!-- /.metric -->
                     </div><!-- /metric column -->
@@ -99,26 +120,24 @@
                     <div class="col">
                       <!-- .metric -->
                       <a class="metric metric-bordered align-items-center">
-                        <h2 class="metric-label"> {{leaveFilter.type .toUpperCase()}} Leave </h2>
+                        <h2 class="metric-label"> Casual Leaves </h2>
                         <p class="metric-value h3">
-                          <sub><i class="fa fa-tasks"></i></sub> <span class="value">{{totalLeaveType}}</span>
+                          <sub><i class="fa fa-tasks"></i></sub> <span class="value">{{leaveDetail.casual}}</span>
+                        </p>
+                      </a> <!-- /.metric -->
+                    </div><!-- /metric column -->
+                    <div class="col">
+                      <!-- .metric -->
+                      <a class="metric metric-bordered align-items-center">
+                        <h2 class="metric-label"> Annual Leaves </h2>
+                        <p class="metric-value h3">
+                          <sub><i class="fa fa-tasks"></i></sub> <span class="value">{{leaveDetail.annual}}</span>
                         </p>
                       </a> <!-- /.metric -->
                     </div><!-- /metric column -->
                   </div>
                 </div><!-- metric column -->
-                <div class="col-lg-3">
-                  <!-- .metric -->
-                  <a  class="metric metric-bordered">
-                    <div class="metric-badge">
-                      <span class="badge badge-lg badge-success"><span class="oi oi-media-record pulse mr-1"></span>
-                        Absent</span>
-                    </div>
-                    <p class="metric-value h3">
-                      <sub><i class="oi oi-timer"></i></sub> <span class="value">{{totalAbsent}}</span>
-                    </p>
-                  </a> <!-- /.metric -->
-                </div><!-- /metric column -->
+               
               </div><!-- /metric row -->
             </div><!-- /.section-block -->
             <!-- grid row -->

@@ -22,6 +22,8 @@ export class DashboardComponent implements OnInit {
   attendanceFilter: attendanceFilter;
   leaveFilter: leaveFilter;
 
+  leaveDetail: any = { approved: 0, pending: 0, casual: 0, annual: 0 };
+
   attendanceTypes: any[] = [
     { value: dateType.currentDate, name: 'Current Date' },
     { value: dateType.currentMonth, name: 'Current Month' },
@@ -73,131 +75,121 @@ export class DashboardComponent implements OnInit {
     this.getCounts();
   }
 
+  getLeaveDetail() {
+    this.leaveService.getUserLeave(this.userId, 1, this.leaveFilter.status, this.startDate, this.endDate, 0).subscribe((leaves: any) => {
+      if (leaves && leaves.data) {
+        leaves.data.forEach(userLeave => {
+          if (userLeave.status === 'pending') {
+            this.leaveDetail.pending += 1;
+          } else if (userLeave.status === 'approved') {
+            this.leaveDetail.approved += 1;
 
-
-
-
-  filterLeave(type: string) {
-    if (type == Constants.status) {
-      this.leaveService.getUserLeaveCount(this.userId, this.leaveFilter.status, this.attendanceFilter, this.startDate, this.endDate).subscribe((leave: any) => {
-        this.totalLeaveStatus = leave.total;
-      });
-    }
-    else {
-      this.leaveService.getUserLeaveCount(this.userId, this.leaveFilter.type, this.attendanceFilter, this.startDate, this.endDate).subscribe((leave: any) => {
-        this.totalLeaveType = leave.total;
-      });
-    }
+            if (userLeave.type === 'casual') {
+              this.leaveDetail.casual += 1;
+            } else {
+              this.leaveDetail.annual += 1;
+            }
+          }
+        });
   }
+});
+}
 
-  getCounts() {
-    this.getTotalAttendance();
-    this.getTotalAbsent();
-    this.getStatusTypeTotal();
-    this.getLeaveTypeTotal();
-  }
+getCounts() {
+  this.getTotalAttendance();
+  this.getTotalAbsent();
+  this.getLeaveDetail();
+}
 
-  getTotalAttendance() {
-    this.attendanceService.getUserAttendanceCount(this.userId, true, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
-      this.totalAttendance = attendance.total;
-    });
-  }
+getTotalAttendance() {
+  this.attendanceService.getUserAttendanceCount(this.userId, true, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
+    this.totalAttendance = attendance.total;
+  });
+}
 
-  getTotalAbsent() {
-    this.attendanceService.getUserAttendanceCount(this.userId, false, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
-      this.totalAbsent = attendance.total;
-    });
-  }
+getTotalAbsent() {
+  this.attendanceService.getUserAttendanceCount(this.userId, false, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
+    this.totalAbsent = attendance.total;
+  });
+}
 
-  getStatusTypeTotal() {
-    this.leaveService.getUserLeaveCount(this.userId, this.leaveFilter.status, this.attendanceFilter, this.startDate, this.startDate).subscribe((leave: any) => {
-      this.totalLeaveStatus = leave.total;
-    });
+filterAttendance() {
+  if (this.attendanceFilter.type != dateType.custom) {
+    this.attendanceFilter.endDate = '';
+    this.attendanceFilter.startDate = '';
+    this.startDate = '';
+    this.endDate = '';
+    this.getCounts();
   }
+}
 
-  getLeaveTypeTotal() {
-    this.leaveService.getUserLeaveCount(this.userId, this.leaveFilter.type, this.attendanceFilter, this.startDate, this.startDate).subscribe((leave: any) => {
-      this.totalLeaveType = leave.total;
-    });
-  }
+/**
+ * Checkin user
+ */
+checkIn() {
+  this.showLoader();
+  this.attendanceService.checkIn().subscribe((result: any) => {
+    this.hideLoader();
+    this.alertService.successToastr(`Good Morning ${this.fullName}!`, false);
+  }, error => {
+    this.hideLoader();
+    this.alertService.warningToastr("Already Clocked In", false);
+  });
+}
 
-  filterAttendance() {
-    if (this.attendanceFilter.type != dateType.custom) {
-      this.attendanceFilter.endDate = '';
-      this.attendanceFilter.startDate = '';
-      this.startDate = '';
-      this.endDate = '';
-      this.getCounts();
-    }
-  }
+/**
+ * Checkout user
+ */
+checkOut() {
+  this.showLoader();
+  this.attendanceService.checkOut().subscribe((result: any) => {
+    this.hideLoader();
+    this.alertService.successToastr(`Good Night ${this.fullName}!`, false);
+  }, error => {
+    this.hideLoader();
+    this.alertService.warningToastr("Already Checekd Out", false);
+  });
+}
 
-  /**
-   * Checkin user
-   */
-  checkIn() {
-    this.showLoader();
-    this.attendanceService.checkIn().subscribe((result: any) => {
-      this.hideLoader();
-      this.alertService.successToastr(`Good Morning ${this.fullName}!`, false);
-    }, error => {
-      this.hideLoader();
-      this.alertService.warningToastr("Already Clocked In", false);
-    });
-  }
+/**
+ * Start break time
+ */
+breakStart() {
+  this.showLoader();
+  this.attendanceService.startBreak().subscribe((result: any) => {
+    this.hideLoader();
+    this.alertService.successToastr(`See you soon ${this.fullName}!`, false);
+  }, error => {
+    this.hideLoader();
+    this.alertService.warningToastr("Break Started already", false);
+  });
+}
 
-  /**
-   * Checkout user
-   */
-  checkOut() {
-    this.showLoader();
-    this.attendanceService.checkOut().subscribe((result: any) => {
-      this.hideLoader();
-      this.alertService.successToastr(`Good Night ${this.fullName}!`, false);
-    }, error => {
-      this.hideLoader();
-      this.alertService.warningToastr("Already Checekd Out", false);
-    });
-  }
+/**
+ * End break time
+ */
+breakEnd() {
+  this.showLoader();
+  this.attendanceService.endBreak().subscribe((result: any) => {
+    this.hideLoader();
+    this.alertService.successToastr(`Welcome back ${this.fullName}!`, false);
+  }, error => {
+    this.hideLoader();
+    this.alertService.warningToastr("Break Ended already", false);
+  });
+}
 
-  /**
-   * Start break time
-   */
-  breakStart() {
-    this.showLoader();
-    this.attendanceService.startBreak().subscribe((result: any) => {
-      this.hideLoader();
-      this.alertService.successToastr(`See you soon ${this.fullName}!`, false);
-    }, error => {
-      this.hideLoader();
-      this.alertService.warningToastr("Break Started already", false);
-    });
-  }
+/**
+ * Show loader
+ */
+showLoader() {
+  this.loaderService.show();
+}
 
-  /**
-   * End break time
-   */
-  breakEnd() {
-    this.showLoader();
-    this.attendanceService.endBreak().subscribe((result: any) => {
-      this.hideLoader();
-      this.alertService.successToastr(`Welcome back ${this.fullName}!`, false);
-    }, error => {
-      this.hideLoader();
-      this.alertService.warningToastr("Break Ended already", false);
-    });
-  }
-
-  /**
-   * Show loader
-   */
-  showLoader() {
-    this.loaderService.show();
-  }
-
-  /**
-   * Hide loader
-   */
-  hideLoader() {
-    this.loaderService.hide();
-  }
+/**
+ * Hide loader
+ */
+hideLoader() {
+  this.loaderService.hide();
+}
 }

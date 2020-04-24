@@ -59,6 +59,15 @@ export class UserService {
     }
 
     /**
+* Update User 
+* @param user it the object to update the data
+*/
+    changePassword(user:any) {
+        const url = `${this.user}/${ApiUrl.changePassword}`;
+        return this.RequestService.updateData(url, user);
+    }
+
+    /**
   * Delete User by id  
   * @param id is to delete the user on base of id
   */

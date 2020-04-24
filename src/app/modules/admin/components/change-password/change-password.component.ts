@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService, LoaderService  } from 'src/app/core/services/index';
+import { AlertService, LoaderService, UserService  } from 'src/app/core/services';
 import { changePassword } from "src/app/models/change-password";
 
 @Component({
@@ -16,14 +16,23 @@ export class ChangePasswordComponent {
     constructor(
       private alertService: AlertService,
       private loaderService: LoaderService,
+      private userService: UserService,
   
     ) {
       this.model = new changePassword();
-  
     }
   
     ngOnInit() {
   
+    }
+
+    changePassword(){
+      this.model
+      this.userService.changePassword(this.model).subscribe(res=>{
+
+      },error=>{
+
+      })
     }
 
     /**

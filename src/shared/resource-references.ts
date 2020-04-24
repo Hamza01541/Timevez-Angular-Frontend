@@ -13,6 +13,7 @@ export class ApiUrl {
     static register = `register`;
     static update = `update`;
     static delete = `delete`;
+    static changePassword = `/changePassword`;
     static add = `add`;
     static attendance = `attendance`;
     static detail = `detail`;

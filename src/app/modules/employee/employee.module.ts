@@ -11,7 +11,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { EmployeeRoutingModule } from './employee.routing.module';
 import {
-    EmployeeIndexComponent,
     EmployeeRootComponent,
     DashboardComponent,
     timesheetComponent,
@@ -25,7 +24,6 @@ import { SharedModule } from '.././../../shared/shared.module';
 
 @NgModule({
     declarations: [
-        EmployeeIndexComponent,
         EmployeeRootComponent,
         DashboardComponent,
         timesheetComponent,

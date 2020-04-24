@@ -11,8 +11,6 @@
                 </g>
               </svg> <span class="sr-only">Sign In</span>
         </h1>
-        <p> Don't have a account? <a href="auth-signup.html">Create One</a>
-        </p>
     </header>
     <form class="auth-form" style="width: 100%;" name="loginForm" #loginForm="ngForm">
         <div class="form-group">
@@ -39,17 +37,7 @@
             <button class="btn btn-lg btn-primary btn-block" (click)="login()" [disabled]="loginForm.invalid"
                 type="submit">Sign In</button>
         </div>
-        <div class="form-group text-center">
-            <div class="custom-control custom-control-inline custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="remember-me"> <label
-                    class="custom-control-label" for="remember-me">Keep me sign in</label>
-            </div>
-        </div>
     </form>
-    <div class="text-center pt-3">
-        <a href="auth-recovery-username.html" class="link">Forgot Username?</a> <span class="mx-2">·</span> <a
-            href="auth-recovery-password.html" class="link">Forgot Password?</a>
-    </div>
-    <footer class="auth-footer"> © 2018 All Rights Reserved. <a>Privacy</a> and <a >Terms</a>
+    <footer class="auth-footer"> © 2020 All Rights Reserved. <a>Privacy</a> and <a >Terms</a>
     </footer>
 </main>
