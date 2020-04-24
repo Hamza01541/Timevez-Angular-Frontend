@@ -52,27 +52,38 @@ export class DashboardComponent implements OnInit {
 
   getCounts() {
     this.getTotalUsers();
-    this.getTotalPresent();
-    this.getTotalAbsent();
     this.getTotalLeave();
   }
 
   getTotalUsers() {
     this.userService.getTotalUsers(this.attendanceFilter, this.startDate, this.endDate).subscribe((users: any) => {
       this.totalUsers = users.total;
+      this.getTotalPresent();
     });
   }
 
   getTotalPresent() {
     this.attendanceService.getTotalAttendance(this.attendanceFilter, true, this.startDate, this.endDate).subscribe((present: any) => {
       this.totalPresent = present.total;
+      this.getTotalAbsent();
     });
   }
 
+  /**
+   * Get total absent users for current date.
+   */
   getTotalAbsent() {
-    this.attendanceService.getTotalAttendance(this.attendanceFilter, false, this.startDate, this.endDate).subscribe((absent: any) => {
-      this.totalAbsent = absent.total;
-    });
+//     let DayDifference = Math.abs((new Date (this.startDate).valueOf() - new Date (this.endDate).valueOf())/(24*60*60*1000));
+
+// if(!DayDifference){
+//   DayDifference = 1;
+// }
+
+  this.totalAbsent = this.totalUsers - this.totalPresent * 1;
+
+  if(this.totalAbsent < 1){
+    this.totalAbsent = 0;
+  }
   }
 
   getTotalLeave() {

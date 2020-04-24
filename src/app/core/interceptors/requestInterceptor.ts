@@ -23,7 +23,6 @@ export class RequestInterceptor implements HttpInterceptor {
         request = this.setRequestHeader(request);
         console.log("Interceptor Worked");
         return next.handle(request).pipe(map((response: HttpEvent<any>) => {
-          
             return response;
         }),
             catchError((error: HttpErrorResponse) => {
@@ -31,8 +30,7 @@ export class RequestInterceptor implements HttpInterceptor {
                     setTimeout(() => {
                         this.router.navigate(['login'], { queryParams: { logout: true } });
                     }, 100);
-                } else {
-                }
+                } 
                 return throwError(error);
             })
         );

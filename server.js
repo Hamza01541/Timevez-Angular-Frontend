@@ -11,7 +11,6 @@ const app = express();
 app.use(express.static('./dist/timevez'));
 
 app.get('/*', function(req,res) {
-    res.cookie('testingVars', process.env.testVar);
     res.sendFile(path.join(__dirname,'/dist/timevez/index.html'));
 });
 

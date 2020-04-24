@@ -22,15 +22,14 @@
               <p class="lead">
                 <span class="font-weight-bold">Hi, {{fullName}}.</span>
               </p>
-              <div class="ml-auto">
-                <!-- .dropdown -->
+              <!-- <div class="ml-auto">
                 <div class="dropdown">
                   <select class="custom-select" id="attendanceType" name="attendanceType" (change)="filterAttendance()"
                     [(ngModel)]="attendanceFilter.type">
                     <option *ngFor="let type of attendanceTypes" [value]="type.value">{{type.name}}
                     </option>
                   </select>
-                </div><!-- /.dropdown -->
+                </div>
                 <div [hidden]="attendanceFilter.type !== 'custom'">
                   <div class="form-group">
                     <input placeholder="Select Start Date" [(ngModel)]="attendanceFilter.startDate" name="checkIndate"
@@ -45,7 +44,7 @@
                   </div>
                 </div>
 
-              </div>
+              </div> -->
             </div>
           </header><!-- /.page-title-bar -->
           <!-- .page-section -->
@@ -62,7 +61,7 @@
                       <a class="metric metric-bordered align-items-center">
                         <h2 class="metric-label"> User </h2>
                         <p class="metric-value h3">
-                          <sub><i class="oi oi-people"></i></sub> <span class="value">{{totalUsers}}</span>
+                          <sub><i class="fas fa-users"></i></sub> <span class="value">{{totalUsers}}</span>
                         </p>
                       </a> <!-- /.metric -->
                     </div><!-- /metric column -->
@@ -72,7 +71,7 @@
                       <a class="metric metric-bordered align-items-center">
                         <h2 class="metric-label"> Present </h2>
                         <p class="metric-value h3">
-                          <sub><i class="oi oi-fork"></i></sub> <span class="value">{{totalPresent}}</span>
+                          <sub><i class="fas fa-user-clock"></i></sub><span class="value">{{totalPresent}}</span>
                         </p>
                       </a> <!-- /.metric -->
                     </div><!-- /metric column -->
@@ -82,7 +81,7 @@
                       <a class="metric metric-bordered align-items-center">
                         <h2 class="metric-label"> Absent </h2>
                         <p class="metric-value h3">
-                          <sub><i class="fa fa-tasks"></i></sub> <span class="value">{{totalAbsent}}</span>
+                          <sub><i class="oi oi-media-record text-warning"></i></sub>  <span class="value">{{totalAbsent}}</span>
                         </p>
                       </a> <!-- /.metric -->
                     </div><!-- /metric column -->

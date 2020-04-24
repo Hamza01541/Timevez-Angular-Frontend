@@ -21,12 +21,12 @@ export class ProfileComponent implements OnInit {
     ngOnInit() {
         let currentUser = this.storageService.get(Constants.currentUser);
         this.role = `${currentUser.role}`;
-        this.getuserDetail(currentUser.userId)
+        this.getuserDetail(currentUser.userId);
     }
 
-    getuserDetail(Id) {
-        this.userService.getById(Id).subscribe((user: any) => {
-            this.user = user.data;
+    getuserDetail(userId:string) {
+        this.userService.getById(userId).subscribe((user: any) => {
+            this.user = user;
         });
     }
 }

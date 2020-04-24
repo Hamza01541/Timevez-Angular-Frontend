@@ -42,7 +42,6 @@ export class UserListComponent implements OnInit {
     endDate: string;
     userTabs = UserTabs;
 
-
     attendanceTypes: any[] = [
         { value: dateType.currentDate, name: 'Current Date' },
         { value: dateType.currentMonth, name: 'Current Month' },

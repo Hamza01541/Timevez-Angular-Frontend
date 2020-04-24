@@ -15,12 +15,8 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import {
-    AdminIndexComponent,
     AdminRootComponent,
-    UserFormComponent,
     UserListComponent,
-    AttendanceFormComponent,
-    AttendanceListComponent,
     DashboardComponent,
     ChangePasswordComponent,
     ProfileComponent
@@ -33,12 +29,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 @NgModule({
     declarations: [
-        AdminIndexComponent,
         AdminRootComponent,
-        UserFormComponent,
         UserListComponent,
-        AttendanceFormComponent,
-        AttendanceListComponent,
         ChangePasswordComponent,
         DashboardComponent,
         ProfileComponent
