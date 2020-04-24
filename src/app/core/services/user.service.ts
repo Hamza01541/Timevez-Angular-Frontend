@@ -89,8 +89,8 @@ export class UserService {
      * Total number of users
      * It will return the total number of users
      */
-    getTotalUsers(model,startDate,endDate) {
-        const url = `${this.user}/${ApiUrl.totalCount}?type=${model.type}&startDate=${startDate}&endDate=${endDate}`;
+    getTotalUsers(filterType:string ,endDate?:string) {
+        const url = `${this.user}/${ApiUrl.totalCount}?type=${filterType}&endDate=${endDate}`;
         return this.RequestService.getData(url);
     }
 

@@ -77,12 +77,12 @@ export class LeaveService {
     }
 
 
-    getUserLeave(userId, pageNumber, leave: string, startDate:string, endDate:string, limit:number = 10) {
+    getUserLeave(userId, pageNumber, leave: string, startDate?:string, endDate?:string, limit:number = 10) {
         const url = `${this.leave}/${ApiUrl.pagedUserLeaves}?userId=${userId}&pageNo=${pageNumber}&type=${leave}&startDate=${startDate}&endDate=${endDate}&limit=${limit}`;
         return this.RequestService.getData(url);
     }
 
-    getUserLeaveCount(userId, status, model,startDate,endDate) {
+    getUserLeaveCount(userId:string, status:string, model,startDate:string,endDate:string) {
         const url = `${this.leave}/${ApiUrl.totalCountByUserId}?userId=${userId}&status=${status}&type=${model.type}&startDate=${startDate}&endDate=${endDate}`;
         return this.RequestService.getData(url);
     }

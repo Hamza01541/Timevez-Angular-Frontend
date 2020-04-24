@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getTotalUsers() {
-    this.userService.getTotalUsers(this.attendanceFilter, this.startDate, this.endDate).subscribe((users: any) => {
+    this.userService.getTotalUsers(this.attendanceFilter.type, this.endDate).subscribe((users: any) => {
       this.totalUsers = users.total;
       this.getTotalPresent();
     });

@@ -16,20 +16,7 @@
                 <span class="font-weight-bold">Hi, {{fullName}}.</span>
               </p>
               <div class="ml-auto">
-                <div class="dropdown">
-                  <select class="custom-select" id="leaveStatusType" name="leaveStatusType" (change)="filterLeave('status')"
-                    [(ngModel)]="leaveFilter.status">
-                    <option *ngFor="let leave of leaveStatuses" [value]="leave.value">{{leave.name}}
-                    </option>
-                  </select>
-                </div><!-- /.dropdown -->
-                <div class="dropdown">
-                  <select class="custom-select" id="leaveType" name="leaveType" (change)="filterLeave('type')"
-                    [(ngModel)]="leaveFilter.type">
-                    <option *ngFor="let leave of leaveType" [value]="leave.value">{{leave.name}}
-                    </option>
-                  </select>
-                </div><!-- /.dropdown -->
+               
                 <!-- .dropdown -->
                 <div class="dropdown">
                   <select class="custom-select" id="attendanceType" name="attendanceType" (change)="filterAttendance()"
