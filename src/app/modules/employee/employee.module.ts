@@ -13,7 +13,7 @@ import { EmployeeRoutingModule } from './employee.routing.module';
 import {
     EmployeeRootComponent,
     DashboardComponent,
-    timesheetComponent,
+    HistoryComponent,
     LeaveComponent,
     ChangePasswordComponent,
     ProfileComponent
@@ -26,7 +26,7 @@ import { SharedModule } from '.././../../shared/shared.module';
     declarations: [
         EmployeeRootComponent,
         DashboardComponent,
-        timesheetComponent,
+        HistoryComponent,
         LeaveComponent,
         ChangePasswordComponent,
         ProfileComponent

@@ -1,0 +1,191 @@
+<div class="app">
+  <aside class="app-aside app-aside-expand-md app-aside-light"></aside>
+  <main class="app-main">
+    <div class="wrapper">
+      <div class="page">
+        <div class="page-inner">
+          <div class="page-section">
+            <!-- .card -->
+            <div class="card card-fluid">
+              <div class="sidebar-section sidebar-section-fill">
+                <h1 class="page-title">
+                  <i class="far fa-building text-muted mr-2"></i> History </h1>
+                <p class="text-muted"> Employee details </p>
+
+                <!-- nav-tabs -->
+                <div class="nav-scroller border-bottom">
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link active show" data-toggle="tab" href="#tab-1">Attendance</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#tab-2">Leave</a>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- attendance-tab -->
+                <div class="tab-content pt-4" id="clientDetailsTabs">
+                  <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <div class="input-group input-group-alt">
+                          <!-- Filter dropdown -->
+                          <div class="input-group-prepend">
+                            <select class="custom-select" id="attendanceType" name="attendanceType"
+                              (change)="filterAttendance()" [(ngModel)]="attendanceFilter.type">
+                              <option *ngFor="let type of attendanceTypes" [value]="type.value">{{type.name}}
+                              </option>
+                            </select>
+                          </div>
+                          <!-- Filter search box -->
+                          <div class="input-group has-clearable">
+                            <button id="clear-search" type="button" class="close" aria-label="Close"><span
+                                aria-hidden="true"><i class="fa fa-times-circle"></i></span></button>
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                            </div><input id="table-search" type="text" class="form-control"
+                              placeholder="Search products">
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- attendance-table -->
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th style="min-width:320px">Date</th>
+                              <th> Checkin </th>
+                              <th> Break Start </th>
+                              <th> Break End </th>
+                              <th> Checkout </th>
+                              <th> Time Spent </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let attendance of userAttendance">
+                              <td class="align-middle col-checker">
+                                <div class="custom-control custom-control-nolabel custom-checkbox">
+                                  <input type="checkbox" class="custom-control-input" name="selectedRow[]" id="p3">
+                                  <label class="custom-control-label" for="p3"></label>
+                                </div>
+                              </td>
+                              <td style="min-width:320px"> <a>{{attendance.date | date : 'EEEE MMM d, y'}} </a></td>
+                              <td class="align-middle"> {{attendance.checkIn | date:'shortTime'}} </td>
+                              <td class="align-middle"> {{attendance.breakStartTime | date:'shortTime'}} </td>
+                              <td class="align-middle"> {{attendance.breakEndTime | date:'shortTime'}} </td>
+                              <td class="align-middle"> {{attendance.checkOut | date:'shortTime'}} </td>
+                              <td class="align-middle"> {{getAvailableTime(attendance)}} </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- .pagination -->
+                      <ul class="pagination justify-content-center mt-4" *ngFor="let count of totalCounts">
+                        <li class="page-item" *ngIf="count > 1">
+                          <a class="page-link" (click)="getPageNumber(count)">{{count}}</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Leave-tab -->
+                  <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <div class="input-group input-group-alt">
+                          <!-- Filter dropdown -->
+                          <div class="input-group-prepend">
+                            <select class="custom-select" id="attendanceType" name="attendanceType"
+                              (change)="filterAttendance()" [(ngModel)]="attendanceFilter.type">
+                              <option *ngFor="let type of attendanceTypes" [value]="type.value">{{type.name}}
+                              </option>
+                            </select>
+                          </div>
+                          <!-- Filter search box -->
+                          <div class="input-group has-clearable">
+                            <button id="clear-search" type="button" class="close" aria-label="Close"><span
+                                aria-hidden="true"><i class="fa fa-times-circle"></i></span></button>
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                            </div><input id="table-search" type="text" class="form-control"
+                              placeholder="Search products">
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Leave-table -->
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th style="min-width:320px">Date</th>
+                              <th> Check In </th>
+                              <th> Break Start </th>
+                              <th> Break End </th>
+                              <th> Check Out </th>
+                              <th> Total Hours </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let attendance of userAttendance">
+                              <td class="align-middle col-checker">
+                                <div class="custom-control custom-control-nolabel custom-checkbox">
+                                  <input type="checkbox" class="custom-control-input" name="selectedRow[]" id="p3">
+                                  <label class="custom-control-label" for="p3"></label>
+                                </div>
+                              </td>
+                              <td style="min-width:320px"> <a>{{attendance.date | date : 'fullDate'}} </a></td>
+                              <td class="align-middle"> {{attendance.checkIn | date:'shortTime'}} </td>
+                              <td class="align-middle"> {{attendance.breakStartTime | date:'shortTime'}} </td>
+                              <td class="align-middle"> {{attendance.breakEndTime | date:'shortTime'}} </td>
+                              <td class="align-middle"> {{attendance.checkOut | date:'shortTime'}} </td>
+                              <td class="align-middle"> {{getAvailableTime(attendance)}} </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- .pagination -->
+                      <ul class="pagination justify-content-center mt-4">
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#" tabindex="-1"><i class="fa fa-lg fa-angle-left"></i></a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#" tabindex="-1">...</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="#">13</a>
+                        </li>
+                        <li class="page-item active">
+                          <a class="page-link" href="#">14</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="#">15</a>
+                        </li>
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#" tabindex="-1">...</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="#">24</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="#"><i class="fa fa-lg fa-angle-right"></i></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

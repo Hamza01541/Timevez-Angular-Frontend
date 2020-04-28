@@ -3,14 +3,16 @@ import { AlertService, LoaderService, AttendanceService } from 'src/app/core/ser
 import { attendanceFilter, dateType } from "src/app/models/filter";
 import { Constants } from 'src/shared/constants';
 import { UtilityService } from 'src/shared/services/utility.service';
+import * as moment from 'moment';
+import {Attendence, Leave} from 'src/app/models';
 
 @Component({
-  selector: 'timesheet-component',
-  templateUrl: './timesheet.component.html',
-  styleUrls: ['./timesheet.component.css']
+  selector: 'history-component',
+  templateUrl: './history.component.html',
+  styleUrls: ['./history.component.css']
 })
 
-export class timesheetComponent implements OnInit {
+export class HistoryComponent implements OnInit {
 
   fullName: string;
   userAttendance: any = [];
@@ -23,12 +25,12 @@ export class timesheetComponent implements OnInit {
   endDate: string;
 
   attendanceTypes: any[] = [
-    { value: dateType.currentDate, name: 'Current Date' },
-    { value: dateType.currentMonth, name: 'Current Month' },
-    { value: dateType.lastMonth, name: 'Last Month' },
-    { value: dateType.currentYear, name: 'Current Year' },
-    { value: dateType.lastYear, name: 'Last Year' },
-    { value: dateType.custom, name: 'Custom' }
+    { value: dateType.currentDate, name: 'Today' },
+    { value: dateType.currentMonth, name: 'This month' },
+    { value: dateType.lastMonth, name: 'Last month' },
+    { value: dateType.currentYear, name: 'This year' },
+    { value: dateType.lastYear, name: 'Last year' },
+    // { value: dateType.custom, name: 'Custom' }
   ];
 
   constructor(
@@ -53,6 +55,7 @@ export class timesheetComponent implements OnInit {
     this.attendanceService.getUserAttendance(id, this.pageNumber, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
       this.userAttendance = attendance.data;
       let totalPages = Math.ceil(attendance.total / 10);
+
       this.totalCounts = [];
       if (totalPages > 0) {
         for (let i = 1; i <= totalPages; i++) {
@@ -83,15 +86,18 @@ export class timesheetComponent implements OnInit {
     }
   }
 
-  getAvailableTime(attendance) {
+  /**
+   * Get time diffence from checkin, checkout, break start time and break end time to calculate time spent in office.
+   * @param {Attendence} attendance
+   */
+  getAvailableTime(attendance: Attendence) {
     var timeDiff = new Date(attendance.checkOut).getTime() - new Date(attendance.checkIn).getTime();
 
     if (attendance.breakStartTime && attendance.breakEndTime) {
       var breakDiff = new Date(attendance.breakEndTime).getTime() - new Date(attendance.breakStartTime).getTime();
       timeDiff = timeDiff - breakDiff;
     }
-    var minutes = Math.floor((timeDiff % 60000) / 1000).toFixed(0) //in minutes
-    var hours = Math.floor(timeDiff / 3600 / 1000); //in hours
-    return hours + " hr " + minutes + " min ";
+
+    return moment.utc(timeDiff).format("hh:mm:ss");
   }
 }

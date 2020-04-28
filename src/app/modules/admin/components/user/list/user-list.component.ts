@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService, LoaderService, UserService, AttendanceService, LeaveService } from 'src/app/core/services';
-import { signUp, attendence, leave } from "src/app/models";
+import { User, Attendence, Leave } from "src/app/models";
 import { attendanceFilter, dateType } from "src/app/models/filter";
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { Constants } from 'src/shared/constants';
@@ -23,9 +23,9 @@ export class UserListComponent implements OnInit {
 
     public config: PerfectScrollbarConfigInterface = { suppressScrollX: false };
 
-    model: signUp;
-    modelAttendance: attendence;
-    modelLeave: leave;
+    model: User;
+    modelAttendance: Attendence;
+    modelLeave: Leave;
     attendanceFilter: attendanceFilter;
     allUsers: any[];
     totalAttendanceCounts: number[];
@@ -73,9 +73,9 @@ export class UserListComponent implements OnInit {
         private loaderService: LoaderService,
         private utilityService: UtilityService,
         public dialog: MatDialog) {
-        this.model = new signUp();
-        this.modelAttendance = new attendence();
-        this.modelLeave = new leave();
+        this.model = new User();
+        this.modelAttendance = new Attendence();
+        this.modelLeave = new Leave();
         this.attendanceFilter = new attendanceFilter();
     }
 
@@ -86,28 +86,23 @@ export class UserListComponent implements OnInit {
     }
 
     save(type: string) {
-        if (type == Constants.attendance) {
-            this.showLoader();
-            this.operation = this.id ? Constants.updateData : Constants.addData;
-            this.showLoader();
-            this.attendanceService[this.operation](this.modelAttendance).subscribe(res => {
-                this.hideLoader();
-                jQuery('#attendanceNewModal').modal('hide');
-                this.alertService.successToastr(`SuccessFully ${this.operation} Of Attendance.`, false);
-            }, error => {
-                this.hideLoader();
-                this.alertService.errorToastr(`Error in ${this.operation} Attendance.`, false);
-                jQuery('#attendanceNewModal').modal('hide');
-            });
-        }
-        else if (type == Constants.user) {
-            this.showLoader();
-            this.operation = this.id ? Constants.updateData : Constants.addData;
+        this.operation = this.id ? Constants.updateData : Constants.addData;
+
+        // Add/Update user
+        if (type === Constants.user) {
             this.showLoader();
             this.userService[this.operation](this.model).subscribe(res => {
                 this.hideLoader();
                 jQuery('#userModal').modal('hide');
-                this.getAllUser();
+
+                if (this.model._id) {
+                    let currentIndex = this.allUsers.findIndex(user => user._id === this.model._id);
+                    this.allUsers[currentIndex] = this.model;
+                    this.selectedUser = this.model;
+                } else {
+                    this.allUsers.push(this.model);
+                }
+
                 this.alertService.successToastr(`SuccessFully ${this.operation} Of User.`, false);
             }, error => {
                 this.hideLoader();
@@ -115,23 +110,51 @@ export class UserListComponent implements OnInit {
                 this.alertService.errorToastr(`Error in ${this.operation} User.`, false);
             });
         }
-        else {
-            this.modelLeave.userId = this.selectedUser._id;
+        // Add/Update user attendance
+        else if (type == Constants.attendance) {
+            this.modelAttendance.userId = this.selectedUser._id;
+
             this.showLoader();
-            this.operation = this.id ? Constants.updateData : Constants.addData;
+            this.attendanceService[this.operation](this.modelAttendance).subscribe(res => {
+                this.hideLoader();
+                jQuery('#attendanceNewModal').modal('hide');
+
+console.log("this.modelAttendance:",this.modelAttendance);
+
+                if (this.modelAttendance._id) {
+                    let currentIndex = this.userAttendance.data.findIndex(attendance => attendance._id === this.modelAttendance._id);
+                    this.userAttendance.data[currentIndex] = this.modelAttendance;
+                } else {
+                    this.userAttendance.data.push(this.modelAttendance);
+                }
+
+                this.alertService.successToastr(`SuccessFully ${this.operation} Of Attendance.`, false);
+            }, error => {
+                this.hideLoader();
+                this.alertService.errorToastr(`Error in ${this.operation} Attendance.`, false);
+                jQuery('#attendanceNewModal').modal('hide');
+            });
+        }
+        else { // Add/Update user Leave
+            this.modelLeave.userId = this.selectedUser._id;
             this.showLoader();
             this.leaveService[this.operation](this.modelLeave).subscribe(res => {
                 this.hideLoader();
                 jQuery('#leaveNewModal').modal('hide');
-                this.getAllUser();
-                this.alertService.successToastr(`SuccessFully ${this.operation} Of Leave.`, false);
 
+                if (this.modelLeave._id) {
+                    let currentIndex = this.userLeave.data.findIndex(leave => leave._id === this.modelLeave._id);
+                    this.userLeave.data[currentIndex] = this.modelLeave;
+                } else {
+                    this.userLeave.data.push(this.modelLeave);
+                }
+
+                this.alertService.successToastr(`SuccessFully ${this.operation} Of Leave.`, false);
             }, error => {
                 this.hideLoader();
                 jQuery('#leaveNewModal').modal('hide');
                 this.alertService.errorToastr(`Error in ${this.operation} Leave.`, false);
             });
-
         }
     }
 
@@ -157,12 +180,14 @@ export class UserListComponent implements OnInit {
 
     getAllUser() {
         this.userService.getData().subscribe((users: any) => {
-            let employees = users.filter(x => x.role == Role.Employee)
-            this.selectedUser = employees[0];
-            this.allUsers = employees;
-            this.getUserAttendance(this.selectedUser._id);
-            this.getUserLeave(this.selectedUser._id);
+            let employees = users.filter(x => x.role == Role.Employee);
 
+            if (employees.length) {
+                this.selectedUser = employees[0];
+                this.allUsers = employees;
+                this.getUserAttendance(this.selectedUser._id);
+                this.getUserLeave(this.selectedUser._id);
+            }
         });
     }
 
@@ -171,12 +196,12 @@ export class UserListComponent implements OnInit {
         if (type == Constants.attendance) {
             this.startDate = '';
             this.endDate = '';
-            
-            if(this.attendanceFilter.startDate){
+
+            if (this.attendanceFilter.startDate) {
                 this.startDate = this.utilityService.getCurrentDate(this.attendanceFilter.startDate);
             }
 
-            if(this.attendanceFilter.endDate){
+            if (this.attendanceFilter.endDate) {
                 this.endDate = this.utilityService.getCurrentDate(this.attendanceFilter.endDate);
             }
 

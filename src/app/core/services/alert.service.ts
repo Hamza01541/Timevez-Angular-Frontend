@@ -16,39 +16,7 @@ export class AlertService {
   constructor(
     private router: Router,
     private toastr: ToastrService
-  ) {
-    // clear alert message on route change
-    router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        if (this.keepAfterNavigationChange) {
-          // only keep for a single location change
-          this.keepAfterNavigationChange = false;
-        } else {
-          // clear alert
-          this.alertSubject.next({ type: "", message: "" });
-        }
-      }
-    });
-  }
-
-  info(message: string, keepAfterNavigationChange = false) {
-    this.keepAfterNavigationChange = keepAfterNavigationChange;
-    this.alertSubject.next({ type: 'info', message: message });
-  }
-
-  success(message: string, keepAfterNavigationChange = false) {
-    this.keepAfterNavigationChange = keepAfterNavigationChange;
-    this.alertSubject.next({ type: 'success', message: message });
-  }
-
-  error(message: string, keepAfterNavigationChange = false) {
-    this.keepAfterNavigationChange = keepAfterNavigationChange;
-    this.alertSubject.next({ type: 'error', message: message });
-  }
-
-  getAlertState(): Observable<AlertState> {
-    return this.alertSubject.asObservable();
-  }
+  ) {}
 
   // Toasters
   successToastr(message: string, disableTimeOut: boolean = false) {
@@ -70,7 +38,8 @@ export class AlertService {
   // type = 'success' || 'error' || 'warning'
   showToastr(message: string, type: string, disableTimeOut: boolean) {
     if (message && message.length > 0) {
-      this.toastr[type](message, type, {
+      // this.toastr[type](`${message}`, `${type.charAt(0).toUpperCase() + type.slice(1)}: `, {
+      this.toastr[type](`${message}`, null, {
         disableTimeOut: disableTimeOut,
         timeOut: 3000,
         positionClass: 'toast-top-right',

@@ -1,4 +1,5 @@
-export class leave {
+export class Leave {
+    _id: string;
     type: string;
     description: string;
     startDate: string;

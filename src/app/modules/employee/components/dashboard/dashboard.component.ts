@@ -92,13 +92,13 @@ export class DashboardComponent implements OnInit {
   }
 
   getTotalAttendance() {
-    this.attendanceService.getUserAttendanceCount(this.userId, true, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
+    this.attendanceService.getUserAttendanceCount(this.userId, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
       this.totalAttendance = attendance.total;
     });
   }
 
   getTotalAbsent() {
-    this.attendanceService.getUserAttendanceCount(this.userId, false, this.attendanceFilter, this.startDate, this.endDate).subscribe((attendance: any) => {
+    this.attendanceService.getUserAttendanceCount(this.userId, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
       this.totalAbsent = attendance.total;
     });
   }
@@ -123,7 +123,7 @@ export class DashboardComponent implements OnInit {
       this.alertService.successToastr(`Good Morning ${this.fullName}!`, false);
     }, error => {
       this.hideLoader();
-      this.alertService.warningToastr("Already Clocked In", false);
+      this.alertService.warningToastr(`${error.error.message}`, false);
     });
   }
 
@@ -137,7 +137,7 @@ export class DashboardComponent implements OnInit {
       this.alertService.successToastr(`Good Night ${this.fullName}!`, false);
     }, error => {
       this.hideLoader();
-      this.alertService.warningToastr("Already Checekd Out", false);
+      this.alertService.warningToastr(`${error.error.message}`, false);
     });
   }
 
@@ -151,7 +151,7 @@ export class DashboardComponent implements OnInit {
       this.alertService.successToastr(`See you soon ${this.fullName}!`, false);
     }, error => {
       this.hideLoader();
-      this.alertService.warningToastr("Break Started already", false);
+      this.alertService.warningToastr(`${error.error.message}`, false);
     });
   }
 
@@ -165,7 +165,7 @@ export class DashboardComponent implements OnInit {
       this.alertService.successToastr(`Welcome back ${this.fullName}!`, false);
     }, error => {
       this.hideLoader();
-      this.alertService.warningToastr("Break Ended already", false);
+      this.alertService.warningToastr(`${error.error.message}`, false);
     });
   }
 

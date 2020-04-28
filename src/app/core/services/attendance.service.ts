@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { RequestService } from "./request.service";
 import { ApiUrl } from 'src/shared/resource-references';
+import { Attendence } from "src/app/models";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AttendanceService {
+    attendance:string = `${ApiUrl.attendance}`;
 
     constructor(private RequestService: RequestService) { }
-
-    attendance = `${ApiUrl.attendance}`;
 
     /**
    * Get list of Attendence
@@ -33,7 +33,7 @@ export class AttendanceService {
    * Get Attendence Detail By Id
    * @param id  Returns the Attendence Detail on specific Id
    */
-    getAttendencedDetailById(id) {
+    getAttendencedDetailById(id: string) {
         const url = `${this.attendance}/${ApiUrl.detail}`;
         return this.RequestService.getData(url + id);
     }
@@ -42,7 +42,7 @@ export class AttendanceService {
         * Add Data to Attendece
         * @param attendance is the object to be added 
         */
-    addData(attendance) {
+    addData(attendance: Attendence) {
         const url = `${this.attendance}/${ApiUrl.add}`;
         return this.RequestService.addData(url, attendance)
     }
@@ -51,7 +51,7 @@ export class AttendanceService {
         *Get Data of Attendence By Id
         * @param id Returns the attendence list on Specific Id
         */
-    getById(id) {
+    getById(id: string) {
         const url = `${this.attendance}/${ApiUrl.list}/`;
         return this.RequestService.getData(url + id);
     }
@@ -60,8 +60,8 @@ export class AttendanceService {
         *Update Data of Attendence By Id
         * @param attendance is the object to update the data
         */
-    updateData(attendance) {
-        const url = `${this.attendance}/${ApiUrl.update}/${attendance.id}`;
+    updateData(attendance: Attendence) {
+        const url = `${this.attendance}/${ApiUrl.update}/${attendance._id}`;
         return this.RequestService.updateData(url, attendance);
     }
 
@@ -69,7 +69,7 @@ export class AttendanceService {
           *Delete Data of Attendence By Id
           * @param id is to delete attendence data 
           */
-    deleteData(id) {
+    deleteData(id: string) {
         const url = `${this.attendance}/${ApiUrl.delete}`;
         return this.RequestService.deleteData(url, id);
     }
@@ -78,7 +78,7 @@ export class AttendanceService {
  * Return  attandance 
  * @param pageNumber is to get page based data 
  */
-    getPagedAttendance(pageNumber) {
+    getPagedAttendance(pageNumber: number) {
         const url = `${this.attendance}/${ApiUrl.getPagedAttendances}/${pageNumber}`;
         return this.RequestService.getData(url);
     }
@@ -104,8 +104,8 @@ export class AttendanceService {
      * Total number of attendance
      * It will return the total numer of  absent or present 
      */
-    getTotalAttendance(model, present: boolean, startDate:string, endDate: string) {
-        const url = `${this.attendance}/${ApiUrl.totalCount}?present=${present}&type=${model.type}&startDate=${startDate}&endDate=${endDate}`;
+    getTotalAttendance(filterType: string, startDate: string, endDate: string) {
+        const url = `${this.attendance}/${ApiUrl.totalCount}?type=${filterType}&startDate=${startDate}&endDate=${endDate}`;
         return this.RequestService.getData(url);
     }
 
@@ -118,8 +118,8 @@ export class AttendanceService {
     }
 
 
-    getUserAttendanceCount(userId, present, model, startDate: string, endDate: string) {
-        const url = `${this.attendance}/${ApiUrl.totalCountByUserId}?userId=${userId}&present=${present}&type=${model.type}&startDate=${startDate}&endDate=${endDate}`;
+    getUserAttendanceCount(userId: string, filterType: string, startDate: string, endDate: string) {
+        const url = `${this.attendance}/${ApiUrl.totalCountByUserId}?userId=${userId}&type=${filterType}&startDate=${startDate}&endDate=${endDate}`;
         return this.RequestService.getData(url);
     }
 

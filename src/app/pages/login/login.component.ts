@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       this.checkRole(this.currentUser);
     }
     else {
-      this.userService.logOut();
+      this.userService.logout();
     }
   }
 
@@ -49,7 +49,8 @@ export class LoginComponent implements OnInit {
     },
       error => {
         this.hideLoader();
-        this.alertService.errorToastr("Invalid Email or Password", false);
+        console.log("error:",error.error.message);
+        this.alertService.errorToastr(error.error.message, false);
       });
 
   }

@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 // Admin Components
 import {
     EmployeeRootComponent,
-    timesheetComponent,
+    HistoryComponent,
     DashboardComponent,
     LeaveComponent,
     ChangePasswordComponent,
@@ -18,7 +18,7 @@ const routes: Routes = [
         component: EmployeeRootComponent,
         children: [
             { path: '', redirectTo: "/dashboard", pathMatch: 'full' },
-            { path: 'timesheet', component: timesheetComponent },
+            { path: 'history', component: HistoryComponent },
             { path: 'change-password', component: ChangePasswordComponent },
             { path: 'dashboard', component: DashboardComponent },
             { path: 'leave', component: LeaveComponent },

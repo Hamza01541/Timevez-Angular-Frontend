@@ -7,58 +7,77 @@
                 <div class="page-inner">
                     <div class="page-section">
                         <form class="auth-form" style="width: 100%;" name="form" #form="ngForm">
-                            <div class="input-group-prepend">
-                                <select class="custom-select" id="leaveType" name="leaveType" [(ngModel)]="model.type">
+                            <div class="form-group">
+                                <select class="custom-select" id="leaveType" name="leaveType" [(ngModel)]="leave.type"
+                                    #leaveType="ngModel" required [ngClass]="getValidationClass(leaveType)">
                                     <option [value]="undefined" disabled selected> Select Leave Type</option>
                                     <option *ngFor="let leave of leaveTypes" [value]="leave.value">{{leave.name}}
                                     </option>
                                 </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="leaveType.errors?.required && (leaveType.dirty || leaveType.touched)">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> Leave type is required.
+                                </div>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="date">Start Date</label>
-                                <input placeholder="Select Start Date" [(ngModel)]="model.startDate" name="startDate"
-                                    class="form-control" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1"
-                                    #startDate="ngModel" required>
-                                <owl-date-time #dtPicker1  [pickerType]="'calendar'">
-                                </owl-date-time>
-                                <div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)"
-                                    class="alert alert-danger">
-                                    <label>
-                                        Start Date is Required
-                                    </label>
+                                <input class="form-control" [ngClass]="getValidationClass(startDate)"
+                                    [min]="minStartDate" placeholder="Select Start Date" [(ngModel)]="leave.startDate"
+                                    name="startDate" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1"
+                                    #startDate="ngModel" (dateTimeChange)="startDateSelected()" required>
+                                <owl-date-time #dtPicker1 [pickerType]="'calendar'"></owl-date-time>
+
+                                <div class="invalid-feedback"
+                                    *ngIf="startDate.errors?.required && (startDate.dirty || startDate.touched)">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> Start Date is Required.
+                                </div>
+                                <div class="invalid-feedback" *ngIf="startDate.errors?.owlDateTimeMin">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> End Date must be greater than today.
+                                </div>
+                                <div class="invalid-feedback" *ngIf="startDate.errors?.owlDateTimeParse">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> Date format must be like: mm/dd/yyyy.
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="date">End Date</label>
-                                <input placeholder="Select End Date" [(ngModel)]="model.endDate" name="endDate"
-                                    class="form-control" [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2"
-                                    #endDate="ngModel" required>
-                                <owl-date-time #dtPicker2  [pickerType]="'calendar'">
-                                </owl-date-time>
-                                <div *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)"
-                                    class="alert alert-danger">
-                                    <label>
-                                        End Date is Required
-                                    </label>
+                                <input class="form-control"
+                                    [ngClass]="{'is-valid': leave.endDate, 'is-invalid': endDate.errors?.owlDateTimeMin}"
+                                    [min]="minEndDate" placeholder="Select End Date" [(ngModel)]="leave.endDate"
+                                    name="endDate" [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2"
+                                    #endDate="ngModel" (dateTimeChange)="endDateSelected(endDate)">
+                                <owl-date-time #dtPicker2 [pickerType]="'calendar'"></owl-date-time>
+
+                                <div class="invalid-feedback" *ngIf="endDate.errors?.owlDateTimeMin">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> End Date must be greater than start
+                                    date.
+                                </div>
+                                <div class="invalid-feedback" *ngIf="endDate.errors?.owlDateTimeParse">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> Date format must be like: mm/dd/yyyy.
                                 </div>
                             </div>
+
                             <div class="form-group">
-                                <label>Description About Leave</label>
-                                <div class="form-label-group">
-                                    <textarea id="leaveDescription" style="height: 100px;" name="leaveDescription"
-                                        required class="form-control" #leaveDescription="ngModel"
-                                        [(ngModel)]="model.description"></textarea>
+                                <label>Leave Reason</label>
+                                <textarea id="leaveDescription" style="height: 100px;" name="leaveDescription" required
+                                    class="form-control" #leaveDescription="ngModel" minlength="20"
+                                    [ngClass]="getValidationClass(leaveDescription)"
+                                    [(ngModel)]="leave.description"></textarea>
+
+                                <div class="invalid-feedback"
+                                    *ngIf="leaveDescription.errors?.required && (leaveDescription.dirty || leaveDescription.touched)">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> Leave Reason is Required.
                                 </div>
-                                <div *ngIf="leaveDescription.errors?.required && leaveDescription.touched "
-                                    class="alert alert-danger">
-                                    Description is Required.
+                                <div class="invalid-feedback" *ngIf="leaveDescription.errors?.minlength">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> Leave Reason should be greater than
+                                    20 characters.
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <button type="submit" class="btn btn-primary" (click)="leaveRequest()"
-                                        [disabled]="form.invalid || !model.type">Submit Leave</button>
+                                        [disabled]="form.invalid || !leave.type">Submit Leave</button>
                                 </div>
                             </div>
                         </form>

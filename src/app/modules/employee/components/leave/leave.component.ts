@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService, LoaderService, LeaveService, LocalStorageService } from 'src/app/core/services';
-import { leave } from "src/app/models";
-import { Router, ActivatedRoute } from '@angular/router';
+import { Leave } from "src/app/models";
+import { Router } from '@angular/router';
 import { leaveType, } from "src/app/models/filter";
 import { Constants } from 'src/shared/constants';
 
@@ -12,43 +12,63 @@ import { Constants } from 'src/shared/constants';
 })
 
 export class LeaveComponent implements OnInit {
+  leaveTypes: any[];
+  leave: Leave;
 
-  model: leave;
-
-  leaveTypes: any[] = [
-    { value: leaveType.casual, name: 'Casual' },
-    { value: leaveType.annual, name: 'Annual' },
-  ];
+  // Timepicker Properties
+  minStartDate = new Date();
+  minEndDate = new Date();
 
   constructor(
     private alertService: AlertService,
     private router: Router,
     private loaderService: LoaderService,
     private leaveService: LeaveService,
-    private storageService: LocalStorageService
-
+    private storageService: LocalStorageService,
   ) {
-    this.model = new leave();
-
+    this.leave = new Leave();
   }
 
   ngOnInit() {
     const user = this.storageService.get(Constants.currentUser);
-    this.model.userId = user.userId;
+    this.leave.userId = user.userId;
+    this.leaveTypes = [
+      { value: leaveType.casual, name: 'Casual' },
+      { value: leaveType.annual, name: 'Annual' },
+    ];
   }
 
- 
   /**
      * Request for Leave 
      * It Submit the object to leave Request endpoint
      */
   leaveRequest() {
-    this.leaveService.requestleave(this.model).subscribe((leave: any) => {
+    this.leaveService.requestleave(this.leave).subscribe((leave: any) => {
       this.alertService.successToastr(`Requested Leave  Sucessflly`, false);
       this.router.navigate(['/employee/dashboard']);
     }, error => {
-      this.alertService.errorToastr(`Error In Submission request for leave`, false);
+      if(error && error.error && error.error.message){
+        this.alertService.errorToastr(error.error.message);
+      }
     });
+  }
+
+  startDateSelected(){
+    console.log("startDateSelected()-called");
+      this.minEndDate = new Date(this.leave.startDate);
+      this.leave.endDate = null;
+  }
+  
+  endDateSelected(endDate:any){
+    console.log("endDateSelected()-called");
+  }
+
+  test(param:any){
+    console.log("param:",param);
+  }
+
+  getValidationClass(ele: any){
+     return {'is-valid': ele.valid && ele.value && ele.value.trim().length, 'is-invalid': ele.invalid && (ele.dirty || ele.touched) && (!ele.value || (ele.value && !ele.value.trim().length))};
   }
 
   /**

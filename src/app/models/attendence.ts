@@ -1,4 +1,5 @@
-export class attendence {
+export class Attendence {
+    _id: string;
     checkIn: Date;
     checkOut: Date;
     breakStartTime: Date;

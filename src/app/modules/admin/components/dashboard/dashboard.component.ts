@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getTotalPresent() {
-    this.attendanceService.getTotalAttendance(this.attendanceFilter, true, this.startDate, this.endDate).subscribe((present: any) => {
+    this.attendanceService.getTotalAttendance(this.attendanceFilter.type,  this.startDate, this.endDate).subscribe((present: any) => {
       this.totalPresent = present.total;
       this.getTotalAbsent();
     });
@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getTotalLeave() {
-    this.leaveService.getTotalLeave(this.attendanceFilter, status, this.startDate, this.endDate).subscribe((leave: any) => {
+    this.leaveService.getTotalLeave(this.attendanceFilter.type, status, this.startDate, this.endDate).subscribe((leave: any) => {
       this.totalLeave = leave.total;
     });
   }

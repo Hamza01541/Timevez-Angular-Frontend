@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { RequestService } from "./request.service";
 import { ApiUrl } from 'src/shared/resource-references';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { User } from "src/app/models";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class UserService {
+    user: string = `${ApiUrl.user}`;
 
     constructor(private RequestService: RequestService, private storageService: LocalStorageService, ) { }
-
-    user = `${ApiUrl.user}`;
 
     /**
    * Get User Data 
@@ -26,7 +26,7 @@ export class UserService {
      * Add Data to User
      * @param user is the object to be added
      */
-    addData(user) {
+    addData(user: User) {
         const url = `${this.user}/${ApiUrl.register}`;
         return this.RequestService.addData(url, user);
     }
@@ -35,25 +35,25 @@ export class UserService {
     * User Can Login
     * @param user is the object to Login the User
     */
-    userLogin(user) {
+    userLogin(user: User) {
         const url = `${this.user}/${ApiUrl.login}`;
         return this.RequestService.addData(url, user);
     }
 
     /**
-   * Get User  By Id
-   * @param id Returns the user by Id
-   */
-    getById(id) {
+     * Get User  By Id
+     * @param userId  User id
+     */
+    getById(userId: string) {
         const url = `${this.user}/${ApiUrl.list}/`;
-        return this.RequestService.getData(url + id);
+        return this.RequestService.getData(url + userId);
     }
 
     /**
 * Update User 
 * @param user it the object to update the data
 */
-    updateData(user) {
+    updateData(user: User) {
         const url = `${this.user}/${ApiUrl.update}/${user._id}`;
         return this.RequestService.updateData(url, user);
     }
@@ -62,7 +62,7 @@ export class UserService {
 * Update User 
 * @param user it the object to update the data
 */
-    changePassword(user:any) {
+    changePassword(user: User) {
         const url = `${this.user}/${ApiUrl.changePassword}`;
         return this.RequestService.updateData(url, user);
     }
@@ -71,7 +71,7 @@ export class UserService {
   * Delete User by id  
   * @param id is to delete the user on base of id
   */
-    deleteData(id) {
+    deleteData(id: string) {
         const url = `${this.user}/${ApiUrl.delete}`;
         return this.RequestService.deleteData(url, id);
     }
@@ -80,7 +80,7 @@ export class UserService {
   * Return  role 
   * @param pageNumber is to get page based data 
   */
-    getPagedUsers(pageNumber) {
+    getPagedUsers(pageNumber: number) {
         const url = `${this.user}/${ApiUrl.getPagedUsers}/${pageNumber}`;
         return this.RequestService.getData(url);
     }
@@ -89,18 +89,19 @@ export class UserService {
      * Total number of users
      * It will return the total number of users
      */
-    getTotalUsers(filterType:string ,endDate?:string) {
+    getTotalUsers(filterType: string, endDate?: string) {
         const url = `${this.user}/${ApiUrl.totalCount}?type=${filterType}&endDate=${endDate}`;
         return this.RequestService.getData(url);
     }
 
-     /**
-     * Return the User that matched the value
-     * @param pageNo is the Numer of page
-     * @param search is the search string that user will type
-     */
-    searchUser(pageNo, search) {
-        const url = `${this.user}/${ApiUrl.getPagedUsers}?pageNo=${pageNo}&search=${search}`;
+    /**
+    * Filter user records.
+    * @param pageNumber Current Page number
+    * @param {string} search Entered text in search box to filter data.
+    * @returns Filtered records
+    */
+    searchUser(pageNumber: number, search: string) {
+        const url = `${this.user}/${ApiUrl.getPagedUsers}?pageNo=${pageNumber}&search=${search}`;
         return this.RequestService.getData(url);
     }
 
@@ -108,7 +109,7 @@ export class UserService {
    * Logout The user 
    * It will remove the current user details from local storage
    */
-    logOut() {
+    logout() {
         this.storageService.remove('currentUser');
     }
 }
