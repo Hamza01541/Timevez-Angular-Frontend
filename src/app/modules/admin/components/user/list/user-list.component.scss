@@ -12,18 +12,3 @@ z-index: 999;
     z-index: 1050 !important;
 }
 
-.right_align{
-    align-self: flex-end;
-}
-
-i{
-  cursor: pointer;
-}
-
-:disabled{
-    cursor: not-allowed;
-}
-
-.dataTables_empty{
-    text-align-last: center;
-}

@@ -22,7 +22,6 @@ export class ConfirmationDialogueComponent implements OnInit {
 
     ngOnInit() {
 
-       
     }
 
     save() {

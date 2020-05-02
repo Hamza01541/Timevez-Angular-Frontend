@@ -54,3 +54,21 @@ border-bottom: 1px solid #f3f3f3;
 .cdk-overlay-container{
   z-index: 9999 !important;
 }
+
+/* Custom */
+:disabled{
+  cursor: not-allowed;
+}
+
+.dataTables_empty{
+  text-align-last: center;
+}
+
+a > i, input[type=checkbox], .fa-times-circle, .oi-magnifying-glass, a {
+	cursor: pointer;
+}
+
+.right_align{
+  align-self: flex-end;
+  text-align-last: end;
+  }

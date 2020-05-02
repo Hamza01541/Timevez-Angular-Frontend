@@ -310,34 +310,32 @@
 </header>
 <!-- .app-aside -->
 <aside class="app-aside app-aside-expand-md app-aside-light">
-  <!-- .aside-content -->
+  
   <div class="aside-content">
 
-    <!-- .aside-menu -->
+
     <div class="aside-menu overflow-hidden">
-      <!-- .stacked-menu -->
+      
       <nav id="stacked-menu" class="stacked-menu">
-        <!-- .menu -->
+        
         <ul class="menu">
-          <!-- .menu-item -->
+      
           <li class="menu-item has-active">
             <a class="menu-link"><span class="menu-icon fas fa-home" [routerLink]="['/admin/dashboard']"></span> <span
                 class="menu-text" [routerLink]="['/admin/dashboard']">Dashboard</span></a>
-          </li><!-- /.menu-item -->
-          <!-- .menu-header -->
-          <li class="menu-header"> App Pages </li><!-- /.menu-header -->
-          <!-- .menu-item -->
-          <!-- .menu-item -->
+          </li>
+          <li class="menu-header"> App Pages </li>
+
           <li class="menu-item has-child" *ngFor="let tab of navbarTabs" class=""
             [ngClass]="{'active': currentPage.toLowerCase() == tab.route.toLowerCase()}"
             routerLink="/admin/{{tab.route}}" style="cursor: pointer;">
             <a class="menu-link"><span></span> <span class="menu-text">
-                {{tab.name}}</span> </a> <!-- child menu -->
-          </li><!-- /.menu-item -->
-        </ul><!-- /.menu -->
-      </nav><!-- /.stacked-menu -->
-    </div><!-- /.aside-menu -->
-    <!-- Skin changer -->
+                {{tab.name}}</span> </a> 
+          </li>
+        </ul>
+      </nav>
+    </div>
+    
     <footer class="aside-footer border-top p-2">
       <button class="btn btn-light btn-block text-primary" (click)="toggleThemeColor()"><span class="d-compact-menu-none">Night
           mode</span> <i class="fas fa-moon ml-1"></i></button>

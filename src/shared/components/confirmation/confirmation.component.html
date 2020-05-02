@@ -1,22 +1,17 @@
-<div id="deleteModal" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalAlertWarningLabel"
-  aria-hidden="true">
-
+<div id="deleteModal" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalAlertWarningLabel" aria-hidden="true">
+  <div class="right_align"><i data-dismiss="modal" class="fa fa-times-circle"></i></div>
   <div class="modal-dialog" role="document">
-
     <div class="modal-content">
-
       <div class="modal-header">
         <h5 id="exampleModalAlertWarningLabel" class="modal-title">
           <i class="fa fa-bullhorn text-warning mr-1"></i> Confirmation </h5>
       </div>
-
       <div class="modal-body">
         <p> {{dialogData.message}} </p>
       </div>
-
       <div class="modal-footer">
         <button class="btn btn-warning" mat-button mat-dialog-close>No</button>
-        <button class="btn btn-light" (click)="save()">Yes</button>
+        <button class="btn btn-danger" (click)="save()">Yes</button>
       </div>
     </div>
   </div>
