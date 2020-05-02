@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService, AlertService, LoaderService, AttendanceService, LeaveService } from 'src/app/core/services/index';
-import { attendanceFilter, dateType } from "src/app/models/filter";
+import { Filter, DurationType } from "src/app/models";
 import { Constants } from 'src/shared/constants';
 import { UtilityService } from 'src/shared/services/utility.service';
 
@@ -11,24 +11,23 @@ import { UtilityService } from 'src/shared/services/utility.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
   totalUsers: number;
   totalPresent: number;
   totalAbsent: number;
   totalLeave: number;
   fullName: string;
-  startDate: string;
-  endDate: string;
-  attendanceFilter: attendanceFilter;
+  fromDate: string;
+  toDate: string;
+  attendanceFilter: Filter;
   firstDayofWeek = Constants.firstDayOfWeek;
 
-  attendanceTypes: any[] = [
-    { value: dateType.currentDate, name: 'Current Date' },
-    { value: dateType.currentMonth, name: 'Current Month' },
-    { value: dateType.lastMonth, name: 'Last Month' },
-    { value: dateType.currentYear, name: 'Current Year' },
-    { value: dateType.lastYear, name: 'Last Year' },
-    { value: dateType.custom, name: 'Custom' }
+  filterTypes: any[] = [
+    { value: DurationType.currentDate, name: 'Today' },
+    { value: DurationType.currentMonth, name: 'This month' },
+    { value: DurationType.lastMonth, name: 'Last month' },
+    { value: DurationType.currentYear, name: 'This year' },
+    { value: DurationType.lastYear, name: 'Last year' },
+    { value: DurationType.custom, name: 'Custom' }
   ];
 
   constructor(
@@ -40,11 +39,11 @@ export class DashboardComponent implements OnInit {
     private utilityService: UtilityService
 
   ) {
-    this.attendanceFilter = new attendanceFilter();
+    this.attendanceFilter = new Filter();
   }
 
   ngOnInit() {
-    this.attendanceFilter.type = dateType.currentDate;
+    this.attendanceFilter.filterType = DurationType.currentDate;
     let currentUser = JSON.parse(localStorage.getItem(Constants.currentUser));
     this.fullName = `${currentUser.firstname} ${currentUser.lastname}`;
     this.getCounts();
@@ -56,14 +55,14 @@ export class DashboardComponent implements OnInit {
   }
 
   getTotalUsers() {
-    this.userService.getTotalUsers(this.attendanceFilter.type, this.endDate).subscribe((users: any) => {
+    this.userService.getTotalUsers(this.attendanceFilter.filterType, this.toDate).subscribe((users: any) => {
       this.totalUsers = users.total;
       this.getTotalPresent();
     });
   }
 
   getTotalPresent() {
-    this.attendanceService.getTotalAttendance(this.attendanceFilter.type,  this.startDate, this.endDate).subscribe((present: any) => {
+    this.attendanceService.getTotalAttendance(this.attendanceFilter.filterType,  this.fromDate, this.toDate).subscribe((present: any) => {
       this.totalPresent = present.total;
       this.getTotalAbsent();
     });
@@ -73,7 +72,7 @@ export class DashboardComponent implements OnInit {
    * Get total absent users for current date.
    */
   getTotalAbsent() {
-//     let DayDifference = Math.abs((new Date (this.startDate).valueOf() - new Date (this.endDate).valueOf())/(24*60*60*1000));
+//     let DayDifference = Math.abs((new Date (this.fromDate).valueOf() - new Date (this.toDate).valueOf())/(24*60*60*1000));
 
 // if(!DayDifference){
 //   DayDifference = 1;
@@ -87,25 +86,25 @@ export class DashboardComponent implements OnInit {
   }
 
   getTotalLeave() {
-    this.leaveService.getTotalLeave(this.attendanceFilter.type, status, this.startDate, this.endDate).subscribe((leave: any) => {
+    this.leaveService.getTotalLeave(this.attendanceFilter.filterType, status, this.fromDate, this.toDate).subscribe((leave: any) => {
       this.totalLeave = leave.total;
     });
   }
 
   filterAttendance() {
 
-    if (this.attendanceFilter.type != dateType.custom) {
-      this.attendanceFilter.endDate = '';
-      this.attendanceFilter.startDate = '';
-      this.startDate = '';
-      this.endDate = '';
+    if (this.attendanceFilter.filterType != DurationType.custom) {
+      this.attendanceFilter.toDate = '';
+      this.attendanceFilter.fromDate = '';
+      this.fromDate = '';
+      this.toDate = '';
       this.getCounts();
     }
   }
 
   filterResult() {
-    this.startDate = this.utilityService.getCurrentDate(this.attendanceFilter.startDate)
-    this.endDate = this.utilityService.getCurrentDate(this.attendanceFilter.endDate)
+    this.fromDate = this.utilityService.getCurrentDate(this.attendanceFilter.fromDate)
+    this.toDate = this.utilityService.getCurrentDate(this.attendanceFilter.toDate)
     this.getCounts();
   }
 

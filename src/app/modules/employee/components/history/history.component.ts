@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService, LoaderService, AttendanceService } from 'src/app/core/services';
-import { attendanceFilter, dateType } from "src/app/models/filter";
+import { AlertService, LoaderService, AttendanceService, LeaveService } from 'src/app/core/services';
 import { Constants } from 'src/shared/constants';
 import { UtilityService } from 'src/shared/services/utility.service';
 import * as moment from 'moment';
-import {Attendence, Leave} from 'src/app/models';
+import { Attendence, Leave, DurationType, Filter, LeaveStatus } from 'src/app/models';
 
 @Component({
   selector: 'history-component',
@@ -13,91 +12,182 @@ import {Attendence, Leave} from 'src/app/models';
 })
 
 export class HistoryComponent implements OnInit {
-
-  fullName: string;
-  userAttendance: any = [];
+  userAttendances: Attendence[];
+  userLeaves: Leave[];
+  attendanceFilter: Filter;
+  leaveFilter: Filter;
   userId: string;
-  attendanceFilter: attendanceFilter;
   totalCounts: number[];
-  pageNumber = Constants.defaultPageNumber
-  firstDayofWeek = Constants.firstDayOfWeek;
-  startDate: string;
-  endDate: string;
+  pageNumber = Constants.defaultPageNumber;
+  leaveStatus: any = LeaveStatus;
 
-  attendanceTypes: any[] = [
-    { value: dateType.currentDate, name: 'Today' },
-    { value: dateType.currentMonth, name: 'This month' },
-    { value: dateType.lastMonth, name: 'Last month' },
-    { value: dateType.currentYear, name: 'This year' },
-    { value: dateType.lastYear, name: 'Last year' },
-    // { value: dateType.custom, name: 'Custom' }
+  attendanceFilterTypes: any[] = [
+    { value: DurationType.currentDate, name: 'Today' },
+    { value: DurationType.yesterday, name: 'Yesterday' },
+    { value: DurationType.currentMonth, name: 'This month' },
+    { value: DurationType.lastMonth, name: 'Last month' },
+    { value: DurationType.currentYear, name: 'This year' },
+    { value: DurationType.lastYear, name: 'Last year' },
+    // { value: DurationType.custom, name: 'Custom' }
+  ];
+ 
+  leaveFilterTypes: any[] = [
+    { value: DurationType.currentDate, name: 'Today' },
+    { value: DurationType.yesterday, name: 'Yesterday' },
+    { value: DurationType.currentMonth, name: 'This month' },
+    { value: DurationType.lastMonth, name: 'Last month' },
+    { value: DurationType.currentYear, name: 'This year' },
+    { value: DurationType.lastYear, name: 'Last year' },
+    { value: DurationType.future, name: 'Future'},
+    // { value: DurationType.custom, name: 'Custom' }
   ];
 
   constructor(
     private alertService: AlertService,
     private loaderService: LoaderService,
     private attendanceService: AttendanceService,
+    private leaveService: LeaveService,
     private utilityService: UtilityService
   ) {
-    this.attendanceFilter = new attendanceFilter();
+    this.attendanceFilter = new Filter();
+    this.leaveFilter = new Filter();
   }
 
   ngOnInit() {
-    this.attendanceFilter.type = dateType.currentDate;
+    this.attendanceFilter.filterType = DurationType.currentMonth;
+    this.leaveFilter.filterType = DurationType.currentMonth;
     let currentUser = JSON.parse(localStorage.getItem(Constants.currentUser));
-    this.fullName = `${currentUser.firstname} ${currentUser.lastname}`;
-    this.getUserAttendance(currentUser.userId);
+    this.userId = currentUser.userId;
 
+    this.getUserAttendances(this.pageNumber);
+    this.getUserLeaves(this.pageNumber);
   }
 
-  getUserAttendance(id) {
-    this.userId = id;
-    this.attendanceService.getUserAttendance(id, this.pageNumber, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
-      this.userAttendance = attendance.data;
-      let totalPages = Math.ceil(attendance.total / 10);
+  /**
+   * Get user attendances
+   */
+  getUserAttendances(pageNumber: number) {
+    let fromDate = '';
+    let toDate = '';
+    this.userAttendances = [];
 
-      this.totalCounts = [];
-      if (totalPages > 0) {
-        for (let i = 1; i <= totalPages; i++) {
-          this.totalCounts.push(i);
-        }
+    if (this.attendanceFilter.fromDate) {
+      fromDate = this.utilityService.getCurrentDate(this.attendanceFilter.fromDate);
+    }
+
+    if (this.attendanceFilter.toDate) {
+      toDate = this.utilityService.getCurrentDate(this.attendanceFilter.toDate);
+    }
+
+    this.attendanceService.getUserAttendance(this.userId, pageNumber, this.attendanceFilter.filterType, fromDate, toDate).subscribe((attendance: any) => {
+      if (attendance && attendance.data && attendance.total) {
+        this.userAttendances = attendance.data;
+
+        this.userAttendances.forEach(userAttendance => {
+          this.getTimeSpent(userAttendance);
+         });
+
+        this.initPagination(attendance.total);
+      }
+    }, error => {
+      if (error && error.error && error.error.message) {
+        this.alertService.errorToastr(error.error.message);
+      }
+    });
+  }
+ 
+  /**
+   * Get user leaves
+   */
+  getUserLeaves(pageNumber: number) {
+    let fromDate = '';
+    let toDate = '';
+    this.userLeaves = [];
+
+    if (this.leaveFilter.fromDate) {
+      fromDate = this.utilityService.getCurrentDate(this.leaveFilter.fromDate);
+    }
+
+    if (this.leaveFilter.toDate) {
+      toDate = this.utilityService.getCurrentDate(this.leaveFilter.toDate);
+    }
+
+    this.leaveService.getUserLeave(this.userId, pageNumber, this.leaveFilter.filterType, fromDate, toDate).subscribe((leave: any) => {
+      if (leave && leave.data && leave.total) {
+        this.userLeaves = leave.data;
+
+        this.initPagination(leave.total);
+      }
+    }, error => {
+      if (error && error.error && error.error.message) {
+        this.alertService.errorToastr(error.error.message);
       }
     });
   }
 
-  getPageNumber(pageNo: number) {
-    this.pageNumber = pageNo;
-    this.filterAttendance();
-  }
+  /**
+   * Initialize pagination.
+   * @param total Total number of records.
+   */
+  initPagination(total: number) {
+    let totalPages = Math.ceil(total / 10);
 
-  filterResult() {
-    this.startDate = this.utilityService.getCurrentDate(this.attendanceFilter.startDate);
-    this.endDate = this.utilityService.getCurrentDate(this.attendanceFilter.endDate);
-    this.attendanceService.getUserAttendance(this.userId, this.pageNumber, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
-      this.userAttendance = attendance.data;
-    });
-  }
-
-  filterAttendance() {
-    if (this.attendanceFilter.type != dateType.custom) {
-      this.attendanceService.getUserAttendance(this.userId, this.pageNumber, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
-        this.userAttendance = attendance.data;
-      });
+    this.totalCounts = [];
+    if (totalPages > 0) {
+      for (let i = 1; i <= totalPages; i++) {
+        this.totalCounts.push(i);
+      }
     }
+  }
+
+      /**
+     * Get time spent in office.
+     * @param attendance User attendance
+     */
+    getTimeSpent(attendance: any) {
+      if(attendance.active){
+      const today = new Date();
+      let breakDiff = 0;
+      let timeDiff = new Date(attendance.checkOut).getTime() - new Date(attendance.checkIn).getTime();
+
+      // Today attendance scenario, if not checkout yet then use current time as second-date/checked-out date
+      if (this.getDaysDifference(today, attendance.date) <= 2 && !attendance.checkOut) {
+          timeDiff = today.getTime() - new Date(attendance.checkIn).getTime();
+
+          if (attendance.breakStartTime && !attendance.breakEndTime) {
+              breakDiff = today.getTime() - new Date(attendance.breakStartTime).getTime();
+          }
+      }
+
+      if (attendance.breakStartTime && attendance.breakEndTime) {
+          breakDiff = new Date(attendance.breakEndTime).getTime() - new Date(attendance.breakStartTime).getTime();
+      }
+
+      if (timeDiff < 0) timeDiff = timeDiff * -1;
+      timeDiff = timeDiff - breakDiff;
+      attendance.timeSpent = moment(attendance.date).add(moment.duration(timeDiff)).format('HH:mm');
+
+        // Time spent in office must be greater than 8 hours (28800000 ms);
+        if((timeDiff >= 28800000)) {
+          // 32400000 ms = 9 hours
+          attendance.timeCompleted = true
+      }
+  }
   }
 
   /**
-   * Get time diffence from checkin, checkout, break start time and break end time to calculate time spent in office.
-   * @param {Attendence} attendance
+   * Get days difference from two dates.
+   * @param fromDate First date
+   * @param toDate Second date
    */
-  getAvailableTime(attendance: Attendence) {
-    var timeDiff = new Date(attendance.checkOut).getTime() - new Date(attendance.checkIn).getTime();
+  getDaysDifference(fromDate: string | Date, toDate: string | Date) {
+      let startDate = moment(fromDate);
+      let endDate = moment(toDate);
+      return endDate.diff(startDate, 'days') + 1;
+  }
 
-    if (attendance.breakStartTime && attendance.breakEndTime) {
-      var breakDiff = new Date(attendance.breakEndTime).getTime() - new Date(attendance.breakStartTime).getTime();
-      timeDiff = timeDiff - breakDiff;
-    }
+  tabChanged() {
 
-    return moment.utc(timeDiff).format("hh:mm:ss");
   }
 }
+

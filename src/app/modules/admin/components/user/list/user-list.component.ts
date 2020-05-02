@@ -3,15 +3,14 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService, LoaderService, UserService, AttendanceService, LeaveService } from 'src/app/core/services';
 import { User, Attendence, Leave } from "src/app/models";
-import { attendanceFilter, dateType } from "src/app/models/filter";
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { Constants } from 'src/shared/constants';
-import { leaveType, leaveStatus } from "src/app/models/filter";
+import { LeaveType, LeaveStatus, Filter, DurationType } from "src/app/models";
 import { UserTabs } from 'src/app/models';
 import { ConfirmationDialogueComponent } from 'src/shared/components';
 import { Role } from 'src/app/models/role';
 import { UtilityService } from 'src/shared/services/utility.service';
-
+import * as moment from 'moment';
 declare var jQuery: any;
 
 @Component({
@@ -26,7 +25,7 @@ export class UserListComponent implements OnInit {
     model: User;
     modelAttendance: Attendence;
     modelLeave: Leave;
-    attendanceFilter: attendanceFilter;
+    // attendanceFilter: Filter;
     allUsers: any[];
     totalAttendanceCounts: number[];
     totalLeaveCounts: number[]
@@ -37,28 +36,55 @@ export class UserListComponent implements OnInit {
     id: number;
     operation = Constants.add;
     selectedUser: any = {};
-    userSearchStr: any;
-    startDate: string;
-    endDate: string;
+    userSearchStr: string = '';
+    fromDate: string;
+    toDate: string;
     userTabs = UserTabs;
 
-    attendanceTypes: any[] = [
-        { value: dateType.currentDate, name: 'Current Date' },
-        { value: dateType.currentMonth, name: 'Current Month' },
-        { value: dateType.lastMonth, name: 'Last Month' },
-        { value: dateType.currentYear, name: 'Current Year' },
-        { value: dateType.lastYear, name: 'Last Year' },
-        { value: dateType.custom, name: 'Custom' }
+    // 
+    userAttendances: any[];
+    userLeaves: Leave[];
+    attendanceFilter: Filter;
+    leaveFilter: Filter;
+    userId: string;
+    totalCounts: number[];
+    pageNumber = Constants.defaultPageNumber;
+    leaveSearchStr: string = '';
+    attendanceSearchStr: string = '';
+    leaveStatus: any = LeaveStatus;
+
+    // 
+
+    attendanceFilterTypes: any[] = [
+        { value: DurationType.currentDate, name: 'Today' },
+        { value: DurationType.yesterday, name: 'Yesterday' },
+        { value: DurationType.currentMonth, name: 'This month' },
+        { value: DurationType.lastMonth, name: 'Last month' },
+        { value: DurationType.currentYear, name: 'This year' },
+        { value: DurationType.lastYear, name: 'Last year' },
+        { value: DurationType.custom, name: 'Custom' }
+    ];
+
+    leaveFilterTypes: any[] = [
+        { value: DurationType.currentDate, name: 'Today' },
+        { value: DurationType.yesterday, name: 'Yesterday' },
+        { value: DurationType.currentMonth, name: 'This month' },
+        { value: DurationType.lastMonth, name: 'Last month' },
+        { value: DurationType.currentYear, name: 'This year' },
+        { value: DurationType.lastYear, name: 'Last year' },
+        { value: DurationType.future, name: 'Future' },
+        { value: DurationType.custom, name: 'Custom' }
     ];
 
     leaveTypes: any[] = [
-        { value: leaveType.casual, name: 'Casual' },
-        { value: leaveType.annual, name: 'Annual' },
+        { value: LeaveType.casual, name: 'Casual' },
+        { value: LeaveType.annual, name: 'Annual' },
     ];
 
     leaveStatuses: any[] = [
-        { value: leaveStatus.pending, name: 'Pending' },
-        { value: leaveStatus.approved, name: 'Approved' },
+        { value: this.leaveStatus.pending, name: 'Pending' },
+        { value: this.leaveStatus.approved, name: 'Approved' },
+        { value: this.leaveStatus.rejected, name: 'Rejected' }
     ];
 
     firstDayofWeek = Constants.firstDayOfWeek;
@@ -76,14 +102,87 @@ export class UserListComponent implements OnInit {
         this.model = new User();
         this.modelAttendance = new Attendence();
         this.modelLeave = new Leave();
-        this.attendanceFilter = new attendanceFilter();
+        this.attendanceFilter = new Filter();
+        this.leaveFilter = new Filter();
     }
 
     ngOnInit() {
-        this.attendanceFilter.type = dateType.currentDate;
         this.getAllUser();
         this.modelAttendance.active = false;
+        this.setDefaultFilterValues();
     }
+
+    /**
+     * Sets default values of filters
+     */
+    setDefaultFilterValues() {
+        this.leaveFilter.searchStr = '';
+        this.attendanceFilter.searchStr = '';
+        this.attendanceFilter.filterType = DurationType.currentMonth;
+        this.leaveFilter.filterType = DurationType.future;
+    }
+
+    /**
+     * Get user attendances
+     */
+    getUserAttendances(pageNumber: number) {
+        let fromDate = '';
+        let toDate = '';
+        this.userAttendances = [];
+
+        if (this.attendanceFilter.fromDate) {
+            fromDate = this.utilityService.getCurrentDate(this.attendanceFilter.fromDate);
+        }
+
+        if (this.attendanceFilter.toDate) {
+            toDate = this.utilityService.getCurrentDate(this.attendanceFilter.toDate);
+        }
+
+        this.attendanceService.getUserAttendance(this.selectedUser._id, pageNumber, this.attendanceFilter.filterType, fromDate, toDate, this.attendanceFilter.searchStr).subscribe((attendance: any) => {
+            if (attendance && attendance.data && attendance.total) {
+                this.userAttendances = attendance.data;
+
+                this.userAttendances.forEach(userAttendance => {
+                 this.getTimeSpent(userAttendance);
+                });
+
+                // this.initPagination(attendance.total);
+            }
+        }, error => {
+            if (error && error.error && error.error.message) {
+                this.alertService.errorToastr(error.error.message);
+            }
+        });
+    }
+
+    /**
+     * Get user leaves
+     */
+    getUserLeaves(pageNumber: number) {
+        let fromDate = '';
+        let toDate = '';
+        this.userLeaves = [];
+
+        if (this.leaveFilter.fromDate) {
+            fromDate = this.utilityService.getCurrentDate(this.leaveFilter.fromDate);
+        }
+
+        if (this.leaveFilter.toDate) {
+            toDate = this.utilityService.getCurrentDate(this.leaveFilter.toDate);
+        }
+
+        this.leaveService.getUserLeave(this.selectedUser._id, pageNumber, this.leaveFilter.filterType, fromDate, toDate, this.leaveFilter.searchStr).subscribe((leave: any) => {
+            if (leave && leave.data && leave.total) {
+                this.userLeaves = leave.data;
+                // this.initPagination(leave.total);
+            }
+        }, error => {
+            if (error && error.error && error.error.message) {
+                this.alertService.errorToastr(error.error.message);
+            }
+        });
+    }
+
 
     save(type: string) {
         this.operation = this.id ? Constants.updateData : Constants.addData;
@@ -119,13 +218,11 @@ export class UserListComponent implements OnInit {
                 this.hideLoader();
                 jQuery('#attendanceNewModal').modal('hide');
 
-console.log("this.modelAttendance:",this.modelAttendance);
-
                 if (this.modelAttendance._id) {
-                    let currentIndex = this.userAttendance.data.findIndex(attendance => attendance._id === this.modelAttendance._id);
-                    this.userAttendance.data[currentIndex] = this.modelAttendance;
+                    let currentIndex = this.userAttendances.findIndex(attendance => attendance._id === this.modelAttendance._id);
+                    this.userAttendances[currentIndex] = this.modelAttendance;
                 } else {
-                    this.userAttendance.data.push(this.modelAttendance);
+                    this.userAttendances.push(this.modelAttendance);
                 }
 
                 this.alertService.successToastr(`SuccessFully ${this.operation} Of Attendance.`, false);
@@ -143,10 +240,10 @@ console.log("this.modelAttendance:",this.modelAttendance);
                 jQuery('#leaveNewModal').modal('hide');
 
                 if (this.modelLeave._id) {
-                    let currentIndex = this.userLeave.data.findIndex(leave => leave._id === this.modelLeave._id);
-                    this.userLeave.data[currentIndex] = this.modelLeave;
+                    let currentIndex = this.userLeaves.findIndex(leave => leave._id === this.modelLeave._id);
+                    this.userLeaves[currentIndex] = this.modelLeave;
                 } else {
-                    this.userLeave.data.push(this.modelLeave);
+                    this.userLeaves.push(this.modelLeave);
                 }
 
                 this.alertService.successToastr(`SuccessFully ${this.operation} Of Leave.`, false);
@@ -158,35 +255,35 @@ console.log("this.modelAttendance:",this.modelAttendance);
         }
     }
 
-    filterAttendanceAndLeave(type: string) {
-        if (this.attendanceFilter.type != dateType.custom) {
-            this.attendanceFilter.startDate = '';
-            this.attendanceFilter.endDate = '';
+    // filterAttendanceAndLeave(type: string) {
+    //     if (this.attendanceFilter.filterType != DurationType.custom) {
+    //         this.attendanceFilter.fromDate = '';
+    //         this.attendanceFilter.toDate = '';
 
-            if (type == Constants.attendance) {
-                this.attendanceService.getUserAttendance(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
-                    this.userAttendance = attendance;
-                    this.calculateTotalGridPages(Constants.attendance, attendance.total);
+    //         if (type == Constants.attendance) {
+    //             this.attendanceService.getUserAttendance(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter.filterType, this.fromDate, this.toDate).subscribe((attendance: any) => {
+    //                 this.userAttendance = attendance;
+    //                 this.calculateTotalGridPages(Constants.attendance, attendance.total);
 
-                });
-            } else {
-                this.leaveService.getUserLeave(this.selectedUser._id, this.leavePageNumber, this.attendanceFilter.type, this.startDate).subscribe((leave: any) => {
-                    this.userLeave = leave;
-                    this.calculateTotalGridPages(Constants.leave, leave.total);
-                });
-            }
-        }
-    }
+    //             });
+    //         } else {
+    //             this.leaveService.getUserLeave(this.selectedUser._id, this.leavePageNumber, this.attendanceFilter.filterType, this.fromDate).subscribe((leave: any) => {
+    //                 this.userLeave = leave;
+    //                 this.calculateTotalGridPages(Constants.leave, leave.total);
+    //             });
+    //         }
+    //     }
+    // }
 
     getAllUser() {
-        this.userService.getData().subscribe((users: any) => {
-            let employees = users.filter(x => x.role == Role.Employee);
+        this.allUsers = [];
+        this.userService.getData().subscribe((employees: any) => {
+            this.allUsers = employees;
 
             if (employees.length) {
                 this.selectedUser = employees[0];
-                this.allUsers = employees;
-                this.getUserAttendance(this.selectedUser._id);
-                this.getUserLeave(this.selectedUser._id);
+                this.getUserAttendances(1);
+                this.getUserLeaves(1);
             }
         });
     }
@@ -194,25 +291,25 @@ console.log("this.modelAttendance:",this.modelAttendance);
     customAttendanceAndLeaveFilter(type: string) {
 
         if (type == Constants.attendance) {
-            this.startDate = '';
-            this.endDate = '';
+            this.fromDate = '';
+            this.toDate = '';
 
-            if (this.attendanceFilter.startDate) {
-                this.startDate = this.utilityService.getCurrentDate(this.attendanceFilter.startDate);
+            if (this.attendanceFilter.fromDate) {
+                this.fromDate = this.utilityService.getCurrentDate(this.attendanceFilter.fromDate);
             }
 
-            if (this.attendanceFilter.endDate) {
-                this.endDate = this.utilityService.getCurrentDate(this.attendanceFilter.endDate);
+            if (this.attendanceFilter.toDate) {
+                this.toDate = this.utilityService.getCurrentDate(this.attendanceFilter.toDate);
             }
 
-            this.attendanceService.getUserAttendance(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
+            this.attendanceService.getUserAttendance(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter.filterType, this.fromDate, this.toDate).subscribe((attendance: any) => {
                 this.userAttendance = attendance;
                 this.calculateTotalGridPages(Constants.attendance, attendance.total);
             });
         }
         else {
-            this.startDate = this.utilityService.getCurrentDate(this.attendanceFilter.startDate);
-            this.leaveService.getUserLeave(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter.type, this.startDate).subscribe((leave: any) => {
+            this.fromDate = this.utilityService.getCurrentDate(this.attendanceFilter.fromDate);
+            this.leaveService.getUserLeave(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter.filterType, this.fromDate).subscribe((leave: any) => {
                 this.userLeave = leave;
                 this.calculateTotalGridPages(Constants.leave, leave.total);
             });
@@ -238,7 +335,6 @@ console.log("this.modelAttendance:",this.modelAttendance);
                 }
             }
         }
-
     }
 
     /**
@@ -283,57 +379,72 @@ console.log("this.modelAttendance:",this.modelAttendance);
         }
     }
 
-    getTablePageNumber(type: string, pageNo: number) {
-        if (type == Constants.attendance) {
-            this.attendancePageNumber = pageNo;
-            this.filterAttendanceAndLeave(Constants.attendance);
-        }
-        else {
-            this.leavePageNumber = pageNo;
-            this.filterAttendanceAndLeave(Constants.leave);
-        }
-    }
-
-    searchUser() {
-        this.userService.searchUser(1, this.userSearchStr).subscribe((user: any) => {
+    /**
+     * Get paged users and select user on top.
+     */
+    getPagedUsers() {
+        this.allUsers = [];
+        this.userService.getPagedUsers(1, this.userSearchStr).subscribe((user: any) => {
             this.allUsers = user.data;
-            this.selectedUser = user.data[0];
+            this.selectedUser = this.allUsers[0];
         });
     }
 
-    getUserLeave(userId: any) {
-        let pageNumber: number = 1
-        this.leaveService.getUserLeave(userId, pageNumber, this.attendanceFilter.type, this.startDate).subscribe((leave: any) => {
-            this.userLeave = leave;
-            this.calculateTotalGridPages(Constants.leave, leave.total);
-        });
-    }
-
-    getUserAttendance(userId) {
-        let pageNumber: number = 1
-        this.attendanceService.getUserAttendance(userId, pageNumber, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
-            this.userAttendance = attendance;
-            this.calculateTotalGridPages(Constants.attendance, attendance.total);
-        }, error => {
-        });
-    }
-
-    getAvailableTime(attendance) {
+    /**
+     * Get time spent in office.
+     * @param attendance User attendance
+     */
+    getTimeSpent(attendance: any) {
+        if(attendance.active){
+        const today = new Date();
+        let breakDiff = 0;
         let timeDiff = new Date(attendance.checkOut).getTime() - new Date(attendance.checkIn).getTime();
-        if (attendance.breakStartTime && attendance.breakEndTime) {
-            const breakDiff = new Date(attendance.breakEndTime).getTime() - new Date(attendance.breakStartTime).getTime();
-            timeDiff = timeDiff - breakDiff;
+
+        // Today attendance scenario, if not checkout yet then use current time as second-date/checked-out date
+        if (this.getDaysDifference(today, attendance.date) <= 2 && !attendance.checkOut) {
+            timeDiff = today.getTime() - new Date(attendance.checkIn).getTime();
+
+            if (attendance.breakStartTime && !attendance.breakEndTime) {
+                breakDiff = today.getTime() - new Date(attendance.breakStartTime).getTime();
+            }
         }
-        const totalTimeInMinutes = Math.floor(timeDiff / 60000) // total time in minutes
-        const hours = Math.floor(totalTimeInMinutes / 60);
-        const minutes = Math.round(totalTimeInMinutes % 60);
-        return hours + " hr " + minutes + " min ";
+
+        if (attendance.breakStartTime && attendance.breakEndTime) {
+            breakDiff = new Date(attendance.breakEndTime).getTime() - new Date(attendance.breakStartTime).getTime();
+        }
+
+        if (timeDiff < 0) timeDiff = timeDiff * -1;
+        timeDiff = timeDiff - breakDiff;
+        attendance.timeSpent = moment(attendance.date).add(moment.duration(timeDiff)).format('HH:mm');
+
+          // Time spent in office must be greater than 8 hours (28800000 ms);
+          if((timeDiff >= 28800000)) {
+            // 32400000 ms = 9 hours
+            attendance.timeCompleted = true
+        }
+    }
     }
 
-    getUserDetails(userDetails) {
+    /**
+     * Get days difference from two dates.
+     * @param fromDate First date
+     * @param toDate Second date
+     */
+    getDaysDifference(fromDate: string | Date, toDate: string | Date) {
+        let startDate = moment(fromDate);
+        let endDate = moment(toDate);
+        return endDate.diff(startDate, 'days') + 1;
+    }
+
+    /**
+     * Get user details for selected user.
+     * @param userDetails Selected user
+     */
+    getUserDetail(userDetails: User) {
+        console.log("this.selectedUser:", userDetails);
         this.selectedUser = userDetails;
-        this.getUserAttendance(this.selectedUser._id);
-        this.getUserLeave(this.selectedUser._id);
+        this.getUserAttendances(1);
+        this.getUserLeaves(1);
     }
 
     /**
@@ -382,8 +493,8 @@ console.log("this.modelAttendance:",this.modelAttendance);
             this.showLoader();
             this.attendanceService.deleteData(result.Id).subscribe(res => {
                 this.hideLoader();
-                let currentIndex = this.userAttendance.data.findIndex(x => x._id == result.Id);
-                this.userAttendance.data.splice(currentIndex, 1);
+                let currentIndex = this.userAttendances.findIndex(x => x._id == result.Id);
+                this.userAttendances.splice(currentIndex, 1);
 
 
 
@@ -397,8 +508,8 @@ console.log("this.modelAttendance:",this.modelAttendance);
             this.showLoader();
             this.leaveService.deleteData(result.Id).subscribe(res => {
                 this.hideLoader();
-                let currentIndex = this.userLeave.data.findIndex(x => x._id == result.Id);
-                this.userLeave.data.splice(currentIndex, 1);
+                let currentIndex = this.userLeaves.findIndex(x => x._id == result.Id);
+                this.userLeaves.splice(currentIndex, 1);
                 this.alertService.successToastr("Selected Leave Deleted Successfully.", false);
             }, error => {
                 this.hideLoader();
@@ -406,7 +517,6 @@ console.log("this.modelAttendance:",this.modelAttendance);
             });
         }
     }
-
 
     /**
      * Show the loader screen

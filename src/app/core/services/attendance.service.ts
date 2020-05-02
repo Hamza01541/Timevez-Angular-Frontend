@@ -7,7 +7,7 @@ import { Attendence } from "src/app/models";
     providedIn: 'root'
 })
 export class AttendanceService {
-    attendance:string = `${ApiUrl.attendance}`;
+    attendance: string = `${ApiUrl.attendance}`;
 
     constructor(private RequestService: RequestService) { }
 
@@ -84,43 +84,47 @@ export class AttendanceService {
     }
 
     /**
-* Return  attandance 
-* @param pageNumber is to get page based data 
-*/
-    getUserAttendance(userId: string, pageNumber: number, filterType: string, startDate: string, endDate: string) {
-        const url = `${this.attendance}/${ApiUrl.getUserPageAttendance}?userId=${userId}&pageNo=${pageNumber}&type=${filterType}&startDate=${startDate}&endDate=${endDate}`;
+     * Get paged user attendances
+     * @param userId User id
+     * @param pageNumber Current page number
+     * @param filterType Filter type (i.e current Date, current month etc)
+     * @param fromDate filter Start date
+     * @param toDate filter end date
+     * @param search Search string typed in search box.
+     */
+    getUserAttendance(userId: string, pageNumber: number, filterType: string, fromDate: string, toDate: string, search?: string) {
+        const url = `${this.attendance}/${ApiUrl.getUserPageAttendance}?userId=${userId}&pageNo=${pageNumber}&type=${filterType}&fromDate=${fromDate}&toDate=${toDate}&search=${search}`;
         return this.RequestService.getData(url);
-    }
-
-    /**
-          *Check In for Attendence By Employee Id
-          */
-    checkIn() {
-        const url = `${this.attendance}/${ApiUrl.checkIn}`;
-        return this.RequestService.addData(url);
     }
 
     /**
      * Total number of attendance
      * It will return the total numer of  absent or present 
      */
-    getTotalAttendance(filterType: string, startDate: string, endDate: string) {
-        const url = `${this.attendance}/${ApiUrl.totalCount}?type=${filterType}&startDate=${startDate}&endDate=${endDate}`;
+    getTotalAttendance(filterType: string, fromDate: string, toDate: string) {
+        const url = `${this.attendance}/${ApiUrl.totalCount}?type=${filterType}&fromDate=${fromDate}&toDate=${toDate}`;
         return this.RequestService.getData(url);
     }
 
     /**
-      *Check Out for Attendence By  Employee Id
-      */
-    checkOut() {
-        const url = `${this.attendance}/${ApiUrl.checkOut}`;
-        return this.RequestService.updateData(url);
+     * Get user attendance count
+     * @param userId User Id
+     * @param filterType Filter type (i.e. currentdate, current month etc)
+     * @param fromDate Attendance start date
+     * @param toDate Attendance end date
+     * @param active 1) If active = true, gets present count 2) If active = false, gets absent count 3) If active is not in param, gets both present and absent count.
+     */
+    getUserAttendanceCount(userId: string, filterType: string, fromDate: string, toDate: string, active?: boolean) {
+        const url = `${this.attendance}/${ApiUrl.totalCountByUserId}?userId=${userId}&type=${filterType}&fromDate=${fromDate}&toDate=${toDate}&active=${active}`;
+        return this.RequestService.getData(url);
     }
 
-
-    getUserAttendanceCount(userId: string, filterType: string, startDate: string, endDate: string) {
-        const url = `${this.attendance}/${ApiUrl.totalCountByUserId}?userId=${userId}&type=${filterType}&startDate=${startDate}&endDate=${endDate}`;
-        return this.RequestService.getData(url);
+      /**
+     * Check in employee
+     */
+    checkIn() {
+        const url = `${this.attendance}/${ApiUrl.checkIn}`;
+        return this.RequestService.addData(url);
     }
 
     /**
@@ -136,6 +140,14 @@ export class AttendanceService {
         */
     endBreak() {
         const url = `${this.attendance}/${ApiUrl.endBreak}`;
+        return this.RequestService.updateData(url);
+    }
+
+     /**
+      *Check Out for Attendence By  Employee Id
+      */
+     checkOut() {
+        const url = `${this.attendance}/${ApiUrl.checkOut}`;
         return this.RequestService.updateData(url);
     }
 }

@@ -1,31 +1,30 @@
 
-export class attendanceFilter {
-    type: string;
-    startDate: string;
-    endDate: string;
+export class Filter {
+    filterType: string;
+    fromDate: string;
+    toDate: string;
+    status: string;
+    searchStr: string
 }
 
-export enum dateType {
+export enum DurationType {
     currentDate = "currentDate",
+    yesterday = "yesterday",
     currentMonth = "currentMonth",
     lastMonth = "lastMonth",
     currentYear = "currentYear",
     lastYear = "lastYear",
+    future = "future",
     custom = "custom",
 }
 
-export enum leaveType {
+export enum LeaveType {
     annual = "annual",
     casual = "casual"
 }
 
-
-export enum leaveStatus {
+export enum LeaveStatus{
     approved = "approved",
-    pending = "pending"
-}
-
-export class leaveFilter {
-    status: string;
-    type: string;
+    pending = "pending",
+    rejected = "rejected"
 }

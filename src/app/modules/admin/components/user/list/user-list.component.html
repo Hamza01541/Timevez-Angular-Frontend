@@ -1,32 +1,38 @@
-<aside class="app-aside app-aside-expand-md app-aside-light">
-</aside><!-- /.app-aside -->
-<!-- .app-main -->
+<aside class="app-aside app-aside-expand-md app-aside-light"></aside>
 <main class="app-main">
-  <!-- .wrapper -->
   <div class="wrapper">
-    <!-- .page -->
     <div class="page has-sidebar has-sidebar-fluid has-sidebar-expand-xl">
-      <!-- .page-inner -->
+      <!-- User list -->
       <div class="page-inner page-inner-fill position-relative">
+        <!-- Seach-box -->
         <header class="page-navs bg-light shadow-sm">
-          <!-- .input-group -->
           <div class="input-group has-clearable">
-            <button type="button" class="close" aria-label="Close"><span aria-hidden="true"><i
-                  class="fa fa-times-circle" (click)="getAllUser()"></i></span></button> <label
-              class="input-group-prepend" for="searchClients"><span class="input-group-text"><span
-                  class="oi oi-magnifying-glass" (click)="searchUser()" [hidden]="!userSearchStr"></span></span></label>
+            <button type="button" class="close" aria-label="Close"><span aria-hidden="true">
+                <i class="fa fa-times-circle" (click)="getAllUser()"></i></span></button>
+            <label class="input-group-prepend" for="searchClients"><span class="input-group-text"><span
+                  class="oi oi-magnifying-glass" (click)="getPagedUsers()"
+                  [hidden]="!userSearchStr"></span></span></label>
             <input type="text" class="form-control" id="searchUsers" [(ngModel)]="userSearchStr"
               placeholder="Find User">
           </div>
         </header><button type="button" class="btn btn-primary btn-floated position-absolute" data-toggle="modal"
-          data-target="#userModal" title="Add new client"><i class="fa fa-plus"></i></button> <!-- board -->
-
+          data-target="#userModal" title="Add new client"><i class="fa fa-plus"></i></button>
+           <!-- list -->
         <perfect-scrollbar [config]="config">
+          <div class=" list-group list-group-flush list-group-divider border-top" data-toggle="radiolist"
+          *ngIf="!allUsers.length">
+            <div class="list-group-item active dataTables_empty" data-toggle="sidebar" data-sidebar="show">
+              <div class="list-group-item-body">
+                <h3 class="list-group-item-title"> No data available </h3>
+              </div>
+            </div>
+          </div>
+          
           <div class=" list-group list-group-flush list-group-divider border-top" data-toggle="radiolist"
             *ngFor="let user of allUsers; let i = index ">
             <div class="list-group-item active" data-toggle="sidebar" data-sidebar="show">
               <div class="ps__thumb-y" tabindex="0" style="top: 0px"></div>
-              <a (click)="getUserDetails(user)" style="cursor: pointer;" class="stretched-link"></a>
+              <a (click)="getUserDetail(user)" style="cursor: pointer;" class="stretched-link"></a>
               <div class="list-group-item-figure">
                 <div class="tile tile-circle bg-purple"> {{user.firstname.charAt(0).toUpperCase()}} </div>
               </div>
@@ -39,7 +45,7 @@
       </div>
 
       <div class="page-sidebar bg-light">
-        <!-- .sidebar-header -->
+        <!-- Header back button -->
         <header class="sidebar-header d-xl-none">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -48,53 +54,67 @@
               </li>
             </ol>
           </nav>
-        </header><!-- /.sidebar-header -->
+        </header>
         <!-- .sidebar-section -->
         <div class="sidebar-section sidebar-section-fill" *ngIf="allUsers && allUsers.length">
-          <h1 class="page-title" *ngIf="selectedUser">
-            <i class="fas fa-user text-muted mr-2"></i> {{selectedUser.firstname}} {{selectedUser.lastname}} </h1>
-          <p class="text-muted"> Pakistan </p><!-- .nav-scroller -->
+          <h1 class="page-title">
+            <div class="text-muted"> <i class="fas fa-user text-muted"></i> {{selectedUser.firstname}}
+              {{selectedUser.lastname}} </div>
+          </h1>
+          <!-- User-detail-tabs -->
           <div class="nav-scroller border-bottom">
-            <!-- .nav-tabs -->
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a class="nav-link active show" data-toggle="tab" href="#client-billing-contact">Contact</a>
+                <a class="nav-link active show" data-toggle="tab" href="#contact-tab">Contact</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#attendance"
-                  (click)="filterAttendanceAndLeave(userTabs.attendance)">Attendance</a>
+                <a class="nav-link" data-toggle="tab" href="#attendance-tab">Attendance</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#leave"
-                  (click)="filterAttendanceAndLeave(userTabs.leave)">Leave</a>
+                <a class="nav-link" data-toggle="tab" href="#leaves-tab">Leave</a>
               </li>
-            </ul><!-- /.nav-tabs -->
-          </div><!-- /.nav-scroller -->
-          <!-- .tab-content -->
-          <div class="tab-content pt-4" id="clientDetailsTabs">
-            <!-- .tab-pane -->
-            <div class="tab-pane fade show active" id="client-billing-contact" role="tabpanel"
-              aria-labelledby="client-billing-contact-tab">
-              <!-- .card -->
+            </ul>
+          </div>
+
+          <div class="tab-content pt-4">
+            <!-- Contact-Tab -->
+            <div class="tab-pane fade show active" id="contact-tab" role="tabpanel" aria-labelledby="contact-tab">
+
               <div class="card">
-                <!-- .card-body -->
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-center">
-                    <h2 id="client-billing-contact-tab" class="card-title"> Address </h2>
+                    <h2 id="contact-tab" class="card-title"> Address </h2>
                   </div>
-                  <address *ngIf="selectedUser"> {{selectedUser.address}}<br> Pakistan </address>
-                </div><!-- /.card-body -->
-              </div><!-- /.card -->
-              <!-- .card -->
+                  <address> {{selectedUser.address}}</address>
+                </div>
+              </div>
+
               <div class="card mt-4">
-                <!-- .card-body -->
+                  <!-- card header -->
+                <div class="card-header border-0">
+                  
+                  <div class="d-flex align-items-center">
+                    
+                    <div class="dropdown">
+                      <button type="button" class="btn btn-icon btn-light" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></button>
+                      <div class="dropdown-menu dropdown-menu-left">
+                        <div class="dropdown-arrow"></div>
+                        <a class="dropdown-item" (click)="performUpdateAndDeleteOperation('user','edit',selectedUser._id)"><span><i class="fa fa-pencil-alt"></i></span> Edit</a>
+                         <a class="dropdown-item"  (click)="performUpdateAndDeleteOperation('user','delete',selectedUser._id)"><span><i class="far fa-trash-alt"></i></span> Remove</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="card-body">
-                  <h2 class="card-title"> Contacts </h2><!-- .table-responsive -->
+                  <h2 class="card-title"> Contact </h2>
+
                   <div class="table-responsive">
                     <table class="table table-hover" style="min-width: 678px">
                       <thead>
                         <tr>
                           <th> Name </th>
+                          <th> Role </th>
                           <th> Email </th>
                           <th> Phone </th>
                           <th> Active </th>
@@ -102,11 +122,12 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngIf="selectedUser">
+                        <tr>
                           <td class="align-middle">{{selectedUser.firstname}} {{selectedUser.lastname}} </td>
+                          <td class="align-middle">{{selectedUser.role}} </td>
                           <td class="align-middle">{{selectedUser.email}}</td>
                           <td class="align-middle">{{selectedUser.phone}} </td>
-                          <td class="align-middle">{{selectedUser.active}} </td>
+                          <td class="align-middle" [ngClass]="{'text-success': selectedUser.active, 'text-danger': !selectedUser.active}">{{selectedUser.active}} </td>
                           <td class="align-middle text-right">
                             <button type="button"
                               (click)="performUpdateAndDeleteOperation('user','edit',selectedUser._id)"
@@ -120,287 +141,295 @@
                         </tr>
                       </tbody>
                     </table>
-                  </div><!-- /.table-responsive -->
-                </div><!-- /.card-body -->
-              </div><!-- /.card -->
-            </div><!-- /.tab-pane -->
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
+            <!-- Attendance-Tab -->
+            <div class="tab-pane fade" id="attendance-tab" role="tabpanel" aria-labelledby="attendance-tab">
+              <button type="button" class="btn btn-primary btn-floated position-initial" data-toggle="modal"
+                data-target="#attendanceNewModal" title="Add new attendance"><i class="fa fa-plus"></i></button>
+              <div class="card mt-4">
+                <div class="card-body">
+                  <h2 class="card-title"> Attendance </h2>
 
+                  <!-- Filters -->
+                  <div class="form-group">
+                    <div class="input-group input-group-alt">
+                      <!-- Dropdown -->
+                      <div class="input-group-prepend">
+                        <select class="custom-select" id="attendanceFilter" name="attendanceFilter"
+                          (change)="getUserAttendances(1)" [(ngModel)]="attendanceFilter.filterType">
+                          <option *ngFor="let filterType of attendanceFilterTypes" [value]="filterType.value">
+                            {{filterType.name}}
+                          </option>
+                        </select>
+                      </div>
+                      <!-- Search box and Date-time pickers  -->
+                      <!-- <div class="input-group has-clearable">
+                          <button type="button" class="close" aria-label="Close"><span aria-hidden="true">
+                            <i class="fa fa-times-circle" (click)="getUserattendance(selectedUser._id)"></i></span></button> 
+                            <label class="input-group-prepend" for="searchClients"><span class="input-group-text"><span
+                                class="oi oi-magnifying-glass" (click)="searchattendances()" [hidden]="!attendanceFilter.searchStr.length"></span></span></label>
+                          <input type="text" class="form-control" id="searchUsers" [(ngModel)]="attendanceFilter.searchStr"
+                            placeholder="Find User">
 
-
-
-
-
-
-            <!-- .tab-pane -->
-            <div class="tab-pane fade" id="leave" role="tabpanel" aria-labelledby="leave-tab">
-              <!-- .card -->
-              <div class="card">
-                <div class="wrapper">
-                  <!-- .page -->
-                  <div class="page">
-                    <!-- .page-inner -->
-                    <div class="page-inner">
-                      <!-- .page-title-bar -->
-                      <header class="page-title-bar">
-                        <div class="d-md-flex align-items-md-start">
-                          <h1 class="page-title mr-sm-auto">Employee Leave </h1><!-- .btn-toolbar -->
-                          <div class="btn-toolbar">
-                            <!-- <button type="button" class="btn btn-light"><i class="oi oi-data-transfer-download"></i>
-                              <span class="ml-1">Export</span></button>
-                            <button type="button" class="btn btn-light"><i class="oi oi-data-transfer-upload"></i> <span
-                                class="ml-1">Import</span></button> -->
-                            <button type="button" class="btn btn-primary btn-floated position-initial"
-                              data-toggle="modal" data-target="#leaveNewModal" title="Add new Leave"><i
-                                class="fa fa-plus"></i></button>
-                          </div><!-- /.btn-toolbar -->
-                        </div><!-- /title and toolbar -->
-                      </header><!-- /.page-title-bar -->
-                      <!-- board -->
-                      <!-- .page-section -->
-                      <div class="page-section">
-                        <!-- .card -->
-                        <div class="card card-fluid">
-                          <div class="card-body">
-                            <!-- .form-group -->
+                          
+                          <div [hidden]="attendanceFilter.filterType !== 'custom'">
                             <div class="form-group">
-
-                              <div class="input-group input-group-alt">
-
-                                <div class="input-group-prepend">
-
-                                  <select class="custom-select" id="attendanceType" name="attendanceType"
-                                    (change)="filterAttendanceAndLeave('leave')" [(ngModel)]="attendanceFilter.type">
-                                    <option *ngFor="let type of attendanceTypes" [value]="type.value">{{type.name}}
-                                    </option>
-                                  </select>
-                                </div>
-                                <div [hidden]="attendanceFilter.type !== 'custom'">
-                                  <div class="form-group">
-                                    <input placeholder="Select Start Date" [(ngModel)]="attendanceFilter.startDate"
-                                      name="checkIndate" class="form-control" [owlDateTimeTrigger]="dtPicker1"
-                                      [owlDateTime]="dtPicker1">
-                                    <owl-date-time #dtPicker1 [firstDayOfWeek]="firstDayofWeek"
-                                      [pickerType]="'calendar'">
-                                    </owl-date-time>
-                                    <input placeholder="Select End Date" [(ngModel)]="attendanceFilter.endDate"
-                                      name="startDate" class="form-control" [owlDateTimeTrigger]="dtPicker2"
-                                      [owlDateTime]="dtPicker2">
-                                    <owl-date-time #dtPicker2 [firstDayOfWeek]="firstDayofWeek"
-                                      [pickerType]="'calendar'">
-                                    </owl-date-time>
-                                    <button class="btn btn-outline-primary form-control"
-                                      (click)="customAttendanceAndLeaveFilter('leave')"> Search </button>
-                                  </div>
-                                </div>
-                              </div>
+                              <input placeholder="Select Start Date" [(ngModel)]="attendanceFilter.fromDate"
+                                name="checkIndate" class="form-control" [owlDateTimeTrigger]="dtPicker1"
+                                [owlDateTime]="dtPicker1">
+                              <owl-date-time #dtPicker1 [firstDayOfWeek]="firstDayofWeek"
+                                [pickerType]="'calendar'">
+                              </owl-date-time>
+                              <input placeholder="Select End Date" [(ngModel)]="attendanceFilter.toDate"
+                                name="fromDate" class="form-control" [owlDateTimeTrigger]="dtPicker2"
+                                [owlDateTime]="dtPicker2">
+                              <owl-date-time #dtPicker2 [firstDayOfWeek]="firstDayofWeek"
+                                [pickerType]="'calendar'">
+                              </owl-date-time>
+                              <button class="btn btn-outline-primary form-control"
+                                (click)="customAttendanceAndattendanceFilter('attendance')"> Search </button>
                             </div>
-
-                            <!-- /.form-group -->
-                            <!-- .table-responsive -->
-                            <div>
-
-                              <div class="table-responsive">
-                                <!-- .table -->
-                                <table class="table">
-                                  <!-- thead -->
-                                  <thead>
-                                    <tr>
-                                      <th> Type </th>
-                                      <th> Status </th>
-                                      <th> From </th>
-                                      <th> To </th>
-                                    </tr>
-                                  </thead><!-- /thead -->
-                                  <!-- tbody -->
-                                  <div *ngIf="userLeave && userLeave.data && userLeave.data.length">
-                                    <tbody *ngFor="let leave of userLeave.data  let i = index">
-                                      <!-- tr -->
-                                      <tr>
-                                        <td class="align-middle"> {{leave.type}} </td>
-                                        <td class="align-middle"> {{leave.status}} </td>
-                                        <td class="align-middle"> {{leave.fromDate| date}} </td>
-                                        <td class="align-middle"> {{leave.toDate| date}} </td>
-                                        <td class="align-middle text-right">
-                                          <a class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"
-                                              (click)="performUpdateAndDeleteOperation('leave','edit',leave._id)"></i>
-                                            <span class="sr-only">Edit</span></a> <a
-                                            class="btn btn-sm btn-icon btn-secondary"><i class="far fa-trash-alt"
-                                              (click)="performUpdateAndDeleteOperation('leave','delete',leave._id)"></i>
-                                            <span class="sr-only">Remove</span></a>
-                                        </td>
-                                      </tr><!-- /tr -->
-                                      <!-- tr -->
-
-                                    </tbody><!-- /tbody -->
-                                  </div>
-                                </table><!-- /.table -->
-                              </div><!-- /.table-responsive -->
+                          </div>
+                      </div> -->
+                    </div>
+                  </div>
+                  <!-- Table -->
+                  <div class="table-responsive">
+                    <table class="table table-hover" style="min-width: 678px">
+                      <thead class="thead-light">
+                        <tr>
+                          <th></th>
+                          <th>Status</th>
+                          <th> Date </th>
+                          <th> Checkin </th>
+                          <th> Break Start </th>
+                          <th> Break End </th>
+                          <th> Checkout </th>
+                          <th> Hours Spent </th>
+                          <th> </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngIf="!userAttendances.length"><td valign="top" colspan="7" class="dataTables_empty">No data available in table</td></tr>
+                        <tr *ngFor="let attendance of userAttendances"  >
+                          <td class="align-middle col-checker">
+                            <div class="custom-control custom-control-nolabel custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" name="selectedRow-{{attendance.date}}"
+                                id="selectedRow-{{attendance.date}}">
+                              <label class="custom-control-label" for="selectedRow-{{attendance.date}}"></label>
                             </div>
-                            <!-- .pagination -->
-                            <ul class="pagination justify-content-center mt-4" *ngFor="let count of totalLeaveCounts">
+                          </td>
+                          <td><i class="oi oi-media-record" [ngClass]="{'text-danger': !attendance.active, 'text-success': attendance.checkOut, 'text-warning': !attendance.checkOut}"></i></td>
+                           <td class="align-middle"> {{attendance.date | date: 'EE MMM d, y'}} </td>
+                          <td class="align-middle"> {{attendance.checkIn | date:'shortTime'}} </td>
+                          <td class="align-middle"> {{attendance.breakStartTime| date:'shortTime'}} </td>
+                          <td class="align-middle"> {{attendance.breakEndTime| date:'shortTime'}} </td>
+                          <td class="align-middle"> {{attendance.checkOut| date:'shortTime'}} </td>
+                          <td class="align-middle" [ngClass]="{'text-danger': !attendance.timeCompleted, 'text-success': attendance.timeCompleted}"> {{attendance.timeSpent}} </td>
+                         
+                          <td class="align-middle text-right">
+                            <a class="btn btn-sm btn-icon btn-secondary"
+                              (click)="performUpdateAndDeleteOperation('attendance','edit',attendance._id)">
+                              <i class="fa fa-pencil-alt"></i>
+                              <span class="sr-only">Edit</span></a>
+                            <a class="btn btn-sm btn-icon btn-secondary"
+                              (click)="performUpdateAndDeleteOperation('attendance','delete',attendance._id)"><i
+                                class="far fa-trash-alt"></i>
+                              <span class="sr-only">Remove</span></a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
 
-                              <li class="page-item">
+                    <!-- Pagination -->
+                    <ul class="pagination justify-content-center mt-4">
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1"><i class="fa fa-lg fa-angle-left"></i></a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">1</a>
+                      </li>
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">...</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">13</a>
+                      </li>
+                      <li class="page-item active">
+                        <a class="page-link" href="#">14</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">15</a>
+                      </li>
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">...</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">24</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#"><i class="fa fa-lg fa-angle-right"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                                <a class="page-link" (click)="getTablePageNumber('leave',count)">{{count}}</a>
+            <!-- Leave-Tab -->
+            <div class="tab-pane fade" id="leaves-tab" role="tabpanel" aria-labelledby="leaves-tab">
+              <button type="button" class="btn btn-primary btn-floated position-initial" data-toggle="modal"
+                data-target="#leaveNewModal" title="Add new Leave"><i class="fa fa-plus"></i></button>
 
-                              </li>
-                            </ul><!-- /.pagination -->
-                          </div><!-- /.card-body -->
-                        </div><!-- /.card -->
-                      </div><!-- /.page-section -->
-                    </div><!-- /.page-inner -->
-                  </div><!-- /.page -->
-                </div><!-- .app-footer -->
-              </div><!-- /.card -->
-            </div><!-- /.tab-pane -->
-            <!-- .tab-pane -->
-            <div class="tab-pane fade" id="attendance" role="tabpanel" aria-labelledby="attendance-tab">
-              <!-- .card -->
-              <div class="card">
-                <div class="wrapper">
-                  <!-- .page -->
-                  <div class="page">
-                    <!-- .page-inner -->
-                    <div class="page-inner">
-                      <!-- .page-title-bar -->
-                      <header class="page-title-bar">
-                        <!-- title and toolbar -->
-                        <div class="d-md-flex align-items-md-start">
-                          <h1 class="page-title mr-sm-auto"> Employee Attendance </h1><!-- .btn-toolbar -->
-                          <div class="btn-toolbar">
-                            <!-- <button type="button" class="btn btn-light"><i class="oi oi-data-transfer-download"></i>
-                              <span class="ml-1">Export</span></button>
-                            <button type="button" class="btn btn-light"><i class="oi oi-data-transfer-upload"></i> <span
-                                class="ml-1">Import</span></button> -->
-                            <button type="button" class="btn btn-primary btn-floated position-initial"
-                              data-toggle="modal" data-target="#attendanceNewModal" title="Add new Attendance"><i
-                                class="fa fa-plus"></i></button>
-                          </div><!-- /.btn-toolbar -->
-                        </div><!-- /title and toolbar -->
-                      </header><!-- /.page-title-bar -->
-                      <!-- board -->
-                      <!-- .page-section -->
-                      <div class="page-section">
-                        <!-- .card -->
-                        <div class="card card-fluid">
-                          <div class="card-body">
-                            <!-- .form-group -->
+              <div class="card mt-4">
+                <div class="card-body">
+                  <h2 class="card-title"> Leaves </h2>
+
+                  <!-- Filters -->
+                  <div class="form-group">
+                    <div class="input-group input-group-alt">
+                      <!-- Dropdown -->
+                      <div class="input-group-prepend">
+                        <select class="custom-select" id="leaveFilter" name="leaveFilter" (change)="getUserLeaves(1)"
+                          [(ngModel)]="leaveFilter.filterType">
+                          <option *ngFor="let filterType of leaveFilterTypes" [value]="filterType.value">
+                            {{filterType.name}}
+                          </option>
+                        </select>
+                      </div>
+                      <!-- Search box and Date-time pickers  -->
+                      <!-- <div class="input-group has-clearable">
+                          <button type="button" class="close" aria-label="Close"><span aria-hidden="true">
+                            <i class="fa fa-times-circle" (click)="getUserLeave(selectedUser._id)"></i></span></button> 
+                            <label class="input-group-prepend" for="searchClients"><span class="input-group-text"><span
+                                class="oi oi-magnifying-glass" (click)="searchLeaves()" [hidden]="!leaveFilter.searchStr.length"></span></span></label>
+                          <input type="text" class="form-control" id="searchUsers" [(ngModel)]="leaveFilter.searchStr"
+                            placeholder="Find User">
+
+                          
+                          <div [hidden]="attendanceFilter.filterType !== 'custom'">
                             <div class="form-group">
-                              <!-- .input-group -->
-                              <div class="input-group input-group-alt">
-
-                                <div class="input-group-prepend">
-                                  <select class="custom-select" id="attendanceType" name="attendanceType"
-                                    (change)="filterAttendanceAndLeave('attendance')"
-                                    [(ngModel)]="attendanceFilter.type">
-                                    <option *ngFor="let type of attendanceTypes" [value]="type.value">{{type.name}}
-                                    </option>
-                                  </select>
-                                </div>
-
-                                <div [hidden]="attendanceFilter.type !== 'custom'">
-                                  <div class="form-group">
-                                    <input placeholder="Select Start Date" [(ngModel)]="attendanceFilter.startDate"
-                                      name="checkIndate" class="form-control" [owlDateTimeTrigger]="dtPicker9"
-                                      [owlDateTime]="dtPicker9">
-                                    <owl-date-time #dtPicker9 [firstDayOfWeek]="firstDayofWeek"
-                                      [pickerType]="'calendar'">
-                                    </owl-date-time>
-                                    <input placeholder="Select End Date" [(ngModel)]="attendanceFilter.endDate"
-                                      name="startDate" class="form-control" [owlDateTimeTrigger]="dtPicker10"
-                                      [owlDateTime]="dtPicker10">
-                                    <owl-date-time #dtPicker10 [firstDayOfWeek]="firstDayofWeek"
-                                      [pickerType]="'calendar'">
-                                    </owl-date-time>
-                                    <button class="btn btn-outline-primary form-control"
-                                      (click)="customAttendanceAndLeaveFilter('attendance')"> Search </button>
-                                  </div>
-                                </div>
-                              </div><!-- /.input-group -->
-                            </div><!-- /.form-group -->
-                            <!-- .table-responsive -->
-                            <div>
-                              <div class="table-responsive">
-                                <!-- .table -->
-                                <table class="table">
-                                  <!-- thead -->
-                                  <thead>
-                                    <tr>
-                                      <th> Date </th>
-                                      <th> Check In </th>
-                                      <th> Break Start </th>
-                                      <th> Break End </th>
-                                      <th> Check Out </th>
-                                      <th> Total Hours </th>
-                                    </tr>
-                                  </thead><!-- /thead -->
-                                  <!-- tbody -->
-                                  <div *ngIf="userAttendance && userAttendance.data && userAttendance.data.length">
-                                    <tbody *ngFor="let attendance of userAttendance.data  let i = index">
-                                      <!-- tr -->
-                                      <tr>
-                                        <td class="align-middle"> {{attendance.date |date}} </td>
-                                        <td class="align-middle"> {{attendance.checkIn | date:'shortTime'}} </td>
-                                        <td class="align-middle"> {{attendance.breakStartTime| date:'shortTime'}} </td>
-                                        <td class="align-middle"> {{attendance.breakEndTime| date:'shortTime'}} </td>
-                                        <td class="align-middle"> {{attendance.checkOut| date:'shortTime'}} </td>
-                                        <td class="align-middle"> {{getAvailableTime(attendance)}} </td>
-                                        <td class="align-middle text-right">
-                                          <a class="btn btn-sm btn-icon btn-secondary"
-                                            (click)="performUpdateAndDeleteOperation('attendance','edit',attendance._id)">
-                                            <i class="fa fa-pencil-alt"></i>
-                                            <span class="sr-only">Edit</span></a>
-                                          <a class="btn btn-sm btn-icon btn-secondary"
-                                            (click)="performUpdateAndDeleteOperation('attendance','delete',attendance._id)"><i
-                                              class="far fa-trash-alt"></i>
-                                            <span class="sr-only">Remove</span></a>
-                                        </td>
-                                      </tr><!-- /tr -->
-                                      <!-- tr -->
-
-                                    </tbody><!-- /tbody -->
-                                  </div>
-                                </table><!-- /.table -->
-                              </div><!-- /.table-responsive -->
+                              <input placeholder="Select Start Date" [(ngModel)]="attendanceFilter.fromDate"
+                                name="checkIndate" class="form-control" [owlDateTimeTrigger]="dtPicker1"
+                                [owlDateTime]="dtPicker1">
+                              <owl-date-time #dtPicker1 [firstDayOfWeek]="firstDayofWeek"
+                                [pickerType]="'calendar'">
+                              </owl-date-time>
+                              <input placeholder="Select End Date" [(ngModel)]="attendanceFilter.toDate"
+                                name="fromDate" class="form-control" [owlDateTimeTrigger]="dtPicker2"
+                                [owlDateTime]="dtPicker2">
+                              <owl-date-time #dtPicker2 [firstDayOfWeek]="firstDayofWeek"
+                                [pickerType]="'calendar'">
+                              </owl-date-time>
+                              <button class="btn btn-outline-primary form-control"
+                                (click)="customAttendanceAndLeaveFilter('leave')"> Search </button>
                             </div>
-                            <!-- .pagination -->
-                            <ul class="pagination justify-content-center mt-4"
-                              *ngFor="let count of totalAttendanceCounts">
-                              <li class="page-item">
-                                <a class="page-link" (click)="getTablePageNumber('attendance',count)">{{count}}</a>
-                              </li>
-                            </ul><!-- /.pagination -->
-                          </div><!-- /.card-body -->
-                        </div><!-- /.card -->
-                      </div><!-- /.page-section -->
-                    </div><!-- /.page-inner -->
-                  </div><!-- /.page -->
-                </div><!-- .app-footer -->
-              </div><!-- /.card -->
-            </div><!-- /.tab-pane -->
-          </div><!-- /.tab-content -->
-        </div><!-- /.sidebar-section -->
-      </div><!-- /.page-sidebar -->
-      <!-- Keep in mind that modals should be placed outsite of page sidebar -->
-      <!-- .modal -->
+                          </div>
+                      </div> -->
 
+                    </div>
+                  </div>
 
+<!-- table -->
+                  <div class="table-responsive">
+                    <table class="table table-hover" style="min-width: 678px">
+                      <thead class="thead-light">
+                        <tr>
+                          <th></th>
+                          <th> From</th>
+                          <th> To </th>
+                          <th> Type </th>
+                          <th> Status </th>
+                          <th> Days </th>
+                          <th> Description </th>
+                          <th> </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngIf="!userLeaves.length"><td valign="top" colspan="8" class="dataTables_empty">No data available in table</td></tr>
+                        <tr *ngFor="let leave of userLeaves">
+                          <td class="align-middle col-checker">
+                            <div class="custom-control custom-control-nolabel custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" name="selectedRow-{{leave.fromDate}}"
+                                id="selectedRow-{{leave.fromDate}}">
+                              <label class="custom-control-label" for="selectedRow-{{leave.fromDate}}"></label>
+                            </div>
+                          </td>
+                          <td style="min-width:320px"> <a>{{leave.fromDate | date : 'EE MMM d, y'}} </a></td>
+                          <td class="align-middle"> {{leave.toDate | date:'EE MMM d, y'}} </td>
+                          <td class="align-middle"> {{leave.type}} </td>
+                          <td class="align-middle badge badge-subtle" 
+                          [ngClass]="{'badge-success': leave.status === leaveStatus.approved, 'badge-danger': leave.status === leaveStatus.rejected, 'badge-warning': leave.status === leaveStatus.pending}"> {{leave.status}} </td>
+                          <td class="align-middle"> {{getDaysDifference(leave.fromDate, leave.toDate)}} </td>
+                          <td class="align-middle"> {{leave.description}} </td>
+                          <td class="align-middle text-right">
+                            <button type="button" (click)="performUpdateAndDeleteOperation('leave','edit',leave._id)"
+                              class="btn btn-sm btn-icon btn-secondary" data-toggle="modal">
+                              <i class="fa fa-pencil-alt"></i> <span class="sr-only">Edit</span></button>
+                            <button type="button" (click)="performUpdateAndDeleteOperation('leave','delete',leave._id)"
+                              class="btn btn-sm btn-icon btn-secondary"><i class="far fa-trash-alt"></i> <span
+                                class="sr-only">Remove</span></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <!-- Pagination -->
+                    <ul class="pagination justify-content-center mt-4">
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1"><i class="fa fa-lg fa-angle-left"></i></a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">1</a>
+                      </li>
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">...</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">13</a>
+                      </li>
+                      <li class="page-item active">
+                        <a class="page-link" href="#">14</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">15</a>
+                      </li>
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">...</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">24</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#"><i class="fa fa-lg fa-angle-right"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Modal -->
       <form name="form" #form="ngForm">
         <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="clientNewModalLabel"
           aria-hidden="true">
-          <!-- .modal-dialog -->
           <div class="modal-dialog" role="document">
-            <!-- .modal-content -->
             <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header right_align">
+                <div class="right_align"><i class="fa fa-times-circle" data-dismiss="modal"></i></div>
+                
+              </div>
 
-              </div><!-- /.modal-header -->
-
-              <!-- .modal-body -->
+              <!-- modal-body -->
               <div class="modal-body">
-                <!-- .form-row -->
                 <div class="form-row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -442,14 +471,8 @@
                     <div class="form-group">
                       <label for="password">Password</label>
                       <input type="password" #password="ngModel" id="Password" name="password"
-                        [(ngModel)]="model.password" placeholder="Enter Password" pattern="^.{6}$"
-                        class="form-control">
+                        [(ngModel)]="model.password" placeholder="Enter Password" pattern="^.{6}$" class="form-control">
                     </div>
-                    <!-- <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
-                      <label>
-                        Password is Required
-                      </label>
-                    </div> -->
                     <div *ngIf="password.errors?.pattern" id="card-errors" class="alert alert-danger col-12"
                       style="color:#f2665c;" role="alert">
                       Password Must be minimun 6 Characters long
@@ -461,12 +484,6 @@
                       <input type="password" type="password" id="confirmpassword" name="confirmpassword"
                         placeholder=" Confirm Password" #confirmPassword="ngModel" ngModel class="form-control">
                     </div>
-                    <!-- <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)"
-                      class="alert alert-danger">
-                      <label>
-                        Confirm Password is Required
-                      </label>
-                    </div> -->
                     <div
                       *ngIf="confirmPassword.touched && confirmPassword.valid && model.password !== confirmPassword.value"
                       id="card-errors" class="alert alert-danger col-12" style="color:#f2665c;" role="alert">
@@ -546,30 +563,29 @@
                       </div>
                     </div>
                   </div>
-                </div><!-- /.form-row -->
-              </div><!-- /.modal-body -->
-              <!-- .modal-footer -->
+                </div>
+              </div>
+              
               <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="save('user')"
                   data-dismiss="modal">Save</button> <button type="button" class="btn btn-light"
                   data-dismiss="modal">Close</button>
-              </div><!-- /.modal-footer -->
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
+              </div>
+            </div>
+          </div>
         </div>
-      </form><!-- /.modal -->
+      </form>
 
+      <!-- Attendance-modal -->
       <form name="attendanceForm" #attendanceForm="ngForm">
         <div class="modal fade" id="attendanceNewModal" tabindex="-1" role="dialog" aria-labelledby="attendanceLabel"
           aria-hidden="true">
-          <!-- .modal-dialog -->
+     
           <div class="modal-dialog" role="document">
-            <!-- .modal-content -->
+            
             <div class="modal-content">
-              <div class="modal-header">
-                <h6 id="clientNewModalLabel" class="modal-title inline-editable">
-                  <span *ngIf="selectedUser">{{selectedUser.firstname}} {{selectedUser.lastname}}</span>
-                </h6>
+              <div class="modal-header right_align">
+                <div class="right_align"><i class="fa fa-times-circle" data-dismiss="modal"></i></div>
               </div>
               <div class="modal-body">
                 <div class="form-row">
@@ -578,11 +594,11 @@
                       <label for="comment">Comment</label>
                       <input type="text" #comment="ngModel" id="comment" name="comment"
                         [(ngModel)]="modelAttendance.comment" minlength="3" placeholder="Enter Comment"
-                        class="form-control">
+                        class="form-control" required>
                     </div>
                     <div *ngIf="comment.errors?.minlength" id="card-errors" class="alert alert-danger col-12"
                       style="color:#f2665c;" role="alert">
-                      Comment Must be Greator then 3 Chracter
+                      Comment must be minimun 5 characters long.
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -596,7 +612,7 @@
                     </div>
                     <div *ngIf="date.errors?.required && (date.dirty || date.touched)" class="alert alert-danger">
                       <label>
-                        Date is Required
+                       Attendance date is Required
                       </label>
                     </div>
                   </div>
@@ -605,14 +621,8 @@
                       <label for="checkIn">Check in Time</label>
                       <input placeholder=" Select CheckIn  Time" [(ngModel)]="modelAttendance.checkIn"
                         name="checkInTime" class="form-control" [owlDateTimeTrigger]="dtPicker1"
-                        [owlDateTime]="dtPicker1" #checkInTime="ngModel" required>
+                        [owlDateTime]="dtPicker1" #checkInTime="ngModel">
                       <owl-date-time #dtPicker1 [hour12Timer]="hour12Timer" [pickerType]="'timer'"></owl-date-time>
-                    </div>
-                    <div *ngIf="checkInTime.invalid && (checkInTime.dirty || checkInTime.touched)"
-                      class="alert alert-danger">
-                      <label>
-                        CheckIn Time is Required
-                      </label>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -620,14 +630,8 @@
                       <label for="checkOut">CheckOut Time</label>
                       <input placeholder="Select CheckOut Time" [(ngModel)]="modelAttendance.checkOut"
                         name="checkOutTime" class="form-control" [owlDateTimeTrigger]="dtPicker2"
-                        [owlDateTime]="dtPicker2" #checkOutTime="ngModel" required>
+                        [owlDateTime]="dtPicker2" #checkOutTime="ngModel">
                       <owl-date-time #dtPicker2 [hour12Timer]="hour12Timer" [pickerType]="'timer'"></owl-date-time>
-                    </div>
-                    <div *ngIf="checkOutTime.invalid && (checkOutTime.dirty || checkOutTime.touched)"
-                      class="alert alert-danger">
-                      <label>
-                        CheckOut Time is Required
-                      </label>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -656,42 +660,42 @@
                       </div>
                     </div>
                   </div>
-                </div><!-- /.form-row -->
-              </div><!-- /.modal-body -->
-              <!-- .modal-footer -->
+                </div>
+              </div>
+              
               <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" [disabled]="attendanceForm.invalid" data-dismiss="modal"
                   (click)="save('attendance')">Save</button> <button type="button" class="btn btn-light"
                   data-dismiss="modal">Close</button>
-              </div><!-- /.modal-footer -->
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
+              </div>
+            </div>
+          </div>
         </div>
-      </form><!-- /.modal -->
+      </form>
+
+      <!-- Leave-modal -->
       <form name="leaveForm" #leaveForm="ngForm">
         <div class="modal fade" id="leaveNewModal" tabindex="-1" role="dialog" aria-labelledby="leaveLabel"
           aria-hidden="true">
-          <!-- .modal-dialog -->
+         
           <div class="modal-dialog" role="document">
-            <!-- .modal-content -->
+       
             <div class="modal-content">
-              <div class="modal-header">
-                <h6 id="clientNewModalLabel" class="modal-title inline-editable">
-                  <span *ngIf="selectedUser">{{selectedUser.firstname}} {{selectedUser.lastname}}</span>
-                </h6>
+              <div class="modal-header right_align">
+                <div class="right_align"><i class="fa fa-times-circle" data-dismiss="modal"></i></div>
               </div>
               <div class="modal-body">
                 <div class="form-row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="date">From Date</label>
-                      <input placeholder="Select Start Date" [(ngModel)]="modelLeave.startDate" name="startDate"
+                      <input placeholder="Select Start Date" [(ngModel)]="modelLeave.fromDate" name="fromDate"
                         class="form-control" [owlDateTimeTrigger]="dtPicker6" [owlDateTime]="dtPicker6"
-                        #startDate="ngModel" required>
+                        #fromDate="ngModel" required>
                       <owl-date-time #dtPicker6 [firstDayOfWeek]="firstDayofWeek" [pickerType]="'calendar'">
                       </owl-date-time>
                     </div>
-                    <div *ngIf="startDate.errors?.required && (startDate.dirty || startDate.touched)"
+                    <div *ngIf="fromDate.errors?.required && (fromDate.dirty || fromDate.touched)"
                       class="alert alert-danger">
                       <label>
                         Start Date is Required
@@ -701,14 +705,13 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="date">To Date</label>
-                      <input placeholder="Select Start Date" [(ngModel)]="modelLeave.endDate" name="endDate"
+                      <input placeholder="Select Start Date" [(ngModel)]="modelLeave.toDate" name="toDate"
                         class="form-control" [owlDateTimeTrigger]="dtPicker7" [owlDateTime]="dtPicker7"
-                        #endDate="ngModel" required>
+                        #toDate="ngModel" required>
                       <owl-date-time #dtPicker7 [firstDayOfWeek]="firstDayofWeek" [pickerType]="'calendar'">
                       </owl-date-time>
                     </div>
-                    <div *ngIf="endDate.errors?.required && (endDate.dirty || endDate.touched)"
-                      class="alert alert-danger">
+                    <div *ngIf="toDate.errors?.required && (toDate.dirty || toDate.touched)" class="alert alert-danger">
                       <label>
                         End Date is Required
                       </label>
@@ -750,18 +753,18 @@
                       </label>
                     </div>
                   </div>
-                </div><!-- /.form-row -->
-              </div><!-- /.modal-body -->
-              <!-- .modal-footer -->
+                </div>
+              </div>
+              
               <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" [disabled]="leaveForm.invalid" data-dismiss="modal"
                   (click)="save('leave')">Save</button> <button type="button" class="btn btn-light"
                   data-dismiss="modal">Close</button>
-              </div><!-- /.modal-footer -->
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
+              </div>
+            </div>
+          </div>
         </div>
-      </form><!-- /.modal -->
-    </div><!-- /.page -->
-  </div><!-- /.wrapper -->
-</main><!-- /.app-main -->
+      </form>
+    </div>
+  </div>
+</main>

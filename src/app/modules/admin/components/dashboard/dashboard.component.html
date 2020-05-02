@@ -25,18 +25,18 @@
               <!-- <div class="ml-auto">
                 <div class="dropdown">
                   <select class="custom-select" id="attendanceType" name="attendanceType" (change)="filterAttendance()"
-                    [(ngModel)]="attendanceFilter.type">
-                    <option *ngFor="let type of attendanceTypes" [value]="type.value">{{type.name}}
+                    [(ngModel)]="attendanceFilter.filterType">
+                    <option *ngFor="let type of filterTypes" [value]="type.value">{{type.name}}
                     </option>
                   </select>
                 </div>
-                <div [hidden]="attendanceFilter.type !== 'custom'">
+                <div [hidden]="attendanceFilter.filterType !== 'custom'">
                   <div class="form-group">
-                    <input placeholder="Select Start Date" [(ngModel)]="attendanceFilter.startDate" name="checkIndate"
+                    <input placeholder="Select Start Date" [(ngModel)]="attendanceFilter.fromDate" name="checkIndate"
                       class="form-control" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1">
                     <owl-date-time #dtPicker1 [firstDayOfWeek]="firstDayofWeek" [pickerType]="'calendar'">
                     </owl-date-time>
-                    <input placeholder="Select End Date" [(ngModel)]="attendanceFilter.endDate" name="startDate"
+                    <input placeholder="Select End Date" [(ngModel)]="attendanceFilter.toDate" name="fromDate"
                       class="form-control" [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2">
                     <owl-date-time #dtPicker2 [firstDayOfWeek]="firstDayofWeek" [pickerType]="'calendar'">
                     </owl-date-time>

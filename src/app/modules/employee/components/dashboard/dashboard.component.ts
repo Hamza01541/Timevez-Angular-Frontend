@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService, LoaderService, AttendanceService, LeaveService } from 'src/app/core/services/index';
 import { Constants } from 'src/shared/constants';
-import { attendanceFilter, dateType, leaveStatus, leaveFilter, leaveType } from "src/app/models/filter";
+import { Filter, DurationType, LeaveStatus, LeaveType } from "src/app/models";
 import { UtilityService } from 'src/shared/services/utility.service';
 
 @Component({
@@ -10,27 +10,27 @@ import { UtilityService } from 'src/shared/services/utility.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  fullName: string;
+  fullname: string;
   userId: string;
   totalAttendance: number;
   totalLeaveStatus: number;
   totalLeaveType: number;
   totalAbsent: number;
   firstDayofWeek = Constants.firstDayOfWeek;
-  startDate: string;
-  endDate: string;
-  attendanceFilter: attendanceFilter;
-  leaveFilter: leaveFilter;
+  fromDate: string;
+  toDate: string;
+  filter: Filter;
 
-  leaveDetail: any = { approved: 0, pending: 0, casual: 0, annual: 0 };
+  leaveDetail: any = { approved: 0, pending: 0, casual: 0, annual: 0, totalAttendance: 0, totalAbsent: 0 };
 
-  attendanceTypes: any[] = [
-    { value: dateType.currentDate, name: 'Current Date' },
-    { value: dateType.currentMonth, name: 'Current Month' },
-    { value: dateType.lastMonth, name: 'Last Month' },
-    { value: dateType.currentYear, name: 'Current Year' },
-    { value: dateType.lastYear, name: 'Last Year' },
-    { value: dateType.custom, name: 'Custom' }
+  filterTypes: any[] = [
+    { value: DurationType.currentDate, name: 'Today' },
+    { value: DurationType.currentMonth, name: 'This month' },
+    { value: DurationType.lastMonth, name: 'Last month' },
+    { value: DurationType.currentYear, name: 'This year' },
+    { value: DurationType.lastYear, name: 'Last year' },
+    { value: DurationType.lastYear, name: 'Future' },
+    // { value: DurationType.custom, name: 'Custom' }
   ];
 
   constructor(
@@ -41,32 +41,39 @@ export class DashboardComponent implements OnInit {
     private utilityService: UtilityService
 
   ) {
-    this.attendanceFilter = new attendanceFilter();
-    this.leaveFilter = new leaveFilter();
+    this.filter = new Filter();
   }
 
   ngOnInit() {
     let currentUser = JSON.parse(localStorage.getItem(Constants.currentUser));
-    this.fullName = `${currentUser.firstname} ${currentUser.lastname}`;
+    this.fullname = `${currentUser.firstname} ${currentUser.lastname}`;
     this.userId = currentUser.userId;
+
+    this.setDefaultFilterValues();
     this.getCounts();
-    this.setDefaultDropDownValue();
   }
 
-  setDefaultDropDownValue() {
-    this.attendanceFilter.type = dateType.currentDate;
-    this.leaveFilter.status = leaveStatus.pending;
-    this.leaveFilter.type = leaveType.casual;
+  /**
+   * Set default values of filters.
+   */
+  setDefaultFilterValues() {
+    this.filter.filterType = DurationType.currentMonth;
+    this.filter.filterType = DurationType.currentMonth;
   }
 
   filterResult() {
-    this.startDate = this.utilityService.getCurrentDate(this.attendanceFilter.startDate);
-    this.endDate = this.utilityService.getCurrentDate(this.attendanceFilter.endDate);
+    this.fromDate = this.utilityService.getCurrentDate(this.filter.fromDate);
+    this.toDate = this.utilityService.getCurrentDate(this.filter.toDate);
     this.getCounts();
   }
 
-  getLeaveDetail() {
-    this.leaveService.getUserLeave(this.userId, 1, this.leaveFilter.status, this.startDate, this.endDate, 0).subscribe((leaves: any) => {
+  /**
+   * Get user leave details (i.e. approved,pending,casual, annual leave counts)
+   */
+  getLeaveCount() {
+    this.showLoader();
+    this.leaveService.getUserLeave(this.userId, 1, this.filter.filterType, this.fromDate, this.toDate, '', 0).subscribe((leaves: any) => {
+      this.hideLoader();
       if (leaves && leaves.data) {
         leaves.data.forEach(userLeave => {
           if (userLeave.status === 'pending') {
@@ -85,42 +92,63 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  /**
+   * Get attendance, leave and absent counts for a specific user.
+   */
   getCounts() {
-    this.getTotalAttendance();
-    this.getTotalAbsent();
-    this.getLeaveDetail();
-  }
-
-  getTotalAttendance() {
-    this.attendanceService.getUserAttendanceCount(this.userId, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
-      this.totalAttendance = attendance.total;
-    });
-  }
-
-  getTotalAbsent() {
-    this.attendanceService.getUserAttendanceCount(this.userId, this.attendanceFilter.type, this.startDate, this.endDate).subscribe((attendance: any) => {
-      this.totalAbsent = attendance.total;
-    });
-  }
-
-  filterAttendance() {
-    if (this.attendanceFilter.type != dateType.custom) {
-      this.attendanceFilter.endDate = '';
-      this.attendanceFilter.startDate = '';
-      this.startDate = '';
-      this.endDate = '';
-      this.getCounts();
-    }
+    this.leaveDetail = { approved: 0, pending: 0, casual: 0, annual: 0, totalAttendance: 0, totalAbsent: 0 };
+    this.getAttendanceCount();
+    this.getAbsentCount();
+    this.getLeaveCount();
   }
 
   /**
-   * Checkin user
+   * Get user present count
+   */
+  getAttendanceCount() {
+    this.showLoader();
+    this.attendanceService.getUserAttendanceCount(this.userId, this.filter.filterType, this.fromDate, this.toDate, true).subscribe((attendance: any) => {
+      this.hideLoader();
+      this.leaveDetail.totalAttendance = attendance.total;
+    });
+  }
+
+  /**
+   * Get user absent count
+   */
+  getAbsentCount() {
+    this.showLoader();
+    this.attendanceService.getUserAttendanceCount(this.userId, this.filter.filterType, this.fromDate, this.toDate, false).subscribe((attendance: any) => {
+      this.hideLoader();
+      this.leaveDetail.totalAbsent = attendance.total;
+    });
+  }
+
+  /**
+   * Get counts based on filters.
+   */
+  filterAttendance() {
+    if (this.filter.filterType === DurationType.custom) {
+      this.fromDate = this.utilityService.getCurrentDate(this.filter.fromDate);
+      this.toDate = this.utilityService.getCurrentDate(this.filter.toDate);
+    } else {
+      this.filter.toDate = '';
+      this.filter.fromDate = '';
+      this.fromDate = '';
+      this.toDate = '';
+    }
+
+    this.getCounts();
+  }
+
+  /**
+   * Checkin current user
    */
   checkIn() {
     this.showLoader();
     this.attendanceService.checkIn().subscribe((result: any) => {
       this.hideLoader();
-      this.alertService.successToastr(`Good Morning ${this.fullName}!`, false);
+      this.alertService.successToastr(`Good Morning ${this.fullname}!`, false);
     }, error => {
       this.hideLoader();
       this.alertService.warningToastr(`${error.error.message}`, false);
@@ -128,13 +156,13 @@ export class DashboardComponent implements OnInit {
   }
 
   /**
-   * Checkout user
+   * Checkout current user
    */
   checkOut() {
     this.showLoader();
     this.attendanceService.checkOut().subscribe((result: any) => {
       this.hideLoader();
-      this.alertService.successToastr(`Good Night ${this.fullName}!`, false);
+      this.alertService.successToastr(`Good Night ${this.fullname}!`, false);
     }, error => {
       this.hideLoader();
       this.alertService.warningToastr(`${error.error.message}`, false);
@@ -142,13 +170,13 @@ export class DashboardComponent implements OnInit {
   }
 
   /**
-   * Start break time
+   * Start break time for current user.
    */
   breakStart() {
     this.showLoader();
     this.attendanceService.startBreak().subscribe((result: any) => {
       this.hideLoader();
-      this.alertService.successToastr(`See you soon ${this.fullName}!`, false);
+      this.alertService.successToastr(`See you soon ${this.fullname}!`, false);
     }, error => {
       this.hideLoader();
       this.alertService.warningToastr(`${error.error.message}`, false);
@@ -156,13 +184,13 @@ export class DashboardComponent implements OnInit {
   }
 
   /**
-   * End break time
+   * End break time for current user.
    */
   breakEnd() {
     this.showLoader();
     this.attendanceService.endBreak().subscribe((result: any) => {
       this.hideLoader();
-      this.alertService.successToastr(`Welcome back ${this.fullName}!`, false);
+      this.alertService.successToastr(`Welcome back ${this.fullname}!`, false);
     }, error => {
       this.hideLoader();
       this.alertService.warningToastr(`${error.error.message}`, false);

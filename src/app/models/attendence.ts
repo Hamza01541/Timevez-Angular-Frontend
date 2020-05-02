@@ -4,8 +4,8 @@ export class Attendence {
     checkOut: Date;
     breakStartTime: Date;
     breakEndTime: Date;
-    date: String;
-    active: Boolean;
-    comment: String;
+    date: string;
+    active: boolean;
+    comment: string;
     userId: number;
 }

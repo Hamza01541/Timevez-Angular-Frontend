@@ -22,20 +22,20 @@
                             <br>
                             <div class="form-group">
                                 <label for="date">Start Date</label>
-                                <input class="form-control" [ngClass]="getValidationClass(startDate)"
-                                    [min]="minStartDate" placeholder="Select Start Date" [(ngModel)]="leave.startDate"
-                                    name="startDate" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1"
-                                    #startDate="ngModel" (dateTimeChange)="startDateSelected()" required>
+                                <input class="form-control" [ngClass]="getValidationClass(fromDate)"
+                                    [min]="minfromDate" placeholder="Select Start Date" [(ngModel)]="leave.fromDate"
+                                    name="fromDate" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1"
+                                    #fromDate="ngModel" (dateTimeChange)="fromDateSelected()" required>
                                 <owl-date-time #dtPicker1 [pickerType]="'calendar'"></owl-date-time>
 
                                 <div class="invalid-feedback"
-                                    *ngIf="startDate.errors?.required && (startDate.dirty || startDate.touched)">
+                                    *ngIf="fromDate.errors?.required && (fromDate.dirty || fromDate.touched)">
                                     <i class="fa fa-exclamation-circle fa-fw"></i> Start Date is Required.
                                 </div>
-                                <div class="invalid-feedback" *ngIf="startDate.errors?.owlDateTimeMin">
+                                <div class="invalid-feedback" *ngIf="fromDate.errors?.owlDateTimeMin">
                                     <i class="fa fa-exclamation-circle fa-fw"></i> End Date must be greater than today.
                                 </div>
-                                <div class="invalid-feedback" *ngIf="startDate.errors?.owlDateTimeParse">
+                                <div class="invalid-feedback" *ngIf="fromDate.errors?.owlDateTimeParse">
                                     <i class="fa fa-exclamation-circle fa-fw"></i> Date format must be like: mm/dd/yyyy.
                                 </div>
                             </div>
@@ -43,17 +43,17 @@
                             <div class="form-group">
                                 <label for="date">End Date</label>
                                 <input class="form-control"
-                                    [ngClass]="{'is-valid': leave.endDate, 'is-invalid': endDate.errors?.owlDateTimeMin}"
-                                    [min]="minEndDate" placeholder="Select End Date" [(ngModel)]="leave.endDate"
-                                    name="endDate" [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2"
-                                    #endDate="ngModel" (dateTimeChange)="endDateSelected(endDate)">
+                                    [ngClass]="{'is-valid': leave.toDate, 'is-invalid': toDate.errors?.owlDateTimeMin}"
+                                    [min]="mintoDate" placeholder="Select End Date" [(ngModel)]="leave.toDate"
+                                    name="toDate" [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2"
+                                    #toDate="ngModel">
                                 <owl-date-time #dtPicker2 [pickerType]="'calendar'"></owl-date-time>
 
-                                <div class="invalid-feedback" *ngIf="endDate.errors?.owlDateTimeMin">
+                                <div class="invalid-feedback" *ngIf="toDate.errors?.owlDateTimeMin">
                                     <i class="fa fa-exclamation-circle fa-fw"></i> End Date must be greater than start
                                     date.
                                 </div>
-                                <div class="invalid-feedback" *ngIf="endDate.errors?.owlDateTimeParse">
+                                <div class="invalid-feedback" *ngIf="toDate.errors?.owlDateTimeParse">
                                     <i class="fa fa-exclamation-circle fa-fw"></i> Date format must be like: mm/dd/yyyy.
                                 </div>
                             </div>
@@ -62,14 +62,14 @@
                                 <label>Leave Reason</label>
                                 <textarea id="leaveDescription" style="height: 100px;" name="leaveDescription" required
                                     class="form-control" #leaveDescription="ngModel" minlength="20"
-                                    [ngClass]="getValidationClass(leaveDescription)"
+                                    [ngClass]="getValidationClass(leaveDescription, 20)"
                                     [(ngModel)]="leave.description"></textarea>
 
                                 <div class="invalid-feedback"
                                     *ngIf="leaveDescription.errors?.required && (leaveDescription.dirty || leaveDescription.touched)">
                                     <i class="fa fa-exclamation-circle fa-fw"></i> Leave Reason is Required.
                                 </div>
-                                <div class="invalid-feedback" *ngIf="leaveDescription.errors?.minlength">
+                                <div class="invalid-feedback" *ngIf="leaveDescription.errors?.minlength || (leaveDescription.value && leaveDescription.value.trim().length < 20)">
                                     <i class="fa fa-exclamation-circle fa-fw"></i> Leave Reason should be greater than
                                     20 characters.
                                 </div>

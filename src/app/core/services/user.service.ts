@@ -77,11 +77,14 @@ export class UserService {
     }
 
     /**
-  * Return  role 
-  * @param pageNumber is to get page based data 
-  */
-    getPagedUsers(pageNumber: number) {
-        const url = `${this.user}/${ApiUrl.getPagedUsers}/${pageNumber}`;
+    * Filter user records.
+    * @param pageNumber Current Page number
+    * @param {string} search Entered text in search box to filter data.
+    * @returns Filtered records
+    */
+    getPagedUsers(pageNumber: number, search?:string) {
+        // const url = `${this.user}/${ApiUrl.getPagedUsers}/${pageNumber}`;
+        const url = `${this.user}/${ApiUrl.getPagedUsers}?pageNo=${pageNumber}&search=${search}`;
         return this.RequestService.getData(url);
     }
 
@@ -89,21 +92,21 @@ export class UserService {
      * Total number of users
      * It will return the total number of users
      */
-    getTotalUsers(filterType: string, endDate?: string) {
-        const url = `${this.user}/${ApiUrl.totalCount}?type=${filterType}&endDate=${endDate}`;
+    getTotalUsers(filterType: string, toDate?: string) {
+        const url = `${this.user}/${ApiUrl.totalCount}?type=${filterType}&toDate=${toDate}`;
         return this.RequestService.getData(url);
     }
 
-    /**
-    * Filter user records.
-    * @param pageNumber Current Page number
-    * @param {string} search Entered text in search box to filter data.
-    * @returns Filtered records
-    */
-    searchUser(pageNumber: number, search: string) {
-        const url = `${this.user}/${ApiUrl.getPagedUsers}?pageNo=${pageNumber}&search=${search}`;
-        return this.RequestService.getData(url);
-    }
+    // /**
+    // * Filter user records.
+    // * @param pageNumber Current Page number
+    // * @param {string} search Entered text in search box to filter data.
+    // * @returns Filtered records
+    // */
+    // searchUser(pageNumber: number, search: string) {
+    //     const url = `${this.user}/${ApiUrl.getPagedUsers}?pageNo=${pageNumber}&search=${search}`;
+    //     return this.RequestService.getData(url);
+    // }
 
     /**
    * Logout The user 

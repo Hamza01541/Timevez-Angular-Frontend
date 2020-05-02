@@ -77,13 +77,13 @@ export class LeaveService {
     }
 
 
-    getUserLeave(userId: string, pageNumber: number, leave: string, startDate?: string, endDate?: string, limit: number = 10) {
-        const url = `${this.leave}/${ApiUrl.pagedUserLeaves}?userId=${userId}&pageNo=${pageNumber}&type=${leave}&startDate=${startDate}&endDate=${endDate}&limit=${limit}`;
+    getUserLeave(userId: string, pageNumber: number, filterType: string, fromDate?: string, toDate?: string, search?:string, limit: number = 10) {
+        const url = `${this.leave}/${ApiUrl.pagedUserLeaves}?userId=${userId}&pageNo=${pageNumber}&type=${filterType}&fromDate=${fromDate}&toDate=${toDate}&limit=${limit}&search=${search}`;
         return this.RequestService.getData(url);
     }
 
-    getUserLeaveCount(userId: string, status: string, filterType: string, startDate: string, endDate: string) {
-        const url = `${this.leave}/${ApiUrl.totalCountByUserId}?userId=${userId}&status=${status}&type=${filterType}&startDate=${startDate}&endDate=${endDate}`;
+    getUserLeaveCount(userId: string, status: string, filterType: string, fromDate: string, toDate: string) {
+        const url = `${this.leave}/${ApiUrl.totalCountByUserId}?userId=${userId}&status=${status}&type=${filterType}&fromDate=${fromDate}&toDate=${toDate}`;
         return this.RequestService.getData(url);
     }
 
@@ -91,8 +91,8 @@ export class LeaveService {
      * Total number of leave
      * It will return the total leave 
      */
-    getTotalLeave(filterType: string, status: string, startDate: string, endDate: string) {
-        const url = `${this.leave}/${ApiUrl.totalCount}?status=${status}&type=${filterType}&startDate=${startDate}&endDate=${endDate}`;
+    getTotalLeave(filterType: string, status: string, fromDate: string, toDate: string) {
+        const url = `${this.leave}/${ApiUrl.totalCount}?status=${status}&type=${filterType}&fromDate=${fromDate}&toDate=${toDate}`;
         return this.RequestService.getData(url);
     }
 }

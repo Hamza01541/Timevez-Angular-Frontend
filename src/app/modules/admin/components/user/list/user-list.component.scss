@@ -11,3 +11,19 @@ z-index: 999;
 .cdk-overlay-transparent-backdrop, .cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing{
     z-index: 1050 !important;
 }
+
+.right_align{
+    align-self: flex-end;
+}
+
+i{
+  cursor: pointer;
+}
+
+:disabled{
+    cursor: not-allowed;
+}
+
+.dataTables_empty{
+    text-align-last: center;
+}

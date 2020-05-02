@@ -10,139 +10,145 @@
               <div class="sidebar-section sidebar-section-fill">
                 <h1 class="page-title">
                   <i class="far fa-building text-muted mr-2"></i> History </h1>
-                <p class="text-muted"> Employee details </p>
+                <p class="text-muted"> Employee Details </p>
 
                 <!-- nav-tabs -->
                 <div class="nav-scroller border-bottom">
                   <ul class="nav nav-tabs">
                     <li class="nav-item">
-                      <a class="nav-link active show" data-toggle="tab" href="#tab-1">Attendance</a>
+                      <a class="nav-link active show" data-toggle="tab" href="#attendance-tab">Attendance</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" data-toggle="tab" href="#tab-2">Leave</a>
+                      <a class="nav-link" data-toggle="tab" href="#leave-tab">Leave</a>
                     </li>
                   </ul>
                 </div>
 
                 <!-- attendance-tab -->
                 <div class="tab-content pt-4" id="clientDetailsTabs">
-                  <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab">
+                  <div class="tab-pane fade show active" id="attendance-tab" role="tabpanel" aria-labelledby="attendance-tab-tab">
                     <div class="card-body">
                       <div class="form-group">
                         <div class="input-group input-group-alt">
                           <!-- Filter dropdown -->
                           <div class="input-group-prepend">
-                            <select class="custom-select" id="attendanceType" name="attendanceType"
-                              (change)="filterAttendance()" [(ngModel)]="attendanceFilter.type">
-                              <option *ngFor="let type of attendanceTypes" [value]="type.value">{{type.name}}
+                            <select class="custom-select" id="attendanceFilter" name="attendanceFilter"
+                              (change)="getUserAttendances(1)" [(ngModel)]="attendanceFilter.filterType">
+                              <option *ngFor="let filterType of attendanceFilterTypes" [value]="filterType.value">{{filterType.name}}
                               </option>
                             </select>
                           </div>
                           <!-- Filter search box -->
-                          <div class="input-group has-clearable">
+                          <!-- <div class="input-group has-clearable">
                             <button id="clear-search" type="button" class="close" aria-label="Close"><span
                                 aria-hidden="true"><i class="fa fa-times-circle"></i></span></button>
                             <div class="input-group-prepend">
                               <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                             </div><input id="table-search" type="text" class="form-control"
                               placeholder="Search products">
-                          </div>
+                          </div> -->
                         </div>
                       </div>
 
                       <!-- attendance-table -->
-                      <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th></th>
-                              <th style="min-width:320px">Date</th>
-                              <th> Checkin </th>
-                              <th> Break Start </th>
-                              <th> Break End </th>
-                              <th> Checkout </th>
-                              <th> Time Spent </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let attendance of userAttendance">
-                              <td class="align-middle col-checker">
-                                <div class="custom-control custom-control-nolabel custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" name="selectedRow[]" id="p3">
-                                  <label class="custom-control-label" for="p3"></label>
-                                </div>
-                              </td>
-                              <td style="min-width:320px"> <a>{{attendance.date | date : 'EEEE MMM d, y'}} </a></td>
-                              <td class="align-middle"> {{attendance.checkIn | date:'shortTime'}} </td>
-                              <td class="align-middle"> {{attendance.breakStartTime | date:'shortTime'}} </td>
-                              <td class="align-middle"> {{attendance.breakEndTime | date:'shortTime'}} </td>
-                              <td class="align-middle"> {{attendance.checkOut | date:'shortTime'}} </td>
-                              <td class="align-middle"> {{getAvailableTime(attendance)}} </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                      <table class="table table-hover" style="min-width: 678px">
+                        <thead class="thead-light">
+                          <tr>
+                            <th></th>
+                            <th>Status</th>
+                            <th> Date </th>
+                            <th> Checkin </th>
+                            <th> Break Start </th>
+                            <th> Break End </th>
+                            <th> Checkout </th>
+                            <th> Hours Spent </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngIf="!userAttendances.length"><td valign="top" colspan="8" class="dataTables_empty">No data available in table</td></tr>
+                          <tr *ngFor="let attendance of userAttendances"  >
+                            <td class="align-middle col-checker">
+                              <div class="custom-control custom-control-nolabel custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="selectedRow-{{attendance.date}}"
+                                  id="selectedRow-{{attendance.date}}">
+                                <label class="custom-control-label" for="selectedRow-{{attendance.date}}"></label>
+                              </div>
+                            </td>
+                            <td><i class="oi oi-media-record" [ngClass]="{'text-danger': !attendance.active, 'text-success': attendance.checkOut, 'text-warning': !attendance.checkOut}"></i></td>
+                             <td class="align-middle"> {{attendance.date | date: 'EE MMM d, y'}} </td>
+                            <td class="align-middle"> {{attendance.checkIn | date:'shortTime'}} </td>
+                            <td class="align-middle"> {{attendance.breakStartTime| date:'shortTime'}} </td>
+                            <td class="align-middle"> {{attendance.breakEndTime| date:'shortTime'}} </td>
+                            <td class="align-middle"> {{attendance.checkOut| date:'shortTime'}} </td>
+                            <td class="align-middle" [ngClass]="{'text-danger': !attendance.timeCompleted, 'text-success': attendance.timeCompleted}"> {{attendance.timeSpent}} </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
                       <!-- .pagination -->
                       <ul class="pagination justify-content-center mt-4" *ngFor="let count of totalCounts">
                         <li class="page-item" *ngIf="count > 1">
-                          <a class="page-link" (click)="getPageNumber(count)">{{count}}</a>
+                          <a class="page-link" (click)="getUserAttendances(count)">{{count}}</a>
                         </li>
                       </ul>
                     </div>
                   </div>
 
                   <!-- Leave-tab -->
-                  <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
+                  <div class="tab-pane fade" id="leave-tab" role="tabpanel" aria-labelledby="leave-tab-tab">
                     <div class="card-body">
                       <div class="form-group">
                         <div class="input-group input-group-alt">
                           <!-- Filter dropdown -->
                           <div class="input-group-prepend">
-                            <select class="custom-select" id="attendanceType" name="attendanceType"
-                              (change)="filterAttendance()" [(ngModel)]="attendanceFilter.type">
-                              <option *ngFor="let type of attendanceTypes" [value]="type.value">{{type.name}}
-                              </option>
-                            </select>
+                            <select class="custom-select" id="leaveFilter" name="leaveFilter"
+                            (change)="getUserLeaves(1)" [(ngModel)]="leaveFilter.filterType">
+                            <option *ngFor="let filterType of leaveFilterTypes" [value]="filterType.value">{{filterType.name}}
+                            </option>
+                          </select>
                           </div>
                           <!-- Filter search box -->
-                          <div class="input-group has-clearable">
+                          <!-- <div class="input-group has-clearable">
                             <button id="clear-search" type="button" class="close" aria-label="Close"><span
                                 aria-hidden="true"><i class="fa fa-times-circle"></i></span></button>
                             <div class="input-group-prepend">
                               <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                             </div><input id="table-search" type="text" class="form-control"
                               placeholder="Search products">
-                          </div>
+                          </div> -->
                         </div>
                       </div>
                       <!-- Leave-table -->
                       <div class="table-responsive">
-                        <table class="table">
-                          <thead>
+                        <table class="table table-hover" style="min-width: 678px">
+                          <thead class="thead-light">
                             <tr>
                               <th></th>
-                              <th style="min-width:320px">Date</th>
-                              <th> Check In </th>
-                              <th> Break Start </th>
-                              <th> Break End </th>
-                              <th> Check Out </th>
-                              <th> Total Hours </th>
+                              <th> From</th>
+                              <th> To </th>
+                              <th> Type </th>
+                              <th> Status </th>
+                              <th> Days </th>
+                              <th> Description </th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr *ngFor="let attendance of userAttendance">
+                            <tr *ngIf="!userLeaves.length"><td valign="top" colspan="8" class="dataTables_empty">No data available in table</td></tr>
+                            <tr *ngFor="let leave of userLeaves">
                               <td class="align-middle col-checker">
                                 <div class="custom-control custom-control-nolabel custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" name="selectedRow[]" id="p3">
-                                  <label class="custom-control-label" for="p3"></label>
+                                  <input type="checkbox" class="custom-control-input" name="selectedRow-{{leave.fromDate}}"
+                                    id="selectedRow-{{leave.fromDate}}">
+                                  <label class="custom-control-label" for="selectedRow-{{leave.fromDate}}"></label>
                                 </div>
                               </td>
-                              <td style="min-width:320px"> <a>{{attendance.date | date : 'fullDate'}} </a></td>
-                              <td class="align-middle"> {{attendance.checkIn | date:'shortTime'}} </td>
-                              <td class="align-middle"> {{attendance.breakStartTime | date:'shortTime'}} </td>
-                              <td class="align-middle"> {{attendance.breakEndTime | date:'shortTime'}} </td>
-                              <td class="align-middle"> {{attendance.checkOut | date:'shortTime'}} </td>
-                              <td class="align-middle"> {{getAvailableTime(attendance)}} </td>
+                              <td style="min-width:320px"> <a>{{leave.fromDate | date : 'EE MMM d, y'}} </a></td>
+                              <td class="align-middle"> {{leave.toDate | date:'EE MMM d, y'}} </td>
+                              <td class="align-middle"> {{leave.type}} </td>
+                              <td class="align-middle badge badge-subtle" 
+                              [ngClass]="{'badge-success': leave.status === leaveStatus.approved, 'badge-danger': leave.status === leaveStatus.rejected, 'badge-warning': leave.status === leaveStatus.pending}"> {{leave.status}} </td>
+                              <td class="align-middle"> {{getDaysDifference(leave.fromDate, leave.toDate)}} </td>
+                              <td class="align-middle"> {{leave.description}} </td>           
                             </tr>
                           </tbody>
                         </table>
