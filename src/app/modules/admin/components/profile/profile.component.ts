@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageService, UserService } from 'src/app/core/services/';
-import { Constants } from 'src/shared/constants';
+import { LocalStorageService, UserService } from 'src/app/core/services';
+import { Constants } from 'src/app/shared/constants';
 
 @Component({
     selector: 'profile-component',

@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService, AlertService, LoaderService, AttendanceService, LeaveService } from 'src/app/core/services/index';
 import { Filter, DurationType } from "src/app/models";
-import { Constants } from 'src/shared/constants';
-import { UtilityService } from 'src/shared/services/utility.service';
+import { Constants } from 'src/app/shared/constants';
+import { UtilityService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-dashboard',

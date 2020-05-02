@@ -4,12 +4,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { AlertService, LoaderService, UserService, AttendanceService, LeaveService } from 'src/app/core/services';
 import { User, Attendence, Leave } from "src/app/models";
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { Constants } from 'src/shared/constants';
+import { Constants } from 'src/app/shared/constants';
 import { LeaveType, LeaveStatus, Filter, DurationType } from "src/app/models";
 import { UserTabs } from 'src/app/models';
-import { ConfirmationDialogueComponent } from 'src/shared/components';
+import { ConfirmationDialogueComponent } from 'src/app/shared/components';
 import { Role } from 'src/app/models/role';
-import { UtilityService } from 'src/shared/services/utility.service';
+import { UtilityService } from 'src/app/shared/services';
 import * as moment from 'moment';
 declare var jQuery: any;
 

@@ -3,14 +3,13 @@ import { AlertService, LoaderService, LeaveService, LocalStorageService } from '
 import { Leave } from "src/app/models";
 import { Router } from '@angular/router';
 import { LeaveType, } from "src/app/models";
-import { Constants } from 'src/shared/constants';
+import { Constants } from 'src/app/shared/constants';
 
 @Component({
   selector: 'leave',
   templateUrl: './leave.component.html',
   styleUrls: ['./leave.component.scss']
 })
-
 export class LeaveComponent implements OnInit {
   leaveTypes: any[];
   leave: Leave;

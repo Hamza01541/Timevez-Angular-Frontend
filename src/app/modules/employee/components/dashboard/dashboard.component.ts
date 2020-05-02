@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService, LoaderService, AttendanceService, LeaveService } from 'src/app/core/services/index';
-import { Constants } from 'src/shared/constants';
+import { Constants } from 'src/app/shared/constants';
 import { Filter, DurationType, LeaveStatus, LeaveType } from "src/app/models";
-import { UtilityService } from 'src/shared/services/utility.service';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 @Component({
   selector: 'app-dashboard-form',

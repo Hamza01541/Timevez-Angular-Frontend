@@ -21,7 +21,7 @@ import {
     ChangePasswordComponent,
     ProfileComponent
 } from "./components";
-import { SharedModule } from '.././../../shared/shared.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true

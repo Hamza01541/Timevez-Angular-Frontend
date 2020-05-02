@@ -17,7 +17,7 @@ import {
 } from 'src/app/core/services';
 
 //shared Services 
-import { UtilityService } from 'src/shared/services/utility.service'
+import { UtilityService } from 'src/app/shared/services';
 
 //Material Module Imports
 import { MatInputModule } from '@angular/material/input';
@@ -35,7 +35,7 @@ import {
 //Shared Component
 import {
   GridComponent, ConfirmationDialogueComponent
-} from 'src/shared/components';
+} from 'src/app/shared/components';
 
 const SHARED_MODULES = [
   FormsModule,

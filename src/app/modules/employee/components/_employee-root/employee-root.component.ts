@@ -2,7 +2,7 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { EmployeeNavigationMenu } from 'src/app/models/navigation-menu';
 import { Role } from 'src/app/models/role';
-import { Constants } from 'src/shared/constants';
+import { Constants } from 'src/app/shared/constants';
 import { LocalStorageService } from 'src/app/core/services/';
 
 @Injectable()

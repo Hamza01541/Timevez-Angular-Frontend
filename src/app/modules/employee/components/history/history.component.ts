@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService, LoaderService, AttendanceService, LeaveService } from 'src/app/core/services';
-import { Constants } from 'src/shared/constants';
-import { UtilityService } from 'src/shared/services/utility.service';
+import { Constants } from 'src/app/shared/constants';
+import { UtilityService } from 'src/app/shared/services';
 import * as moment from 'moment';
 import { Attendence, Leave, DurationType, Filter, LeaveStatus } from 'src/app/models';
 

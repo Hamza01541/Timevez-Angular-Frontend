@@ -3,7 +3,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { Routing } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RequestInterceptor } from 'src/app/core/interceptors';
@@ -22,7 +22,7 @@ import {
 //Shared Module
 import {
   LoaderComponent
-} from 'src/shared/components/loader/loader.component';
+} from 'src/app/shared/components';
 
 
 @NgModule({

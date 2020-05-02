@@ -3,7 +3,7 @@ import { AlertService, LoaderService, UserService } from 'src/app/core/services'
 import { Router, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { Role } from 'src/app/models/role';
-import { Constants } from 'src/shared/constants';
+import { Constants } from 'src/app/shared/constants';
 
 @Component({
   selector: 'login-component',

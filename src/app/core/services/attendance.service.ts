@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RequestService } from "./request.service";
-import { ApiUrl } from 'src/shared/resource-references';
+import { ApiUrl } from 'src/app/shared/resource-references';
 import { Attendence } from "src/app/models";
 
 @Injectable({

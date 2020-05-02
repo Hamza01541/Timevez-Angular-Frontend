@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import 'jquery';
+
 @Component({
   selector: 'jsgrid',
   templateUrl: './grid.component.html',

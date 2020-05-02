@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AdminNavigationMenu } from 'src/app/models/navigation-menu';
 import { Role } from 'src/app/models/role';
 import { LocalStorageService } from 'src/app/core/services/';
-import { Constants } from 'src/shared/constants';
+import { Constants } from 'src/app/shared/constants';
 
 @Component({
   selector: 'admin-root',
