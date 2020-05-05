@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService, LoaderService, UserService } from 'src/app/core/services';
+import { AlertService, LoaderService, UserService, UserStatusService } from 'src/app/core/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { Role } from 'src/app/models/role';
@@ -15,9 +15,11 @@ export class LoginComponent implements OnInit {
   loginModel: any = { username: "", password: "" }
   logout: boolean = false;
   currentUser: any;
+
   constructor(
     private alertService: AlertService,
     private userService: UserService,
+    private userStatusService: UserStatusService,
     private router: Router,
     private loaderService: LoaderService,
     private route: ActivatedRoute,
@@ -43,6 +45,7 @@ export class LoginComponent implements OnInit {
       this.alertService.successToastr("Successfully Logined", false);
       if (user && user.token) {
         this.storageService.set(Constants.currentUser, user);
+        this.userStatusService.isUserLoggedIn.next(true);
         this.hideLoader();
         this.checkRole(user);
       }

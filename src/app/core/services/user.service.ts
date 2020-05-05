@@ -3,15 +3,15 @@ import { RequestService } from "./request.service";
 import { ApiUrl } from 'src/app/shared/resource-references';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { User } from "src/app/models";
+import { UserStatusService } from './user-status.service';
 
 @Injectable({
     providedIn: 'root'
 })
-
 export class UserService {
     user: string = `${ApiUrl.user}`;
 
-    constructor(private RequestService: RequestService, private storageService: LocalStorageService, ) { }
+    constructor(private RequestService: RequestService, private storageService: LocalStorageService, private userStatusService: UserStatusService) { }
 
     /**
    * Get User Data 
@@ -114,5 +114,6 @@ export class UserService {
    */
     logout() {
         this.storageService.remove('currentUser');
+        this.userStatusService.isUserLoggedIn.next(false);
     }
 }

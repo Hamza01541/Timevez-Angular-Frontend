@@ -5,3 +5,4 @@ export * from './alert.service';
 export * from './user.service';
 export * from './attendance.service';
 export * from './leave.service';
+export * from './user-status.service';

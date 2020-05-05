@@ -17,7 +17,7 @@ const routes: Routes = [
         component: AdminRootComponent,
         children: [
             { path: 'dashboard', component: DashboardComponent },
-            { path: 'user', component: UserListComponent },
+            { path: 'employee', component: UserListComponent },
             { path: 'change-password', component: ChangePasswordComponent },
             { path: 'profile', component: ProfileComponent },
             // otherwise redirect to home

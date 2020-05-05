@@ -1,6 +1,6 @@
 
 import { NgModule, ErrorHandler } from '@angular/core';
-import { Routing } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -32,13 +32,12 @@ import {
     LoaderComponent
   ],
   imports: [
+    AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    FontAwesomeModule,
-
-    Routing,
+    FontAwesomeModule
   ],
   providers: [
 

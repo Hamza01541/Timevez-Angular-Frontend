@@ -4,6 +4,7 @@ import {
   LoginComponent
 } from 'src/app/pages';
 import { Role } from 'src/app/models/role';
+import { NgModule } from '@angular/core';
 
 const appRoutes: Routes = [
 
@@ -25,5 +26,8 @@ const appRoutes: Routes = [
   { path: '', redirectTo: "/login", pathMatch: 'full' },
 ];
 
-
-export const Routing = RouterModule.forRoot(appRoutes);
+@NgModule({
+  imports: [RouterModule.forRoot(appRoutes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

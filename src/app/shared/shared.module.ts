@@ -13,7 +13,7 @@ import { AuthGuard } from 'src/app/core/guards';
 import { ToastrModule } from 'ngx-toastr';
 // Service
 import {
-  AlertService, LoaderService, UserService, AttendanceService, LeaveService
+  AlertService, LoaderService, UserService, AttendanceService, LeaveService, UserStatusService
 } from 'src/app/core/services';
 
 //shared Services 
@@ -34,10 +34,12 @@ import {
 
 //Shared Component
 import {
-  GridComponent, ConfirmationDialogueComponent
+  GridComponent, ConfirmationDialogueComponent, SideNavBarComponent
 } from 'src/app/shared/components';
+import { RouterModule } from '@angular/router';
 
 const SHARED_MODULES = [
+  RouterModule,
   FormsModule,
   HttpModule,
   HttpClientModule,
@@ -58,6 +60,7 @@ const SHARED_COMPONENTS = [
   //Shared Component
   GridComponent,
   ConfirmationDialogueComponent,
+  SideNavBarComponent
 ];
 
 const SHARED_SERVICES = [
@@ -69,7 +72,8 @@ const SHARED_SERVICES = [
   UserService,
   AuthGuard,
   LeaveService,
-  UtilityService
+  UtilityService,
+  UserStatusService
 ];
 
 @NgModule({

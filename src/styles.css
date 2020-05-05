@@ -2,60 +2,18 @@
 /* Material */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
  
-
-
-
 /* ngx-toastr */
 @import '~ngx-toastr/toastr.css';
 
-/* Owl Date and time*/
-
+/* Owl-Date-time Picker*/
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 
+
+/* #Custom CSS# */
 body.disable-scroll{
   overflow: hidden;
 }
 
-/* hides arrow of input type='number' */
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {  
-   -webkit-appearance: none; 
-   margin: 0; 
-}
-
-/* display cursor pointer not-allowed for all disabled buttons */
-button[disabled]:hover {
-  cursor: not-allowed;
-}
-
-:disabled {
-  cursor: not-allowed;
-}
-.selected-row {
-  border: 2px solid #E4A00F;
-  background: #E4A00F ;
-}
-.jsgrid-header-row{
- background-color: #fcfcfc;
-}
-.jsgrid-alt-row{
-border-top: 1px solid #f3f3f3;
-border-bottom: 1px solid #f3f3f3;
-}
-.jsgrid-alt-row,
-.jsgrid-row{
-  color: black;
-}
-.jsgrid-grid-body{
-  overflow-y: auto !important;
-}
-
-/** To display owl-time picker on modal popups */
-.cdk-overlay-container{
-  z-index: 9999 !important;
-}
-
-/* Custom */
 :disabled{
   cursor: not-allowed;
 }
@@ -68,7 +26,19 @@ a > i, input[type=checkbox], .fa-times-circle, .oi-magnifying-glass, a {
 	cursor: pointer;
 }
 
-.right_align{
+.right_align {
   align-self: flex-end;
   text-align-last: end;
   }
+
+  /* hides arrow of input type='number' */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+   -webkit-appearance: none; 
+   margin: 0; 
+}
+
+/** To display owl-time picker on modal popups */
+.cdk-overlay-container{
+  z-index: 9999 !important;
+}

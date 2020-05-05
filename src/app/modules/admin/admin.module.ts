@@ -50,10 +50,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         NgbModule,
         SharedModule,
         OwlDateTimeModule,
-        OwlNativeDateTimeModule,
-
-
-
+        OwlNativeDateTimeModule
     ],
 
     providers: [

@@ -2,24 +2,41 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>timevez</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <!-- Cordova start-->
-  <script type=”text/javascript” src=”cordova.js”></script>
-  <!-- Cordova end-->
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- font-awesome -->
-  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+   <!-- End Required meta tags -->
+   <!-- Begin SEO tag -->
+   <title> Dashboard | Looper - Bootstrap 4 Admin Theme </title>
+   <meta property="og:title" content="Dashboard">
+   <meta name="author" content="Beni Arisandi">
+   <meta property="og:locale" content="en_US">
+   <meta name="description" content="Responsive admin theme build on top of Bootstrap 4">
+   <meta property="og:description" content="Responsive admin theme build on top of Bootstrap 4">
+   <link rel="canonical" href="https://uselooper.com">
+   <meta property="og:url" content="https://uselooper.com">
+   <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme">
+   <script type="application/ld+json">
+     {
+       "name": "Looper - Bootstrap 4 Admin Theme",
+       "description": "Responsive admin theme build on top of Bootstrap 4",
+       "author":
+       {
+         "@type": "Person",
+         "name": "Beni Arisandi"
+       },
+       "@type": "WebSite",
+       "url": "",
+       "headline": "Dashboard",
+       "@context": "http://schema.org"
+     }
+   </script><!-- End SEO tag -->
 
-
-  <link rel="stylesheet" href="https://openlayers.org/en/v6.1.1/css/ol.css" type="text/css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css"
-    integrity="sha256-a/jNbtm7jpeKiXCShJ8YC+eNL9Abh7CBiYXHgaofUVs=" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+<!--  -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -29,74 +46,57 @@
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
+<!--  -->
+   <!-- FAVICONS -->
+   <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon.png">
+   <link rel="shortcut icon" href="assets/favicon.ico">
+   <meta name="theme-color" content="#3063A0">
+   <!-- End FAVICONS -->
+   <!-- GOOGLE FONT -->
+   <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet">
+   <!-- End GOOGLE FONT -->
+   <!-- BEGIN PLUGINS STYLES -->
+   <link rel="stylesheet" href="assets/vendor/open-iconic/css/open-iconic-bootstrap.min.css">
+   <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.css">
+   <link rel="stylesheet" href="assets/vendor/flatpickr/flatpickr.min.css">
+   <!-- END PLUGINS STYLES -->
+   <!-- BEGIN THEME STYLES -->
+   <link rel="stylesheet" href="assets/stylesheets/theme.min.css" data-skin="default">
+   <link rel="stylesheet" href="assets/stylesheets/theme-dark.min.css" data-skin="dark">
+   <link rel="stylesheet" href="assets/stylesheets/custom.css">
+   <script>
+     var skin = localStorage.getItem('skin') || 'default';
+     var isCompact = JSON.parse(localStorage.getItem('hasCompactMenu'));
+     var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+     // Disable unused skin immediately
+     disabledSkinStylesheet.setAttribute('rel', '');
+     disabledSkinStylesheet.setAttribute('disabled', true);
+     // add flag class to html immediately
+     if (isCompact == true) document.querySelector('html').classList.add('preparing-compact-menu');
+   </script><!-- END THEME STYLES -->
+  
 
 
-
-
-  <!-- BEGIN PLUGINS JS -->
-  <script src="assets/vendor/pace/pace.min.js"></script>
-  <script src="assets/vendor/stacked-menu/stacked-menu.min.js"></script>
-  <script src="assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-  <script src="assets/vendor/sortablejs/Sortable.min.js"></script>
-
-  <!-- BEGIN THEME JS -->
-  <script src="assets/javascript/theme.js"></script>
-  <!-- END THEME JS -->
-
-
-  <!-- BEGIN PLUGINS JS -->
-  <script src="assets/vendor/particles.js/particles.min.js"></script>
-  <script>
-    /**
-     * Keep in mind that your scripts may not always be executed after the theme is completely ready,
-     * you might need to observe the `theme:load` event to make sure your scripts are executed after the theme is ready.
-     */
-    $(document).on('theme:init', () => {
-      /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
-      particlesJS.load('auth-header', 'assets/javascript/pages/particles.json');
-    })
-  </script> <!-- END PLUGINS JS -->
-
-
-  <!-- BEGIN BASE JS -->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/popper.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script> <!-- END BASE JS -->
-
-  <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon.png">
-  <link rel="shortcut icon" href="assets/favicon.ico">
-  <meta name="theme-color" content="#3063A0"><!-- Google font -->
-  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End Google font -->
-  <!-- BEGIN PLUGINS STYLES -->
-  <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.css">
-  <link rel="stylesheet" href="assets/vendor/open-iconic/css/open-iconic-bootstrap.min.css">
-  <link rel="stylesheet" href="assets/stylesheets/theme.min.css" data-skin="default">
-  <link rel="stylesheet" href="assets/stylesheets/theme-dark.min.css" data-skin="dark">
-  <link rel="stylesheet" href="assets/stylesheets/custom.css">
-  <link rel="canonical" href="https://uselooper.com">
-
-
-
-
-  <!-- BEGIN PLUGINS JS -->
-
-  <script src="assets/vendor/easy-pie-chart/jquery.easypiechart.min.js"></script>
-  <script src="assets/vendor/chart.js/Chart.min.js"></script> <!-- END PLUGINS JS -->
-
-  <!-- BEGIN THEME JS -->
-  <script src="assets/javascript/theme.min.js"></script> <!-- END THEME JS -->
-  <!-- BEGIN PAGE LEVEL JS -->
-
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <!-- Flat-Pickr Start  -->
-  <!-- Link: https://codepen.io/riyos94/pen/xppbBj/?__cf_chl_jschl_tk__=b1f739aed128fd6bb567bef1bec08197a65f9071-1586675196-0-AUR14BMiJ5me-n8hdmyrHNdrt3miwjhpFtzrh-HP9KrECW2AnAN5EAhx2HzbDwpett5qG_0vMwShBCvrMGefw7IYpfbQxwEVDgSulgrXTxb2Y77oBXZAtuBFxG4yiE7YZOmJZcWKGj19JKpi3HnlTzCFi5Lm1Lb2qoQrvGi492t4Z3mWDTR3jmworMuTRsbIEXFUvPyYT1mNpxRnKM5KZThSUDxAbn0DIO3YUri4Z8VZOAEuUrKTL1U1b5rizN9y6bESgyBRiwnBQMY0nNrrLr7ul_7aDOrd2stE7sluAJfy0ZmNR3TETYl3KHjoz3T_a2IQ4PjEsO0cO3ai81-nXzP9zKcsC9aGM54rzYEQ39_t -->
-  <!-- Link: https://codepen.io/takapps/pen/zLENvg?__cf_chl_jschl_tk__=71b6531687d7b877d2943a2b91987552e2c8c60d-1586675196-0-Ac4Qja_JQftTPZ7265sHe99VYaM3NaSBVD3J0Sr92HM4ug0-X_pm4_DO4rOWg0N3JNcmfvPNEqYIVjta7JmsDY4ykBxKE9Q3C5DvKXT8cvNqal-E-uWulgD8zGhBG3dpEUy17koxmpotyutstsQ_H6HuwPOivlwrIFc2IBX4Qp-fO_t5PJlIFVKOQT0KMfVFjvHebC_x5QvE-rH2J_ngGU3DYwN6q3gHu0likBsnKn6X7shva7HR23aXfvZna5U8Vp6da3l8mTQIrF1IHW77p0rxQmrZtcvLw18DoUkfeow_43HdVSoVvqWx_ztt-Ubh37RgXbNotRRt2GTddy0OjbD4LRncL57999Yc_J3PZe2Q -->
-
-  <!-- <script src="assets/javascript/pages/dashboard-demo.js"></script>  -->
-
-  <!-- END PAGE LEVEL JS -->
+   <!-- BEGIN BASE JS -->
+   <script src="assets/vendor/jquery/jquery.min.js"></script>
+   <script src="assets/vendor/bootstrap/js/popper.min.js"></script>
+   <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script> 
+   <!-- END BASE JS -->
+   <!-- BEGIN PLUGINS JS -->
+   <script src="assets/vendor/pace/pace.min.js"></script>
+   <script src="assets/vendor/stacked-menu/stacked-menu.min.js"></script>
+   <script src="assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+   <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
+   <script src="assets/vendor/easy-pie-chart/jquery.easypiechart.min.js"></script>
+   <script src="assets/vendor/chart.js/Chart.min.js"></script>
+    <!-- END PLUGINS JS -->
+   <!-- BEGIN THEME JS -->
+   <script src="assets/javascript/theme.min.js"></script> 
+   <!-- END THEME JS -->
+   <!-- BEGIN PAGE LEVEL JS -->
+   <!-- <script src="assets/javascript/pages/dashboard-demo.js"></script>  -->
+   <!-- END PAGE LEVEL JS -->
 
 </head>
 
