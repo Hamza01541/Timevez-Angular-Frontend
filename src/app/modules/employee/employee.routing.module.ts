@@ -10,7 +10,6 @@ import {
     ChangePasswordComponent,
 } from "./components";
 
-
 const routes: Routes = [
     {
         path: '',
