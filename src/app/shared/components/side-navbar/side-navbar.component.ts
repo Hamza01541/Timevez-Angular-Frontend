@@ -6,8 +6,8 @@ import { UserService, UserStatusService, LocalStorageService } from 'src/app/cor
 
 @Component({
   selector: 'side-navBar',
-  templateUrl: './side-navBar.component.html',
-  styleUrls: ['./side-navBar.component.scss']
+  templateUrl: './side-navbar.component.html',
+  styleUrls: ['./side-navbar.component.scss']
 })
 export class SideNavBarComponent implements OnInit, OnChanges {
   @Input() isShowAsideBar: boolean = true;
