@@ -67,6 +67,7 @@ export class SideNavBarComponent implements OnInit, OnChanges {
 
   redirectTo(route:string){
     if(route && route.length && this.currentUser && this.currentUser.role) {
+      console.log(`Rote: /${this.currentUser.role.toLowerCase()}/${route}`);
     this.router.navigate([`/${this.currentUser.role.toLowerCase()}/${route}`]);
   }
 }
