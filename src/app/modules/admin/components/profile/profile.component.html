@@ -7,8 +7,13 @@
                 <!-- .page-cover -->
                 <header class="page-cover">
                     <div class="text-center">
-                        <a  class="user-avatar user-avatar-xl"><img
-                                src="assets/images/avatars/hash.jpg" alt=""></a>
+                        <div class="user-avatar user-avatar-xl fileinput-button">
+                            <div class="fileinput-button-label"> Change photo </div>
+                            <!-- <img [src]="user.photo" alt=""> -->
+                            <img src="assets/images/avatars/unknown-profile.jpg" alt="">
+                            <input type="file" id="fileupload-avatar" name="avatar" (change)="uploadPhoto($event)">
+                        </div>
+
                         <h2 class="h4 mt-2 mb-0"> {{user.firstname}} {{user.lastname}} </h2>
                         <div class="my-1">
                             <a class="btn btn-light"> Email: {{user.email}}</a>

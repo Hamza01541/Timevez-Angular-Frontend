@@ -311,7 +311,7 @@
                     <div class="dropdown d-flex">
                         <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false"><span class="user-avatar user-avatar-md"><img
-                                    src="assets/images/avatars/profile.jpg" alt=""></span> 
+                                    [src]="getImage()" alt=""></span> 
                                     <span class="account-summary pr-lg-4 d-none d-lg-block" *ngIf="currentUser">
                                 <span class="account-name">{{currentUser.firstname | titlecase}} {{currentUser.lastname | titlecase}} </span> 
                                 <span class="account-description"> {{currentUser.role | titlecase}} </span>
@@ -323,10 +323,10 @@
                             <div class="dropdown-arrow ml-3"></div>
                             <h6 class="dropdown-header d-none d-md-block d-lg-none" *ngIf="currentUser"> {{currentUser.firstname | titlecase}} {{currentUser.lastname | titlecase}} </h6>
                             
-                            <a class="dropdown-item" [routerLink]="['/admin/profile']">
+                            <a class="dropdown-item" (click)="redirectTo('profile')">
                                 <span class="dropdown-icon oi oi-person"></span> Profile
                             </a>
-                            <a class="dropdown-item" [routerLink]="['/admin/change-password']">
+                            <a class="dropdown-item" (click)="redirectTo('change-password')">
                                 <span class="dropdown-icon oi oi-key"></span> Change Password
                             </a>
                             <a class="dropdown-item" [routerLink]="['/login']" [queryParams]="{logout: true}">
@@ -342,6 +342,10 @@
             </div>
         </div>
     </header>
+
+
+<!-- Body must be here -->
+<!-- <router-outlet></router-outlet> -->
 
     <!-- Aside -->
     <aside class="app-aside app-aside-expand-md app-aside-light"> 
@@ -375,17 +379,15 @@
             </header>
 
             <!-- Aside-menu -->
-            <div class="aside-menu overflow-hidden">
+            <!-- <div class="aside-menu overflow-hidden">
                 <nav id="stacked-menu" class="stacked-menu">
                     <ul class="menu">
-                        <!-- Menu items -->
                         <li class="menu-item" *ngFor="let menuItem of menuList" [ngClass]="{'has-active': menuItem.url === currentPage, 'has-child': menuItem.subMenus && menuItem.subMenus.length}">
                             <a (click)="redirectTo(menuItem)" class="menu-link">
                                 <span class="menu-icon {{menuItem.iconClass}}"></span> 
                                 <span class="menu-text"> {{menuItem.text}} </span>
                             </a>
-                            <!-- Sub menu items -->
-                                <ul class="menu">
+                                <ul class="menu" *ngIf="menuItem.subMenus && menuItem.subMenus.length">
                                     <li class="menu-item" *ngFor="let subMenuItem of menuItem.subMenus" [ngClass]="{'has-active': subMenuItem.url === currentPage}">
                                         <a *ngIf="menuItem.subMenus && menuItem.subMenus.length" (click)="redirectTo(subMenuItem)" class="menu-link"> 
                                             <span class="menu-icon {{subMenuItem.iconClass}}"></span> 
@@ -396,14 +398,70 @@
                         </li>
                     </ul>
                 </nav>
+            </div> -->
+            
+            <!-- Todo: must be proper dynamic with reload window. -->
+            <div class="aside-menu overflow-hidden">
+                <nav id="stacked-menu" class="stacked-menu">
+                    <ul class="menu">
+                        <li class="menu-item" *ngFor="let menuItem of menuItems" [ngClass]="{'has-active': menuItem.url === currentPage, 'has-child': menuItem.subMenus && menuItem.subMenus.length}">
+                            <a (click)="redirectTo(menuItem.url)" class="menu-link">
+                                <span class="menu-icon {{menuItem.iconClass}}"></span> 
+                                <span class="menu-text"> {{menuItem.text}} </span>
+                            </a>
+                                <ul class="menu" *ngIf="menuItem.subMenus && menuItem.subMenus.length">
+                                    <li class="menu-item" *ngFor="let subMenuItem of menuItem.subMenus" [ngClass]="{'has-active': subMenuItem.url === currentPage}">
+                                        <a *ngIf="menuItem.subMenus && menuItem.subMenus.length" (click)="redirectTo(subMenuItem.url)" class="menu-link"> 
+                                            <span class="menu-icon {{subMenuItem.iconClass}}"></span> 
+                                            <span class="menu-text"> {{subMenuItem.text}} </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                        </li>
+                    </ul>
+                </nav>
             </div>
+
+            <!-- Todo: menu items should be dynamic, submenu items were creating issues when menu list changed for another user -->
+         <!-- <div class="aside-menu overflow-hidden">
+            <nav id="stacked-menu" class="stacked-menu">
+              <ul class="menu">
+                <li class="menu-item has-active" [hidden]="menuId !== 'adminMenu'">
+                  <a href="index.html" class="menu-link"><span class="menu-icon fas fa-home"></span> <span class="menu-text">Dashboard</span></a>
+                </li>
+                <li class="menu-item has-active" [hidden]="menuId !== 'employeeMenu'">
+                  <a href="index.html" class="menu-link"><span class="menu-icon fas fa-home"></span> <span class="menu-text">Dashboard</span></a>
+                </li>
+
+                <li class="menu-item has-child">
+                  <a href="#" class="menu-link"><span class="menu-icon far fa-file"></span> <span class="menu-text">App Pages</span> <span class="badge badge-warning">New</span></a> 
+                  
+                  <ul class="menu" >
+                    <li class="menu-item" [hidden]="menuId !== 'adminMenu'">
+                      <a href="page-clients.html" class="menu-link">Employees</a>
+                    </li>
+                
+                    <li class="menu-item" [hidden]="menuId !== 'employeeMenu'">
+                      <a href="page-clients.html" class="menu-link"> History </a>
+                    </li>
+                    <li class="menu-item" [hidden]="menuId !== 'employeeMenu'">
+                      <a href="page-teams.html" class="menu-link"> Leave Request </a>
+                    </li> 
+                  </ul>
+                </li>
+              </ul>
+
+            </nav>
+          </div> -->
+          
             
             <!-- Aside Footer -->
             <footer class="aside-footer border-top p-2">
-                <button class="btn btn-light btn-block text-primary" data-toggle="skin">
+                <button class="btn btn-light btn-block text-primary" data-toggle="skin" (click)="toggleThemeColor()">
                     <span class="d-compact-menu-none">Night mode</span> <i class="fas fa-moon ml-1"></i>
                 </button>
             </footer>
         </div>
     </aside>
+    
 </div>

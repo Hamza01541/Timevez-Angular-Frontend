@@ -6,3 +6,4 @@ export * from './user.service';
 export * from './attendance.service';
 export * from './leave.service';
 export * from './user-status.service';
+export * from './crypto.service';

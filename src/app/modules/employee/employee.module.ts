@@ -16,7 +16,6 @@ import {
     HistoryComponent,
     LeaveComponent,
     ChangePasswordComponent,
-    ProfileComponent
 
 } from "./components";
 
@@ -29,7 +28,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
         HistoryComponent,
         LeaveComponent,
         ChangePasswordComponent,
-        ProfileComponent
     ],
 
     imports: [

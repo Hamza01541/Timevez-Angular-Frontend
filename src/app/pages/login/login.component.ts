@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { Role } from 'src/app/models/role';
 import { Constants } from 'src/app/shared/constants';
+import { UtilityService } from 'src/app/shared/services';
 
 @Component({
   selector: 'login-component',
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
     private loaderService: LoaderService,
     private route: ActivatedRoute,
     private storageService: LocalStorageService,
+    public utilityService: UtilityService
   ) {
   }
 
@@ -31,11 +33,10 @@ export class LoginComponent implements OnInit {
     this.logout = this.route.snapshot.queryParams['logout'] || false;
     this.currentUser = this.storageService.get(Constants.currentUser);
 
-    if (!this.logout) {
-      this.checkRole(this.currentUser);
-    }
-    else {
+    if (this.logout) {
       this.userService.logout();
+    } else {
+      this.checkRole(this.currentUser);
     }
   }
 
@@ -45,7 +46,6 @@ export class LoginComponent implements OnInit {
       this.alertService.successToastr("Successfully Logined", false);
       if (user && user.token) {
         this.storageService.set(Constants.currentUser, user);
-        this.userStatusService.isUserLoggedIn.next(true);
         this.hideLoader();
         this.checkRole(user);
       }
@@ -59,13 +59,13 @@ export class LoginComponent implements OnInit {
   }
 
   checkRole(user: any) {
-
     if (user && user.token && user.role) {
       if (user.role == Role.Admin) {
         this.router.navigate(['/admin/dashboard']);
       } else {
         this.router.navigate(['/employee/dashboard'], { queryParams: { id: user.id } });
       }
+      this.userStatusService.isUserLoggedIn.next(true);
     }
   }
 

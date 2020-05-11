@@ -4,12 +4,13 @@ import { ApiUrl } from 'src/app/shared/resource-references';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { User } from "src/app/models";
 import { UserStatusService } from './user-status.service';
+import { Constants } from 'src/app/shared/constants';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
-    user: string = `${ApiUrl.user}`;
+    userBaseUrl: string = `${ApiUrl.user}`;
 
     constructor(private RequestService: RequestService, private storageService: LocalStorageService, private userStatusService: UserStatusService) { }
 
@@ -18,7 +19,7 @@ export class UserService {
    * It Returns the Object 
    */
     getData() {
-        const url = `${this.user}/${ApiUrl.list}`;
+        const url = `${this.userBaseUrl}/${ApiUrl.list}`;
         return this.RequestService.getData(url);
     }
 
@@ -27,7 +28,7 @@ export class UserService {
      * @param user is the object to be added
      */
     addData(user: User) {
-        const url = `${this.user}/${ApiUrl.register}`;
+        const url = `${this.userBaseUrl}/${ApiUrl.register}`;
         return this.RequestService.addData(url, user);
     }
 
@@ -36,7 +37,7 @@ export class UserService {
     * @param user is the object to Login the User
     */
     userLogin(user: User) {
-        const url = `${this.user}/${ApiUrl.login}`;
+        const url = `${this.userBaseUrl}/${ApiUrl.login}`;
         return this.RequestService.addData(url, user);
     }
 
@@ -45,8 +46,18 @@ export class UserService {
      * @param userId  User id
      */
     getById(userId: string) {
-        const url = `${this.user}/${ApiUrl.list}/`;
-        return this.RequestService.getData(url + userId);
+        const url = `${this.userBaseUrl}/${ApiUrl.list}/${userId}`;
+        return this.RequestService.getData(url);
+    }
+
+ /**
+  * Upload user photo
+  * @param userId User Id
+  * @param photo Photo(base64 format) to be uploaded.
+  */
+    uploadPhoto(userId:string, obj: any) {
+        const url = `${this.userBaseUrl}${ApiUrl.uploadphoto}/${userId}`;
+        return this.RequestService.updateData(url, obj);
     }
 
     /**
@@ -54,7 +65,7 @@ export class UserService {
 * @param user it the object to update the data
 */
     updateData(user: User) {
-        const url = `${this.user}/${ApiUrl.update}/${user._id}`;
+        const url = `${this.userBaseUrl}/${ApiUrl.update}/${user._id}`;
         return this.RequestService.updateData(url, user);
     }
 
@@ -63,7 +74,7 @@ export class UserService {
 * @param user it the object to update the data
 */
     changePassword(user: User) {
-        const url = `${this.user}/${ApiUrl.changePassword}`;
+        const url = `${this.userBaseUrl}/${ApiUrl.changePassword}`;
         return this.RequestService.updateData(url, user);
     }
 
@@ -72,7 +83,7 @@ export class UserService {
   * @param id is to delete the user on base of id
   */
     deleteData(id: string) {
-        const url = `${this.user}/${ApiUrl.delete}`;
+        const url = `${this.userBaseUrl}/${ApiUrl.delete}`;
         return this.RequestService.deleteData(url, id);
     }
 
@@ -84,7 +95,7 @@ export class UserService {
     */
     getPagedUsers(pageNumber: number, search?:string) {
         // const url = `${this.user}/${ApiUrl.getPagedUsers}/${pageNumber}`;
-        const url = `${this.user}/${ApiUrl.getPagedUsers}?pageNo=${pageNumber}&search=${search}`;
+        const url = `${this.userBaseUrl}/${ApiUrl.getPagedUsers}?pageNo=${pageNumber}&search=${search}`;
         return this.RequestService.getData(url);
     }
 
@@ -93,7 +104,7 @@ export class UserService {
      * It will return the total number of users
      */
     getTotalUsers(filterType: string, toDate?: string) {
-        const url = `${this.user}/${ApiUrl.totalCount}?type=${filterType}&toDate=${toDate}`;
+        const url = `${this.userBaseUrl}/${ApiUrl.totalCount}?type=${filterType}&toDate=${toDate}`;
         return this.RequestService.getData(url);
     }
 
@@ -113,7 +124,7 @@ export class UserService {
    * It will remove the current user details from local storage
    */
     logout() {
-        this.storageService.remove('currentUser');
-        this.userStatusService.isUserLoggedIn.next(false);
+            this.storageService.remove(Constants.currentUser);
+            this.userStatusService.isUserLoggedIn.next(false);
     }
 }

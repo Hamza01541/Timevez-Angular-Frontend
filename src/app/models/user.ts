@@ -9,6 +9,7 @@ export class User {
     email: string;
     address: string;
     CNIC: string;
+    photo: string | ArrayBuffer;
     roles: [];
     active: boolean = true;
 }

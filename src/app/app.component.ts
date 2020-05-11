@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Constants } from './shared/constants';
 import { UserStatusService, LocalStorageService } from './core/services';
 import * as menus from 'src/app/shared/components/side-navbar/menus';
-
+import { Role } from 'src/app/models';
 
 @Component({
   selector: 'app-root',
@@ -11,36 +11,35 @@ import * as menus from 'src/app/shared/components/side-navbar/menus';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'timevez';
-  menuList:any[];
-  currentUser:any;
-  isLoggedIn:boolean = false;
-  blackListRoutes:string[] = ['/login'];
-  isShowAsideBar:boolean = true;
-  currentPage:string = '';
+  menuList: any[] = [];
+  currentUser: any;
+  isLoggedIn: boolean = false;
+  blackListRoutes: string[] = ['/login'];
+  isShowAsideBar: boolean = true;
+  currentPage: string = '';
+  role = Role;
 
-  constructor(private router: Router, private route: ActivatedRoute, private userStatusService: UserStatusService,private storageService: LocalStorageService,) {
+  constructor(private router: Router, private route: ActivatedRoute, private userStatusService: UserStatusService, private storageService: LocalStorageService, ) {
     this.setDefaultThemeColor();
   }
 
 
   ngOnInit() {
-    console.log("this.currentUser:",this.currentUser);
     this.checkBlackListRoute();
     this.getMenus();
 
     this.router.events.subscribe(event => {
-      if(event instanceof NavigationEnd) {
+      if (event instanceof NavigationEnd) {
         this.checkBlackListRoute();
       }
     });
 
     this.userStatusService.isUserLoggedIn.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
-			if (isLoggedIn) {
-       this.getMenus();
-			}
-		});
+      if (isLoggedIn) {
+        this.getMenus();
+      }
+    });
   }
 
   /**
@@ -48,22 +47,34 @@ export class AppComponent implements OnInit {
    * @param url Route url to be checked
    */
   checkBlackListRoute() {
-    if(this.blackListRoutes.includes(window.location.pathname)) {
-      this.isShowAsideBar = false;
-    }else {
-      this.isShowAsideBar = true;
+    this.currentPage = window.location.pathname;
+   let isBlackListUrl = false;
+
+    for (let i = 0; i < this.blackListRoutes.length; i++) {
+      if (this.currentPage.includes(this.blackListRoutes[i])) {
+          isBlackListUrl = true;
+          this.isShowAsideBar = false;
+          break;
+      }
+  }
+
+  if (!isBlackListUrl) {
+    this.isShowAsideBar = true;
+    if(this.currentUser) {
+      this.currentPage = this.currentPage.split(`/${this.currentUser.role.toLowerCase()}/`)[1];
     }
+  }
   }
 
   /**
    * Get menus for current user role and set current page as active tab 
    */
   getMenus() {
-    this.currentPage = window.location.pathname;
-    this.menuList = [];
     this.currentUser = this.storageService.get(Constants.currentUser);
-    this.menuList = menus[this.currentUser.role];
-    console.log("this.menuList:",this.menuList);
+
+    if (this.currentUser) {
+      this.menuList = menus[this.currentUser.role];
+    }
   }
 
 

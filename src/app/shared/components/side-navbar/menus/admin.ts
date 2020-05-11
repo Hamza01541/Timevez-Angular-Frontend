@@ -2,7 +2,7 @@ export const Admin = [
   {
     iconClass: 'fas fa-home',
     text: 'Dashboard',
-    url: '/admin/dashboard',
+    url: 'dashboard',
     linkType: 'internal',
   },
   {
@@ -12,7 +12,7 @@ export const Admin = [
       {
         iconClass: 'fas fa-user',
         text: 'Employees',
-        url: '/admin/employee',
+        url: 'employee',
         linkType: 'internal',
       },
     ]

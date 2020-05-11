@@ -21,7 +21,8 @@ export class RequestInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // request = this.checkUrl(request);
         request = this.setRequestHeader(request);
-        console.log("Interceptor Worked");
+        console.log("Interceptor Worked", request);
+
         return next.handle(request).pipe(map((response: HttpEvent<any>) => {
             return response;
         }),
@@ -30,7 +31,7 @@ export class RequestInterceptor implements HttpInterceptor {
                     setTimeout(() => {
                         this.router.navigate(['login'], { queryParams: { logout: true } });
                     }, 100);
-                } 
+                }
                 return throwError(error);
             })
         );
@@ -56,11 +57,12 @@ export class RequestInterceptor implements HttpInterceptor {
      * @returns request header
      */
     setRequestHeader(request: HttpRequest<any>) {
-
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
             request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + currentUser.token) });
         }
         return request;
     }
+
+
 }

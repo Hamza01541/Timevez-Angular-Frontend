@@ -85,12 +85,8 @@
                         </tbody>
                       </table>
 
-                      <!-- .pagination -->
-                      <ul class="pagination justify-content-center mt-4" *ngFor="let count of totalCounts">
-                        <li class="page-item" *ngIf="count > 1">
-                          <a class="page-link" (click)="getUserAttendances(count)">{{count}}</a>
-                        </li>
-                      </ul>
+                       <!-- Pagination -->
+                       <table-pagination [totalRecord]="totalAttendances" [id]="'attendance'" (pageChanged)="pageChanged($event)"></table-pagination>
                     </div>
                   </div>
 
@@ -153,36 +149,8 @@
                           </tbody>
                         </table>
                       </div>
-                      <!-- .pagination -->
-                      <ul class="pagination justify-content-center mt-4">
-                        <li class="page-item disabled">
-                          <a class="page-link" href="#" tabindex="-1"><i class="fa fa-lg fa-angle-left"></i></a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item disabled">
-                          <a class="page-link" href="#" tabindex="-1">...</a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">13</a>
-                        </li>
-                        <li class="page-item active">
-                          <a class="page-link" href="#">14</a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">15</a>
-                        </li>
-                        <li class="page-item disabled">
-                          <a class="page-link" href="#" tabindex="-1">...</a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">24</a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#"><i class="fa fa-lg fa-angle-right"></i></a>
-                        </li>
-                      </ul>
+                     <!-- Pagination -->
+                     <table-pagination [totalRecord]="totalLeaves" [id]="'leave'" (pageChanged)="pageChanged($event)"></table-pagination>
                     </div>
                   </div>
 

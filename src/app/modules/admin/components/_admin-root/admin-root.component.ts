@@ -52,13 +52,4 @@ export class AdminRootComponent implements OnInit {
     }
   }
 
-  /**
-   * Toggle theme skin color
-   */
-  toggleThemeColor() {
-    let skin = localStorage.getItem('skin') || 'default';
-    skin = skin === 'default' ? 'dark' : 'default';
-    localStorage.setItem('skin', skin);
-    window.location.reload();
-  }
 }

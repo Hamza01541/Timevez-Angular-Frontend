@@ -4,6 +4,7 @@ import { Leave } from "src/app/models";
 import { Router } from '@angular/router';
 import { LeaveType, } from "src/app/models";
 import { Constants } from 'src/app/shared/constants';
+import {UtilityService} from 'src/app/shared/services';
 
 @Component({
   selector: 'leave',
@@ -24,6 +25,7 @@ export class LeaveComponent implements OnInit {
     private loaderService: LoaderService,
     private leaveService: LeaveService,
     private storageService: LocalStorageService,
+    public utilityService: UtilityService
   ) {
     this.leave = new Leave();
   }
@@ -74,19 +76,6 @@ getMinDate(date: any, isForward: boolean): Date{
   const minDate = new Date(date);
  return new Date(minDate.setDate(minDate.getDate() + (isForward ? + 1 : -1)));
 }
-
-  /**
-   * Get validation classes.
-   * @param el Current Element to be validate.
-   * @param expectedLength Expected value length
-   */
-  getValidationClass(el: any, expectedLength:number = 0) {
-    if (el.value && typeof el.value === 'string'){
-     return {'is-valid': el.valid && el.value.trim().length >= expectedLength, 'is-invalid': (el.invalid || el.value.trim().length < expectedLength) && (el.dirty || el.touched)};
-    } else {
-      return {'is-valid': el.valid && el.value, 'is-invalid': el.invalid && (el.dirty || el.touched) && (!el.value)};
-    }
-  }
 
   /**
    * Show loader

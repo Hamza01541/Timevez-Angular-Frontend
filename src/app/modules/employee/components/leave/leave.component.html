@@ -9,7 +9,7 @@
                         <form class="auth-form" style="width: 100%;" name="form" #form="ngForm">
                             <div class="form-group">
                                 <select class="custom-select" id="leaveType" name="leaveType" [(ngModel)]="leave.type"
-                                    #leaveType="ngModel" required [ngClass]="getValidationClass(leaveType)">
+                                    #leaveType="ngModel" required [ngClass]="utilityService.getValidationClass(leaveType)">
                                     <option [value]="undefined" disabled selected> Select Leave Type</option>
                                     <option *ngFor="let leave of leaveTypes" [value]="leave.value">{{leave.name}}
                                     </option>
@@ -22,7 +22,7 @@
                             <br>
                             <div class="form-group">
                                 <label for="date">Start Date</label>
-                                <input class="form-control" [ngClass]="getValidationClass(fromDate)"
+                                <input class="form-control" [ngClass]="utilityService.getValidationClass(fromDate)"
                                     [min]="minfromDate" placeholder="Select Start Date" [(ngModel)]="leave.fromDate"
                                     name="fromDate" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1"
                                     #fromDate="ngModel" (dateTimeChange)="fromDateSelected()" required>
@@ -62,7 +62,7 @@
                                 <label>Leave Reason</label>
                                 <textarea id="leaveDescription" style="height: 100px;" name="leaveDescription" required
                                     class="form-control" #leaveDescription="ngModel" minlength="20"
-                                    [ngClass]="getValidationClass(leaveDescription, 20)"
+                                    [ngClass]="utilityService.getValidationClass(leaveDescription, 20)"
                                     [(ngModel)]="leave.description"></textarea>
 
                                 <div class="invalid-feedback"

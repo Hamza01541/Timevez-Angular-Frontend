@@ -50,71 +50,50 @@
               <!-- metric row -->
               <div class="metric-row">
                 <div class="col-lg-9">
-                  <div class="metric-row metric-flush">
-                    <!-- metric column -->
-                    <div class="col">
-                      <!-- .metric -->
-                      <a  class="metric metric-bordered align-items-center">
-                        <h2 class="metric-label badge badge-lg"> Attendance </h2>
-                        <p class="metric-value h3">
-                          <sub><i class="oi oi-people"></i></sub> <span class="value">{{leaveDetail.totalAttendance}}</span>
-                        </p>
-                      </a> <!-- /.metric -->
-                    </div><!-- /metric column -->
-                    <div class="col-lg-3">
-                      <!-- .metric -->
-                      <a  class="metric metric-bordered">
-                        <div class="metric-badge">
-                          <span class="badge badge-lg badge-danger"><span class="oi oi-media-record pulse mr-1"></span>
-                            Absent</span>
-                        </div>
-                        <p class="metric-value h3">
-                          <sub><i class="oi oi-timer"></i></sub> <span class="value">{{leaveDetail.totalAbsent}}</span>
-                        </p>
-                      </a> <!-- /.metric -->
-                    </div><!-- /metric column -->
-                    <!-- metric column -->
-                    <div class="col">
-                      <!-- .metric -->
-                      <a  class="metric metric-bordered align-items-center">
-                        <h2 class="metric-label"> Approved Leaves </h2>
-                        <p class="metric-value h3">
-                          <sub><i class="oi oi-fork"></i></sub> <span class="value">{{leaveDetail.approved}}</span>
-                        </p>
-                      </a> <!-- /.metric -->
-                    </div><!-- /metric column -->
-                    <div class="col">
-                      <!-- .metric -->
-                      <a  class="metric metric-bordered align-items-center">
-                        <h2 class="metric-label"> Pending Leaves </h2>
-                        <p class="metric-value h3">
-                          <sub><i class="oi oi-fork"></i></sub> <span class="value">{{leaveDetail.pending}}</span>
-                        </p>
-                      </a> <!-- /.metric -->
-                    </div><!-- /metric column -->
-                    <!-- metric column -->
-                    <div class="col">
-                      <!-- .metric -->
+                  <div class="metric-row metric-flush">                    
+                    <div class="col">                
                       <a class="metric metric-bordered align-items-center">
-                        <h2 class="metric-label"> Casual Leaves </h2>
+                        <h2 class="metric-label"><i class="fas fa-users text-danger"></i> Absent </h2>
                         <p class="metric-value h3">
-                          <sub><i class="fa fa-tasks"></i></sub> <span class="value">{{leaveDetail.casual}}</span>
+                           <span class="value">{{leaveDetail.totalAbsent}}</span>
                         </p>
-                      </a> <!-- /.metric -->
-                    </div><!-- /metric column -->
-                    <div class="col">
-                      <!-- .metric -->
+                      </a> 
+                    </div>                     
+                    <div class="col">                         
                       <a class="metric metric-bordered align-items-center">
-                        <h2 class="metric-label"> Annual Leaves </h2>
+                        <h2 class="metric-label"><i class="oi oi-circle-check text-success"></i> Approved </h2>
                         <p class="metric-value h3">
-                          <sub><i class="fa fa-tasks"></i></sub> <span class="value">{{leaveDetail.annual}}</span>
+                          <span class="value">{{leaveDetail.approved}}</span>
                         </p>
-                      </a> <!-- /.metric -->
-                    </div><!-- /metric column -->
+                      </a> 
+                    </div>                       
+                    <div class="col">                     
+                      <a class="metric metric-bordered align-items-center">
+                        <h2 class="metric-label"><i class="oi oi-media-record text-warning"></i> Pending </h2>
+                        <p class="metric-value h3">
+                            <span class="value">{{leaveDetail.pending}}</span>
+                        </p>
+                      </a> 
+                    </div>
+                    <div class="col">
+                      <a class="metric metric-bordered align-items-center">
+                        <h2 class="metric-label"><span class="oi oi-pulse text-danger"></span> Casual </h2>
+                        <p class="metric-value h3">
+                            <span class="value">{{leaveDetail.casual}}</span>
+                        </p>
+                      </a> 
+                    </div>
                   </div>
-                </div><!-- metric column -->
-               
-              </div><!-- /metric row -->
+                </div>
+                <div class="col">
+                  <a class="metric metric-bordered align-items-center">
+                    <h2 class="metric-label"><span class="oi oi-calendar text-info"></span> Annual </h2>
+                    <p class="metric-value h3">
+                      <span class="value">{{leaveDetail.annual}}</span>
+                    </p>
+                  </a> 
+                </div>
+              </div>
             </div><!-- /.section-block -->
             <!-- grid row -->
             <div class="row">

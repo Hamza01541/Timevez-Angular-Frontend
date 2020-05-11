@@ -25,6 +25,7 @@ export class ApiUrl {
     static leaveRequest = `leaveRequest`;
     static totalCount = `totalCount`;
     static totalCountByUserId=`totalCountByUserId`;
+    static uploadphoto=`/uploadphoto`;
     // Pagination
     static getPagedAttendances = `PagedAttendances`;
     static getPagedUsers = `PagedUsers`

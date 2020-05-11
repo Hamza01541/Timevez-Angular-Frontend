@@ -39,8 +39,10 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "@ng-bootstrap/ng-bootstrap": "^6.0.0",
     "@ng-select/ng-select": "^3.7.3",
+    "@types/crypto-js": "^3.1.45",
     "@types/jquery": "^3.3.33",
     "bootstrap": "^4.4.1",
+    "crypto-js": "^4.0.0",
     "express": "^4.17.1",
     "fa-icons": "^0.2.0",
     "flatpickr": "^4.6.3",
@@ -83,5 +85,8 @@
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",
     "typescript": "~3.7.5"
+  },
+  "browser": {
+    "crypto": false
   }
 }

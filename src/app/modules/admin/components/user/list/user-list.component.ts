@@ -19,7 +19,6 @@ declare var jQuery: any;
     styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-
     public config: PerfectScrollbarConfigInterface = { suppressScrollX: false };
 
     model: User;
@@ -46,14 +45,16 @@ export class UserListComponent implements OnInit {
     userLeaves: Leave[];
     attendanceFilter: Filter;
     leaveFilter: Filter;
+    userDetailFilter: Filter;
     userId: string;
     totalCounts: number[];
     pageNumber = Constants.defaultPageNumber;
     leaveSearchStr: string = '';
     attendanceSearchStr: string = '';
     leaveStatus: any = LeaveStatus;
-
-    // 
+    userCount: any = { totalAbsent: 0, approved: 0, pending: 0, casual: 0, annual: 0 };
+    totalAttendances:number;
+    totalLeaves:number;
 
     attendanceFilterTypes: any[] = [
         { value: DurationType.currentDate, name: 'Today' },
@@ -99,17 +100,20 @@ export class UserListComponent implements OnInit {
         private loaderService: LoaderService,
         private utilityService: UtilityService,
         public dialog: MatDialog) {
+
         this.model = new User();
         this.modelAttendance = new Attendence();
         this.modelLeave = new Leave();
         this.attendanceFilter = new Filter();
         this.leaveFilter = new Filter();
+        this.userDetailFilter = new Filter();
     }
 
     ngOnInit() {
         this.getAllUser();
         this.modelAttendance.active = false;
         this.setDefaultFilterValues();
+        this.model.photo = 'assets/images/avatars/unknown-profile.jpg';
     }
 
     /**
@@ -120,6 +124,7 @@ export class UserListComponent implements OnInit {
         this.attendanceFilter.searchStr = '';
         this.attendanceFilter.filterType = DurationType.currentMonth;
         this.leaveFilter.filterType = DurationType.future;
+        this.userDetailFilter.filterType = DurationType.currentMonth;
     }
 
     /**
@@ -139,14 +144,13 @@ export class UserListComponent implements OnInit {
         }
 
         this.attendanceService.getUserAttendance(this.selectedUser._id, pageNumber, this.attendanceFilter.filterType, fromDate, toDate, this.attendanceFilter.searchStr).subscribe((attendance: any) => {
-            if (attendance && attendance.data && attendance.total) {
+            if (attendance) {
                 this.userAttendances = attendance.data;
+                this.totalAttendances = attendance.total;
 
                 this.userAttendances.forEach(userAttendance => {
-                 this.getTimeSpent(userAttendance);
+                    this.getTimeSpent(userAttendance);
                 });
-
-                // this.initPagination(attendance.total);
             }
         }, error => {
             if (error && error.error && error.error.message) {
@@ -172,9 +176,9 @@ export class UserListComponent implements OnInit {
         }
 
         this.leaveService.getUserLeave(this.selectedUser._id, pageNumber, this.leaveFilter.filterType, fromDate, toDate, this.leaveFilter.searchStr).subscribe((leave: any) => {
-            if (leave && leave.data && leave.total) {
+            if (leave) {
                 this.userLeaves = leave.data;
-                // this.initPagination(leave.total);
+                this.totalLeaves = leave.total;
             }
         }, error => {
             if (error && error.error && error.error.message) {
@@ -199,14 +203,17 @@ export class UserListComponent implements OnInit {
                     this.allUsers[currentIndex] = this.model;
                     this.selectedUser = this.model;
                 } else {
+                    this.model._id = res._id
                     this.allUsers.push(this.model);
                 }
 
                 this.alertService.successToastr(`SuccessFully ${this.operation} Of User.`, false);
+                this.clearModalData();
             }, error => {
                 this.hideLoader();
                 jQuery('#userModal').modal('hide');
                 this.alertService.errorToastr(`Error in ${this.operation} User.`, false);
+                this.clearModalData();
             });
         }
         // Add/Update user attendance
@@ -217,19 +224,22 @@ export class UserListComponent implements OnInit {
             this.attendanceService[this.operation](this.modelAttendance).subscribe(res => {
                 this.hideLoader();
                 jQuery('#attendanceNewModal').modal('hide');
-
                 if (this.modelAttendance._id) {
                     let currentIndex = this.userAttendances.findIndex(attendance => attendance._id === this.modelAttendance._id);
+                    this.getTimeSpent(this.modelAttendance);
                     this.userAttendances[currentIndex] = this.modelAttendance;
                 } else {
+                    this.getTimeSpent(this.modelAttendance);
                     this.userAttendances.push(this.modelAttendance);
                 }
 
                 this.alertService.successToastr(`SuccessFully ${this.operation} Of Attendance.`, false);
+                this.clearModalData();
             }, error => {
                 this.hideLoader();
                 this.alertService.errorToastr(`Error in ${this.operation} Attendance.`, false);
                 jQuery('#attendanceNewModal').modal('hide');
+                this.clearModalData();
             });
         }
         else { // Add/Update user Leave
@@ -247,12 +257,59 @@ export class UserListComponent implements OnInit {
                 }
 
                 this.alertService.successToastr(`SuccessFully ${this.operation} Of Leave.`, false);
+                this.clearModalData();
             }, error => {
                 this.hideLoader();
                 jQuery('#leaveNewModal').modal('hide');
                 this.alertService.errorToastr(`Error in ${this.operation} Leave.`, false);
+                this.clearModalData();
             });
         }
+    }
+
+        /**
+     * Upload photo in base64 format
+     * @param event
+     * @see http://bachors.com/code/convert-image-to-base64-blob-binary-using-javascript
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
+     */
+    uploadPhoto(event: any) {
+        // const file = event.target.files[0];
+
+        // if (file) {
+        //     if (/(jpe?g|png)$/i.test(file.type)) {
+        //         const fileReader = new FileReader();
+        //         const _this = this;
+
+        //         fileReader.onload = function (evt) {
+        //             const base64Img = evt.target.result;
+        //             _this.model.photo = base64Img;
+        //             _this.userService.uploadPhoto(_this.selectedUser._id, { photo: 'base64Img' }).subscribe(res => {
+        //                 _this.selectedUser.photo = base64Img;
+        //                 _this.alertService.successToastr(res.message);
+        //             }, error => {
+        //                 if (error && error.error && error.error.message) {
+        //                     _this.alertService.errorToastr(error.error.message);
+        //                 }
+        //             });
+        //         }
+
+        //         fileReader.readAsDataURL(file);
+        //     } else {
+        //         this.alertService.errorToastr("Invalid photo type! Photo type must PNG or JPEG");
+        //     }
+        // } else {
+        //     this.alertService.errorToastr("Failed to load photo, please try again");
+        // }
+    }
+
+    /**
+     * Clear modal data.
+     */
+    clearModalData() {
+        this.model = new User();
+        this.modelAttendance = new Attendence();
+        this.modelLeave = new Leave();
     }
 
     // filterAttendanceAndLeave(type: string) {
@@ -289,7 +346,6 @@ export class UserListComponent implements OnInit {
     }
 
     customAttendanceAndLeaveFilter(type: string) {
-
         if (type == Constants.attendance) {
             this.fromDate = '';
             this.toDate = '';
@@ -304,7 +360,8 @@ export class UserListComponent implements OnInit {
 
             this.attendanceService.getUserAttendance(this.selectedUser._id, this.attendancePageNumber, this.attendanceFilter.filterType, this.fromDate, this.toDate).subscribe((attendance: any) => {
                 this.userAttendance = attendance;
-                this.calculateTotalGridPages(Constants.attendance, attendance.total);
+                // this.calculateTotalGridPages(Constants.attendance, attendance.total);
+                
             });
         }
         else {
@@ -337,6 +394,41 @@ export class UserListComponent implements OnInit {
         }
     }
 
+
+    /**
+     * 
+     * @param totalRecord Total number of records
+     */
+    initPagination(totalRecord:number) {
+    const totalPages = Math.ceil(totalRecord / 10);
+    let pagination = [];
+
+    for (let i = 1; i <= totalPages; i++) {
+        pagination.push(i);
+    }
+
+    return {totalPages: totalPages, paginationArr: pagination};
+}
+
+/**
+ * Fired on pagination change.
+ * @param {any} data data emitted on page changed. 
+ */
+pageChanged(data:any) {
+    switch (data.paginationId) {
+        case 'attendance':
+            this.getUserAttendances(data.currentPage);
+            break;
+        
+        case 'leave':
+            this.getUserLeaves(data.currentPage);
+            break;
+    
+        default:
+            break;
+    }
+}
+
     /**
          * Perform update & Delete Operation
          */
@@ -350,7 +442,10 @@ export class UserListComponent implements OnInit {
                 jQuery('#userModal').modal('show');
                 this.userService.getById(Id).subscribe(user => {
                     this.model = user;
+                    console.log("*user:",user);
                 });
+            } else if (operation === 'change_password') {
+                this.id = Id;
             }
         }
         else if (type == Constants.attendance) {
@@ -395,34 +490,34 @@ export class UserListComponent implements OnInit {
      * @param attendance User attendance
      */
     getTimeSpent(attendance: any) {
-        if(attendance.active){
-        const today = new Date();
-        let breakDiff = 0;
-        let timeDiff = new Date(attendance.checkOut).getTime() - new Date(attendance.checkIn).getTime();
+        if (attendance.active) {
+            const today = new Date();
+            let breakDiff = 0;
+            let timeDiff = new Date(attendance.checkOut).getTime() - new Date(attendance.checkIn).getTime();
 
-        // Today attendance scenario, if not checkout yet then use current time as second-date/checked-out date
-        if (this.getDaysDifference(today, attendance.date) <= 2 && !attendance.checkOut) {
-            timeDiff = today.getTime() - new Date(attendance.checkIn).getTime();
+            // Today attendance scenario, if not checkout yet then use current time as second-date/checked-out date
+            if (this.getDaysDifference(today, attendance.date) <= 2 && !attendance.checkOut) {
+                timeDiff = today.getTime() - new Date(attendance.checkIn).getTime();
 
-            if (attendance.breakStartTime && !attendance.breakEndTime) {
-                breakDiff = today.getTime() - new Date(attendance.breakStartTime).getTime();
+                if (attendance.breakStartTime && !attendance.breakEndTime) {
+                    breakDiff = today.getTime() - new Date(attendance.breakStartTime).getTime();
+                }
+            }
+
+            if (attendance.breakStartTime && attendance.breakEndTime) {
+                breakDiff = new Date(attendance.breakEndTime).getTime() - new Date(attendance.breakStartTime).getTime();
+            }
+
+            if (timeDiff < 0) timeDiff = timeDiff * -1;
+            timeDiff = timeDiff - breakDiff;
+            attendance.timeSpent = moment(attendance.date).add(moment.duration(timeDiff)).format('HH:mm');
+
+            // Time spent in office must be greater than 8 hours (28800000 ms);
+            if ((timeDiff >= 28800000)) {
+                // 32400000 ms = 9 hours
+                attendance.timeCompleted = true
             }
         }
-
-        if (attendance.breakStartTime && attendance.breakEndTime) {
-            breakDiff = new Date(attendance.breakEndTime).getTime() - new Date(attendance.breakStartTime).getTime();
-        }
-
-        if (timeDiff < 0) timeDiff = timeDiff * -1;
-        timeDiff = timeDiff - breakDiff;
-        attendance.timeSpent = moment(attendance.date).add(moment.duration(timeDiff)).format('HH:mm');
-
-          // Time spent in office must be greater than 8 hours (28800000 ms);
-          if((timeDiff >= 28800000)) {
-            // 32400000 ms = 9 hours
-            attendance.timeCompleted = true
-        }
-    }
     }
 
     /**
@@ -443,8 +538,13 @@ export class UserListComponent implements OnInit {
     getUserDetail(userDetails: User) {
         console.log("this.selectedUser:", userDetails);
         this.selectedUser = userDetails;
+        if(!this.model.photo) {
+            this.model.photo = 'assets/images/avatars/unknown-profile.jpg';
+        }
+
         this.getUserAttendances(1);
         this.getUserLeaves(1);
+        this.getCounts();
     }
 
     /**
@@ -495,9 +595,6 @@ export class UserListComponent implements OnInit {
                 this.hideLoader();
                 let currentIndex = this.userAttendances.findIndex(x => x._id == result.Id);
                 this.userAttendances.splice(currentIndex, 1);
-
-
-
                 this.alertService.successToastr("Selected Attendance Deleted Successfully.", false);
             }, error => {
                 this.hideLoader();
@@ -516,6 +613,59 @@ export class UserListComponent implements OnInit {
                 this.alertService.errorToastr("Error in Deleting Selected Leave.", false);
             });
         }
+    }
+
+    /**
+     * Get attendance, leave and absent counts for a specific user.
+     */
+    getCounts() {
+        this.userCount = { approved: 0, pending: 0, casual: 0, annual: 0, totalAbsent: 0 };
+        this.getAbsentCount();
+        this.getLeaveCount();
+    }
+
+    /**
+     * Get user absent count
+     */
+    getAbsentCount() {
+        this.showLoader();
+        this.attendanceService.getUserAttendanceCount(this.selectedUser._id, this.userDetailFilter.filterType, this.fromDate, this.toDate, false).subscribe((attendance: any) => {
+            this.hideLoader();
+            this.userCount.totalAbsent = attendance.total;
+        });
+    }
+
+    /**
+    * Get user leave details (i.e. approved,pending,casual, annual leave counts)
+    */
+    getLeaveCount() {
+        this.showLoader();
+        this.leaveService.getUserLeave(this.selectedUser._id, 1, this.userDetailFilter.filterType, this.fromDate, this.toDate, '', 0).subscribe((leaves: any) => {
+            this.hideLoader();
+            if (leaves && leaves.data) {
+                leaves.data.forEach(userLeave => {
+                    if (userLeave.status === 'pending') {
+                        this.userCount.pending += 1;
+                    } else if (userLeave.status === 'approved') {
+                        this.userCount.approved += 1;
+
+                        if (userLeave.type === 'casual') {
+                            this.userCount.casual += 1;
+                        } else {
+                            this.userCount.annual += 1;
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * Get image
+     * @param photo 
+     */
+    getImage(photo:any){
+        return photo? photo: 'assets/images/avatars/unknown-profile.jpg';
     }
 
     /**

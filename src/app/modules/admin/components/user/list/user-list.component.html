@@ -1,174 +1,247 @@
-<aside class="app-aside app-aside-expand-md app-aside-light"></aside>
-<main class="app-main">
-  <div class="wrapper">
-    <div class="page has-sidebar has-sidebar-fluid has-sidebar-expand-xl">
-      <!-- User list -->
-      <div class="page-inner page-inner-fill position-relative">
-        <!-- Seach-box -->
-        <header class="page-navs bg-light shadow-sm">
-          <div class="input-group has-clearable">
-            <button type="button" class="close" aria-label="Close"><span aria-hidden="true">
-                <i class="fa fa-times-circle" (click)="getAllUser()"></i></span></button>
-            <label class="input-group-prepend" for="searchClients"><span class="input-group-text"><span
-                  class="oi oi-magnifying-glass" (click)="getPagedUsers()"
-                  [hidden]="!userSearchStr"></span></span></label>
-            <input type="text" class="form-control" id="searchUsers" [(ngModel)]="userSearchStr"
-              placeholder="Find User">
-          </div>
-        </header><button type="button" class="btn btn-primary btn-floated position-absolute" data-toggle="modal"
-          data-target="#userModal" title="Add new client"><i class="fa fa-plus"></i></button>
-           <!-- list -->
-        <perfect-scrollbar [config]="config">
-          <div class=" list-group list-group-flush list-group-divider border-top" data-toggle="radiolist"
-          *ngIf="!allUsers.length">
-            <div class="list-group-item active dataTables_empty" data-toggle="sidebar" data-sidebar="show">
-              <div class="list-group-item-body">
-                <h3 class="list-group-item-title"> No data available </h3>
-              </div>
+<div class="app">
+  <aside class="app-aside app-aside-expand-md app-aside-light"></aside>
+  <main class="app-main">
+    <div class="wrapper">
+      <div class="page has-sidebar has-sidebar-fluid has-sidebar-expand-xl">
+        <!-- User list -->
+        <div class="page-inner page-inner-fill position-relative">
+          <!-- Seach-box -->
+          <header class="page-navs bg-light shadow-sm">
+            <div class="input-group has-clearable">
+              <button type="button" class="close" aria-label="Close"><span aria-hidden="true">
+                  <i class="fa fa-times-circle" (click)="getAllUser()"></i></span></button>
+              <label class="input-group-prepend" for="searchClients"><span class="input-group-text"><span
+                    class="oi oi-magnifying-glass" (click)="getPagedUsers()"
+                    [hidden]="!userSearchStr"></span></span></label>
+              <input type="text" class="form-control" id="searchUsers" [(ngModel)]="userSearchStr"
+                placeholder="Find User">
             </div>
-          </div>
-          
-          <div class=" list-group list-group-flush list-group-divider border-top" data-toggle="radiolist"
-            *ngFor="let user of allUsers; let i = index ">
-            <div class="list-group-item active" data-toggle="sidebar" data-sidebar="show">
-              <div class="ps__thumb-y" tabindex="0" style="top: 0px"></div>
-              <a (click)="getUserDetail(user)" style="cursor: pointer;" class="stretched-link"></a>
-              <div class="list-group-item-figure">
-                <div class="tile tile-circle bg-purple"> {{user.firstname.charAt(0).toUpperCase()}} </div>
-              </div>
-              <div class="list-group-item-body">
-                <h3 class="list-group-item-title"> {{user.firstname}} {{user.lastname}} </h3>
-              </div>
-            </div>
-          </div>
-        </perfect-scrollbar>
-      </div>
-
-      <div class="page-sidebar bg-light">
-        <!-- Header back button -->
-        <header class="sidebar-header d-xl-none">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item active">
-                <a onclick="Looper.toggleSidebar()"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Back</a>
-              </li>
-            </ol>
-          </nav>
-        </header>
-        <!-- .sidebar-section -->
-        <div class="sidebar-section sidebar-section-fill" *ngIf="allUsers && allUsers.length">
-          <h1 class="page-title">
-            <div class="text-muted"> <i class="fas fa-user text-muted"></i> {{selectedUser.firstname}}
-              {{selectedUser.lastname}} </div>
-          </h1>
-          <!-- User-detail-tabs -->
-          <div class="nav-scroller border-bottom">
-            <ul class="nav nav-tabs">
-              <li class="nav-item">
-                <a class="nav-link active show" data-toggle="tab" href="#contact-tab">Contact</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#attendance-tab">Attendance</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#leaves-tab">Leave</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="tab-content pt-4">
-            <!-- Contact-Tab -->
-            <div class="tab-pane fade show active" id="contact-tab" role="tabpanel" aria-labelledby="contact-tab">
-
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h2 id="contact-tab" class="card-title"> Address </h2>
-                  </div>
-                  <address> {{selectedUser.address}}</address>
+          </header><button type="button" class="btn btn-primary btn-floated position-absolute" data-toggle="modal"
+            data-target="#userModal" title="Add new client"><i class="fa fa-plus"></i></button>
+          <!-- list -->
+          <perfect-scrollbar [config]="config">
+            <div class=" list-group list-group-flush list-group-divider border-top" data-toggle="radiolist"
+              *ngIf="!allUsers.length">
+              <div class="list-group-item active dataTables_empty" data-toggle="sidebar" data-sidebar="show">
+                <div class="list-group-item-body">
+                  <h3 class="list-group-item-title"> No data available </h3>
                 </div>
               </div>
+            </div>
 
-              <div class="card mt-4">
-                  <!-- card header -->
-                <div class="card-header border-0">
-                  
-                  <div class="d-flex align-items-center">
-                    
-                    <div class="dropdown">
-                      <button type="button" class="btn btn-icon btn-light" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></button>
-                      <div class="dropdown-menu dropdown-menu-left">
-                        <div class="dropdown-arrow"></div>
-                        <a class="dropdown-item" (click)="performUpdateAndDeleteOperation('user','edit',selectedUser._id)"><span><i class="fa fa-pencil-alt"></i></span> Edit</a>
-                         <a class="dropdown-item"  (click)="performUpdateAndDeleteOperation('user','delete',selectedUser._id)"><span><i class="far fa-trash-alt"></i></span> Remove</a>
+            <div class=" list-group list-group-flush list-group-divider border-top" data-toggle="radiolist"
+              *ngFor="let user of allUsers; let i = index ">
+              <div class="list-group-item active" data-toggle="sidebar" data-sidebar="show">
+                <div class="ps__thumb-y" tabindex="0" style="top: 0px"></div>
+                <a (click)="getUserDetail(user)" style="cursor: pointer;" class="stretched-link"></a>
+                <div class="list-group-item-figure">
+                  <span class="user-avatar user-avatar-md" [ngClass]="{'unknown-profile': !user.photo}">
+                    <!-- <img [src]="getImage(user.photo)" alt=""> -->
+                    <img src="assets/images/avatars/unknown-profile.jpg" alt="">
+                  </span>
+                </div>
+                <div class="list-group-item-body">
+                  <h3 class="list-group-item-title"> {{user.firstname | titlecase}} {{user.lastname | titlecase}} </h3>
+                </div>
+              </div>
+            </div>
+          </perfect-scrollbar>
+        </div>
+
+        <div class="page-sidebar bg-light">
+          <!-- Header back button -->
+          <header class="sidebar-header d-xl-none">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item active">
+                  <a onclick="Looper.toggleSidebar()"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Back</a>
+                </li>
+              </ol>
+            </nav>
+          </header>
+          <!-- .sidebar-section -->
+          <div class="sidebar-section sidebar-section-fill" *ngIf="allUsers && allUsers.length">
+            <h1 class="page-title">
+              <div class="text-muted"> <i class="fas fa-user text-muted"></i> {{selectedUser.firstname | titlecase }}
+                {{selectedUser.lastname | titlecase}} </div>
+            </h1>
+            <!-- User-detail-tabs -->
+            <div class="nav-scroller border-bottom">
+              <ul class="nav nav-tabs">
+                <li class="nav-item" (click)="getCounts()">
+                  <a class="nav-link active show" data-toggle="tab" href="#contact-tab">Contact</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#attendance-tab">Attendance</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#leaves-tab">Leave</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="tab-content pt-4">
+              <!-- Contact-Tab -->
+              <div class="tab-pane fade show active" id="contact-tab" role="tabpanel" aria-labelledby="contact-tab">
+
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h2 id="contact-tab" class="card-title"> Counts </h2>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="form-group">
+                      <div class="input-group input-group-alt">
+                        <!-- Dropdown -->
+                        <div class="input-group-prepend">
+                          <select class="custom-select" id="userDetailFilter" name="userDetailFilter"
+                            (change)="getCounts()" [(ngModel)]="userDetailFilter.filterType">
+                            <option *ngFor="let filterType of leaveFilterTypes" [value]="filterType.value">
+                              {{filterType.name}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- metric row -->
+                    <div class="section-block">
+                      <div class="metric-row">
+                        <div class="col-lg-9">
+                          <div class="metric-row metric-flush">
+                            <div class="col">
+                              <a class="metric metric-bordered align-items-center">
+                                <h2 class="metric-label"><i class="fas fa-users text-danger"></i> Absent </h2>
+                                <p class="metric-value h3">
+                                  <span class="value">{{userCount.totalAbsent}}</span>
+                                </p>
+                              </a>
+                            </div>
+                            <div class="col">
+                              <a class="metric metric-bordered align-items-center">
+                                <h2 class="metric-label"><i class="oi oi-circle-check text-success"></i> Approved </h2>
+                                <p class="metric-value h3">
+                                  <span class="value">{{userCount.approved}}</span>
+                                </p>
+                              </a>
+                            </div>
+                            <div class="col">
+                              <a class="metric metric-bordered align-items-center">
+                                <h2 class="metric-label"><i class="oi oi-media-record text-warning"></i> Pending </h2>
+                                <p class="metric-value h3">
+                                  <span class="value">{{userCount.pending}}</span>
+                                </p>
+                              </a>
+                            </div>
+                            <div class="col">
+                              <a class="metric metric-bordered align-items-center">
+                                <h2 class="metric-label"><span class="oi oi-pulse text-danger"></span> Casual </h2>
+                                <p class="metric-value h3">
+                                  <span class="value">{{userCount.casual}}</span>
+                                </p>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <a class="metric metric-bordered align-items-center">
+                            <h2 class="metric-label"><span class="oi oi-calendar text-info"></span> Annual </h2>
+                            <p class="metric-value h3">
+                              <span class="value">{{userCount.annual}}</span>
+                            </p>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div class="card-body">
-                  <h2 class="card-title"> Contact </h2>
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h2 id="contact-tab" class="card-title"> Address </h2>
+                    </div>
+                    <address> {{selectedUser.address}} <br> Pakistan</address>
+                  </div>
+                </div>
 
-                  <div class="table-responsive">
-                    <table class="table table-hover" style="min-width: 678px">
-                      <thead>
-                        <tr>
-                          <th> Name </th>
-                          <th> Role </th>
-                          <th> Email </th>
-                          <th> Phone </th>
-                          <th> Active </th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class="align-middle">{{selectedUser.firstname}} {{selectedUser.lastname}} </td>
-                          <td class="align-middle">{{selectedUser.role}} </td>
-                          <td class="align-middle">{{selectedUser.email}}</td>
-                          <td class="align-middle">{{selectedUser.phone}} </td>
-                          <td class="align-middle" [ngClass]="{'text-success': selectedUser.active, 'text-danger': !selectedUser.active}">{{selectedUser.active}} </td>
-                          <td class="align-middle text-right">
-                            <button type="button"
-                              (click)="performUpdateAndDeleteOperation('user','edit',selectedUser._id)"
-                              class="btn btn-sm btn-icon btn-secondary" data-toggle="modal"><i
-                                class="fa fa-pencil-alt"></i> <span class="sr-only">Edit</span></button>
-                            <button type="button"
-                              (click)="performUpdateAndDeleteOperation('user','delete',selectedUser._id)"
-                              class="btn btn-sm btn-icon btn-secondary"><i class="far fa-trash-alt"></i> <span
-                                class="sr-only">Remove</span></button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                <div class="card mt-4">
+                  <!-- card header -->
+                  <div class="card-header border-0">
+                    <div class="d-flex align-items-center">
+                      <div class="dropdown">
+                        <button type="button" class="btn btn-icon btn-light" data-toggle="dropdown"><i
+                            class="fa fa-ellipsis-v"></i></button>
+                        <div class="dropdown-menu dropdown-menu-left">
+                          <div class="dropdown-arrow"></div>
+                          <a class="dropdown-item"
+                            (click)="performUpdateAndDeleteOperation('user','edit',selectedUser._id)"><span><i
+                                class="fa fa-pencil-alt"></i></span> Edit</a>
+                          <a class="dropdown-item"
+                            (click)="performUpdateAndDeleteOperation('user','delete',selectedUser._id)"><span><i
+                                class="far fa-trash-alt"></i></span> Remove</a>
+                          <!-- <a class="dropdown-item"
+                        (click)="performUpdateAndDeleteOperation('user','change_password',selectedUser._id)"><span><i
+                            class="oi oi-key"></i></span> Change Password</a> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card-body">
+                    <h2 class="card-title"> Contact </h2>
+                    <div class="table-responsive">
+                      <table class="table table-hover" style="min-width: 678px">
+                        <thead>
+                          <tr>
+                            <th> Name </th>
+                            <th> Role </th>
+                            <th> Email </th>
+                            <th> Phone </th>
+                            <th> Active </th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="align-middle">{{selectedUser.firstname}} {{selectedUser.lastname}} </td>
+                            <td class="align-middle">{{selectedUser.role}} </td>
+                            <td class="align-middle">{{selectedUser.email}}</td>
+                            <td class="align-middle">{{selectedUser.phone}} </td>
+                            <td class="align-middle"
+                              [ngClass]="{'text-success': selectedUser.active, 'text-danger': !selectedUser.active}">
+                              {{selectedUser.active}} </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
+              <!-- Attendance-Tab -->
+              <div class="tab-pane fade" id="attendance-tab" role="tabpanel" aria-labelledby="attendance-tab">
+                <button type="button" class="btn btn-primary btn-floated position-initial" data-toggle="modal"
+                  data-target="#attendanceNewModal" title="Add new attendance"><i class="fa fa-plus"></i></button>
+                <div class="card mt-4">
+                  <div class="card-body">
+                    <h2 class="card-title"> Attendance </h2>
 
-            <!-- Attendance-Tab -->
-            <div class="tab-pane fade" id="attendance-tab" role="tabpanel" aria-labelledby="attendance-tab">
-              <button type="button" class="btn btn-primary btn-floated position-initial" data-toggle="modal"
-                data-target="#attendanceNewModal" title="Add new attendance"><i class="fa fa-plus"></i></button>
-              <div class="card mt-4">
-                <div class="card-body">
-                  <h2 class="card-title"> Attendance </h2>
-
-                  <!-- Filters -->
-                  <div class="form-group">
-                    <div class="input-group input-group-alt">
-                      <!-- Dropdown -->
-                      <div class="input-group-prepend">
-                        <select class="custom-select" id="attendanceFilter" name="attendanceFilter"
-                          (change)="getUserAttendances(1)" [(ngModel)]="attendanceFilter.filterType">
-                          <option *ngFor="let filterType of attendanceFilterTypes" [value]="filterType.value">
-                            {{filterType.name}}
-                          </option>
-                        </select>
-                      </div>
-                      <!-- Search box and Date-time pickers  -->
-                      <!-- <div class="input-group has-clearable">
+                    <!-- Filters -->
+                    <div class="form-group">
+                      <div class="input-group input-group-alt">
+                        <!-- Dropdown -->
+                        <div class="input-group-prepend">
+                          <select class="custom-select" id="attendanceFilter" name="attendanceFilter"
+                            (change)="getUserAttendances(1)" [(ngModel)]="attendanceFilter.filterType">
+                            <option *ngFor="let filterType of attendanceFilterTypes" [value]="filterType.value">
+                              {{filterType.name}}
+                            </option>
+                          </select>
+                        </div>
+                        <!-- Search box and Date-time pickers  -->
+                        <!-- <div class="input-group has-clearable">
                           <button type="button" class="close" aria-label="Close"><span aria-hidden="true">
                             <i class="fa fa-times-circle" (click)="getUserattendance(selectedUser._id)"></i></span></button> 
                             <label class="input-group-prepend" for="searchClients"><span class="input-group-text"><span
@@ -196,114 +269,92 @@
                             </div>
                           </div>
                       </div> -->
+                      </div>
                     </div>
-                  </div>
-                  <!-- Table -->
-                  <div class="table-responsive">
-                    <table class="table table-hover" style="min-width: 678px">
-                      <thead class="thead-light">
-                        <tr>
-                          <th></th>
-                          <th>Status</th>
-                          <th> Date </th>
-                          <th> Checkin </th>
-                          <th> Break Start </th>
-                          <th> Break End </th>
-                          <th> Checkout </th>
-                          <th> Hours Spent </th>
-                          <th> </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngIf="!userAttendances.length"><td valign="top" colspan="7" class="dataTables_empty">No data available in table</td></tr>
-                        <tr *ngFor="let attendance of userAttendances"  >
-                          <td class="align-middle col-checker">
-                            <div class="custom-control custom-control-nolabel custom-checkbox">
-                              <input type="checkbox" class="custom-control-input" name="selectedRow-{{attendance.date}}"
-                                id="selectedRow-{{attendance.date}}">
-                              <label class="custom-control-label" for="selectedRow-{{attendance.date}}"></label>
-                            </div>
-                          </td>
-                          <td><i class="oi oi-media-record" [ngClass]="{'text-danger': !attendance.active, 'text-success': attendance.checkOut, 'text-warning': !attendance.checkOut}"></i></td>
-                           <td class="align-middle"> {{attendance.date | date: 'EE MMM d, y'}} </td>
-                          <td class="align-middle"> {{attendance.checkIn | date:'shortTime'}} </td>
-                          <td class="align-middle"> {{attendance.breakStartTime| date:'shortTime'}} </td>
-                          <td class="align-middle"> {{attendance.breakEndTime| date:'shortTime'}} </td>
-                          <td class="align-middle"> {{attendance.checkOut| date:'shortTime'}} </td>
-                          <td class="align-middle" [ngClass]="{'text-danger': !attendance.timeCompleted, 'text-success': attendance.timeCompleted}"> {{attendance.timeSpent}} </td>
-                         
-                          <td class="align-middle text-right">
-                            <a class="btn btn-sm btn-icon btn-secondary"
-                              (click)="performUpdateAndDeleteOperation('attendance','edit',attendance._id)">
-                              <i class="fa fa-pencil-alt"></i>
-                              <span class="sr-only">Edit</span></a>
-                            <a class="btn btn-sm btn-icon btn-secondary"
-                              (click)="performUpdateAndDeleteOperation('attendance','delete',attendance._id)"><i
-                                class="far fa-trash-alt"></i>
-                              <span class="sr-only">Remove</span></a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <!-- Table -->
+                    <div class="table-responsive">
+                      <table class="table table-hover" style="min-width: 678px">
+                        <thead class="thead-light">
+                          <tr>
+                            <th></th>
+                            <th>Status</th>
+                            <th> Date </th>
+                            <th> Checkin </th>
+                            <th> Break Start </th>
+                            <th> Break End </th>
+                            <th> Checkout </th>
+                            <th> Hours Spent </th>
+                            <th> </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngIf="!userAttendances.length">
+                            <td valign="top" colspan="7" class="dataTables_empty">No data available in table</td>
+                          </tr>
+                          <tr *ngFor="let attendance of userAttendances">
+                            <td class="align-middle col-checker">
+                              <div class="custom-control custom-control-nolabel custom-checkbox">
+                                <input type="checkbox" class="custom-control-input"
+                                  name="selectedRow-{{attendance.date}}" id="selectedRow-{{attendance.date}}">
+                                <label class="custom-control-label" for="selectedRow-{{attendance.date}}"></label>
+                              </div>
+                            </td>
+                            <td><i class="oi oi-media-record"
+                                [ngClass]="{'text-danger': !attendance.active, 'text-success': attendance.checkOut, 'text-warning': !attendance.checkOut}"></i>
+                            </td>
+                            <td class="align-middle"> {{attendance.date | date: 'EE MMM d, y'}} </td>
+                            <td class="align-middle"> {{attendance.checkIn | date:'shortTime'}} </td>
+                            <td class="align-middle"> {{attendance.breakStartTime| date:'shortTime'}} </td>
+                            <td class="align-middle"> {{attendance.breakEndTime| date:'shortTime'}} </td>
+                            <td class="align-middle"> {{attendance.checkOut| date:'shortTime'}} </td>
+                            <td class="align-middle"
+                              [ngClass]="{'text-danger': !attendance.timeCompleted, 'text-success': attendance.timeCompleted}">
+                              {{attendance.timeSpent}} </td>
 
-                    <!-- Pagination -->
-                    <ul class="pagination justify-content-center mt-4">
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1"><i class="fa fa-lg fa-angle-left"></i></a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                      </li>
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">...</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">13</a>
-                      </li>
-                      <li class="page-item active">
-                        <a class="page-link" href="#">14</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">15</a>
-                      </li>
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">...</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">24</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#"><i class="fa fa-lg fa-angle-right"></i></a>
-                      </li>
-                    </ul>
+                            <td class="align-middle text-right">
+                              <a class="btn btn-sm btn-icon btn-secondary"
+                                (click)="performUpdateAndDeleteOperation('attendance','edit',attendance._id)">
+                                <i class="fa fa-pencil-alt"></i>
+                                <span class="sr-only">Edit</span></a>
+                              <a class="btn btn-sm btn-icon btn-secondary"
+                                (click)="performUpdateAndDeleteOperation('attendance','delete',attendance._id)"><i
+                                  class="far fa-trash-alt"></i>
+                                <span class="sr-only">Remove</span></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- Pagination -->
+                      <table-pagination [totalRecord]="totalAttendances" [id]="'attendance'"
+                        (pageChanged)="pageChanged($event)"></table-pagination>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Leave-Tab -->
-            <div class="tab-pane fade" id="leaves-tab" role="tabpanel" aria-labelledby="leaves-tab">
-              <button type="button" class="btn btn-primary btn-floated position-initial" data-toggle="modal"
-                data-target="#leaveNewModal" title="Add new Leave"><i class="fa fa-plus"></i></button>
+              <!-- Leave-Tab -->
+              <div class="tab-pane fade" id="leaves-tab" role="tabpanel" aria-labelledby="leaves-tab">
+                <button type="button" class="btn btn-primary btn-floated position-initial" data-toggle="modal"
+                  data-target="#leaveNewModal" title="Add new Leave"><i class="fa fa-plus"></i></button>
 
-              <div class="card mt-4">
-                <div class="card-body">
-                  <h2 class="card-title"> Leaves </h2>
+                <div class="card mt-4">
+                  <div class="card-body">
+                    <h2 class="card-title"> Leaves </h2>
 
-                  <!-- Filters -->
-                  <div class="form-group">
-                    <div class="input-group input-group-alt">
-                      <!-- Dropdown -->
-                      <div class="input-group-prepend">
-                        <select class="custom-select" id="leaveFilter" name="leaveFilter" (change)="getUserLeaves(1)"
-                          [(ngModel)]="leaveFilter.filterType">
-                          <option *ngFor="let filterType of leaveFilterTypes" [value]="filterType.value">
-                            {{filterType.name}}
-                          </option>
-                        </select>
-                      </div>
-                      <!-- Search box and Date-time pickers  -->
-                      <!-- <div class="input-group has-clearable">
+                    <!-- Filters -->
+                    <div class="form-group">
+                      <div class="input-group input-group-alt">
+                        <!-- Dropdown -->
+                        <div class="input-group-prepend">
+                          <select class="custom-select" id="leaveFilter" name="leaveFilter" (change)="getUserLeaves(1)"
+                            [(ngModel)]="leaveFilter.filterType">
+                            <option *ngFor="let filterType of leaveFilterTypes" [value]="filterType.value">
+                              {{filterType.name}}
+                            </option>
+                          </select>
+                        </div>
+                        <!-- Search box and Date-time pickers  -->
+                        <!-- <div class="input-group has-clearable">
                           <button type="button" class="close" aria-label="Close"><span aria-hidden="true">
                             <i class="fa fa-times-circle" (click)="getUserLeave(selectedUser._id)"></i></span></button> 
                             <label class="input-group-prepend" for="searchClients"><span class="input-group-text"><span
@@ -332,439 +383,426 @@
                           </div>
                       </div> -->
 
+                      </div>
                     </div>
-                  </div>
 
-<!-- table -->
-                  <div class="table-responsive">
-                    <table class="table table-hover" style="min-width: 678px">
-                      <thead class="thead-light">
-                        <tr>
-                          <th></th>
-                          <th> From</th>
-                          <th> To </th>
-                          <th> Type </th>
-                          <th> Status </th>
-                          <th> Days </th>
-                          <th> Description </th>
-                          <th> </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngIf="!userLeaves.length"><td valign="top" colspan="8" class="dataTables_empty">No data available in table</td></tr>
-                        <tr *ngFor="let leave of userLeaves">
-                          <td class="align-middle col-checker">
-                            <div class="custom-control custom-control-nolabel custom-checkbox">
-                              <input type="checkbox" class="custom-control-input" name="selectedRow-{{leave.fromDate}}"
-                                id="selectedRow-{{leave.fromDate}}">
-                              <label class="custom-control-label" for="selectedRow-{{leave.fromDate}}"></label>
-                            </div>
-                          </td>
-                          <td style="min-width:320px"> <a>{{leave.fromDate | date : 'EE MMM d, y'}} </a></td>
-                          <td class="align-middle"> {{leave.toDate | date:'EE MMM d, y'}} </td>
-                          <td class="align-middle"> {{leave.type}} </td>
-                          <td class="align-middle badge badge-subtle" 
-                          [ngClass]="{'badge-success': leave.status === leaveStatus.approved, 'badge-danger': leave.status === leaveStatus.rejected, 'badge-warning': leave.status === leaveStatus.pending}"> {{leave.status}} </td>
-                          <td class="align-middle"> {{getDaysDifference(leave.fromDate, leave.toDate)}} </td>
-                          <td class="align-middle"> {{leave.description}} </td>
-                          <td class="align-middle text-right">
-                            <button type="button" (click)="performUpdateAndDeleteOperation('leave','edit',leave._id)"
-                              class="btn btn-sm btn-icon btn-secondary" data-toggle="modal">
-                              <i class="fa fa-pencil-alt"></i> <span class="sr-only">Edit</span></button>
-                            <button type="button" (click)="performUpdateAndDeleteOperation('leave','delete',leave._id)"
-                              class="btn btn-sm btn-icon btn-secondary"><i class="far fa-trash-alt"></i> <span
-                                class="sr-only">Remove</span></button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <!-- table -->
+                    <div class="table-responsive">
+                      <table class="table table-hover" style="min-width: 678px">
+                        <thead class="thead-light">
+                          <tr>
+                            <th></th>
+                            <th> From</th>
+                            <th> To </th>
+                            <th> Type </th>
+                            <th> Status </th>
+                            <th> Days </th>
+                            <th> Description </th>
+                            <th> </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngIf="!userLeaves.length">
+                            <td valign="top" colspan="8" class="dataTables_empty">No data available in table</td>
+                          </tr>
+                          <tr *ngFor="let leave of userLeaves">
+                            <td class="align-middle col-checker">
+                              <div class="custom-control custom-control-nolabel custom-checkbox">
+                                <input type="checkbox" class="custom-control-input"
+                                  name="selectedRow-{{leave.fromDate}}" id="selectedRow-{{leave.fromDate}}">
+                                <label class="custom-control-label" for="selectedRow-{{leave.fromDate}}"></label>
+                              </div>
+                            </td>
+                            <td style="min-width:320px"> <a>{{leave.fromDate | date : 'EE MMM d, y'}} </a></td>
+                            <td class="align-middle"> {{leave.toDate | date:'EE MMM d, y'}} </td>
+                            <td class="align-middle"> {{leave.type}} </td>
+                            <td class="align-middle badge badge-subtle"
+                              [ngClass]="{'badge-success': leave.status === leaveStatus.approved, 'badge-danger': leave.status === leaveStatus.rejected, 'badge-warning': leave.status === leaveStatus.pending}">
+                              {{leave.status}} </td>
+                            <td class="align-middle"> {{getDaysDifference(leave.fromDate, leave.toDate)}} </td>
+                            <td class="align-middle"> {{leave.description}} </td>
+                            <td class="align-middle text-right">
+                              <button type="button" (click)="performUpdateAndDeleteOperation('leave','edit',leave._id)"
+                                class="btn btn-sm btn-icon btn-secondary" data-toggle="modal">
+                                <i class="fa fa-pencil-alt"></i> <span class="sr-only">Edit</span></button>
+                              <button type="button"
+                                (click)="performUpdateAndDeleteOperation('leave','delete',leave._id)"
+                                class="btn btn-sm btn-icon btn-secondary"><i class="far fa-trash-alt"></i> <span
+                                  class="sr-only">Remove</span></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
 
-                    <!-- Pagination -->
-                    <ul class="pagination justify-content-center mt-4">
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1"><i class="fa fa-lg fa-angle-left"></i></a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                      </li>
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">...</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">13</a>
-                      </li>
-                      <li class="page-item active">
-                        <a class="page-link" href="#">14</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">15</a>
-                      </li>
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">...</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">24</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#"><i class="fa fa-lg fa-angle-right"></i></a>
-                      </li>
-                    </ul>
+                      <!-- Pagination -->
+                      <table-pagination [totalRecord]="totalLeaves" [id]="'leave'" (pageChanged)="pageChanged($event)">
+                      </table-pagination>
+
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- User Modal -->
+        <form name="form" #form="ngForm">
+          <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="clientNewModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header right_align">
+                  <div class="right_align"><i class="fa fa-times-circle" data-dismiss="modal"
+                      (click)="clearModalData()"></i></div>
+                </div>
+
+                <!-- modal-body -->
+                <div class="modal-body">
+                  <div class="form-row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <div class="text-center">
+                          <div class="user-avatar user-avatar-xl fileinput-button">
+                            <div class="fileinput-button-label"> Change photo </div>
+                            <!-- <img [src]="model.photo" alt=""> -->
+                            <img src="assets/images/avatars/unknown-profile.jpg" alt="">
+                            <input type="file" id="fileupload-avatar" name="avatar" (change)="uploadPhoto($event)">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="firstname">First Name</label>
+                        <input type="text" required #firstname="ngModel" id="FirstName" name="firstname"
+                          [(ngModel)]="model.firstname" placeholder="Enter First Name" class="form-control">
+                      </div>
+                      <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)"
+                        class="alert alert-danger">
+                        <label>
+                          First Name is Required
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" required #lastname="ngModel" id="LastName" name="lastname"
+                          [(ngModel)]="model.lastname" placeholder="Enter Last Name" class="form-control">
+                      </div>
+                      <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">
+                        <label>
+                          Last Name is Required
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="username">User Name</label>
+                        <input type="text" required #username="ngModel" id="UserName" name="username"
+                          [(ngModel)]="model.username" placeholder="Enter User Name" class="form-control">
+                      </div>
+                      <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+                        <label>
+                          User Name is Required
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="cnic">CNIC</label>
+                        <input type="text" required #cnic="ngModel" id="cnic" name="cnic" [(ngModel)]="model.CNIC"
+                          placeholder="Enter CNIC" pattern="^[0-9]{13}$" class="form-control">
+                      </div>
+                      <div *ngIf="cnic.errors?.required && (cnic.dirty || cnic.touched)" class="alert alert-danger">
+                        <label>
+                          Invalid CNIC Number
+                        </label>
+                      </div>
+                      <div *ngIf="cnic.errors?.pattern" id="card-errors" class="alert alert-danger col-12"
+                        style="color:#f2665c;" role="alert">
+                        Invalid CNIC Number Must be Like:1234590832617
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="phonenumber">Phone Number</label>
+                        <input type="text" required #phoneNumber="ngModel" id="PhoneNumber" name="phoneNumber"
+                          [(ngModel)]="model.phone" placeholder="Enter Phone Number" maxlength="15"
+                          pattern="^[0-9]{11}$" class="form-control">
+                      </div>
+                      <div *ngIf="phoneNumber.errors?.required && (phoneNumber.dirty || phoneNumber.touched)"
+                        class="alert alert-danger">
+                        <label>
+                          Invalid Phone Number
+                        </label>
+                      </div>
+                      <div *ngIf="phoneNumber.errors?.pattern" id="card-errors" class="alert alert-danger col-12"
+                        style="color:#f2665c;" role="alert">
+                        Invalid Phone Number Must be Like:03001234567
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="emailaddress">Email Address</label>
+                        <input type="text" required #emailAddress="ngModel" id="emailAddress" name="emailAddress"
+                          [(ngModel)]="model.email" placeholder="Enter Email Address"
+                          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" class="form-control">
+                      </div>
+                      <div *ngIf="emailAddress.invalid && emailAddress.touched" class="alert alert-danger">
+                        <label>
+                          Email Address is Required
+                        </label>
+                      </div>
+                      <div *ngIf="emailAddress.errors?.pattern" class="alert alert-danger">
+                        <label>
+                          Invalid Email address
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" required #address="ngModel" id="Address" name="address"
+                          [(ngModel)]="model.address" placeholder="Enter Address" class="form-control">
+                      </div>
+                      <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+                        <label>
+                          Address is Required
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="d-flex justify-content-between" for="password"><span>Password</span> <a
+                            href="#password" data-toggle="password"><i class="fa fa-fw fa-eye"></i>
+                            <span>Show</span></a></label>
+                        <input type="password" placeholder="Password" name="password" id="password" class="form-control"
+                          #password="ngModel" [(ngModel)]="model.password" minlength="6">
+                      </div>
+                      <div *ngIf="password.errors?.minlength" id="card-errors" class="alert alert-danger col-12"
+                        style="color:#f2665c;" role="alert">
+                        Password Must be minimun 6 Characters long
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" [(ngModel)]="model.active" name="userActive">
+                          <label><span>Active</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success" [disabled]="form.invalid" (click)="save('user')"
+                    data-dismiss="modal">Save</button> <button type="button" class="btn btn-warning"
+                    data-dismiss="modal" (click)="clearModalData()">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- Attendance-modal -->
+        <form name="attendanceForm" #attendanceForm="ngForm">
+          <div class="modal fade" id="attendanceNewModal" tabindex="-1" role="dialog" aria-labelledby="attendanceLabel"
+            aria-hidden="true">
+
+            <div class="modal-dialog" role="document">
+
+              <div class="modal-content">
+                <div class="modal-header right_align">
+                  <div class="right_align"><i class="fa fa-times-circle" data-dismiss="modal"
+                      (click)="clearModalData()"></i></div>
+                </div>
+                <div class="modal-body">
+                  <div class="form-row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="comment">Comment</label>
+                        <input type="text" #comment="ngModel" id="comment" name="comment"
+                          [(ngModel)]="modelAttendance.comment" minlength="3" placeholder="Enter Comment"
+                          class="form-control" required>
+                      </div>
+                      <div *ngIf="comment.errors?.minlength" id="card-errors" class="alert alert-danger col-12"
+                        style="color:#f2665c;" role="alert">
+                        Comment must be minimun 5 characters long.
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="date">Date</label>
+                        <input placeholder="Select Date" [(ngModel)]="modelAttendance.date" name="date"
+                          class="form-control" [owlDateTimeTrigger]="dtPicker5" [owlDateTime]="dtPicker5"
+                          #date="ngModel" required>
+                        <owl-date-time #dtPicker5 [firstDayOfWeek]="firstDayofWeek" [pickerType]="'calendar'">
+                        </owl-date-time>
+                      </div>
+                      <div *ngIf="date.errors?.required && (date.dirty || date.touched)" class="alert alert-danger">
+                        <label>
+                          Attendance date is Required
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="checkIn">Check in Time</label>
+                        <input placeholder=" Select CheckIn  Time" [(ngModel)]="modelAttendance.checkIn"
+                          name="checkInTime" class="form-control" [owlDateTimeTrigger]="dtPicker1"
+                          [owlDateTime]="dtPicker1" #checkInTime="ngModel">
+                        <owl-date-time #dtPicker1 [hour12Timer]="hour12Timer" [pickerType]="'timer'"></owl-date-time>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="checkOut">CheckOut Time</label>
+                        <input placeholder="Select CheckOut Time" [(ngModel)]="modelAttendance.checkOut"
+                          name="checkOutTime" class="form-control" [owlDateTimeTrigger]="dtPicker2"
+                          [owlDateTime]="dtPicker2" #checkOutTime="ngModel">
+                        <owl-date-time #dtPicker2 [hour12Timer]="hour12Timer" [pickerType]="'timer'"></owl-date-time>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="breakStart">Break Start Time</label>
+                        <input placeholder="Break Start Date and Time" [(ngModel)]="modelAttendance.breakStartTime"
+                          name="breakStartTime" class="form-control" [owlDateTimeTrigger]="dtPicker3"
+                          [owlDateTime]="dtPicker3">
+                        <owl-date-time #dtPicker3 [hour12Timer]="hour12Timer" [pickerType]="'timer'"></owl-date-time>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="breakEnd">Break End Time</label>
+                        <input placeholder="Select Break End Time" [(ngModel)]="modelAttendance.breakEndTime"
+                          name="breakEnd date" class="form-control" [owlDateTimeTrigger]="dtPicker4"
+                          [owlDateTime]="dtPicker4">
+                        <owl-date-time #dtPicker4 [hour12Timer]="hour12Timer" [pickerType]="'timer'"></owl-date-time>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" [(ngModel)]="modelAttendance.active" name="attendanceActive">
+                          <label><span>Active</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success" [disabled]="attendanceForm.invalid" data-dismiss="modal"
+                    (click)="save('attendance')">Save</button> <button type="button" class="btn btn-warning"
+                    data-dismiss="modal" (click)="clearModalData()">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- Leave-modal -->
+        <form name="leaveForm" #leaveForm="ngForm">
+          <div class="modal fade" id="leaveNewModal" tabindex="-1" role="dialog" aria-labelledby="leaveLabel"
+            aria-hidden="true">
+
+            <div class="modal-dialog" role="document">
+
+              <div class="modal-content">
+                <div class="modal-header right_align">
+                  <div class="right_align"><i class="fa fa-times-circle" data-dismiss="modal"
+                      (click)="clearModalData()"></i></div>
+                </div>
+                <div class="modal-body">
+                  <div class="form-row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="date">From Date</label>
+                        <input placeholder="Select Start Date" [(ngModel)]="modelLeave.fromDate" name="fromDate"
+                          class="form-control" [owlDateTimeTrigger]="dtPicker6" [owlDateTime]="dtPicker6"
+                          #fromDate="ngModel" required>
+                        <owl-date-time #dtPicker6 [firstDayOfWeek]="firstDayofWeek" [pickerType]="'calendar'">
+                        </owl-date-time>
+                      </div>
+                      <div *ngIf="fromDate.errors?.required && (fromDate.dirty || fromDate.touched)"
+                        class="alert alert-danger">
+                        <label>
+                          Start Date is Required
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="date">To Date</label>
+                        <input placeholder="Select Start Date" [(ngModel)]="modelLeave.toDate" name="toDate"
+                          class="form-control" [owlDateTimeTrigger]="dtPicker7" [owlDateTime]="dtPicker7"
+                          #toDate="ngModel" required>
+                        <owl-date-time #dtPicker7 [firstDayOfWeek]="firstDayofWeek" [pickerType]="'calendar'">
+                        </owl-date-time>
+                      </div>
+                      <div *ngIf="toDate.errors?.required && (toDate.dirty || toDate.touched)"
+                        class="alert alert-danger">
+                        <label>
+                          End Date is Required
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="breakEnd">Leave Type</label>
+                        <select class="custom-select" id="leaveType" name="leaveType" [(ngModel)]="modelLeave.type"
+                          required>
+                          <option [value]="undefined" disabled selected> Select Leave Type</option>
+                          <option *ngFor="let leave of leaveTypes" [value]="leave.value">{{leave.name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="breakEnd">Leave Status</label>
+                        <select class="custom-select" id="leaveStatusType" name="leaveStatusType"
+                          [(ngModel)]="modelLeave.status" required>
+                          <option [value]="undefined" disabled selected> Select Leave Status</option>
+                          <option *ngFor="let status of leaveStatuses" [value]="status.value">{{status.name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="date">Description</label>
+                        <textarea id="leaveDescription" style="height: 100px;" name="leaveDescription" required
+                          class="form-control" #leaveDescription="ngModel" [(ngModel)]="modelLeave.description"
+                          #leaveDescription="ngModel" required></textarea>
+                      </div>
+                      <div *ngIf="leaveDescription.invalid && (leaveDescription.dirty || leaveDescription.touched)"
+                        class="alert alert-danger">
+                        <label>
+                          Leave Description is Required
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success" [disabled]="leaveForm.invalid" data-dismiss="modal"
+                    (click)="save('leave')">Save</button> <button type="button" class="btn btn-warning"
+                    data-dismiss="modal" (click)="clearModalData()">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-
-      <!-- User Modal -->
-      <form name="form" #form="ngForm">
-        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="clientNewModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header right_align">
-                <div class="right_align"><i class="fa fa-times-circle" data-dismiss="modal"></i></div>
-                
-              </div>
-
-              <!-- modal-body -->
-              <div class="modal-body">
-                <div class="form-row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="firstname">First Name</label>
-                      <input type="text" required #firstname="ngModel" id="FirstName" name="firstname"
-                        [(ngModel)]="model.firstname" placeholder="Enter First Name" class="form-control">
-                    </div>
-                    <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger">
-                      <label>
-                        First Name is Required
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="lastname">Last Name</label>
-                      <input type="text" required #lastname="ngModel" id="LastName" name="lastname"
-                        [(ngModel)]="model.lastname" placeholder="Enter Last Name" class="form-control">
-                    </div>
-                    <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">
-                      <label>
-                        Last Name is Required
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="username">User Name</label>
-                      <input type="text" required #username="ngModel" id="UserName" name="username"
-                        [(ngModel)]="model.username" placeholder="Enter User Name" class="form-control">
-                    </div>
-                    <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
-                      <label>
-                        User Name is Required
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="password">Password</label>
-                      <input type="password" #password="ngModel" id="Password" name="password"
-                        [(ngModel)]="model.password" placeholder="Enter Password" pattern="^.{6}$" class="form-control">
-                    </div>
-                    <div *ngIf="password.errors?.pattern" id="card-errors" class="alert alert-danger col-12"
-                      style="color:#f2665c;" role="alert">
-                      Password Must be minimun 6 Characters long
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="confirmpassword">Confirm Password</label>
-                      <input type="password" type="password" id="confirmpassword" name="confirmpassword"
-                        placeholder=" Confirm Password" #confirmPassword="ngModel" ngModel class="form-control">
-                    </div>
-                    <div
-                      *ngIf="confirmPassword.touched && confirmPassword.valid && model.password !== confirmPassword.value"
-                      id="card-errors" class="alert alert-danger col-12" style="color:#f2665c;" role="alert">
-                      Password does not match
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="cnic">CNIC</label>
-                      <input type="text" required #cnic="ngModel" id="cnic" name="cnic" [(ngModel)]="model.CNIC"
-                        placeholder="Enter CNIC" pattern="^[0-9]{13}$" class="form-control">
-                    </div>
-                    <div *ngIf="cnic.errors?.required && (cnic.dirty || cnic.touched)" class="alert alert-danger">
-                      <label>
-                        Invalid CNIC Number
-                      </label>
-                    </div>
-                    <div *ngIf="cnic.errors?.pattern" id="card-errors" class="alert alert-danger col-12"
-                      style="color:#f2665c;" role="alert">
-                      Invalid CNIC Number Must be Like:1234590832617
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="phonenumber">Phone Number</label>
-                      <input type="text" required #phoneNumber="ngModel" id="PhoneNumber" name="phoneNumber"
-                        [(ngModel)]="model.phone" placeholder="Enter Phone Number" maxlength="15" pattern="^[0-9]{11}$"
-                        class="form-control">
-                    </div>
-                    <div *ngIf="phoneNumber.errors?.required && (phoneNumber.dirty || phoneNumber.touched)"
-                      class="alert alert-danger">
-                      <label>
-                        Invalid Phone Number
-                      </label>
-                    </div>
-                    <div *ngIf="phoneNumber.errors?.pattern" id="card-errors" class="alert alert-danger col-12"
-                      style="color:#f2665c;" role="alert">
-                      Invalid Phone Number Must be Like:03001234567
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="emailaddress">Email Address</label>
-                      <input type="text" required #emailAddress="ngModel" id="emailAddress" name="emailAddress"
-                        [(ngModel)]="model.email" placeholder="Enter Email Address"
-                        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" class="form-control">
-                    </div>
-                    <div *ngIf="emailAddress.invalid && emailAddress.touched" class="alert alert-danger">
-                      <label>
-                        Email Address is Required
-                      </label>
-                    </div>
-                    <div *ngIf="emailAddress.errors?.pattern" class="alert alert-danger">
-                      <label>
-                        Invalid Email address
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="address">Address</label>
-                      <input type="text" required #address="ngModel" id="Address" name="address"
-                        [(ngModel)]="model.address" placeholder="Enter Address" class="form-control">
-                    </div>
-                    <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
-                      <label>
-                        Address is Required
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" [(ngModel)]="model.active" name="userActive">
-                        <label><span>Active</span></label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-success" [disabled]="form.invalid" (click)="save('user')"
-                  data-dismiss="modal">Save</button> <button type="button" class="btn btn-warning"
-                  data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-
-      <!-- Attendance-modal -->
-      <form name="attendanceForm" #attendanceForm="ngForm">
-        <div class="modal fade" id="attendanceNewModal" tabindex="-1" role="dialog" aria-labelledby="attendanceLabel"
-          aria-hidden="true">
-     
-          <div class="modal-dialog" role="document">
-            
-            <div class="modal-content">
-              <div class="modal-header right_align">
-                <div class="right_align"><i class="fa fa-times-circle" data-dismiss="modal"></i></div>
-              </div>
-              <div class="modal-body">
-                <div class="form-row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="comment">Comment</label>
-                      <input type="text" #comment="ngModel" id="comment" name="comment"
-                        [(ngModel)]="modelAttendance.comment" minlength="3" placeholder="Enter Comment"
-                        class="form-control" required>
-                    </div>
-                    <div *ngIf="comment.errors?.minlength" id="card-errors" class="alert alert-danger col-12"
-                      style="color:#f2665c;" role="alert">
-                      Comment must be minimun 5 characters long.
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="date">Date</label>
-                      <input placeholder="Select Date" [(ngModel)]="modelAttendance.date" name="date"
-                        class="form-control" [owlDateTimeTrigger]="dtPicker5" [owlDateTime]="dtPicker5" #date="ngModel"
-                        required>
-                      <owl-date-time #dtPicker5 [firstDayOfWeek]="firstDayofWeek" [pickerType]="'calendar'">
-                      </owl-date-time>
-                    </div>
-                    <div *ngIf="date.errors?.required && (date.dirty || date.touched)" class="alert alert-danger">
-                      <label>
-                       Attendance date is Required
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="checkIn">Check in Time</label>
-                      <input placeholder=" Select CheckIn  Time" [(ngModel)]="modelAttendance.checkIn"
-                        name="checkInTime" class="form-control" [owlDateTimeTrigger]="dtPicker1"
-                        [owlDateTime]="dtPicker1" #checkInTime="ngModel">
-                      <owl-date-time #dtPicker1 [hour12Timer]="hour12Timer" [pickerType]="'timer'"></owl-date-time>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="checkOut">CheckOut Time</label>
-                      <input placeholder="Select CheckOut Time" [(ngModel)]="modelAttendance.checkOut"
-                        name="checkOutTime" class="form-control" [owlDateTimeTrigger]="dtPicker2"
-                        [owlDateTime]="dtPicker2" #checkOutTime="ngModel">
-                      <owl-date-time #dtPicker2 [hour12Timer]="hour12Timer" [pickerType]="'timer'"></owl-date-time>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="breakStart">Break Start Time</label>
-                      <input placeholder="Break Start Date and Time" [(ngModel)]="modelAttendance.breakStartTime"
-                        name="breakStartTime" class="form-control" [owlDateTimeTrigger]="dtPicker3"
-                        [owlDateTime]="dtPicker3">
-                      <owl-date-time #dtPicker3 [hour12Timer]="hour12Timer" [pickerType]="'timer'"></owl-date-time>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="breakEnd">Break End Time</label>
-                      <input placeholder="Select Break End Time" [(ngModel)]="modelAttendance.breakEndTime"
-                        name="breakEnd date" class="form-control" [owlDateTimeTrigger]="dtPicker4"
-                        [owlDateTime]="dtPicker4">
-                      <owl-date-time #dtPicker4 [hour12Timer]="hour12Timer" [pickerType]="'timer'"></owl-date-time>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" [(ngModel)]="modelAttendance.active" name="attendanceActive">
-                        <label><span>Active</span></label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-success" [disabled]="attendanceForm.invalid" data-dismiss="modal"
-                  (click)="save('attendance')">Save</button> <button type="button" class="btn btn-warning"
-                  data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-
-      <!-- Leave-modal -->
-      <form name="leaveForm" #leaveForm="ngForm">
-        <div class="modal fade" id="leaveNewModal" tabindex="-1" role="dialog" aria-labelledby="leaveLabel"
-          aria-hidden="true">
-         
-          <div class="modal-dialog" role="document">
-       
-            <div class="modal-content">
-              <div class="modal-header right_align">
-                <div class="right_align"><i class="fa fa-times-circle" data-dismiss="modal"></i></div>
-              </div>
-              <div class="modal-body">
-                <div class="form-row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="date">From Date</label>
-                      <input placeholder="Select Start Date" [(ngModel)]="modelLeave.fromDate" name="fromDate"
-                        class="form-control" [owlDateTimeTrigger]="dtPicker6" [owlDateTime]="dtPicker6"
-                        #fromDate="ngModel" required>
-                      <owl-date-time #dtPicker6 [firstDayOfWeek]="firstDayofWeek" [pickerType]="'calendar'">
-                      </owl-date-time>
-                    </div>
-                    <div *ngIf="fromDate.errors?.required && (fromDate.dirty || fromDate.touched)"
-                      class="alert alert-danger">
-                      <label>
-                        Start Date is Required
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="date">To Date</label>
-                      <input placeholder="Select Start Date" [(ngModel)]="modelLeave.toDate" name="toDate"
-                        class="form-control" [owlDateTimeTrigger]="dtPicker7" [owlDateTime]="dtPicker7"
-                        #toDate="ngModel" required>
-                      <owl-date-time #dtPicker7 [firstDayOfWeek]="firstDayofWeek" [pickerType]="'calendar'">
-                      </owl-date-time>
-                    </div>
-                    <div *ngIf="toDate.errors?.required && (toDate.dirty || toDate.touched)" class="alert alert-danger">
-                      <label>
-                        End Date is Required
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="breakEnd">Leave Type</label>
-                      <select class="custom-select" id="leaveType" name="leaveType" [(ngModel)]="modelLeave.type"
-                        required>
-                        <option [value]="undefined" disabled selected> Select Leave Type</option>
-                        <option *ngFor="let leave of leaveTypes" [value]="leave.value">{{leave.name}}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="breakEnd">Leave Status</label>
-                      <select class="custom-select" id="leaveStatusType" name="leaveStatusType"
-                        [(ngModel)]="modelLeave.status" required>
-                        <option [value]="undefined" disabled selected> Select Leave Status</option>
-                        <option *ngFor="let status of leaveStatuses" [value]="status.value">{{status.name}}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="date">Description</label>
-                      <textarea id="leaveDescription" style="height: 100px;" name="leaveDescription" required
-                        class="form-control" #leaveDescription="ngModel" [(ngModel)]="modelLeave.description"
-                        #leaveDescription="ngModel" required></textarea>
-                    </div>
-                    <div *ngIf="leaveDescription.invalid && (leaveDescription.dirty || leaveDescription.touched)"
-                      class="alert alert-danger">
-                      <label>
-                        Leave Description is Required
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-success" [disabled]="leaveForm.invalid" data-dismiss="modal"
-                  (click)="save('leave')">Save</button> <button type="button" class="btn btn-warning"
-                  data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
     </div>
-  </div>
-</main>
+  </main>
+</div>

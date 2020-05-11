@@ -21,14 +21,14 @@ export class DashboardComponent implements OnInit {
   toDate: string;
   filter: Filter;
 
-  leaveDetail: any = { approved: 0, pending: 0, casual: 0, annual: 0, totalAttendance: 0, totalAbsent: 0 };
+  leaveDetail: any = { approved: 0, pending: 0, casual: 0, annual: 0, totalAbsent: 0 };
 
   filterTypes: any[] = [
-    { value: DurationType.currentDate, name: 'Today' },
+    // { value: DurationType.currentDate, name: 'Today' },
     { value: DurationType.currentMonth, name: 'This month' },
     { value: DurationType.lastMonth, name: 'Last month' },
     { value: DurationType.currentYear, name: 'This year' },
-    { value: DurationType.lastYear, name: 'Last year' },
+    // { value: DurationType.lastYear, name: 'Last year' },
     { value: DurationType.lastYear, name: 'Future' },
     // { value: DurationType.custom, name: 'Custom' }
   ];
@@ -68,8 +68,28 @@ export class DashboardComponent implements OnInit {
   }
 
   /**
-   * Get user leave details (i.e. approved,pending,casual, annual leave counts)
+   * Get attendance, leave and absent counts for a specific user.
    */
+  getCounts() {
+    this.leaveDetail = { approved: 0, pending: 0, casual: 0, annual: 0, totalAttendance: 0, totalAbsent: 0 };
+    this.getAbsentCount();
+    this.getLeaveCount();
+  }
+
+  /**
+   * Get user absent count
+   */
+  getAbsentCount() {
+    this.showLoader();
+    this.attendanceService.getUserAttendanceCount(this.userId, this.filter.filterType, this.fromDate, this.toDate, false).subscribe((attendance: any) => {
+      this.hideLoader();
+      this.leaveDetail.totalAbsent = attendance.total;
+    });
+  }
+
+  /**
+ * Get user leave details (i.e. approved,pending,casual, annual leave counts)
+ */
   getLeaveCount() {
     this.showLoader();
     this.leaveService.getUserLeave(this.userId, 1, this.filter.filterType, this.fromDate, this.toDate, '', 0).subscribe((leaves: any) => {
@@ -89,38 +109,6 @@ export class DashboardComponent implements OnInit {
           }
         });
       }
-    });
-  }
-
-  /**
-   * Get attendance, leave and absent counts for a specific user.
-   */
-  getCounts() {
-    this.leaveDetail = { approved: 0, pending: 0, casual: 0, annual: 0, totalAttendance: 0, totalAbsent: 0 };
-    this.getAttendanceCount();
-    this.getAbsentCount();
-    this.getLeaveCount();
-  }
-
-  /**
-   * Get user present count
-   */
-  getAttendanceCount() {
-    this.showLoader();
-    this.attendanceService.getUserAttendanceCount(this.userId, this.filter.filterType, this.fromDate, this.toDate, true).subscribe((attendance: any) => {
-      this.hideLoader();
-      this.leaveDetail.totalAttendance = attendance.total;
-    });
-  }
-
-  /**
-   * Get user absent count
-   */
-  getAbsentCount() {
-    this.showLoader();
-    this.attendanceService.getUserAttendanceCount(this.userId, this.filter.filterType, this.fromDate, this.toDate, false).subscribe((attendance: any) => {
-      this.hideLoader();
-      this.leaveDetail.totalAbsent = attendance.total;
     });
   }
 

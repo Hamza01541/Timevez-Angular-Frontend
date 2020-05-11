@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// Admin Components
+// Employee Components
 import {
     EmployeeRootComponent,
     HistoryComponent,
     DashboardComponent,
     LeaveComponent,
     ChangePasswordComponent,
-    ProfileComponent
-} from "./components/index";
+} from "./components";
 
 
 const routes: Routes = [
@@ -22,7 +21,6 @@ const routes: Routes = [
             { path: 'change-password', component: ChangePasswordComponent },
             { path: 'dashboard', component: DashboardComponent },
             { path: 'leave', component: LeaveComponent },
-            { path: 'profile', component: ProfileComponent },
             // otherwise redirect to home
             { path: '**', redirectTo: "dashboard" },
         ]

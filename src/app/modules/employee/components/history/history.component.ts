@@ -20,15 +20,11 @@ export class HistoryComponent implements OnInit {
   totalCounts: number[];
   pageNumber = Constants.defaultPageNumber;
   leaveStatus: any = LeaveStatus;
+  totalAttendances:number;
+  totalLeaves:number;
 
   attendanceFilterTypes: any[] = [
-    { value: DurationType.currentDate, name: 'Today' },
-    { value: DurationType.yesterday, name: 'Yesterday' },
     { value: DurationType.currentMonth, name: 'This month' },
-    { value: DurationType.lastMonth, name: 'Last month' },
-    { value: DurationType.currentYear, name: 'This year' },
-    { value: DurationType.lastYear, name: 'Last year' },
-    // { value: DurationType.custom, name: 'Custom' }
   ];
  
   leaveFilterTypes: any[] = [
@@ -39,7 +35,6 @@ export class HistoryComponent implements OnInit {
     { value: DurationType.currentYear, name: 'This year' },
     { value: DurationType.lastYear, name: 'Last year' },
     { value: DurationType.future, name: 'Future'},
-    // { value: DurationType.custom, name: 'Custom' }
   ];
 
   constructor(
@@ -55,7 +50,7 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit() {
     this.attendanceFilter.filterType = DurationType.currentMonth;
-    this.leaveFilter.filterType = DurationType.currentMonth;
+    this.leaveFilter.filterType = DurationType.future;
     let currentUser = JSON.parse(localStorage.getItem(Constants.currentUser));
     this.userId = currentUser.userId;
 
@@ -80,14 +75,13 @@ export class HistoryComponent implements OnInit {
     }
 
     this.attendanceService.getUserAttendance(this.userId, pageNumber, this.attendanceFilter.filterType, fromDate, toDate).subscribe((attendance: any) => {
-      if (attendance && attendance.data && attendance.total) {
+      if (attendance) {
         this.userAttendances = attendance.data;
+        this.totalAttendances = attendance.total;
 
         this.userAttendances.forEach(userAttendance => {
           this.getTimeSpent(userAttendance);
          });
-
-        this.initPagination(attendance.total);
       }
     }, error => {
       if (error && error.error && error.error.message) {
@@ -113,10 +107,9 @@ export class HistoryComponent implements OnInit {
     }
 
     this.leaveService.getUserLeave(this.userId, pageNumber, this.leaveFilter.filterType, fromDate, toDate).subscribe((leave: any) => {
-      if (leave && leave.data && leave.total) {
+      if (leave) {
         this.userLeaves = leave.data;
-
-        this.initPagination(leave.total);
+        this.totalLeaves = leave.total;
       }
     }, error => {
       if (error && error.error && error.error.message) {
@@ -125,20 +118,24 @@ export class HistoryComponent implements OnInit {
     });
   }
 
-  /**
-   * Initialize pagination.
-   * @param total Total number of records.
-   */
-  initPagination(total: number) {
-    let totalPages = Math.ceil(total / 10);
-
-    this.totalCounts = [];
-    if (totalPages > 0) {
-      for (let i = 1; i <= totalPages; i++) {
-        this.totalCounts.push(i);
-      }
-    }
+/**
+ * Fired on pagination change.
+ * @param {any} data data emitted on page changed. 
+ */
+pageChanged(data:any) {
+  switch (data.paginationId) {
+      case 'attendance':
+          this.getUserAttendances(data.currentPage);
+          break;
+      
+      case 'leave':
+          this.getUserLeaves(data.currentPage);
+          break;
+  
+      default:
+          break;
   }
+}
 
       /**
      * Get time spent in office.
