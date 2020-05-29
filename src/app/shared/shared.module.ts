@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { RequestInterceptor } from 'src/app/core/interceptors';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { BarChartComponent } from 'src/app/shared/components/bar-chart/bar-chart.component';
 
 //auth Guard
 import { AuthGuard } from 'src/app/core/guards';
@@ -53,7 +55,8 @@ const SHARED_MODULES = [
   MatStepperModule,
   CommonModule,
   NgSelectModule,
-  ToastrModule.forRoot()
+  ToastrModule.forRoot(),
+  GoogleChartsModule
 ];
 
 const SHARED_COMPONENTS = [
@@ -61,7 +64,8 @@ const SHARED_COMPONENTS = [
   GridComponent,
   ConfirmationDialogueComponent,
   SideNavBarComponent,
-  PaginationComponent
+  PaginationComponent,
+  BarChartComponent
 ];
 
 const SHARED_SERVICES = [
