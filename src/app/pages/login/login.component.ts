@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
   loginModel: any = { username: "", password: "" }
   logout: boolean = false;
   currentUser: any;
-  employeesRetention: any[] = [];
 
   constructor(
     private alertService: AlertService,
