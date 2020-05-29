@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {  HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { RequestInterceptor } from 'src/app/core/interceptors';
 import { GoogleChartsModule } from 'angular-google-charts';
@@ -43,8 +43,8 @@ import { RouterModule } from '@angular/router';
 const SHARED_MODULES = [
   RouterModule,
   FormsModule,
-  HttpModule,
-  HttpClientModule,
+  // HttpModule,
+  // HttpClientModule,
   ReactiveFormsModule,
   MatAutocompleteModule,
   MatCheckboxModule,
