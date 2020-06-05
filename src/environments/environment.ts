@@ -4,5 +4,5 @@ export const environment = {
   backend_uri: 'https://timevez-backend.herokuapp.com/api',
   // backend_uri: 'http://localhost:5000/api',
   api_version: '1/',
-  crypto_secret_key: '12345a'
+  crypto_secret_key: 'Time9hours'
 };
