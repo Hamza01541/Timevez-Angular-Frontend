@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
   loginModel: any = { username: "", password: "" }
   logout: boolean = false;
   currentUser: any;
-  employeesRetention: any[] = [];
 
   constructor(
     private alertService: AlertService,
@@ -53,7 +52,7 @@ export class LoginComponent implements OnInit {
     },
       error => {
         this.hideLoader();
-        console.log("error:", error.error.message);
+        console.log("error:",error.error.message);
         this.alertService.errorToastr(error.error.message, false);
       });
 
