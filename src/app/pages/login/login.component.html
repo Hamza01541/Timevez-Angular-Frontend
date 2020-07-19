@@ -21,7 +21,7 @@
         <div class="form-group">
             <div class="form-label-group">
                 <input type="text" id="username" name="username" required class="form-control" #userName="ngModel"
-                    placeholder="Enter UserName" [(ngModel)]="loginModel.username" autofocus=""
+                     [(ngModel)]="loginModel.username" autofocus=""
                     [ngClass]="utilityService.getValidationClass(userName)"> <label for="inputUser">Username</label>
 
                 <div class="invalid-feedback" *ngIf="userName.errors?.required && (userName.dirty || userName.touched)">
@@ -34,7 +34,7 @@
             <label class="d-flex justify-content-between" for="password"><span></span> <a href="#password"
                     data-toggle="password"><i class="fa fa-fw fa-eye"></i> <span>Show</span></a></label>
             <div class="form-label-group">
-                <input type="password" placeholder="Pass" id="password" name="password" required class="form-control" #password="ngModel"
+                <input type="password" id="password" name="password" required class="form-control" #password="ngModel"
                      [(ngModel)]="loginModel.password" [ngClass]="utilityService.getValidationClass(password)" autofocus=""><label for="inputUser">Password</label>
                 <div class="invalid-feedback" *ngIf="password.errors?.required && (password.dirty || password.touched)">
                     <i class="fa fa-exclamation-circle fa-fw"></i> Password is Required.
