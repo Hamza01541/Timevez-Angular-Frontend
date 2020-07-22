@@ -34,7 +34,7 @@ export class RequestService {
    *@param {any} obj is the object to be added
    *@returns Observable<any> in response
    */
-  addData(url: string, obj?: any): Observable<any> {
+  addData(url: string, obj: any = {}): Observable<any> {
     url = `${this.baseUrl}${url}`;
 
     return this.http.post(url, { payload: this.cryptoService.encryptData(obj) })

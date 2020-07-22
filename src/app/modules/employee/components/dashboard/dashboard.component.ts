@@ -138,6 +138,7 @@ export class DashboardComponent implements OnInit {
       this.hideLoader();
       this.alertService.successToastr(`Good Morning ${this.fullname}!`, false);
     }, error => {
+      console.log("error:",error);
       this.hideLoader();
       this.alertService.warningToastr(`${error.error.message}`, false);
     });

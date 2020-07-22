@@ -442,7 +442,6 @@ pageChanged(data:any) {
                 jQuery('#userModal').modal('show');
                 this.userService.getById(Id).subscribe(user => {
                     this.model = user;
-                    console.log("*user:",user);
                 });
             } else if (operation === 'change_password') {
                 this.id = Id;
@@ -536,7 +535,6 @@ pageChanged(data:any) {
      * @param userDetails Selected user
      */
     getUserDetail(userDetails: User) {
-        console.log("this.selectedUser:", userDetails);
         this.selectedUser = userDetails;
         if(!this.model.photo) {
             this.model.photo = 'assets/images/avatars/unknown-profile.jpg';

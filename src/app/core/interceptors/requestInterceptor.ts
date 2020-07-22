@@ -21,7 +21,6 @@ export class RequestInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // request = this.checkUrl(request);
         request = this.setRequestHeader(request);
-        console.log("Interceptor Worked", request);
 
         return next.handle(request).pipe(map((response: HttpEvent<any>) => {
             return response;

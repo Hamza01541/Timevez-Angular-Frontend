@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
     },
       error => {
         this.hideLoader();
-        console.log("error:",error.error.message);
         this.alertService.errorToastr(error.error.message, false);
       });
 

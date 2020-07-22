@@ -19,12 +19,10 @@ export class PaginationComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         this.initPagination(this.totalRecord);
-        console.log("totalRecord:",this.totalRecord);
     }
 
     ngOnChanges(){
         this.initPagination(this.totalRecord);
-        console.log("*totalRecord:",this.totalRecord);
     }
     
     /**
